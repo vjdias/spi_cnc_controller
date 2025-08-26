@@ -6,7 +6,7 @@ import shutil
 
 root = Path(__file__).resolve().parents[2]
 
-tb_file = root / "tb" / "verilator" / "framings_tb.sv"
+tb_file = root / "tb" / "tests" / "framings_tb.sv"
 framing_root = root / "src" / "protocol" / "framings"
 
 files = []
