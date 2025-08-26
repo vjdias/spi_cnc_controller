@@ -19,10 +19,11 @@ package bytes_util_pkg;
 
   typedef logic [7:0] byte_t;
 
+  // Largura padrão dos vetores manipulados pelo pacote (em bits)
+  localparam int VECTOR_WIDTH_BITS = 440;
+
   // Retorna o byte de posição idx de um vetor raw[VECTOR_WIDTH_BITS-1:0].
-  function automatic byte_t get_byte
-    #(int VECTOR_WIDTH_BITS = 440) // largura total do vetor em bits (default 440 bits)
-    (
+  function automatic byte_t get_byte(
       input logic [VECTOR_WIDTH_BITS-1:0] raw,
       input int idx
     );

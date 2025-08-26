@@ -22,7 +22,6 @@
 package move_queue_add_response_pkg;
 
   import protocol_constants_pkg::*; // RESP_HEADER/RESP_TAIL, byte_t
-  import bytes_util_pkg::*;         // get_byte()
 
   // Largura total do vetor serializado em BITS (6 bytes = 48 bits)
   parameter int FRAME_BITS = 48;
@@ -40,12 +39,12 @@ package move_queue_add_response_pkg;
   // -------- Decoder (FRAME_BITS -> struct) --------
   function automatic move_queue_add_resp_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_queue_add_resp_bytes_t r;
-    r.header      = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType     = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameIdEcho = get_byte#(FRAME_BITS)(raw, 2);
-    r.status      = get_byte#(FRAME_BITS)(raw, 3);
-    r.parityByte  = get_byte#(FRAME_BITS)(raw, 4);
-    r.tail        = get_byte#(FRAME_BITS)(raw, 5);
+    r.header      = raw[47:40];
+    r.msgType     = raw[39:32];
+    r.frameIdEcho = raw[31:24];
+    r.status      = raw[23:16];
+    r.parityByte  = raw[15:8];
+    r.tail        = raw[7:0];
     return r;
   endfunction
 

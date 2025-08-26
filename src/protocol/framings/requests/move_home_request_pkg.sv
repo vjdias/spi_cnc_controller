@@ -19,7 +19,6 @@
 package move_home_request_pkg;
 
   import protocol_constants_pkg::*;
-  import bytes_util_pkg::*;
 
   parameter int FRAME_BITS = 72;
 
@@ -37,14 +36,14 @@ package move_home_request_pkg;
   // -------- Decoder (FRAME_BITS -> struct) --------
   function automatic move_home_req_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_home_req_bytes_t r;
-    r.header   = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType  = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameId  = get_byte#(FRAME_BITS)(raw, 2);
-    r.axisMask = get_byte#(FRAME_BITS)(raw, 3);
-    r.dirMask  = get_byte#(FRAME_BITS)(raw, 4);
-    r.vhome    = be16(get_byte#(FRAME_BITS)(raw,5), get_byte#(FRAME_BITS)(raw,6));
-    r.parity   = get_byte#(FRAME_BITS)(raw, 7);
-    r.tail     = get_byte#(FRAME_BITS)(raw, 8);
+    r.header   = raw[71:64];
+    r.msgType  = raw[63:56];
+    r.frameId  = raw[55:48];
+    r.axisMask = raw[47:40];
+    r.dirMask  = raw[39:32];
+    r.vhome    = raw[31:16];
+    r.parity   = raw[15:8];
+    r.tail     = raw[7:0];
     return r;
   endfunction
 

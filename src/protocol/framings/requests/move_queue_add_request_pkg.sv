@@ -28,7 +28,6 @@
 package move_queue_add_request_pkg;
 
   import protocol_constants_pkg::*; // REQ_HEADER/REQ_TAIL, byte_t
-  import bytes_util_pkg::*;         // get_byte(), be16(), be32()
 
   // Largura total do vetor serializado em BITS (44 bytes = 352 bits)
   parameter int FRAME_BITS = 352;
@@ -62,37 +61,34 @@ package move_queue_add_request_pkg;
   function automatic move_queue_add_req_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_queue_add_req_bytes_t r;
 
-    r.header   = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType  = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameId  = get_byte#(FRAME_BITS)(raw, 2);
-    r.dirMask  = get_byte#(FRAME_BITS)(raw, 3);
+    r.header   = raw[351:344];
+    r.msgType  = raw[343:336];
+    r.frameId  = raw[335:328];
+    r.dirMask  = raw[327:320];
 
-    r.vx = be16(get_byte#(FRAME_BITS)(raw, 4), get_byte#(FRAME_BITS)(raw, 5));
-    r.sx = be32(get_byte#(FRAME_BITS)(raw, 6), get_byte#(FRAME_BITS)(raw, 7),
-                get_byte#(FRAME_BITS)(raw, 8), get_byte#(FRAME_BITS)(raw, 9));
+    r.vx = raw[319:304];
+    r.sx = raw[303:272];
 
-    r.vy = be16(get_byte#(FRAME_BITS)(raw,10), get_byte#(FRAME_BITS)(raw,11));
-    r.sy = be32(get_byte#(FRAME_BITS)(raw,12), get_byte#(FRAME_BITS)(raw,13),
-                get_byte#(FRAME_BITS)(raw,14), get_byte#(FRAME_BITS)(raw,15));
+    r.vy = raw[271:256];
+    r.sy = raw[255:224];
 
-    r.vz = be16(get_byte#(FRAME_BITS)(raw,16), get_byte#(FRAME_BITS)(raw,17));
-    r.sz = be32(get_byte#(FRAME_BITS)(raw,18), get_byte#(FRAME_BITS)(raw,19),
-                get_byte#(FRAME_BITS)(raw,20), get_byte#(FRAME_BITS)(raw,21));
+    r.vz = raw[223:208];
+    r.sz = raw[207:176];
 
-    r.kp_x = be16(get_byte#(FRAME_BITS)(raw,22), get_byte#(FRAME_BITS)(raw,23));
-    r.ki_x = be16(get_byte#(FRAME_BITS)(raw,24), get_byte#(FRAME_BITS)(raw,25));
-    r.kd_x = be16(get_byte#(FRAME_BITS)(raw,26), get_byte#(FRAME_BITS)(raw,27));
+    r.kp_x = raw[175:160];
+    r.ki_x = raw[159:144];
+    r.kd_x = raw[143:128];
 
-    r.kp_y = be16(get_byte#(FRAME_BITS)(raw,28), get_byte#(FRAME_BITS)(raw,29));
-    r.ki_y = be16(get_byte#(FRAME_BITS)(raw,30), get_byte#(FRAME_BITS)(raw,31));
-    r.kd_y = be16(get_byte#(FRAME_BITS)(raw,32), get_byte#(FRAME_BITS)(raw,33));
+    r.kp_y = raw[127:112];
+    r.ki_y = raw[111:96];
+    r.kd_y = raw[95:80];
 
-    r.kp_z = be16(get_byte#(FRAME_BITS)(raw,34), get_byte#(FRAME_BITS)(raw,35));
-    r.ki_z = be16(get_byte#(FRAME_BITS)(raw,36), get_byte#(FRAME_BITS)(raw,37));
-    r.kd_z = be16(get_byte#(FRAME_BITS)(raw,38), get_byte#(FRAME_BITS)(raw,39));
+    r.kp_z = raw[79:64];
+    r.ki_z = raw[63:48];
+    r.kd_z = raw[47:32];
 
-    r.parityByte = get_byte#(FRAME_BITS)(raw,40);
-    r.tail       = get_byte#(FRAME_BITS)(raw,41);
+    r.parityByte = raw[31:24];
+    r.tail       = raw[23:16];
     return r;
   endfunction
 

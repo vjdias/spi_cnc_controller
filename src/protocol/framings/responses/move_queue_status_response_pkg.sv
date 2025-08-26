@@ -29,7 +29,6 @@
 package move_queue_status_response_pkg;
 
   import protocol_constants_pkg::*; // RESP_HEADER/RESP_TAIL, byte_t
-  import bytes_util_pkg::*;         // get_byte()
 
   typedef struct packed {
     byte_t header;       // RESP_HEADER (0xAB)
