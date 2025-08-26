@@ -1,0 +1,48 @@
+[
+ {
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+  "InstLine" : 400,
+  "InstName" : "SPI_MASTER_Top",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+  "ModuleLine" : 400,
+  "ModuleName" : "SPI_MASTER_Top",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+    "InstLine" : 439,
+    "InstName" : "u_spi_master",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "~spi_master.SPI_MASTER_Top"
+   }
+  ]
+ },
+ {
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+  "InstLine" : 9,
+  "InstName" : "top",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+  "ModuleLine" : 9,
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 40,
+    "InstName" : "u_spi_slave",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_slave.sv",
+    "ModuleLine" : 12,
+    "ModuleName" : "spi_slave",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_slave.sv",
+      "InstLine" : 52,
+      "InstName" : "u_spi_slave_core",
+      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+      "ModuleLine" : 10,
+      "ModuleName" : "~spi_master.SPI_MASTER_Top"
+     }
+    ]
+   }
+  ]
+ }
+]

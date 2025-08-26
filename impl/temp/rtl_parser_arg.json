@@ -2,6 +2,14 @@
  "Device" : "GW2A-18C",
  "Files" : [
   {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_slave.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
    "Type" : "verilog"
   }
