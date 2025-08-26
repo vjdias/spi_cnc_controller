@@ -29,8 +29,8 @@ package move_queue_add_request_pkg;
 
   import protocol_constants_pkg::*; // REQ_HEADER/REQ_TAIL, byte_t
 
-  // Largura total do vetor serializado em BITS (44 bytes = 352 bits)
-  parameter int FRAME_BITS = 352;
+  // Largura total do vetor serializado em BITS (42 bytes = 336 bits)
+  parameter int FRAME_BITS = 336;
 
 
   typedef struct packed {
@@ -61,34 +61,34 @@ package move_queue_add_request_pkg;
   function automatic move_queue_add_req_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_queue_add_req_bytes_t r;
 
-    r.header   = raw[351:344];
-    r.msgType  = raw[343:336];
-    r.frameId  = raw[335:328];
-    r.dirMask  = raw[327:320];
+    r.header   = raw[335:328];
+    r.msgType  = raw[327:320];
+    r.frameId  = raw[319:312];
+    r.dirMask  = raw[311:304];
 
-    r.vx = raw[319:304];
-    r.sx = raw[303:272];
+    r.vx = raw[303:288];
+    r.sx = raw[287:256];
 
-    r.vy = raw[271:256];
-    r.sy = raw[255:224];
+    r.vy = raw[255:240];
+    r.sy = raw[239:208];
 
-    r.vz = raw[223:208];
-    r.sz = raw[207:176];
+    r.vz = raw[207:192];
+    r.sz = raw[191:160];
 
-    r.kp_x = raw[175:160];
-    r.ki_x = raw[159:144];
-    r.kd_x = raw[143:128];
+    r.kp_x = raw[159:144];
+    r.ki_x = raw[143:128];
+    r.kd_x = raw[127:112];
 
-    r.kp_y = raw[127:112];
-    r.ki_y = raw[111:96];
-    r.kd_y = raw[95:80];
+    r.kp_y = raw[111:96];
+    r.ki_y = raw[95:80];
+    r.kd_y = raw[79:64];
 
-    r.kp_z = raw[79:64];
-    r.ki_z = raw[63:48];
-    r.kd_z = raw[47:32];
+    r.kp_z = raw[63:48];
+    r.ki_z = raw[47:32];
+    r.kd_z = raw[31:16];
 
-    r.parityByte = raw[31:24];
-    r.tail       = raw[23:16];
+    r.parityByte = raw[15:8];
+    r.tail       = raw[7:0];
     return r;
   endfunction
 
