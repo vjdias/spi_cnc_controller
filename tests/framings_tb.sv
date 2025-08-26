@@ -3,8 +3,8 @@ module framings_tb;
   import bytes_util_pkg::*;
 
   task automatic test_bytes_util();
-    logic [31:0] vec;
-    vec = 32'hAABBCCDD;
+    logic [439:0] vec;
+    vec = {32'hAABBCCDD, {408{1'b0}}};
     assert(get_byte(vec,0) == 8'hAA);
     assert(get_byte(vec,1) == 8'hBB);
     assert(get_byte(vec,2) == 8'hCC);
