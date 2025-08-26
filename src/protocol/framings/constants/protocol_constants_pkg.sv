@@ -24,14 +24,39 @@ package protocol_constants_pkg;
   localparam byte_t RESP_TAIL   = 8'h54;
 
   // ---------------------------
-  // FPGA_STATUS
+  // MOVE (Queue Add)
   // ---------------------------
-  localparam byte_t FPGA_STATUS_TYPE   = 8'h20;
+  localparam byte_t MOVE_TYPE = 8'h01;
+
+  // ---------------------------
+  // MOVE_QUEUE_STATUS
+  // ---------------------------
+  localparam byte_t MOVE_QUEUE_STATUS_TYPE = 8'h02;
 
   // ---------------------------
   // START_MOVE
   // ---------------------------
   localparam byte_t START_MOVE_TYPE = 8'h03;
+
+  // ---------------------------
+  // MOVE_HOME
+  // ---------------------------
+  localparam byte_t MOVE_HOME_TYPE = 8'h04;
+
+  // ---------------------------
+  // MOVE_PROBE_LEVEL
+  // ---------------------------
+  localparam byte_t MOVE_PROBE_LEVEL_TYPE = 8'h05;
+
+  // ---------------------------
+  // MOVE_END
+  // ---------------------------
+  localparam byte_t MOVE_END_TYPE = 8'h06;
+
+  // ---------------------------
+  // FPGA_STATUS
+  // ---------------------------
+  localparam byte_t FPGA_STATUS_TYPE   = 8'h20;
   
 endpackage
 `endif

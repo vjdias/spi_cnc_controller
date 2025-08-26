@@ -33,12 +33,10 @@ package move_queue_add_request_pkg;
   // Largura total do vetor serializado em BITS (44 bytes = 352 bits)
   parameter int FRAME_BITS = 352;
 
-  // Código do comando MOVE (request)
-  localparam byte_t MOVE_TYPE = 8'h01;
 
   typedef struct packed {
     byte_t header;        // REQ_HEADER
-    byte_t msgType;       // 0x01 (MOVE)
+    byte_t msgType;       // MOVE_TYPE (0x01)
     byte_t frameId;       // 0..255 (tag do item na fila)
     byte_t dirMask;       // b0=X, b1=Y, b2=Z (1=positivo,0=negativo)
 

@@ -6,7 +6,7 @@
 //
 // Layout (Big-Endian por byte; offsets em bytes):
 //  0: Header(AA)
-//  1: MsgType(02)      // MOVE_STATUS_TYPE
+//  1: MsgType(02)      // MOVE_QUEUE_STATUS_TYPE
 //  2: FrameID          // identificador do frame (tag do host)
 //  3: Tail(55)
 // -----------------------------------------------------------------------------
@@ -16,14 +16,9 @@ package move_queue_status_request_pkg;
 
   import protocol_constants_pkg::*; // REQ_HEADER/REQ_TAIL, byte_t
 
-  typedef logic [7:0] byte_t;
-
-  // Tipo específico para "status de movimento em execução"
-  localparam byte_t MOVE__MOVE_QUEUE_STATUS_TYPE = 8'h02;
-
   typedef struct packed {
     byte_t header;   // REQ_HEADER (0xAA)
-    byte_t msgType;  // MOVE_STATUS_TYPE (0x02)
+    byte_t msgType;  // MOVE_QUEUE_STATUS_TYPE (0x02)
     byte_t frameId;  // tag do host para correlacionar a resposta
     byte_t tail;     // REQ_TAIL (0x55)
   } move_queue_status_bytes_t;
@@ -47,7 +42,7 @@ package move_queue_status_request_pkg;
   function automatic move_queue_status_bytes_t make_default();
     move_queue_status_bytes_t r;
     r.header  = REQ_HEADER;
-    r.msgType = MOVE_STATUS_TYPE;
+    r.msgType = MOVE_QUEUE_STATUS_TYPE;
     r.frameId = 8'd0;
     r.tail    = REQ_TAIL;
     return r;

@@ -27,12 +27,10 @@ package move_queue_add_response_pkg;
   // Largura total do vetor serializado em BITS (6 bytes = 48 bits)
   parameter int FRAME_BITS = 48;
 
-  // Reutiliza o mesmo tipo do comando MOVE
-  localparam byte_t MOVE_TYPE = 8'h01;
 
   typedef struct packed {
     byte_t header;        // RESP_HEADER (0xAB)
-    byte_t msgType;       // 0x01 (MOVE)
+    byte_t msgType;       // MOVE_TYPE (0x01)
     byte_t frameIdEcho;   // eco do request
     byte_t status;        // 0=OK, 1=ERR
     byte_t parityByte;    // bit0 = paridade; [7:1]=0
@@ -82,7 +80,7 @@ package move_queue_add_response_pkg;
 
   // -------- Default seguro --------
   function automatic move_queue_add_resp_bytes_t make_default_ok(input byte_t id_echo = 8'd0);
-    move_queue_resp_bytes_t r;
+    move_queue_add_resp_bytes_t r;
     r.header      = RESP_HEADER;
     r.msgType     = MOVE_TYPE;
     r.frameIdEcho = id_echo;

@@ -31,11 +31,6 @@ package move_queue_status_response_pkg;
   import protocol_constants_pkg::*; // RESP_HEADER/RESP_TAIL, byte_t
   import bytes_util_pkg::*;         // get_byte()
 
-  typedef logic [7:0] byte_t;
-
-  // Tipo específico para "status da fila de movimento"
-  localparam byte_t MOVE_QUEUE_STATUS_TYPE = 8'h02;
-
   typedef struct packed {
     byte_t header;       // RESP_HEADER (0xAB)
     byte_t msgType;      // MOVE_QUEUE_STATUS_TYPE (0x02)
