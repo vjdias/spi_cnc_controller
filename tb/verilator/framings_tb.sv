@@ -1,16 +1,19 @@
 `timescale 1ns/1ps
+`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; return; end
+
 module framings_tb;
   import bytes_util_pkg::*;
 
   task automatic test_bytes_util();
     logic [439:0] vec;
     vec = {32'hAABBCCDD, {408{1'b0}}};
-    assert(get_byte(vec,0) == 8'hAA);
-    assert(get_byte(vec,1) == 8'hBB);
-    assert(get_byte(vec,2) == 8'hCC);
-    assert(get_byte(vec,3) == 8'hDD);
-    assert(be16(8'h12,8'h34) == 16'h1234);
-    assert(be32(8'hDE,8'hAD,8'hBE,8'hEF) == 32'hDEADBEEF);
+    `TEST_ASSERT(get_byte(vec,0) == 8'hAA, "test_bytes_util");
+    `TEST_ASSERT(get_byte(vec,1) == 8'hBB, "test_bytes_util");
+    `TEST_ASSERT(get_byte(vec,2) == 8'hCC, "test_bytes_util");
+    `TEST_ASSERT(get_byte(vec,3) == 8'hDD, "test_bytes_util");
+    `TEST_ASSERT(be16(8'h12,8'h34) == 16'h1234, "test_bytes_util");
+    `TEST_ASSERT(be32(8'hDE,8'hAD,8'hBE,8'hEF) == 32'hDEADBEEF, "test_bytes_util");
+    $display("Sucesso: test_bytes_util");
   endtask
 
   task automatic test_start_move_request();
@@ -21,7 +24,8 @@ module framings_tb;
     r.frameId = 8'h11;
     raw = start_move_request_pkg::encoder(r);
     d = start_move_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_start_move_request");
+    $display("Sucesso: test_start_move_request");
   endtask
 
   task automatic test_move_home_request();
@@ -34,10 +38,11 @@ module framings_tb;
     r.dirMask = 8'h05;
     r.vhome = 16'h1234;
     r = move_home_request_pkg::set_parity(r);
-    assert(move_home_request_pkg::check_parity(r));
+    `TEST_ASSERT(move_home_request_pkg::check_parity(r), "test_move_home_request");
     raw = move_home_request_pkg::encoder(r);
     d = move_home_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_home_request");
+    $display("Sucesso: test_move_home_request");
   endtask
 
   task automatic test_move_probe_level_request();
@@ -49,10 +54,11 @@ module framings_tb;
     r.axisMask = 8'h07;
     r.vprobe = 16'h5678;
     r = move_probe_level_request_pkg::set_parity(r);
-    assert(move_probe_level_request_pkg::check_parity(r));
+    `TEST_ASSERT(move_probe_level_request_pkg::check_parity(r), "test_move_probe_level_request");
     raw = move_probe_level_request_pkg::encoder(r);
     d = move_probe_level_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_probe_level_request");
+    $display("Sucesso: test_move_probe_level_request");
   endtask
 
   task automatic test_fpga_status_request();
@@ -63,7 +69,8 @@ module framings_tb;
     r.frameId = 8'h44;
     raw = fpga_status_request_pkg::encoder(r);
     d = fpga_status_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_fpga_status_request");
+    $display("Sucesso: test_fpga_status_request");
   endtask
 
   task automatic test_move_queue_status_request();
@@ -74,7 +81,8 @@ module framings_tb;
     r.frameId = 8'h55;
     raw = move_queue_status_request_pkg::encoder(r);
     d = move_queue_status_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_queue_status_request");
+    $display("Sucesso: test_move_queue_status_request");
   endtask
 
   task automatic test_move_end_request();
@@ -85,12 +93,13 @@ module framings_tb;
     r.frameId = 8'h66;
     raw = move_end_request_pkg::encoder(r);
     d = move_end_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_end_request");
+    $display("Sucesso: test_move_end_request");
   endtask
 
   task automatic test_move_queue_add_request();
     move_queue_add_request_pkg::move_queue_add_req_bytes_t r;
-    logic [351:0] raw;
+    logic [335:0] raw;
     move_queue_add_request_pkg::move_queue_add_req_bytes_t d;
     r = move_queue_add_request_pkg::make_default();
     r.frameId = 8'h77;
@@ -102,10 +111,11 @@ module framings_tb;
     r.kp_y = 16'h191A; r.ki_y = 16'h1B1C; r.kd_y = 16'h1D1E;
     r.kp_z = 16'h1F20; r.ki_z = 16'h2122; r.kd_z = 16'h2324;
     r = move_queue_add_request_pkg::set_parity(r);
-    assert(move_queue_add_request_pkg::check_parity(r));
+    `TEST_ASSERT(move_queue_add_request_pkg::check_parity(r), "test_move_queue_add_request");
     raw = move_queue_add_request_pkg::encoder(r);
     d = move_queue_add_request_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_queue_add_request");
+    $display("Sucesso: test_move_queue_add_request");
   endtask
 
   task automatic test_start_move_response();
@@ -116,7 +126,8 @@ module framings_tb;
     r.frameIdEcho = 8'h10;
     raw = start_move_response_pkg::encoder(r);
     d = start_move_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_start_move_response");
+    $display("Sucesso: test_start_move_response");
   endtask
 
   task automatic test_move_end_response();
@@ -127,7 +138,8 @@ module framings_tb;
     r.frameIdEcho = 8'h20;
     raw = move_end_response_pkg::encoder(r);
     d = move_end_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_end_response");
+    $display("Sucesso: test_move_end_response");
   endtask
 
   task automatic test_move_home_response();
@@ -139,10 +151,11 @@ module framings_tb;
     r.axisHomeMask = 8'h07;
     r.errorFlags = 8'h01;
     r = move_home_response_pkg::set_parity(r);
-    assert(move_home_response_pkg::check_parity(r));
+    `TEST_ASSERT(move_home_response_pkg::check_parity(r), "test_move_home_response");
     raw = move_home_response_pkg::encoder(r);
     d = move_home_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_home_response");
+    $display("Sucesso: test_move_home_response");
   endtask
 
   task automatic test_move_queue_status_response();
@@ -154,10 +167,11 @@ module framings_tb;
     r.status = 8'd2;
     r.pctX = 8'd10; r.pctY = 8'd20; r.pctZ = 8'd30;
     r = move_queue_status_response_pkg::set_parity(r);
-    assert(move_queue_status_response_pkg::check_parity(r));
+    `TEST_ASSERT(move_queue_status_response_pkg::check_parity(r), "test_move_queue_status_response");
     raw = move_queue_status_response_pkg::encoder(r);
     d = move_queue_status_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_queue_status_response");
+    $display("Sucesso: test_move_queue_status_response");
   endtask
 
   task automatic test_fpga_status_response();
@@ -169,10 +183,11 @@ module framings_tb;
     r.status = 8'd1;
     r.mode = 8'd2;
     r = fpga_status_response_pkg::set_parity(r);
-    assert(fpga_status_response_pkg::check_parity(r));
+    `TEST_ASSERT(fpga_status_response_pkg::check_parity(r), "test_fpga_status_response");
     raw = fpga_status_response_pkg::encoder(r);
     d = fpga_status_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_fpga_status_response");
+    $display("Sucesso: test_fpga_status_response");
   endtask
 
   task automatic test_move_queue_add_response();
@@ -184,16 +199,17 @@ module framings_tb;
     move_queue_add_response_pkg::move_queue_add_resp_bytes_t d_e;
     r = move_queue_add_response_pkg::make_default_ok(8'h60);
     r = move_queue_add_response_pkg::set_parity(r);
-    assert(move_queue_add_response_pkg::check_parity(r));
+    `TEST_ASSERT(move_queue_add_response_pkg::check_parity(r), "test_move_queue_add_response");
     raw = move_queue_add_response_pkg::encoder(r);
     d = move_queue_add_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_queue_add_response");
     e = move_queue_add_response_pkg::make_default_err(8'h61);
     e = move_queue_add_response_pkg::set_parity(e);
-    assert(move_queue_add_response_pkg::check_parity(e));
+    `TEST_ASSERT(move_queue_add_response_pkg::check_parity(e), "test_move_queue_add_response");
     raw_e = move_queue_add_response_pkg::encoder(e);
     d_e = move_queue_add_response_pkg::decoder(raw_e);
-    assert(d_e == e);
+    `TEST_ASSERT(d_e == e, "test_move_queue_add_response");
+    $display("Sucesso: test_move_queue_add_response");
   endtask
 
   task automatic test_move_probe_level_response();
@@ -207,10 +223,11 @@ module framings_tb;
     r.latchedPosY = 32'h05060708;
     r.latchedPosZ = 32'h090A0B0C;
     r = move_probe_level_response_pkg::set_parity(r);
-    assert(move_probe_level_response_pkg::check_parity(r));
+    `TEST_ASSERT(move_probe_level_response_pkg::check_parity(r), "test_move_probe_level_response");
     raw = move_probe_level_response_pkg::encoder(r);
     d = move_probe_level_response_pkg::decoder(raw);
-    assert(d == r);
+    `TEST_ASSERT(d == r, "test_move_probe_level_response");
+    $display("Sucesso: test_move_probe_level_response");
   endtask
 
   initial begin
