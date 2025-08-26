@@ -22,7 +22,6 @@
 package move_probe_level_response_pkg;
 
   import protocol_constants_pkg::*;
-  import bytes_util_pkg::*;
 
   parameter int FRAME_BITS = 160;
 
@@ -43,20 +42,17 @@ package move_probe_level_response_pkg;
   // -------- Decoder (FRAME_BITS -> struct) --------
   function automatic move_probe_level_resp_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_probe_level_resp_bytes_t r;
-    r.header       = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType      = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameIdEcho  = get_byte#(FRAME_BITS)(raw, 2);
-    r.status       = get_byte#(FRAME_BITS)(raw, 3);
-    r.axisDoneMask = get_byte#(FRAME_BITS)(raw, 4);
-    r.errorFlags   = get_byte#(FRAME_BITS)(raw, 5);
-    r.latchedPosX  = be32(get_byte#(FRAME_BITS)(raw,6), get_byte#(FRAME_BITS)(raw,7),
-                          get_byte#(FRAME_BITS)(raw,8), get_byte#(FRAME_BITS)(raw,9));
-    r.latchedPosY  = be32(get_byte#(FRAME_BITS)(raw,10), get_byte#(FRAME_BITS)(raw,11),
-                          get_byte#(FRAME_BITS)(raw,12), get_byte#(FRAME_BITS)(raw,13));
-    r.latchedPosZ  = be32(get_byte#(FRAME_BITS)(raw,14), get_byte#(FRAME_BITS)(raw,15),
-                          get_byte#(FRAME_BITS)(raw,16), get_byte#(FRAME_BITS)(raw,17));
-    r.parity       = get_byte#(FRAME_BITS)(raw,18);
-    r.tail         = get_byte#(FRAME_BITS)(raw,19);
+    r.header       = raw[159:152];
+    r.msgType      = raw[151:144];
+    r.frameIdEcho  = raw[143:136];
+    r.status       = raw[135:128];
+    r.axisDoneMask = raw[127:120];
+    r.errorFlags   = raw[119:112];
+    r.latchedPosX  = raw[111:80];
+    r.latchedPosY  = raw[79:48];
+    r.latchedPosZ  = raw[47:16];
+    r.parity       = raw[15:8];
+    r.tail         = raw[7:0];
     return r;
   endfunction
 

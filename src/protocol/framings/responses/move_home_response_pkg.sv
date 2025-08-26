@@ -19,7 +19,6 @@
 package move_home_response_pkg;
 
   import protocol_constants_pkg::*;
-  import bytes_util_pkg::*;
 
   parameter int FRAME_BITS = 64;
 
@@ -37,14 +36,14 @@ package move_home_response_pkg;
   // -------- Decoder (FRAME_BITS -> struct) --------
   function automatic move_home_resp_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_home_resp_bytes_t r;
-    r.header       = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType      = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameIdEcho  = get_byte#(FRAME_BITS)(raw, 2);
-    r.status       = get_byte#(FRAME_BITS)(raw, 3);
-    r.axisHomeMask = get_byte#(FRAME_BITS)(raw, 4);
-    r.errorFlags   = get_byte#(FRAME_BITS)(raw, 5);
-    r.parity       = get_byte#(FRAME_BITS)(raw, 6);
-    r.tail         = get_byte#(FRAME_BITS)(raw, 7);
+    r.header       = raw[63:56];
+    r.msgType      = raw[55:48];
+    r.frameIdEcho  = raw[47:40];
+    r.status       = raw[39:32];
+    r.axisHomeMask = raw[31:24];
+    r.errorFlags   = raw[23:16];
+    r.parity       = raw[15:8];
+    r.tail         = raw[7:0];
     return r;
   endfunction
 

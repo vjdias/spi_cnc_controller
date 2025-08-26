@@ -18,7 +18,6 @@
 package move_probe_level_request_pkg;
 
   import protocol_constants_pkg::*;
-  import bytes_util_pkg::*;
 
   parameter int FRAME_BITS = 64;
 
@@ -35,13 +34,13 @@ package move_probe_level_request_pkg;
   // -------- Decoder (FRAME_BITS -> struct) --------
   function automatic move_probe_level_req_bytes_t decoder(input logic [FRAME_BITS-1:0] raw);
     move_probe_level_req_bytes_t r;
-    r.header   = get_byte#(FRAME_BITS)(raw, 0);
-    r.msgType  = get_byte#(FRAME_BITS)(raw, 1);
-    r.frameId  = get_byte#(FRAME_BITS)(raw, 2);
-    r.axisMask = get_byte#(FRAME_BITS)(raw, 3);
-    r.vprobe   = be16(get_byte#(FRAME_BITS)(raw,4), get_byte#(FRAME_BITS)(raw,5));
-    r.parity   = get_byte#(FRAME_BITS)(raw, 6);
-    r.tail     = get_byte#(FRAME_BITS)(raw, 7);
+    r.header   = raw[63:56];
+    r.msgType  = raw[55:48];
+    r.frameId  = raw[47:40];
+    r.axisMask = raw[39:32];
+    r.vprobe   = raw[31:16];
+    r.parity   = raw[15:8];
+    r.tail     = raw[7:0];
     return r;
   endfunction
 
