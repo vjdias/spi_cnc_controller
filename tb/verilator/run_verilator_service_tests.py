@@ -16,7 +16,9 @@ tb_dir = root / "tb" / "tests"
 
 tb_files = [
     tb_dir / "spi_capture_tb.sv",
+    tb_dir / "spi_capture_flow_tb.sv",
     tb_dir / "spi_queue_consumer_tb.sv",
+    tb_dir / "spi_tx_buffer_tb.sv",
 ]
 
 files = []

@@ -5,13 +5,14 @@ module spi_capture_tb;
   import spi_service_pkg::*;
 
   // FIFO com profundidade pequena para testar overflow
-  spi_fifo_if #(2) fifo();
+  spi_fifo_if #(.DEPTH(2), .DROP_OLD_ON_FULL(0)) fifo();
 
   logic clk = 0;
   logic rst_n = 0;
   logic spi_byte_valid;
   byte_t spi_byte;
   logic overflow_error;
+  logic slave_busy;
 
   spi_capture dut(
     .clk(clk),
@@ -19,7 +20,8 @@ module spi_capture_tb;
     .spi_byte_valid(spi_byte_valid),
     .spi_byte(spi_byte),
     .fifo(fifo),
-    .overflow_error(overflow_error)
+    .overflow_error(overflow_error),
+    .slave_busy(slave_busy)
   );
 
   // Geração de clock

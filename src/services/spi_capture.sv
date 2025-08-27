@@ -13,7 +13,8 @@ module spi_capture (
     input  logic           spi_byte_valid,
     input  spi_service_pkg::byte_t spi_byte,
     spi_fifo_if.producer   fifo,
-    output logic           overflow_error
+    output logic           overflow_error,
+    output logic           slave_busy
 );
   import spi_service_pkg::*;
 
@@ -31,5 +32,8 @@ module spi_capture (
       end
     end
   end
+
+  // Sinaliza quando a fila ultrapassa o limite seguro (4× MR)
+  assign slave_busy = (fifo.count > spi_service_pkg::RX_BLOCK_LEVEL);
 endmodule
 `endif
