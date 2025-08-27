@@ -1,30 +1,32 @@
 #!/usr/bin/env bash
+# Script de shell para executar todos os testes do projeto.
+# Uso: ./run_tests.sh <verilator|modelsim>
 set -e
 
-usage() {
-  echo "Usage: $0 [verilator|modelsim]" >&2
-  exit 1
-}
-
 if [ $# -ne 1 ]; then
-  usage
+  echo "Uso: $0 <verilator|modelsim>" >&2
+  exit 1
 fi
 
-case "$1" in
+simulator="$1"
+
+case "$simulator" in
   verilator)
-    python3 tb/verilator/run_verilator_framings_tests.py
-    python3 tb/verilator/run_verilator_parser_tests.py
-    python3 tb/verilator/run_verilator_service_tests.py
+    # Executa os testes com o simulador Verilator
+    python tb/verilator/run_verilator_framings_tests.py
+    python tb/verilator/run_verilator_parser_tests.py
+    python tb/verilator/run_verilator_service_tests.py
     ;;
   modelsim)
+    # Executa os testes com o ModelSim/Questa (necessita 'vsim' no PATH)
     if ! command -v vsim >/dev/null 2>&1; then
-      echo "Modelsim (vsim) not found in PATH" >&2
+      echo "Modelsim (vsim) não encontrado no PATH." >&2
       exit 1
     fi
     vsim -c -do "tb/modelsim/run_all.tcl"
     ;;
   *)
-    usage
+    echo "Simulador inválido: $simulator" >&2
+    exit 1
     ;;
-esac
-
+ esac
