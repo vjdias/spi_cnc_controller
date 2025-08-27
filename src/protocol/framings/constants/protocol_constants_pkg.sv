@@ -54,6 +54,11 @@ package protocol_constants_pkg;
   localparam byte_t MOVE_END_TYPE = 8'h06;
 
   // ---------------------------
+  // LED_CTRL
+  // ---------------------------
+  localparam byte_t LED_CTRL_TYPE = 8'h07;
+
+  // ---------------------------
   // FPGA_STATUS
   // ---------------------------
   localparam byte_t FPGA_STATUS_TYPE   = 8'h20;
