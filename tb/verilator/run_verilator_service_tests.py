@@ -5,20 +5,31 @@ import sys
 
 root = Path(__file__).resolve().parents[2]
 
-parser_root = root / "src" / "protocol" / "parsers" / "requests"
-framing_root = root / "src" / "protocol" / "framings"
-router_root = root / "src" / "protocol" / "routers"
+service_root   = root / "src" / "services"
+package_root   = service_root / "packages"
+interface_root = service_root / "interfaces"
+parser_root    = root / "src" / "protocol" / "parsers" / "requests"
+framing_root   = root / "src" / "protocol" / "framings"
+router_root    = root / "src" / "protocol" / "routers"
 
 tb_dir = root / "tb" / "tests"
 
-tb_files = sorted(tb_dir.glob("*_request_parser_tb.sv"))
-tb_files.append(tb_dir / "request_router_tb.sv")
+tb_files = [
+    tb_dir / "spi_capture_tb.sv",
+    tb_dir / "spi_capture_flow_tb.sv",
+    tb_dir / "spi_queue_consumer_tb.sv",
+    tb_dir / "spi_tx_buffer_tb.sv",
+]
 
 files = []
 files.extend(sorted((framing_root / "constants").glob("*.sv")))
 files.extend(sorted((framing_root / "requests").glob("*.sv")))
+files.extend(sorted((framing_root / "responses").glob("*.sv")))
 files.extend(sorted(parser_root.glob("*.sv")))
 files.extend(sorted(router_root.glob("*.sv")))
+files.extend(sorted(package_root.glob("*.sv")))
+files.extend(sorted(interface_root.glob("*.sv")))
+files.extend(sorted(service_root.glob("*.sv")))
 
 success = True
 for tb in tb_files:
@@ -52,4 +63,4 @@ for tb in tb_files:
 if not success:
     sys.exit(1)
 
-print("Todos os testes de parser passaram com sucesso.")
+print("Todos os testes de serviços passaram com sucesso.")

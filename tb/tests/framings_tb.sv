@@ -118,6 +118,22 @@ module framings_tb;
     $display("Sucesso: test_move_queue_add_request");
   endtask
 
+  task automatic test_led_ctrl_request();
+    led_control_request_pkg::led_ctrl_req_bytes_t r;
+    logic [55:0] raw;
+    led_control_request_pkg::led_ctrl_req_bytes_t d;
+    r = led_control_request_pkg::make_default();
+    r.frameId  = 8'h88;
+    r.ledMask  = 8'h3F;
+    r.ledValue = 8'h01;
+    r = led_control_request_pkg::set_parity(r);
+    `TEST_ASSERT(led_control_request_pkg::check_parity(r), "test_led_ctrl_request");
+    raw = led_control_request_pkg::encoder(r);
+    d   = led_control_request_pkg::decoder(raw);
+    `TEST_ASSERT(d == r, "test_led_ctrl_request");
+    $display("Sucesso: test_led_ctrl_request");
+  endtask
+
   task automatic test_start_move_response();
     start_move_response_pkg::start_move_resp_bytes_t r;
     logic [31:0] raw;
@@ -230,6 +246,22 @@ module framings_tb;
     $display("Sucesso: test_move_probe_level_response");
   endtask
 
+  task automatic test_led_ctrl_response();
+    led_control_response_pkg::led_ctrl_resp_bytes_t r;
+    logic [55:0] raw;
+    led_control_response_pkg::led_ctrl_resp_bytes_t d;
+    r = led_control_response_pkg::make_default();
+    r.frameIdEcho = 8'h99;
+    r.ledMask     = 8'h3F;
+    r.status      = 8'h00;
+    r = led_control_response_pkg::set_parity(r);
+    `TEST_ASSERT(led_control_response_pkg::check_parity(r), "test_led_ctrl_response");
+    raw = led_control_response_pkg::encoder(r);
+    d   = led_control_response_pkg::decoder(raw);
+    `TEST_ASSERT(d == r, "test_led_ctrl_response");
+    $display("Sucesso: test_led_ctrl_response");
+  endtask
+
   initial begin
     test_bytes_util();
     test_start_move_request();
@@ -239,6 +271,7 @@ module framings_tb;
     test_move_queue_status_request();
     test_move_end_request();
     test_move_queue_add_request();
+    test_led_ctrl_request();
     test_start_move_response();
     test_move_end_response();
     test_move_home_response();
@@ -246,6 +279,7 @@ module framings_tb;
     test_fpga_status_response();
     test_move_queue_add_response();
     test_move_probe_level_response();
+    test_led_ctrl_response();
     $display("All framing tests passed");
     $finish;
   end
