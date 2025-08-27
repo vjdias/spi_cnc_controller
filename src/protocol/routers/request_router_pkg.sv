@@ -18,6 +18,7 @@ package request_router_pkg;
   import move_end_req_parser_pkg::*;
   import move_queue_status_req_parser_pkg::*;
   import fpga_status_req_parser_pkg::*;
+  import led_control_req_parser_pkg::*;
 
   // Pacotes de framing para acesso às structs e funções make_default
   import start_move_request_pkg::*;
@@ -27,6 +28,7 @@ package request_router_pkg;
   import move_queue_add_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import fpga_status_request_pkg::*;
+  import led_control_request_pkg::*;
 
   // Estado do roteador: controla a etapa de recepção
   typedef enum logic [1:0] {
@@ -44,7 +46,8 @@ package request_router_pkg;
     P_MOVE_QUEUE_ADD,  // parser de MOVE_QUEUE_ADD
     P_MOVE_END,        // parser de MOVE_END
     P_MOVE_QUEUE_STATUS,// parser de MOVE_QUEUE_STATUS
-    P_FPGA_STATUS      // parser de FPGA_STATUS
+    P_FPGA_STATUS,     // parser de FPGA_STATUS
+    P_LED_CTRL         // parser de LED_CTRL
   } parser_id_t;
 
   // Contexto principal do roteador. Armazena estado, parser ativo e
@@ -61,6 +64,7 @@ package request_router_pkg;
     move_end_req_parser_pkg::parser_ctx_t         move_end_ctx;    // ctx MOVE_END
     move_queue_status_req_parser_pkg::parser_ctx_t queue_status_ctx; // ctx MOVE_QUEUE_STATUS
     fpga_status_req_parser_pkg::parser_ctx_t      fpga_status_ctx; // ctx FPGA_STATUS
+    led_control_req_parser_pkg::parser_ctx_t      led_ctrl_ctx;    // ctx LED_CTRL
   } router_ctx_t;
 
   // Inicializa o contexto do roteador e de cada parser individual
@@ -81,6 +85,7 @@ package request_router_pkg;
     ctx.move_end_ctx     = move_end_req_parser_pkg::init();
     ctx.queue_status_ctx = move_queue_status_req_parser_pkg::init();
     ctx.fpga_status_ctx  = fpga_status_req_parser_pkg::init();
+    ctx.led_ctrl_ctx     = led_control_req_parser_pkg::init();
     return ctx;
   endfunction
 
@@ -97,7 +102,8 @@ package request_router_pkg;
       output move_queue_add_req_bytes_t   queue_add_frame,
       output move_end_req_bytes_t         move_end_frame,
       output move_queue_status_bytes_t    queue_status_frame,
-      output request_fpga_status_bytes_t  fpga_status_frame
+      output request_fpga_status_bytes_t  fpga_status_frame,
+      output led_ctrl_req_bytes_t         led_ctrl_frame
   );
     router_ctx_t ctx = in_ctx;      // cópia local para ser atualizada
     logic d_valid, d_err;           // sinais descartados dos parsers
@@ -113,6 +119,7 @@ package request_router_pkg;
     move_end_frame     = move_end_request_pkg::make_default();
     queue_status_frame = move_queue_status_request_pkg::make_default();
     fpga_status_frame  = fpga_status_request_pkg::make_default();
+    led_ctrl_frame     = led_control_request_pkg::make_default();
 
     case (ctx.state)
       // Primeiro byte do frame: valida o HEADER
@@ -185,6 +192,14 @@ package request_router_pkg;
             ctx.fpga_status_ctx = fpga_status_req_parser_pkg::feed(ctx.fpga_status_ctx, data,   d_valid, d_err, fpga_status_frame);
             ctx.state           = R_PARSING;
           end
+          LED_CTRL_TYPE: begin
+            ctx.active      = P_LED_CTRL;
+            ctx.led_ctrl_ctx = led_control_req_parser_pkg::init();
+            // header e msgType são reenviados ao parser de LEDs
+            ctx.led_ctrl_ctx = led_control_req_parser_pkg::feed(ctx.led_ctrl_ctx, ctx.hdr, d_valid, d_err, led_ctrl_frame);
+            ctx.led_ctrl_ctx = led_control_req_parser_pkg::feed(ctx.led_ctrl_ctx, data,   d_valid, d_err, led_ctrl_frame);
+            ctx.state        = R_PARSING;
+          end
           default: begin
             // msgType desconhecido
             frame_error = 1'b1;
@@ -231,6 +246,11 @@ package request_router_pkg;
               // passa o byte ao parser FPGA_STATUS
               ctx.fpga_status_ctx = fpga_status_req_parser_pkg::feed(ctx.fpga_status_ctx, data, frame_valid, frame_error, fpga_status_frame);
               out_msgType         = FPGA_STATUS_TYPE;
+            end
+            P_LED_CTRL: begin
+              // passa o byte ao parser LED_CTRL
+              ctx.led_ctrl_ctx = led_control_req_parser_pkg::feed(ctx.led_ctrl_ctx, data, frame_valid, frame_error, led_ctrl_frame);
+              out_msgType      = LED_CTRL_TYPE;
             end
             default: begin
               frame_error = 1'b1; // parser inválido (não deveria ocorrer)

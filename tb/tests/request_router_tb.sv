@@ -10,6 +10,7 @@ module request_router_tb;
   import move_queue_add_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import fpga_status_request_pkg::*;
+  import led_control_request_pkg::*;
   import request_router_pkg::*;
 
   initial begin
@@ -23,6 +24,7 @@ module request_router_tb;
     move_queue_add_req_bytes_t   queue_add_out;
     move_queue_status_bytes_t    queue_status_out;
     request_fpga_status_bytes_t  fpga_status_out;
+    led_ctrl_req_bytes_t         led_ctrl_out;
     start_move_req_bytes_t       sm_in;
     move_home_req_bytes_t        mh_in;
     move_probe_level_req_bytes_t mp_in;
@@ -30,6 +32,7 @@ module request_router_tb;
     move_end_req_bytes_t         me_in;
     move_queue_status_bytes_t    qs_in;
     request_fpga_status_bytes_t  fs_in;
+    led_ctrl_req_bytes_t         lc_in;
     byte_t b;
     logic [335:0] raw; // tamanho máximo (queue_add)
 
@@ -43,7 +46,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 3) begin
         `TEST_ASSERT(!frame_valid, $sformatf("sm_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("sm_no_error_%0d", i));
@@ -69,7 +72,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 8) begin
         `TEST_ASSERT(!frame_valid, $sformatf("mh_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("mh_no_error_%0d", i));
@@ -94,7 +97,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 7) begin
         `TEST_ASSERT(!frame_valid, $sformatf("mp_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("mp_no_error_%0d", i));
@@ -120,7 +123,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 41) begin
         `TEST_ASSERT(!frame_valid, $sformatf("qa_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("qa_no_error_%0d", i));
@@ -142,7 +145,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 3) begin
         `TEST_ASSERT(!frame_valid, $sformatf("me_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("me_no_error_%0d", i));
@@ -164,7 +167,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 3) begin
         `TEST_ASSERT(!frame_valid, $sformatf("qs_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("qs_no_error_%0d", i));
@@ -186,7 +189,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i < 3) begin
         `TEST_ASSERT(!frame_valid, $sformatf("fs_no_valid_%0d", i));
         `TEST_ASSERT(!frame_error, $sformatf("fs_no_error_%0d", i));
@@ -198,16 +201,41 @@ module request_router_tb;
       end
     end
 
+    // --- LED_CTRL sucesso ---
+    ctx = init();
+    lc_in = led_control_request_pkg::make_default();
+    lc_in.frameId  = 8'h99;
+    lc_in.ledMask  = 8'h3F;
+    lc_in.ledValue = 8'h01;
+    lc_in = led_control_request_pkg::set_parity(lc_in);
+    raw = {led_control_request_pkg::encoder(lc_in), 280'd0};
+    for (int i = 0; i < 7; i++) begin
+      b   = raw[335 - i*8 -: 8];
+      ctx = feed(ctx, b, frame_valid, frame_error, mtype,
+                 move_home_out, start_move_out, probe_out,
+                 queue_add_out, move_end_out, queue_status_out,
+                 fpga_status_out, led_ctrl_out);
+      if (i < 6) begin
+        `TEST_ASSERT(!frame_valid, $sformatf("led_no_valid_%0d", i));
+        `TEST_ASSERT(!frame_error, $sformatf("led_no_error_%0d", i));
+      end else begin
+        `TEST_ASSERT(frame_valid, "led_valid");
+        `TEST_ASSERT(!frame_error, "led_no_error");
+        `TEST_ASSERT(mtype == LED_CTRL_TYPE, "led_type");
+        `TEST_ASSERT(led_ctrl_out == lc_in, "led_payload");
+      end
+    end
+
     // --- erro: msgType desconhecido ---
     ctx = init();
     ctx = feed(ctx, REQ_HEADER, frame_valid, frame_error, mtype,
                move_home_out, start_move_out, probe_out,
                queue_add_out, move_end_out, queue_status_out,
-               fpga_status_out);
+               fpga_status_out, led_ctrl_out);
     ctx = feed(ctx, 8'hFF, frame_valid, frame_error, mtype,
                move_home_out, start_move_out, probe_out,
                queue_add_out, move_end_out, queue_status_out,
-               fpga_status_out);
+               fpga_status_out, led_ctrl_out);
     `TEST_ASSERT(frame_error, "unknown_type_error");
     `TEST_ASSERT(!frame_valid, "unknown_type_no_valid");
 
@@ -226,7 +254,7 @@ module request_router_tb;
       ctx = feed(ctx, b, frame_valid, frame_error, mtype,
                  move_home_out, start_move_out, probe_out,
                  queue_add_out, move_end_out, queue_status_out,
-                 fpga_status_out);
+                 fpga_status_out, led_ctrl_out);
       if (i == 7) begin
         `TEST_ASSERT(frame_error, "parity_error_flag");
         `TEST_ASSERT(!frame_valid, "parity_error_no_valid");

@@ -22,6 +22,7 @@ tb_files = [
 files = []
 files.extend(sorted((framing_root / "constants").glob("*.sv")))
 files.extend(sorted((framing_root / "requests").glob("*.sv")))
+files.extend(sorted((framing_root / "responses").glob("*.sv")))
 files.extend(sorted(parser_root.glob("*.sv")))
 files.extend(sorted(router_root.glob("*.sv")))
 files.extend(sorted(package_root.glob("*.sv")))

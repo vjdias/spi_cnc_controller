@@ -11,6 +11,7 @@ module spi_queue_consumer_tb;
   import move_end_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import fpga_status_request_pkg::*;
+  import led_control_request_pkg::*;
 
   spi_fifo_if fifo();
 
@@ -26,6 +27,7 @@ module spi_queue_consumer_tb;
   move_end_req_bytes_t         move_end_frame;
   move_queue_status_bytes_t    queue_status_frame;
   request_fpga_status_bytes_t  fpga_status_frame;
+  led_control_request_pkg::led_ctrl_req_bytes_t led_ctrl_frame;
 
   spi_queue_consumer dut(
     .clk(clk),
@@ -40,7 +42,8 @@ module spi_queue_consumer_tb;
     .queue_add_frame(queue_add_frame),
     .move_end_frame(move_end_frame),
     .queue_status_frame(queue_status_frame),
-    .fpga_status_frame(fpga_status_frame)
+    .fpga_status_frame(fpga_status_frame),
+    .led_ctrl_frame(led_ctrl_frame)
   );
 
   // Geração de clock

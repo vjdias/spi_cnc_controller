@@ -22,7 +22,8 @@ module spi_queue_consumer (
     output move_queue_add_request_pkg::move_queue_add_req_bytes_t   queue_add_frame,
     output move_end_request_pkg::move_end_req_bytes_t         move_end_frame,
     output move_queue_status_request_pkg::move_queue_status_bytes_t    queue_status_frame,
-    output fpga_status_request_pkg::request_fpga_status_bytes_t  fpga_status_frame
+    output fpga_status_request_pkg::request_fpga_status_bytes_t  fpga_status_frame,
+    output led_control_request_pkg::led_ctrl_req_bytes_t        led_ctrl_frame
 );
   import spi_service_pkg::*;
   import request_router_pkg::*;
@@ -34,6 +35,7 @@ module spi_queue_consumer (
   import move_end_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import fpga_status_request_pkg::*;
+  import led_control_request_pkg::*;
 
   router_ctx_t ctx;
 
@@ -53,6 +55,7 @@ module spi_queue_consumer (
       move_end_frame     = move_end_request_pkg::make_default();
       queue_status_frame = move_queue_status_request_pkg::make_default();
       fpga_status_frame  = fpga_status_request_pkg::make_default();
+      led_ctrl_frame     = led_control_request_pkg::make_default();
     end else begin
       // Sinais baixos por padrão a cada ciclo
       frame_valid = 1'b0;
@@ -73,7 +76,8 @@ module spi_queue_consumer (
                  queue_add_frame,
                  move_end_frame,
                  queue_status_frame,
-                 fpga_status_frame
+                 fpga_status_frame,
+                 led_ctrl_frame
                );
       end
     end
