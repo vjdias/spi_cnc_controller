@@ -37,12 +37,20 @@ spi_capture → spi_fifo_if → spi_queue_consumer → request_router_pkg → pa
 4. **Parsers** preenchem estruturas de frame ou sinalizam erro.
 
 ## Executando testes
-No Windows, utilize o script PowerShell `run_tests.ps1` localizado na raiz do repositório. Ele recebe um parâmetro que define o simulador desejado:
+Há scripts para Windows e Linux, ambos exigindo um parâmetro que define o simulador a ser utilizado:
 
 ```powershell
+# Windows
 ./run_tests.ps1 verilator   # utiliza Verilator
 ./run_tests.ps1 modelsim    # utiliza ModelSim/Questa (requer "vsim" no PATH)
 ```
+
+```bash
+# Linux
+./run_tests.sh verilator    # utiliza Verilator
+./run_tests.sh modelsim     # utiliza ModelSim/Questa (requer "vsim" no PATH)
+```
+
 Os testes são executados em modo texto e o resultado de cada testbench é mostrado de forma resumida no terminal.
 
 ## Licença
