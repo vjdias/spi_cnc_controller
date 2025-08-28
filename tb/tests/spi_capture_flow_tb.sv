@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; end
+`include "lib/test_macros.svh"
 
 module spi_capture_flow_tb;
   import spi_service_pkg::*;

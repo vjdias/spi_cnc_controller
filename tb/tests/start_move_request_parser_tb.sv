@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; end
+`include "lib/test_macros.svh"
 
 module start_move_request_parser_tb;
   import protocol_constants_pkg::*;

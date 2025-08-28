@@ -12,7 +12,7 @@ module led_service (
     input  logic rst_n,
     input  logic frame_valid,
     input  spi_service_pkg::byte_t msgType,
-    input  led_control_request_pkg::led_ctrl_req_bytes_t led_req,
+    input  var led_control_request_pkg::led_ctrl_req_bytes_t led_req,
     output logic [5:0] leds,
     output logic resp_valid,
     output led_control_response_pkg::led_ctrl_resp_bytes_t resp_frame
@@ -32,7 +32,8 @@ module led_service (
     end else begin
       resp_valid <= 1'b0; // baixa por padrão
       if (frame_valid && msgType == LED_CTRL_TYPE) begin
-        led_ctrl_resp_bytes_t r = led_control_response_pkg::make_default();
+        led_ctrl_resp_bytes_t r;
+        r = led_control_response_pkg::make_default();
         r.frameIdEcho = led_req.frameId;
         r.ledMask     = led_req.ledMask;
         if (|led_req.ledMask[7:6]) begin

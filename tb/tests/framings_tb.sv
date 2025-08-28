@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; return; end
+`include "lib/test_macros.svh"
 
 module framings_tb;
   import bytes_util_pkg::*;

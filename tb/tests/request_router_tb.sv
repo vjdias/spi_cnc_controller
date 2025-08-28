@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; end
+`include "lib/test_macros.svh"
 
 module request_router_tb;
   import protocol_constants_pkg::*;
@@ -65,7 +65,7 @@ module request_router_tb;
     mh_in.axisMask = 8'h07;
     mh_in.dirMask  = 8'h02;
     mh_in.vhome    = 16'h1234;
-    mh_in = set_parity(mh_in);
+    mh_in = move_home_request_pkg::set_parity(mh_in);
     raw = {move_home_request_pkg::encoder(mh_in), 264'd0};
     for (int i = 0; i < 9; i++) begin
       b   = raw[335 - i*8 -: 8];
@@ -246,7 +246,7 @@ module request_router_tb;
     mh_in.axisMask = 8'h01;
     mh_in.dirMask  = 8'h01;
     mh_in.vhome    = 16'h0001;
-    mh_in = set_parity(mh_in);
+    mh_in = move_home_request_pkg::set_parity(mh_in);
     mh_in.parity ^= 8'hFF; // corrompe paridade
     raw = {move_home_request_pkg::encoder(mh_in), 264'd0};
     for (int i = 0; i < 9; i++) begin

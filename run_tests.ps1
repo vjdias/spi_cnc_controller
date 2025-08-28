@@ -20,5 +20,6 @@ switch ($simulator) {
             exit 1
         }
         vsim -c -do "tb/modelsim/run_all.tcl"
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } else { exit 0 }
     }
 }

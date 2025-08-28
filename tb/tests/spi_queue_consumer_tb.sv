@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; end
+`include "lib/test_macros.svh"
 
 module spi_queue_consumer_tb;
   import spi_service_pkg::*;
@@ -19,7 +19,7 @@ module spi_queue_consumer_tb;
   logic rst_n = 0;
   logic frame_valid;
   logic frame_error;
-  byte_t out_msgType;
+  spi_service_pkg::byte_t out_msgType;
   move_home_req_bytes_t        move_home_frame;
   start_move_req_bytes_t       start_move_frame;
   move_probe_level_req_bytes_t move_probe_frame;
@@ -51,19 +51,19 @@ module spi_queue_consumer_tb;
 
   initial begin
     move_home_req_bytes_t in;
-    byte_t b;
+    spi_service_pkg::byte_t b;
     logic [71:0] raw;
     int cycles;
 
     // ---- Cenário de sucesso ----
-    in = make_default();
+    in = move_home_request_pkg::make_default();
     in.frameId  = 8'h0A;
     in.axisMask = 8'h03;
     in.dirMask  = 8'h01;
     in.vhome    = 16'h0204;
-    in = set_parity(in);
+    in = move_home_request_pkg::set_parity(in);
 
-    raw = encoder(in);
+    raw = move_home_request_pkg::encoder(in);
 
     #12 rst_n = 1; // libera o reset
     for (int i = 0; i < 9; i++) begin
@@ -82,14 +82,14 @@ module spi_queue_consumer_tb;
 
     // ---- Cenário de erro: paridade inválida ----
     rst_n = 0; @(posedge clk); @(posedge clk); rst_n = 1;
-    in = make_default();
+    in = move_home_request_pkg::make_default();
     in.frameId  = 8'h0B;
     in.axisMask = 8'h07;
     in.dirMask  = 8'h02;
     in.vhome    = 16'h1234;
-    in = set_parity(in);
+    in = move_home_request_pkg::set_parity(in);
     in.parity ^= 8'hFF; // corrompe paridade
-    raw = encoder(in);
+    raw = move_home_request_pkg::encoder(in);
     for (int i = 0; i < 9; i++) begin
       b = raw[71 - i*8 -: 8];
       fifo.write(b);

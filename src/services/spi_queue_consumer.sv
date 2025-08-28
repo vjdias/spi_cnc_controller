@@ -39,8 +39,7 @@ module spi_queue_consumer (
 
   router_ctx_t ctx;
 
-  // Contexto inicial do roteador
-  initial ctx = request_router_pkg::init();
+  // Contexto inicial é aplicado via reset em always_ff
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -62,7 +61,7 @@ module spi_queue_consumer (
       frame_error = 1'b0;
 
       if (!fifo.empty) begin
-        byte_t data;
+        spi_service_pkg::byte_t data;
         fifo.read(data); // obtém próximo byte da fila
         ctx <= request_router_pkg::feed(
                  ctx,

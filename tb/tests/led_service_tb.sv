@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`define TEST_ASSERT(cond, name) if(!(cond)) begin $display("Falha: %s", name); $finish; end
+`include "lib/test_macros.svh"
 
 module led_service_tb;
   import spi_service_pkg::*;
@@ -10,7 +10,7 @@ module led_service_tb;
   logic clk = 0;
   logic rst_n = 0;
   logic frame_valid;
-  byte_t msgType;
+  spi_service_pkg::byte_t msgType;
   led_ctrl_req_bytes_t led_req;
   logic [5:0] leds;
   logic resp_valid;
@@ -26,7 +26,7 @@ module led_service_tb;
   always #5 clk = ~clk;
 
   initial begin
-    frame_valid = 0; msgType = 0; led_req = make_default();
+    frame_valid = 0; msgType = 0; led_req = led_control_request_pkg::make_default();
     #12 rst_n = 1; @(posedge clk);
 
     // Liga todos os LEDs
@@ -51,7 +51,9 @@ module led_service_tb;
     $finish;
   end
 
-  task automatic wait_response(byte_t frameId, byte_t mask, byte_t status);
+  task automatic wait_response(spi_service_pkg::byte_t frameId,
+                               spi_service_pkg::byte_t mask,
+                               spi_service_pkg::byte_t status);
     int cycles = 0;
     while (!resp_valid && cycles < 20) begin
       @(posedge clk); cycles++;
