@@ -30,8 +30,16 @@ module spi_led_integration_tb;
   logic                               resp_valid;
   led_ctrl_resp_bytes_t               resp_frame;
 
+  // FIFO de transmissão e TX buffer
+  spi_fifo_if #(.DEPTH(TX_FIFO_DEPTH), .DROP_OLD_ON_FULL(1)) tx_fifo();
+  logic tx_busy;
+  // Stream genérico de respostas do LED
+  resp_stream_if led_stream();
+  // Array de streams para o HUB genérico (1 fonte)
+  resp_stream_if streams[1]();
+
   // DUTs
-  spi_capture u_cap(
+  spi_rx_mosi_service u_cap(
     .clk(clk), .rst_n(rst_n),
     .spi_byte_valid(spi_byte_valid),
     .spi_byte(spi_byte),
@@ -40,7 +48,7 @@ module spi_led_integration_tb;
     .slave_busy(slave_busy)
   );
 
-  spi_queue_consumer u_cons(
+  spi_rx_hub_service u_cons(
     .clk(clk), .rst_n(rst_n),
     .fifo(fifo),
     .frame_valid(frame_valid), .frame_error(frame_error),
@@ -60,7 +68,22 @@ module spi_led_integration_tb;
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid), .msgType(out_msgType),
     .led_req(led_ctrl_frame),
-    .leds(leds), .resp_valid(resp_valid), .resp_frame(resp_frame)
+    .leds(leds), .resp_valid(resp_valid), .resp_frame(resp_frame),
+    .tx_stream(led_stream)
+  );
+
+  // Conecta LED stream no array de streams[0]
+  assign streams[0].valid = led_stream.valid;
+  assign streams[0].bits  = led_stream.bits;
+  assign streams[0].len   = led_stream.len;
+  assign led_stream.ready = streams[0].ready;
+
+  // HUB genérico (1 fonte)
+  spi_tx_hub_service #(.NUM_STREAMS(1)) u_tx(
+    .clk(clk), .rst_n(rst_n),
+    .streams(streams),
+    .tx_fifo(tx_fifo),
+    .tx_busy(tx_busy)
   );
 
   // clock
@@ -92,6 +115,10 @@ module spi_led_integration_tb;
 
   initial begin
     int cycles;
+    int i;
+    logic [55:0] raw_resp;
+    spi_service_pkg::byte_t rb;
+    led_ctrl_resp_bytes_t dec;
     spi_byte_valid = 0;
     spi_byte       = 0;
 
@@ -113,6 +140,21 @@ module spi_led_integration_tb;
     `TEST_ASSERT(resp_frame.frameIdEcho == 8'hA1, "resp_frameid_echo")
     `TEST_ASSERT(resp_frame.ledMask == 8'h07, "resp_ledmask_echo")
     `TEST_ASSERT(resp_frame.status == 8'h00, "resp_status_ok")
+
+    // Verifica que 7 bytes foram colocados na TX FIFO e redecodifica
+    cycles = 0;
+    while (tx_fifo.count < 7 && cycles < 50) begin
+      @(posedge clk); cycles++;
+    end
+    `TEST_ASSERT(tx_fifo.count >= 7, "tx_fifo_timeout")
+    for (i = 0; i < 7; i++) begin
+      tx_fifo.read(rb);
+      raw_resp[55 - i*8 -: 8] = rb;
+    end
+    dec = led_control_response_pkg::decoder(raw_resp);
+    `TEST_ASSERT(dec.frameIdEcho == 8'hA1, "dec_frameid_echo")
+    `TEST_ASSERT(dec.ledMask == 8'h07, "dec_ledmask")
+    `TEST_ASSERT(dec.status == 8'h00, "dec_status_ok")
 
     $display("Sucesso: spi_led_integration_tb");
     $finish;

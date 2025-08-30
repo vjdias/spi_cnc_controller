@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import subprocess
+import shutil
 from pathlib import Path
 import sys
 
 root = Path(__file__).resolve().parents[2]
 
 service_root   = root / "src" / "services"
-package_root   = service_root / "packages"
-interface_root = service_root / "interfaces"
+integrations_root = service_root / "integrations"
+package_root   = integrations_root / "packages"
+interface_root = integrations_root / "interfaces"
 parser_root    = root / "src" / "protocol" / "parsers" / "requests"
 framing_root   = root / "src" / "protocol" / "framings"
 router_root    = root / "src" / "protocol" / "routers"
@@ -15,10 +17,12 @@ router_root    = root / "src" / "protocol" / "routers"
 tb_dir = root / "tb" / "tests"
 
 tb_files = [
-    tb_dir / "spi_capture_tb.sv",
-    tb_dir / "spi_capture_flow_tb.sv",
-    tb_dir / "spi_queue_consumer_tb.sv",
+    tb_dir / "spi_rx_mosi_service_tb.sv",
+    tb_dir / "spi_rx_mosi_flow_tb.sv",
+    tb_dir / "spi_rx_hub_service_tb.sv",
     tb_dir / "spi_tx_buffer_tb.sv",
+    tb_dir / "spi_full_flow_led_20_tb.sv",
+    tb_dir / "spi_tx_hub_service_tb.sv",
 ]
 
 files = []
@@ -30,10 +34,18 @@ files.extend(sorted(router_root.glob("*.sv")))
 files.extend(sorted(package_root.glob("*.sv")))
 files.extend(sorted(interface_root.glob("*.sv")))
 files.extend(sorted(service_root.glob("*.sv")))
+# também pega subpastas relevantes em services
+for sub in ["spi", "led"]:
+    subdir = service_root / sub
+    if subdir.exists():
+        files.extend(sorted(subdir.glob("*.sv")))
 
 success = True
 for tb in tb_files:
-    subprocess.run(["rm", "-rf", str(root / "obj_dir")])
+    # remove obj_dir de forma portável
+    obj = root / "obj_dir"
+    if obj.exists():
+        shutil.rmtree(obj, ignore_errors=True)
 
     top = tb.stem
     cmd = [
@@ -44,7 +56,13 @@ for tb in tb_files:
         top,
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
+        f"-I{tb_dir}",
     ] + [str(f) for f in files] + [str(tb)]
+
+    # Garante que o Verilator está disponível
+    if shutil.which("verilator") is None:
+        print("Verilator não encontrado no PATH. Instale-o ou use ModelSim (vsim).")
+        sys.exit(1)
 
     compile = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
     print(compile.stdout)

@@ -5,9 +5,19 @@
     <Version>5</Version>
     <Device name="GW2A-18C" pn="GW2A-LV18PG256C8/I7">gw2a18c-011</Device>
     <FileList>
-        <File path="src/drivers/spi_master/spi_master.v" type="file.verilog" enable="1"/>
-        <File path="src/drivers/spi_slave.sv" type="file.verilog" enable="1"/>
+        <File path="src/drivers/spi/spi_master/spi_master.v" type="file.verilog" enable="1"/>
+        <File path="src/drivers/spi/spi_master/spi_master_tmp.v" type="file.verilog" enable="1"/>
+        <File path="src/protocol/framings/constants/protocol_constants_pkg.sv" type="file.verilog" enable="1"/>
+        <File path="src/protocol/routers/request_router_pkg.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/led/led_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/spi/spi_rx_hub_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/spi/spi_rx_mosi_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/spi/spi_rx_slave_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/spi/spi_tx_hub_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/spi/spi_tx_miso_service.sv" type="file.verilog" enable="1"/>
         <File path="src/top.sv" type="file.verilog" enable="1"/>
+        <File path="src/drivers/spi/spi_master/spi_master.vo" type="file.netlist" enable="1"/>
         <File path="src/spi_cnc_controller.cst" type="file.cst" enable="1"/>
+        <File path="src/drivers/spi/spi_master/spi_master.ipc" type="file.other" enable="1"/>
     </FileList>
 </Project>

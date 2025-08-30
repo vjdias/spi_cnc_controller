@@ -15,17 +15,22 @@ module led_service_tb;
   logic [5:0] leds;
   logic resp_valid;
   led_ctrl_resp_bytes_t resp_frame;
+  // Stream genérico (não consumido neste TB)
+  resp_stream_if led_stream();
 
   led_service svc(
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid), .msgType(msgType),
     .led_req(led_req), .leds(leds),
-    .resp_valid(resp_valid), .resp_frame(resp_frame)
+    .resp_valid(resp_valid), .resp_frame(resp_frame),
+    .tx_stream(led_stream)
   );
 
   always #5 clk = ~clk;
 
   initial begin
+    // Nenhum consumidor: mantém ready baixo para não limpar pendência
+    led_stream.ready = 1'b0;
     frame_valid = 0; msgType = 0; led_req = led_control_request_pkg::make_default();
     #12 rst_n = 1; @(posedge clk);
 
