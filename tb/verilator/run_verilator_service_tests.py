@@ -5,6 +5,8 @@ from pathlib import Path
 import sys
 
 root = Path(__file__).resolve().parents[2]
+temp_dir = root / "tb" / "tests" / "temp"
+obj_dir  = temp_dir / "obj_dir"
 
 service_root   = root / "src" / "services"
 integrations_root = service_root / "integrations"
@@ -42,10 +44,10 @@ for sub in ["spi", "led"]:
 
 success = True
 for tb in tb_files:
-    # remove obj_dir de forma portável
-    obj = root / "obj_dir"
-    if obj.exists():
-        shutil.rmtree(obj, ignore_errors=True)
+    # remove obj_dir (tb/tests/temp/obj_dir) de forma portável
+    if obj_dir.exists():
+        shutil.rmtree(obj_dir, ignore_errors=True)
+    obj_dir.mkdir(parents=True, exist_ok=True)
 
     top = tb.stem
     cmd = [
@@ -57,7 +59,7 @@ for tb in tb_files:
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
         f"-I{tb_dir}",
-    ] + [str(f) for f in files] + [str(tb)]
+    ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 
     # Garante que o Verilator está disponível
     if shutil.which("verilator") is None:
@@ -71,7 +73,7 @@ for tb in tb_files:
         success = False
         break
 
-    proc = subprocess.run([f"./obj_dir/V{top}"], cwd=root, capture_output=True, text=True)
+    proc = subprocess.run([str(obj_dir / f"V{top}")], cwd=root, capture_output=True, text=True)
     print(proc.stdout)
     if proc.returncode != 0 or "Sucesso" not in proc.stdout:
         print(proc.stderr)

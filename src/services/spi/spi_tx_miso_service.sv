@@ -8,6 +8,14 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_TX_MISO_SERVICE_SV
 `define SPI_TX_MISO_SERVICE_SV
+// Disponível somente em simulação (ModelSim/Verilator)
+`ifdef MODEL_TECH
+`define __SIM_BUILD__
+`endif
+`ifdef VERILATOR
+`define __SIM_BUILD__
+`endif
+`ifdef __SIM_BUILD__
 module spi_tx_miso_service #(
     parameter logic [2:0] TX_DATA_ADDR  = 3'd0,   // endereço do registrador de TX
     parameter int         WAIT_CYCLES   = 2       // espaçamento entre writes
@@ -23,6 +31,7 @@ module spi_tx_miso_service #(
     output logic [2:0]  waddr,
     output logic [7:0]  wdata
 );
+  // Nota: evite importar tudo para não conflitar com outros pacotes sob -mfcu
   import spi_service_pkg::*;
 
   logic [$clog2(WAIT_CYCLES+1)-1:0] gap;
@@ -38,7 +47,7 @@ module spi_tx_miso_service #(
       if (gap != 0) begin
         gap <= gap - 1'b1;
       end else if (!tx_fifo.empty) begin
-        byte_t b;
+        spi_service_pkg::byte_t b;
         tx_fifo.read(b);
         waddr <= TX_DATA_ADDR;
         wdata <= b;
@@ -49,3 +58,4 @@ module spi_tx_miso_service #(
   end
 endmodule
 `endif
+`endif // __SIM_BUILD__

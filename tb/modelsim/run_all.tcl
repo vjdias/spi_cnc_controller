@@ -19,13 +19,18 @@ proc rglob {dir pattern} {
   return $results
 }
 
-# limpa/gera bibliotecas
-catch { vdel -lib work -all }
-vlib work
-
-# coloca a biblioteca física da simlib dentro de tb/tests/temp/simlib
+# limpa/gera bibliotecas no diretório temporário de testes
 set sim_temp_dir [file join $root tb tests temp]
 file mkdir $sim_temp_dir
+
+# WORK: mapeia a lib padrão 'work' para tb/tests/temp/work
+set work_dir [file join $sim_temp_dir work]
+catch { vdel -lib work -all }
+file mkdir $work_dir
+vlib $work_dir
+vmap work $work_dir
+
+# coloca a biblioteca física da simlib dentro de tb/tests/temp/simlib
 set simlib_dir [file join $sim_temp_dir simlib]
 catch { vdel -lib simlib -all }
 vlib $simlib_dir

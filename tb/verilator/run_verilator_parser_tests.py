@@ -4,6 +4,8 @@ from pathlib import Path
 import sys
 
 root = Path(__file__).resolve().parents[2]
+temp_dir = root / "tb" / "tests" / "temp"
+obj_dir  = temp_dir / "obj_dir"
 
 parser_root = root / "src" / "protocol" / "parsers" / "requests"
 framing_root = root / "src" / "protocol" / "framings"
@@ -22,7 +24,14 @@ files.extend(sorted(router_root.glob("*.sv")))
 
 success = True
 for tb in tb_files:
-    subprocess.run(["rm", "-rf", str(root / "obj_dir")])
+    # limpa diretório de build do Verilator em tb/tests/temp/obj_dir
+    if obj_dir.exists():
+        try:
+            import shutil
+            shutil.rmtree(obj_dir, ignore_errors=True)
+        except Exception:
+            pass
+    obj_dir.mkdir(parents=True, exist_ok=True)
 
     top = tb.stem
     cmd = [
@@ -33,7 +42,7 @@ for tb in tb_files:
         top,
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
-    ] + [str(f) for f in files] + [str(tb)]
+    ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 
     compile = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
     print(compile.stdout)
@@ -42,7 +51,7 @@ for tb in tb_files:
         success = False
         break
 
-    proc = subprocess.run([f"./obj_dir/V{top}"], cwd=root, capture_output=True, text=True)
+    proc = subprocess.run([str(obj_dir / f"V{top}")], cwd=root, capture_output=True, text=True)
     print(proc.stdout)
     if proc.returncode != 0 or "Sucesso" not in proc.stdout:
         print(proc.stderr)

@@ -7,6 +7,14 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_TX_HUB_SERVICE_SV
 `define SPI_TX_HUB_SERVICE_SV
+// Disponível somente em simulação (ModelSim/Verilator)
+`ifdef MODEL_TECH
+`define __SIM_BUILD__
+`endif
+`ifdef VERILATOR
+`define __SIM_BUILD__
+`endif
+`ifdef __SIM_BUILD__
 module spi_tx_hub_service #(
     parameter int NUM_STREAMS = 4
   )(
@@ -21,7 +29,7 @@ module spi_tx_hub_service #(
 
     output logic tx_busy
 );
-  import spi_service_pkg::*;
+  import spi_service_pkg::*; // usado para RESP_MAX_BYTES e byte_t qualificado
 
   localparam int SHIFT_BITS = RESP_MAX_BYTES * 8;
   localparam int LENW       = $clog2(RESP_MAX_BYTES + 1);
@@ -45,6 +53,10 @@ module spi_tx_hub_service #(
   // Seleção combinacional do próximo stream
   logic pick;
   int unsigned pick_idx;
+  // Variáveis de loop pré-declaradas para compatibilidade com simuladores
+  int unsigned i;
+  int unsigned k;
+  int unsigned cand;
 
   // Combinacional: default dos readys
   // Espelha sinais das interfaces e aplica ready por índice constante
@@ -64,13 +76,12 @@ module spi_tx_hub_service #(
     pick = 1'b0;
     pick_idx = '0;
     // default: nenhum ready
-    for (int i = 0; i < NUM_STREAMS; i++) begin
+    for (i = 0; i < NUM_STREAMS; i++) begin
       ready_arr[i] = 1'b0;
     end
     if (state == IDLE) begin
       // procura válido a partir de rr_ptr (round-robin)
-      for (int k = 0; k < NUM_STREAMS; k++) begin
-        int unsigned cand;
+      for (k = 0; k < NUM_STREAMS; k++) begin
         cand = (rr_ptr + k) % NUM_STREAMS;
         if (!pick && valid_arr[cand]) begin
           pick = 1'b1;
@@ -127,3 +138,4 @@ module spi_tx_hub_service #(
   end
 endmodule
 `endif
+`endif // __SIM_BUILD__

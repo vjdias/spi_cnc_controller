@@ -1,17 +1,17 @@
 [
  {
-  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
   "InstLine" : 400,
   "InstName" : "SPI_MASTER_Top",
-  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
   "ModuleLine" : 400,
   "ModuleName" : "SPI_MASTER_Top",
   "SubInsts" : [
    {
-    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
     "InstLine" : 439,
     "InstName" : "u_spi_master",
-    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
     "ModuleLine" : 10,
     "ModuleName" : "~spi_master.SPI_MASTER_Top"
    }
@@ -27,21 +27,61 @@
   "SubInsts" : [
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 40,
+    "InstLine" : 67,
     "InstName" : "u_spi_slave",
-    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_slave.sv",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
     "ModuleLine" : 12,
     "ModuleName" : "spi_slave",
     "SubInsts" : [
      {
-      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_slave.sv",
-      "InstLine" : 52,
+      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
+      "InstLine" : 54,
       "InstName" : "u_spi_slave_core",
-      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi_master/spi_master.v",
+      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
       "ModuleLine" : 10,
       "ModuleName" : "~spi_master.SPI_MASTER_Top"
      }
     ]
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 102,
+    "InstName" : "u_rx_bridge",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv",
+    "ModuleLine" : 16,
+    "ModuleName" : "spi_rx_slave_service"
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 127,
+    "InstName" : "u_rx_cap_synth",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv",
+    "ModuleLine" : 52,
+    "ModuleName" : "spi_rx_mosi_service"
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 139,
+    "InstName" : "u_rx_fifo",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync.sv",
+    "ModuleLine" : 9,
+    "ModuleName" : "byte_fifo_sync"
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 157,
+    "InstName" : "u_rx_hub_synth",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv",
+    "ModuleLine" : 94,
+    "ModuleName" : "spi_rx_hub_service"
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 181,
+    "InstName" : "u_led_synth",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv",
+    "ModuleLine" : 10,
+    "ModuleName" : "led_service"
    }
   ]
  }

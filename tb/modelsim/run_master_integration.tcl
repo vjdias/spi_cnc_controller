@@ -21,13 +21,19 @@ proc rglob {dir pattern} {
   return $results
 }
 
-# cria/usa bibliotecas
-vlib work
-
-# coloca a biblioteca física da simlib dentro de tb/tests/temp/simlib
+# cria/usa bibliotecas no diretório temporário
 set sim_temp_dir [file join $root tb tests temp]
 file mkdir $sim_temp_dir
+
+# WORK: mapeia a lib padrão 'work' para tb/tests/temp/work
+set work_dir [file join $sim_temp_dir work]
+catch { vdel -lib work -all }
+file mkdir $work_dir
+vlib $work_dir
+vmap work $work_dir
+
 set simlib_dir [file join $sim_temp_dir simlib]
+catch { vdel -lib simlib -all }
 vlib $simlib_dir
 vmap simlib $simlib_dir
 
@@ -89,7 +95,6 @@ set spi_master_v [file join $root src drivers spi spi_master spi_master.v]
 if {[file exists $spi_master_v]} {
   # Compila o IP no 'work' e mapeia um alias lógico "~spi_master" para o diretório do 'work'.
   # Isso evita problemas de expansão de til no -work do vlog.
-  set work_dir [file normalize work]
   vmap {~spi_master} $work_dir
   puts "Compilando IP SPI MASTER (no work) e mapeando alias ~spi_master: $spi_master_v"
   vlog $spi_master_v
