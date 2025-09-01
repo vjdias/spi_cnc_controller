@@ -20,7 +20,7 @@ package move_home_response_pkg;
 
   import protocol_constants_pkg::*;
 
-  parameter int FRAME_BITS = 64;
+  localparam int FRAME_BITS = 64;
 
   typedef struct packed {
     byte_t header;        // RESP_HEADER (0xAB)

@@ -30,7 +30,7 @@ package move_queue_add_request_pkg;
   import protocol_constants_pkg::*; // REQ_HEADER/REQ_TAIL, byte_t
 
   // Largura total do vetor serializado em BITS (42 bytes = 336 bits)
-  parameter int FRAME_BITS = 336;
+  localparam int FRAME_BITS = 336;
 
 
   typedef struct packed {

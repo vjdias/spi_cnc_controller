@@ -18,6 +18,30 @@
   ]
  },
  {
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
+  "InstLine" : 16,
+  "InstName" : "lj12a3_proximity_driver",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
+  "ModuleLine" : 16,
+  "ModuleName" : "lj12a3_proximity_driver"
+ },
+ {
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
+  "InstLine" : 16,
+  "InstName" : "tmc5160_step_dir_driver",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
+  "ModuleLine" : 16,
+  "ModuleName" : "tmc5160_step_dir_driver"
+ },
+ {
+  "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv",
+  "InstLine" : 16,
+  "InstName" : "emergency_stop_driver",
+  "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv",
+  "ModuleLine" : 16,
+  "ModuleName" : "emergency_stop_driver"
+ },
+ {
   "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
   "InstLine" : 9,
   "InstName" : "top",
@@ -27,7 +51,7 @@
   "SubInsts" : [
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 67,
+    "InstLine" : 87,
     "InstName" : "u_spi_slave",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
     "ModuleLine" : 12,
@@ -45,7 +69,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 102,
+    "InstLine" : 122,
     "InstName" : "u_rx_bridge",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv",
     "ModuleLine" : 16,
@@ -53,7 +77,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 127,
+    "InstLine" : 147,
     "InstName" : "u_rx_cap_synth",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv",
     "ModuleLine" : 52,
@@ -61,15 +85,15 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 139,
+    "InstLine" : 159,
     "InstName" : "u_rx_fifo",
-    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync.sv",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv",
     "ModuleLine" : 9,
     "ModuleName" : "byte_fifo_sync"
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 157,
+    "InstLine" : 177,
     "InstName" : "u_rx_hub_synth",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv",
     "ModuleLine" : 94,
@@ -77,11 +101,19 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 181,
+    "InstLine" : 201,
     "InstName" : "u_led_synth",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv",
     "ModuleLine" : 10,
     "ModuleName" : "led_service"
+   },
+   {
+    "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
+    "InstLine" : 236,
+    "InstName" : "u_quad_enc",
+    "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv",
+    "ModuleLine" : 18,
+    "ModuleName" : "quad_encoder_tmcs28_driver"
    }
   ]
  }

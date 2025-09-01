@@ -25,7 +25,9 @@ module quad_encoder_tmcs28_driver #(
     // Wrap: usa contador modular [0..MODULO-1]; 0 = desabilita (saturação)
     parameter int unsigned MODULO             = 0,
     // Velocidade: janela de medição em ciclos de clk; 0 = desabilita
-    parameter int unsigned VEL_WINDOW_CYCLES  = 0
+    parameter int unsigned VEL_WINDOW_CYCLES  = 0,
+    // Modo de contagem: 1 (X1: borda de subida de A), 2 (X2: ambas as bordas de A), 4 (X4: todas as transições válidas A/B)
+    parameter int unsigned COUNT_MODE         = 4
   )(
     input  logic                     clk,
     input  logic                     rst_n,
@@ -65,28 +67,28 @@ module quad_encoder_tmcs28_driver #(
   // ----------------------------------
   // 2) Filtro (debounce) opcional A/B/Z
   // ----------------------------------
-  function automatic logic filt_update(
-      input logic raw,
-      input logic stable,
-      input int unsigned cnt,
-      input int unsigned lim,
-      output int unsigned cnt_next,
-      output logic stable_next
+  task automatic filt_update(
+      input  logic         raw,
+      input  logic         stable,
+      input  int unsigned  cnt,
+      input  int unsigned  lim,
+      output int unsigned  cnt_next,
+      output logic         stable_next
     );
     if (lim == 0) begin
-      cnt_next = 0; stable_next = raw; return stable_next;
-    end
-    if (raw == stable) begin
-      cnt_next = 0; stable_next = stable;
+      cnt_next   = 0;
+      stable_next= raw;
+    end else if (raw == stable) begin
+      cnt_next   = 0;
+      stable_next= stable;
+    end else if (cnt + 1 >= lim) begin
+      cnt_next   = 0;
+      stable_next= raw;
     end else begin
-      if (cnt + 1 >= lim) begin
-        cnt_next = 0; stable_next = raw;
-      end else begin
-        cnt_next = cnt + 1; stable_next = stable;
-      end
+      cnt_next   = cnt + 1;
+      stable_next= stable;
     end
-    return stable_next;
-  endfunction
+  endtask
 
   logic a_stb, b_stb, z_stb;
   int unsigned a_cnt, b_cnt, z_cnt;
@@ -107,8 +109,9 @@ module quad_encoder_tmcs28_driver #(
   // 3) Decodificação X4 AB(Z)
   // -------------------------
   logic [1:0] ab_q, ab_d;
-  logic idx_q;
-  logic step_pulse_q, illegal_q, dir_q;
+  logic       a_q;
+  logic       idx_q;
+  logic       step_pulse_q, illegal_q, dir_q;
   assign o_step_pulse    = step_pulse_q;
   assign o_illegal_pulse = illegal_q;
   assign o_dir           = dir_q;
@@ -116,31 +119,53 @@ module quad_encoder_tmcs28_driver #(
   // Detecta borda de índice (rising)
   assign o_index_pulse = ( z_stb & ~idx_q );
 
+  // Intermediários para seleção de modo
+  logic x4_step, x4_dir, x4_illegal;
+  logic x1_step, x1_dir, x2_step, x2_dir;
+  logic a_rise, a_fall;
+
   always_comb begin
     ab_d = {a_stb, b_stb};
-    step_pulse_q = 1'b0;
-    illegal_q    = 1'b0;
-    dir_q        = 1'b0; // 1 = A leads B (CW)
 
+    // X4 (todas transições válidas)
+    x4_step    = 1'b0;
+    x4_dir     = 1'b0;
+    x4_illegal = 1'b0;
     if (ab_d != ab_q) begin
       unique case ({ab_q, ab_d})
-        4'b00_01, // 00->01
-        4'b01_11, // 01->11
-        4'b11_10, // 11->10
-        4'b10_00: begin // 10->00
-          step_pulse_q = 1'b1; dir_q = 1'b1; illegal_q = 1'b0;
+        4'b00_01, 4'b01_11, 4'b11_10, 4'b10_00: begin
+          x4_step = 1'b1; x4_dir = 1'b1; x4_illegal = 1'b0; // A leads B (CW)
         end
-        4'b00_10, // 00->10
-        4'b10_11, // 10->11
-        4'b11_01, // 11->01
-        4'b01_00: begin // 01->00
-          step_pulse_q = 1'b1; dir_q = 1'b0; illegal_q = 1'b0;
+        4'b00_10, 4'b10_11, 4'b11_01, 4'b01_00: begin
+          x4_step = 1'b1; x4_dir = 1'b0; x4_illegal = 1'b0; // B leads A (CCW)
         end
         default: begin
-          // pulos 00<->11 ou 01<->10: inválidos
-          step_pulse_q = 1'b0; dir_q = dir_q; illegal_q = 1'b1;
+          x4_step = 1'b0; x4_illegal = 1'b1; // saltos inválidos
         end
       endcase
+    end
+
+    // X1/X2 baseados em bordas de A
+    a_rise = (~a_q) & a_stb;
+    a_fall =  a_q   & (~a_stb);
+    x1_step = a_rise;
+    x1_dir  = ~b_stb;            // A rising: B=0 => CW
+    x2_step = a_rise | a_fall;
+    x2_dir  = (a_rise & ~b_stb) | (a_fall & b_stb);
+
+    // Seleção do modo
+    step_pulse_q = 1'b0;
+    dir_q        = 1'b0; // 1 = CW
+    illegal_q    = x4_illegal; // mantém detecção de ilegais de A/B
+    if (COUNT_MODE == 4) begin
+      step_pulse_q = x4_step;
+      dir_q        = x4_dir;
+    end else if (COUNT_MODE == 2) begin
+      step_pulse_q = x2_step;
+      dir_q        = x2_dir;
+    end else begin // COUNT_MODE == 1 (ou outro)
+      step_pulse_q = x1_step;
+      dir_q        = x1_dir;
     end
   end
 
@@ -170,7 +195,9 @@ module quad_encoder_tmcs28_driver #(
   // 5) Velocidade por janela
   // -------------------------
   logic signed [31:0] vel_acc_q;
+  /* verilator lint_off UNUSEDSIGNAL */
   logic [31:0]        vel_win_cnt_q;
+  /* verilator lint_on UNUSEDSIGNAL */
   logic               vel_valid_q;
   assign o_velocity  = vel_acc_q;
   assign o_vel_valid = vel_valid_q;
@@ -181,13 +208,12 @@ module quad_encoder_tmcs28_driver #(
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       ab_q         <= 2'b00;
+      a_q          <= 1'b0;
       idx_q        <= 1'b0;
       pos_q        <= '0;
-      vel_acc_q    <= '0;
-      vel_win_cnt_q<= 32'd0;
-      vel_valid_q  <= 1'b0;
     end else begin
       ab_q  <= ab_d;
+      a_q   <= a_stb;
       idx_q <= z_stb;
 
       // Index: reset/ajuste de posição
@@ -200,31 +226,49 @@ module quad_encoder_tmcs28_driver #(
         pos_q <= dir_q ? pos_inc(pos_q) : pos_dec(pos_q);
       end
 
-      // Velocidade: integra passos na janela
-      if (VEL_WINDOW_CYCLES == 0) begin
-        vel_acc_q     <= '0;
-        vel_win_cnt_q <= 32'd0;
-        vel_valid_q   <= 1'b0;
-      end else begin
-        vel_valid_q <= 1'b0;
-        // acumula +1/-1 a cada passo
-        if (step_pulse_q) begin
-          vel_acc_q <= dir_q ? (vel_acc_q + 1) : (vel_acc_q - 1);
-        end
-        // avança contador de janela
-        if (vel_win_cnt_q + 1 >= VEL_WINDOW_CYCLES) begin
-          vel_win_cnt_q <= 32'd0;
-          vel_valid_q   <= 1'b1; // o_velocity atualizado
-          // mantém último valor acumulado; alternativa: zerar para próxima janela
-          vel_acc_q     <= '0;
+      // Velocidade movida para bloco generate dedicado
+    end
+  end
+
+  // Blocos dedicados para cálculo de velocidade (evita warnings com parâmetro 0)
+  generate
+    if (VEL_WINDOW_CYCLES == 0) begin : g_no_vel
+      always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+          vel_acc_q      <= '0;
+          vel_win_cnt_q  <= 32'd0;
+          vel_valid_q    <= 1'b0;
         end else begin
-          vel_win_cnt_q <= vel_win_cnt_q + 1'b1;
+          vel_acc_q      <= '0;
+          vel_win_cnt_q  <= 32'd0;
+          vel_valid_q    <= 1'b0;
+        end
+      end
+    end else begin : g_vel
+      always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+          vel_acc_q      <= '0;
+          vel_win_cnt_q  <= 32'd0;
+          vel_valid_q    <= 1'b0;
+        end else begin
+          vel_valid_q <= 1'b0;
+          // acumula +1/-1 a cada passo
+          if (step_pulse_q) begin
+            vel_acc_q <= dir_q ? (vel_acc_q + 1) : (vel_acc_q - 1);
+          end
+          // avança contador de janela
+          if (vel_win_cnt_q + 1 >= VEL_WINDOW_CYCLES) begin
+            vel_win_cnt_q <= 32'd0;
+            vel_valid_q   <= 1'b1; // o_velocity atualizado
+            vel_acc_q     <= '0;   // zera para próxima janela
+          end else begin
+            vel_win_cnt_q <= vel_win_cnt_q + 1'b1;
+          end
         end
       end
     end
-  end
+  endgenerate
 
 endmodule
 
 `endif
-

@@ -109,12 +109,14 @@ module emergency_stop_driver #(
 
       // Contagem de holdoff para clear — somente quando em estado seguro e clear requisitado
       if (i_clear && !debounced_active && latched_q && (CLEAR_HOLDOFF_CYCLES != 0)) begin
+        /* verilator lint_off UNSIGNED */
         if (clear_cnt_q + 1 >= CLEAR_HOLDOFF_CYCLES) begin
           latched_q   <= 1'b0;
           clear_cnt_q <= 32'd0;
         end else begin
           clear_cnt_q <= clear_cnt_q + 1'b1;
         end
+        /* verilator lint_on UNSIGNED */
       end else begin
         clear_cnt_q <= 32'd0;
         // Se não há holdoff configurado, limpa imediatamente quando seguro e solicitado
@@ -151,4 +153,3 @@ module emergency_stop_driver #(
 
 endmodule
 `endif
-

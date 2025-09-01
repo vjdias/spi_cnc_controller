@@ -7,7 +7,7 @@
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\packages\spi_service_pkg.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\interfaces\spi_fifo_if.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\interfaces\resp_stream_if.sv" type="verilog"/>
-        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\utils\bytes_util_pkg.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\fpga_status_request_pkg.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\led_control_request_pkg.sv" type="verilog"/>
@@ -43,6 +43,10 @@
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_hub_service.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_miso_service.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv" type="verilog"/>
     </FileList>
     <OptionList>

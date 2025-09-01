@@ -19,7 +19,7 @@ package move_probe_level_request_pkg;
 
   import protocol_constants_pkg::*;
 
-  parameter int FRAME_BITS = 64;
+  localparam int FRAME_BITS = 64;
 
   typedef struct packed {
     byte_t header;    // REQ_HEADER (0xAA)

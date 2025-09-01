@@ -36,7 +36,22 @@ module top (
     // -------------------------
     // Sinais de LED (usados por testes de integração)
     // -------------------------
-    output wire [5:0]  leds
+    output wire [5:0]  leds,
+
+    // -------------------------
+    // Pinos do encoder incremental (ABZ)
+    // -------------------------
+    input  wire        i_enc_a,
+    input  wire        i_enc_b,
+    input  wire        i_enc_z,
+    // Exposição da posição (32 bits) para debug/integração
+    output wire [31:0] o_enc_position,
+    // Debug adicionais do encoder
+    output wire signed [31:0] o_enc_velocity,
+    output wire               o_enc_vel_valid,
+    output wire               o_enc_step_pulse_dbg,
+    output wire               o_enc_index_pulse_dbg,
+    output wire               o_enc_illegal_pulse_dbg
 );
 
     // -------------------------
@@ -60,6 +75,11 @@ module top (
 
     // Saída MISO do wrapper vai ao pino externo
     assign pi_miso = miso_slave_i;
+
+    // Tie-offs para interface de escrita do wrapper (não usada neste top)
+    assign wr_en_i  = 1'b0;
+    assign waddr_i  = 3'd0;
+    assign wdata_i  = 8'h00;
 
     // -------------------------
     // Instância do wrapper SPI slave
@@ -189,6 +209,51 @@ module top (
       .resp_frame (led_resp_frame),
       .tx_stream  (led_stream)
     );
+
+    // Consumidor inexistente: aceita sempre (evita WARN de sinal sem driver)
+    assign led_stream.ready = 1'b1;
+
+
+    // -------------------------
+    // Encoder incremental (TMCS-28) — posição exposta
+    // -------------------------
+    logic [31:0]        enc_position;
+    logic               enc_step_pulse;
+    logic               enc_dir;
+    logic               enc_z_pulse;
+    logic               enc_illegal;
+    logic signed [31:0] enc_velocity;
+    logic               enc_vel_valid;
+
+    quad_encoder_tmcs28_driver #(
+      .POS_WIDTH(32),
+      .FILTER_CYCLES(0),          // ajuste conforme ruído da entrada
+      .RESET_ON_INDEX(1'b1),
+      .INDEX_OFFSET(0),
+      .MODULO(0),                 // 0 = saturação; ajuste se quiser wrap
+      .VEL_WINDOW_CYCLES(0),
+      .COUNT_MODE(4)              // X4 por padrão
+    ) u_quad_enc (
+      .clk           (i_clk),
+      .rst_n         (i_resetn),
+      .i_enc_a       (i_enc_a),
+      .i_enc_b       (i_enc_b),
+      .i_enc_z       (i_enc_z),
+      .o_position    (enc_position),
+      .o_step_pulse  (enc_step_pulse),
+      .o_dir         (enc_dir),
+      .o_index_pulse (enc_z_pulse),
+      .o_illegal_pulse(enc_illegal),
+      .o_velocity    (enc_velocity),
+      .o_vel_valid   (enc_vel_valid)
+    );
+
+    assign o_enc_position = enc_position;
+    assign o_enc_velocity = enc_velocity;
+    assign o_enc_vel_valid = enc_vel_valid;
+    assign o_enc_step_pulse_dbg = enc_step_pulse;
+    assign o_enc_index_pulse_dbg = enc_z_pulse;
+    assign o_enc_illegal_pulse_dbg = enc_illegal;
 
 
 endmodule

@@ -24,7 +24,7 @@ package move_queue_add_response_pkg;
   import protocol_constants_pkg::*; // RESP_HEADER/RESP_TAIL, byte_t
 
   // Largura total do vetor serializado em BITS (6 bytes = 48 bits)
-  parameter int FRAME_BITS = 48;
+  localparam int FRAME_BITS = 48;
 
 
   typedef struct packed {

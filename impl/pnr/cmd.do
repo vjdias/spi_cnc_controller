@@ -3,6 +3,7 @@
 -pn GW2A-LV18PG256C8/I7
 -cst C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller.cst
 -cfg C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\device.cfg
+-sdc C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\constraints\timing.sdc
 -bit
 -tr
 -ph

@@ -27,6 +27,7 @@ Parâmetros
 - `INDEX_OFFSET` (default 0): posição atribuída ao detectar Z (útil para indexar 0 ou outro offset).
 - `MODULO` (default 0): se >0, posição faz wrap em [0..MODULO-1]; senão satura.
 - `VEL_WINDOW_CYCLES` (default 0): se >0, habilita saída de velocidade (contagem por janela).
+- `COUNT_MODE` (default 4): seleciona modo de contagem: 1 = X1 (borda de subida de A), 2 = X2 (ambas as bordas de A), 4 = X4 (todas as transições A/B).
 
 Notas de uso
 - Níveis elétricos: o módulo assume 0/1 limpos na FPGA. Ajuste com comparadores, Schmitt, ou line receivers se necessário.
@@ -51,7 +52,8 @@ quad_encoder_tmcs28_driver #(
   .RESET_ON_INDEX(1'b1),
   .INDEX_OFFSET(0),
   .MODULO(MOD),
-  .VEL_WINDOW_CYCLES(VWIN)
+  .VEL_WINDOW_CYCLES(VWIN),
+  .COUNT_MODE(4)
 ) u_enc (
   .clk           (i_clk),
   .rst_n         (i_resetn),

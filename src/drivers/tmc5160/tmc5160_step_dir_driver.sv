@@ -63,18 +63,17 @@ module tmc5160_step_dir_driver #(
   assign o_done_pulse = done_q;
 
   // Mapeia polaridade de DIR e ENN
-  function logic map_dir (input logic d);
+  function automatic logic map_dir (input logic d);
     map_dir = DIR_ACTIVE_HIGH ? d : ~d;
   endfunction
 
-  function logic map_enn (input logic en);
+  function automatic logic map_enn (input logic en);
     // i_enable=1 => habilitar; ENN ativo baixo => sai ~1=0
-    logic enn_n = ~en;           // ativo baixo por padrão
-    map_enn = ENN_ACTIVE_LOW ? enn_n : ~enn_n;
+    map_enn = ENN_ACTIVE_LOW ? (~en) : en;
   endfunction
 
   // STEP ativo durante pulso
-  function logic map_step (input logic on);
+  function automatic logic map_step (input logic on);
     map_step = STEP_ACTIVE_HIGH ? on : ~on;
   endfunction
 
@@ -186,4 +185,3 @@ module tmc5160_step_dir_driver #(
 endmodule
 
 `endif
-

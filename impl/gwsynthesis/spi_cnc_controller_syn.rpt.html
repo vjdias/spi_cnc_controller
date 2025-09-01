@@ -94,6 +94,10 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\servi
 C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv<br>
 C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_hub_service.sv<br>
 C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_miso_service.sv<br>
+C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv<br>
+C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv<br>
+C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv<br>
+C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv<br>
 C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv<br>
 </td>
 </tr>
@@ -119,7 +123,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label">Created Time</td>
-<td>Sun Aug 31 09:05:57 2025
+<td>Mon Sep  1 15:14:19 2025
 </td>
 </tr>
 <tr>
@@ -135,11 +139,11 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label">Synthesis Process</td>
-<td>Running parser:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.265s, Elapsed time = 0h 0m 0.306s, Peak memory usage = 61.824MB<br/>Running netlist conversion:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 0MB<br/>Running device independent optimization:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 0: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.023s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 1: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.007s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 2: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.017s, Peak memory usage = 61.824MB<br/>Running inference:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.006s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 1: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 2: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 61.824MB<br/>Running technical mapping:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 0: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.021s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 1: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.004s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 2: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.003s, Peak memory usage = 61.824MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 3: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s, Peak memory usage = 84.410MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 4: CPU time = 0h 0m 0.046s, Elapsed time = 0h 0m 0.071s, Peak memory usage = 84.410MB<br/>Generate output files:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.031s, Peak memory usage = 84.410MB<br/></td>
+<td>Running parser:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.281s, Elapsed time = 0h 0m 0.304s, Peak memory usage = 400.594MB<br/>Running netlist conversion:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s, Peak memory usage = 0MB<br/>Running device independent optimization:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 0: CPU time = 0h 0m 0.046s, Elapsed time = 0h 0m 0.031s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 1: CPU time = 0h 0m 0.031s, Elapsed time = 0h 0m 0.009s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Optimizing Phase 2: CPU time = 0h 0m 0.031s, Elapsed time = 0h 0m 0.022s, Peak memory usage = 400.594MB<br/>Running inference:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 0: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.006s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 1: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 2: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Inferring Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.001s, Peak memory usage = 400.594MB<br/>Running technical mapping:<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 0: CPU time = 0h 0m 0.031s, Elapsed time = 0h 0m 0.032s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 1: CPU time = 0h 0m 0.015s, Elapsed time = 0h 0m 0.007s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 2: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0.003s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 3: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 1s, Peak memory usage = 400.594MB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Tech-Mapping Phase 4: CPU time = 0h 0m 0.031s, Elapsed time = 0h 0m 0.064s, Peak memory usage = 400.594MB<br/>Generate output files:<br/>&nbsp;&nbsp;&nbsp;&nbsp;CPU time = 0h 0m 0.046s, Elapsed time = 0h 0m 0.038s, Peak memory usage = 400.594MB<br/></td>
 </tr>
 <tr>
 <td class="label">Total Time and Memory Usage</td>
-<td>CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s, Peak memory usage = 84.410MB</td>
+<td>CPU time = 0h 0m 2s, Elapsed time = 0h 0m 1s, Peak memory usage = 400.594MB</td>
 </tr>
 </table>
 <h1><a name="resource">Resource</a></h1>
@@ -151,19 +155,19 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label"><b>I/O Port </b></td>
-<td>37</td>
+<td>108</td>
 </tr>
 <tr>
 <td class="label"><b>I/O Buf </b></td>
-<td>21</td>
+<td>92</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspIBUF</td>
-<td>5</td>
+<td>8</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspOBUF</td>
-<td>15</td>
+<td>83</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspTBUF</td>
@@ -171,7 +175,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label"><b>Register </b></td>
-<td>210</td>
+<td>254</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspDFFPE</td>
@@ -179,27 +183,27 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspDFFC</td>
-<td>24</td>
+<td>36</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspDFFCE</td>
-<td>185</td>
+<td>217</td>
 </tr>
 <tr>
 <td class="label"><b>LUT </b></td>
-<td>345</td>
+<td>488</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspLUT2</td>
-<td>51</td>
+<td>68</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspLUT3</td>
-<td>90</td>
+<td>119</td>
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp&nbsp&nbspLUT4</td>
-<td>204</td>
+<td>301</td>
 </tr>
 <tr>
 <td class="label"><b>ALU </b></td>
@@ -235,12 +239,12 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label">Logic</td>
-<td>386(348 LUT, 38 ALU) / 20736</td>
-<td>2%</td>
+<td>529(491 LUT, 38 ALU) / 20736</td>
+<td>3%</td>
 </tr>
 <tr>
 <td class="label">Register</td>
-<td>210 / 16173</td>
+<td>254 / 16173</td>
 <td>2%</td>
 </tr>
 <tr>
@@ -250,7 +254,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 </tr>
 <tr>
 <td class="label">&nbsp&nbsp--Register as FF</td>
-<td>210 / 16173</td>
+<td>254 / 16173</td>
 <td>2%</td>
 </tr>
 <tr>
@@ -313,7 +317,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>1</td>
 <td>i_clk</td>
 <td>100.000(MHz)</td>
-<td>114.150(MHz)</td>
+<td>114.451(MHz)</td>
 <td>9</td>
 <td>TOP</td>
 </tr>
@@ -332,383 +336,11 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.240</td>
+<td>1.263</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>9.085</td>
-</tr>
-<tr>
-<td class="label">Data Required Time</td>
-<td>10.325</td>
-</tr>
-<tr>
-<td class="label">From</td>
-<td>u_rx_fifo/mem_mem_0_0_s</td>
-</tr>
-<tr>
-<td class="label">To</td>
-<td>u_rx_hub_synth/ctx.state_1_s0</td>
-</tr>
-<tr>
-<td class="label">Launch Clk</td>
-<td>i_clk[R]</td>
-</tr>
-<tr>
-<td class="label">Latch Clk</td>
-<td>i_clk[R]</td>
-</tr>
-</table>
-<b>Data Arrival Path:</b>
-<table class="summary_table">
-<tr>
-<th>AT</th>
-<th>DELAY</th>
-<th>TYPE</th>
-<th>RF</th>
-<th>FANOUT</th>
-<th>NODE</th>
-</tr>
-<tr>
-<td>0.000</td>
-<td>0.000</td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td>i_clk</td>
-</tr>
-<tr>
-<td>0.000</td>
-<td>0.000</td>
-<td>tCL</td>
-<td>RR</td>
-<td>1</td>
-<td>i_clk_ibuf/I</td>
-</tr>
-<tr>
-<td>0.000</td>
-<td>0.000</td>
-<td>tINS</td>
-<td>RR</td>
-<td>189</td>
-<td>i_clk_ibuf/O</td>
-</tr>
-<tr>
-<td>0.360</td>
-<td>0.360</td>
-<td>tNET</td>
-<td>RR</td>
-<td>8</td>
-<td>u_rx_fifo/mem_mem_0_0_s/CLKB</td>
-</tr>
-<tr>
-<td>2.620</td>
-<td>2.260</td>
-<td>tC2Q</td>
-<td>RF</td>
-<td>22</td>
-<td>u_rx_fifo/mem_mem_0_0_s/DO[0]</td>
-</tr>
-<tr>
-<td>3.094</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2093_s0/I1</td>
-</tr>
-<tr>
-<td>3.664</td>
-<td>0.570</td>
-<td>tINS</td>
-<td>FR</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2093_s0/COUT</td>
-</tr>
-<tr>
-<td>3.664</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>RR</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2094_s0/CIN</td>
-</tr>
-<tr>
-<td>3.699</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>RF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2094_s0/COUT</td>
-</tr>
-<tr>
-<td>3.699</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2095_s0/CIN</td>
-</tr>
-<tr>
-<td>3.734</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2095_s0/COUT</td>
-</tr>
-<tr>
-<td>3.734</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2096_s0/CIN</td>
-</tr>
-<tr>
-<td>3.770</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2096_s0/COUT</td>
-</tr>
-<tr>
-<td>3.770</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2097_s0/CIN</td>
-</tr>
-<tr>
-<td>3.805</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2097_s0/COUT</td>
-</tr>
-<tr>
-<td>3.805</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2098_s0/CIN</td>
-</tr>
-<tr>
-<td>3.840</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2098_s0/COUT</td>
-</tr>
-<tr>
-<td>3.840</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2099_s0/CIN</td>
-</tr>
-<tr>
-<td>3.875</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n2099_s0/COUT</td>
-</tr>
-<tr>
-<td>3.875</td>
-<td>0.000</td>
-<td>tNET</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/CIN</td>
-</tr>
-<tr>
-<td>3.910</td>
-<td>0.035</td>
-<td>tINS</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/COUT</td>
-</tr>
-<tr>
-<td>4.384</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/n6968_s9/I0</td>
-</tr>
-<tr>
-<td>4.901</td>
-<td>0.517</td>
-<td>tINS</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n6968_s9/F</td>
-</tr>
-<tr>
-<td>5.375</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/I3</td>
-</tr>
-<tr>
-<td>5.746</td>
-<td>0.371</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/F</td>
-</tr>
-<tr>
-<td>6.220</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/I2</td>
-</tr>
-<tr>
-<td>6.673</td>
-<td>0.453</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/F</td>
-</tr>
-<tr>
-<td>7.147</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/I1</td>
-</tr>
-<tr>
-<td>7.702</td>
-<td>0.555</td>
-<td>tINS</td>
-<td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/F</td>
-</tr>
-<tr>
-<td>8.176</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s3/I0</td>
-</tr>
-<tr>
-<td>8.725</td>
-<td>0.549</td>
-<td>tINS</td>
-<td>FR</td>
-<td>2</td>
-<td>u_rx_hub_synth/ctx.state_1_s3/F</td>
-</tr>
-<tr>
-<td>9.085</td>
-<td>0.360</td>
-<td>tNET</td>
-<td>RR</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s0/CE</td>
-</tr>
-</table>
-<b>Data Required Path:</b>
-<table class="summary_table">
-<tr>
-<th>AT</th>
-<th>DELAY</th>
-<th>TYPE</th>
-<th>RF</th>
-<th>FANOUT</th>
-<th>NODE</th>
-</tr>
-<tr>
-<td>10.000</td>
-<td>0.000</td>
-<td> </td>
-<td> </td>
-<td> </td>
-<td>i_clk</td>
-</tr>
-<tr>
-<td>10.000</td>
-<td>0.000</td>
-<td>tCL</td>
-<td>RR</td>
-<td>1</td>
-<td>i_clk_ibuf/I</td>
-</tr>
-<tr>
-<td>10.000</td>
-<td>0.000</td>
-<td>tINS</td>
-<td>RR</td>
-<td>189</td>
-<td>i_clk_ibuf/O</td>
-</tr>
-<tr>
-<td>10.360</td>
-<td>0.360</td>
-<td>tNET</td>
-<td>RR</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s0/CLK</td>
-</tr>
-<tr>
-<td>10.325</td>
-<td>-0.035</td>
-<td>tSu</td>
-<td> </td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s0</td>
-</tr>
-</table>
-<b>Path Statistics:</b>
-<table class="summary_table">
-<tr>
-<td class="label">Clock Skew:</td>
-<td>0.000</td>
-</tr>
-<tr>
-<td class="label">Setup Relationship:</td>
-<td>10.000</td>
-</tr>
-<tr>
-<td class="label">Logic Level:</td>
-<td>9</td>
-</tr>
-<tr>
-<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
-<tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 3.261, 37.379%; route: 3.204, 36.720%; tC2Q: 2.260, 25.901%</td></tr>
-<tr>
-<td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
-</table>
-<br/>
-<h3>Path&nbsp2</h3>
-<b>Path Summary:</b></br>
-<table class="summary_table">
-<tr>
-<td class="label">Slack</td>
-<td>1.240</td>
-</tr>
-<tr>
-<td class="label">Data Arrival Time</td>
-<td>9.085</td>
+<td>9.062</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -762,7 +394,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -787,7 +419,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2093_s0/I1</td>
+<td>u_rx_hub_synth/n5191_s0/I1</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -795,7 +427,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FR</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2093_s0/COUT</td>
+<td>u_rx_hub_synth/n5191_s0/COUT</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -803,7 +435,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>RR</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2094_s0/CIN</td>
+<td>u_rx_hub_synth/n5192_s0/CIN</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -811,7 +443,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>RF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2094_s0/COUT</td>
+<td>u_rx_hub_synth/n5192_s0/COUT</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -819,7 +451,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2095_s0/CIN</td>
+<td>u_rx_hub_synth/n5193_s0/CIN</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -827,7 +459,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2095_s0/COUT</td>
+<td>u_rx_hub_synth/n5193_s0/COUT</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -835,7 +467,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2096_s0/CIN</td>
+<td>u_rx_hub_synth/n5194_s0/CIN</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -843,7 +475,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2096_s0/COUT</td>
+<td>u_rx_hub_synth/n5194_s0/COUT</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -851,7 +483,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2097_s0/CIN</td>
+<td>u_rx_hub_synth/n5195_s0/CIN</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -859,7 +491,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2097_s0/COUT</td>
+<td>u_rx_hub_synth/n5195_s0/COUT</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -867,7 +499,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2098_s0/CIN</td>
+<td>u_rx_hub_synth/n5196_s0/CIN</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -875,7 +507,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2098_s0/COUT</td>
+<td>u_rx_hub_synth/n5196_s0/COUT</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -883,7 +515,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2099_s0/CIN</td>
+<td>u_rx_hub_synth/n5197_s0/CIN</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -891,7 +523,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2099_s0/COUT</td>
+<td>u_rx_hub_synth/n5197_s0/COUT</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -899,15 +531,15 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2100_s0/CIN</td>
+<td>u_rx_hub_synth/n5198_s0/CIN</td>
 </tr>
 <tr>
 <td>3.910</td>
 <td>0.035</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/COUT</td>
+<td>3</td>
+<td>u_rx_hub_synth/n5198_s0/COUT</td>
 </tr>
 <tr>
 <td>4.384</td>
@@ -915,82 +547,82 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n6968_s9/I0</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/I1</td>
 </tr>
 <tr>
-<td>4.901</td>
-<td>0.517</td>
+<td>4.939</td>
+<td>0.555</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n6968_s9/F</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/F</td>
 </tr>
 <tr>
-<td>5.375</td>
+<td>5.413</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/I3</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/I1</td>
 </tr>
 <tr>
-<td>5.746</td>
+<td>5.968</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/F</td>
+</tr>
+<tr>
+<td>6.442</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/I3</td>
+</tr>
+<tr>
+<td>6.813</td>
 <td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/F</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/F</td>
 </tr>
 <tr>
-<td>6.220</td>
+<td>7.287</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/I2</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/I3</td>
 </tr>
 <tr>
-<td>6.673</td>
-<td>0.453</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/F</td>
-</tr>
-<tr>
-<td>7.147</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/I1</td>
-</tr>
-<tr>
-<td>7.702</td>
-<td>0.555</td>
+<td>7.658</td>
+<td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
 <td>u_rx_hub_synth/ctx.state_1_s4/F</td>
 </tr>
 <tr>
-<td>8.176</td>
+<td>8.132</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.active_3_s3/I0</td>
+<td>u_rx_hub_synth/ctx.active_3_s3/I1</td>
 </tr>
 <tr>
-<td>8.725</td>
-<td>0.549</td>
+<td>8.702</td>
+<td>0.570</td>
 <td>tINS</td>
 <td>FR</td>
 <td>4</td>
 <td>u_rx_hub_synth/ctx.active_3_s3/F</td>
 </tr>
 <tr>
-<td>9.085</td>
+<td>9.062</td>
 <td>0.360</td>
 <td>tNET</td>
 <td>RR</td>
@@ -1029,7 +661,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1066,21 +698,21 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 3.261, 37.379%; route: 3.204, 36.720%; tC2Q: 2.260, 25.901%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 3.238, 37.213%; route: 3.204, 36.817%; tC2Q: 2.260, 25.970%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 </table>
 <br/>
-<h3>Path&nbsp3</h3>
+<h3>Path&nbsp2</h3>
 <b>Path Summary:</b></br>
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.240</td>
+<td>1.263</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>9.085</td>
+<td>9.062</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -1134,7 +766,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1159,7 +791,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2093_s0/I1</td>
+<td>u_rx_hub_synth/n5191_s0/I1</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1167,7 +799,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FR</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2093_s0/COUT</td>
+<td>u_rx_hub_synth/n5191_s0/COUT</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1175,7 +807,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>RR</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2094_s0/CIN</td>
+<td>u_rx_hub_synth/n5192_s0/CIN</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1183,7 +815,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>RF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2094_s0/COUT</td>
+<td>u_rx_hub_synth/n5192_s0/COUT</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1191,7 +823,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2095_s0/CIN</td>
+<td>u_rx_hub_synth/n5193_s0/CIN</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1199,7 +831,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2095_s0/COUT</td>
+<td>u_rx_hub_synth/n5193_s0/COUT</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1207,7 +839,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2096_s0/CIN</td>
+<td>u_rx_hub_synth/n5194_s0/CIN</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1215,7 +847,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2096_s0/COUT</td>
+<td>u_rx_hub_synth/n5194_s0/COUT</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1223,7 +855,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2097_s0/CIN</td>
+<td>u_rx_hub_synth/n5195_s0/CIN</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1231,7 +863,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2097_s0/COUT</td>
+<td>u_rx_hub_synth/n5195_s0/COUT</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1239,7 +871,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2098_s0/CIN</td>
+<td>u_rx_hub_synth/n5196_s0/CIN</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1247,7 +879,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2098_s0/COUT</td>
+<td>u_rx_hub_synth/n5196_s0/COUT</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1255,7 +887,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2099_s0/CIN</td>
+<td>u_rx_hub_synth/n5197_s0/CIN</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -1263,7 +895,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2099_s0/COUT</td>
+<td>u_rx_hub_synth/n5197_s0/COUT</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -1271,15 +903,15 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2100_s0/CIN</td>
+<td>u_rx_hub_synth/n5198_s0/CIN</td>
 </tr>
 <tr>
 <td>3.910</td>
 <td>0.035</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/COUT</td>
+<td>3</td>
+<td>u_rx_hub_synth/n5198_s0/COUT</td>
 </tr>
 <tr>
 <td>4.384</td>
@@ -1287,82 +919,82 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n6968_s9/I0</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/I1</td>
 </tr>
 <tr>
-<td>4.901</td>
-<td>0.517</td>
+<td>4.939</td>
+<td>0.555</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n6968_s9/F</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/F</td>
 </tr>
 <tr>
-<td>5.375</td>
+<td>5.413</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/I3</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/I1</td>
 </tr>
 <tr>
-<td>5.746</td>
+<td>5.968</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/F</td>
+</tr>
+<tr>
+<td>6.442</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/I3</td>
+</tr>
+<tr>
+<td>6.813</td>
 <td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/F</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/F</td>
 </tr>
 <tr>
-<td>6.220</td>
+<td>7.287</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/I2</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/I3</td>
 </tr>
 <tr>
-<td>6.673</td>
-<td>0.453</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/F</td>
-</tr>
-<tr>
-<td>7.147</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/I1</td>
-</tr>
-<tr>
-<td>7.702</td>
-<td>0.555</td>
+<td>7.658</td>
+<td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
 <td>u_rx_hub_synth/ctx.state_1_s4/F</td>
 </tr>
 <tr>
-<td>8.176</td>
+<td>8.132</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.active_3_s3/I0</td>
+<td>u_rx_hub_synth/ctx.active_3_s3/I1</td>
 </tr>
 <tr>
-<td>8.725</td>
-<td>0.549</td>
+<td>8.702</td>
+<td>0.570</td>
 <td>tINS</td>
 <td>FR</td>
 <td>4</td>
 <td>u_rx_hub_synth/ctx.active_3_s3/F</td>
 </tr>
 <tr>
-<td>9.085</td>
+<td>9.062</td>
 <td>0.360</td>
 <td>tNET</td>
 <td>RR</td>
@@ -1401,7 +1033,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1438,21 +1070,21 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 3.261, 37.379%; route: 3.204, 36.720%; tC2Q: 2.260, 25.901%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 3.238, 37.213%; route: 3.204, 36.817%; tC2Q: 2.260, 25.970%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 </table>
 <br/>
-<h3>Path&nbsp4</h3>
+<h3>Path&nbsp3</h3>
 <b>Path Summary:</b></br>
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.240</td>
+<td>1.263</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>9.085</td>
+<td>9.062</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -1506,7 +1138,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1531,7 +1163,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2093_s0/I1</td>
+<td>u_rx_hub_synth/n5191_s0/I1</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1539,7 +1171,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FR</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2093_s0/COUT</td>
+<td>u_rx_hub_synth/n5191_s0/COUT</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1547,7 +1179,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>RR</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2094_s0/CIN</td>
+<td>u_rx_hub_synth/n5192_s0/CIN</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1555,7 +1187,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>RF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2094_s0/COUT</td>
+<td>u_rx_hub_synth/n5192_s0/COUT</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1563,7 +1195,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2095_s0/CIN</td>
+<td>u_rx_hub_synth/n5193_s0/CIN</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1571,7 +1203,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2095_s0/COUT</td>
+<td>u_rx_hub_synth/n5193_s0/COUT</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1579,7 +1211,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2096_s0/CIN</td>
+<td>u_rx_hub_synth/n5194_s0/CIN</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1587,7 +1219,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2096_s0/COUT</td>
+<td>u_rx_hub_synth/n5194_s0/COUT</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1595,7 +1227,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2097_s0/CIN</td>
+<td>u_rx_hub_synth/n5195_s0/CIN</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1603,7 +1235,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2097_s0/COUT</td>
+<td>u_rx_hub_synth/n5195_s0/COUT</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1611,7 +1243,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2098_s0/CIN</td>
+<td>u_rx_hub_synth/n5196_s0/CIN</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1619,7 +1251,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2098_s0/COUT</td>
+<td>u_rx_hub_synth/n5196_s0/COUT</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1627,7 +1259,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2099_s0/CIN</td>
+<td>u_rx_hub_synth/n5197_s0/CIN</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -1635,7 +1267,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2099_s0/COUT</td>
+<td>u_rx_hub_synth/n5197_s0/COUT</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -1643,15 +1275,15 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2100_s0/CIN</td>
+<td>u_rx_hub_synth/n5198_s0/CIN</td>
 </tr>
 <tr>
 <td>3.910</td>
 <td>0.035</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/COUT</td>
+<td>3</td>
+<td>u_rx_hub_synth/n5198_s0/COUT</td>
 </tr>
 <tr>
 <td>4.384</td>
@@ -1659,82 +1291,82 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n6968_s9/I0</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/I1</td>
 </tr>
 <tr>
-<td>4.901</td>
-<td>0.517</td>
+<td>4.939</td>
+<td>0.555</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n6968_s9/F</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/F</td>
 </tr>
 <tr>
-<td>5.375</td>
+<td>5.413</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/I3</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/I1</td>
 </tr>
 <tr>
-<td>5.746</td>
+<td>5.968</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/F</td>
+</tr>
+<tr>
+<td>6.442</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/I3</td>
+</tr>
+<tr>
+<td>6.813</td>
 <td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/F</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/F</td>
 </tr>
 <tr>
-<td>6.220</td>
+<td>7.287</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/I2</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/I3</td>
 </tr>
 <tr>
-<td>6.673</td>
-<td>0.453</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/F</td>
-</tr>
-<tr>
-<td>7.147</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/I1</td>
-</tr>
-<tr>
-<td>7.702</td>
-<td>0.555</td>
+<td>7.658</td>
+<td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
 <td>u_rx_hub_synth/ctx.state_1_s4/F</td>
 </tr>
 <tr>
-<td>8.176</td>
+<td>8.132</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.active_3_s3/I0</td>
+<td>u_rx_hub_synth/ctx.active_3_s3/I1</td>
 </tr>
 <tr>
-<td>8.725</td>
-<td>0.549</td>
+<td>8.702</td>
+<td>0.570</td>
 <td>tINS</td>
 <td>FR</td>
 <td>4</td>
 <td>u_rx_hub_synth/ctx.active_3_s3/F</td>
 </tr>
 <tr>
-<td>9.085</td>
+<td>9.062</td>
 <td>0.360</td>
 <td>tNET</td>
 <td>RR</td>
@@ -1773,7 +1405,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1810,21 +1442,21 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 3.261, 37.379%; route: 3.204, 36.720%; tC2Q: 2.260, 25.901%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 3.238, 37.213%; route: 3.204, 36.817%; tC2Q: 2.260, 25.970%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 </table>
 <br/>
-<h3>Path&nbsp5</h3>
+<h3>Path&nbsp4</h3>
 <b>Path Summary:</b></br>
 <table class="summary_table">
 <tr>
 <td class="label">Slack</td>
-<td>1.240</td>
+<td>1.263</td>
 </tr>
 <tr>
 <td class="label">Data Arrival Time</td>
-<td>9.085</td>
+<td>9.062</td>
 </tr>
 <tr>
 <td class="label">Data Required Time</td>
@@ -1878,7 +1510,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -1903,7 +1535,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2093_s0/I1</td>
+<td>u_rx_hub_synth/n5191_s0/I1</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1911,7 +1543,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FR</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2093_s0/COUT</td>
+<td>u_rx_hub_synth/n5191_s0/COUT</td>
 </tr>
 <tr>
 <td>3.664</td>
@@ -1919,7 +1551,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>RR</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2094_s0/CIN</td>
+<td>u_rx_hub_synth/n5192_s0/CIN</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1927,7 +1559,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>RF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2094_s0/COUT</td>
+<td>u_rx_hub_synth/n5192_s0/COUT</td>
 </tr>
 <tr>
 <td>3.699</td>
@@ -1935,7 +1567,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2095_s0/CIN</td>
+<td>u_rx_hub_synth/n5193_s0/CIN</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1943,7 +1575,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2095_s0/COUT</td>
+<td>u_rx_hub_synth/n5193_s0/COUT</td>
 </tr>
 <tr>
 <td>3.734</td>
@@ -1951,7 +1583,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2096_s0/CIN</td>
+<td>u_rx_hub_synth/n5194_s0/CIN</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1959,7 +1591,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2096_s0/COUT</td>
+<td>u_rx_hub_synth/n5194_s0/COUT</td>
 </tr>
 <tr>
 <td>3.770</td>
@@ -1967,7 +1599,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2097_s0/CIN</td>
+<td>u_rx_hub_synth/n5195_s0/CIN</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1975,7 +1607,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2097_s0/COUT</td>
+<td>u_rx_hub_synth/n5195_s0/COUT</td>
 </tr>
 <tr>
 <td>3.805</td>
@@ -1983,7 +1615,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2098_s0/CIN</td>
+<td>u_rx_hub_synth/n5196_s0/CIN</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1991,7 +1623,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2098_s0/COUT</td>
+<td>u_rx_hub_synth/n5196_s0/COUT</td>
 </tr>
 <tr>
 <td>3.840</td>
@@ -1999,7 +1631,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2099_s0/CIN</td>
+<td>u_rx_hub_synth/n5197_s0/CIN</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -2007,7 +1639,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n2099_s0/COUT</td>
+<td>u_rx_hub_synth/n5197_s0/COUT</td>
 </tr>
 <tr>
 <td>3.875</td>
@@ -2015,15 +1647,15 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>2</td>
-<td>u_rx_hub_synth/n2100_s0/CIN</td>
+<td>u_rx_hub_synth/n5198_s0/CIN</td>
 </tr>
 <tr>
 <td>3.910</td>
 <td>0.035</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n2100_s0/COUT</td>
+<td>3</td>
+<td>u_rx_hub_synth/n5198_s0/COUT</td>
 </tr>
 <tr>
 <td>4.384</td>
@@ -2031,82 +1663,82 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/n6968_s9/I0</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/I1</td>
 </tr>
 <tr>
-<td>4.901</td>
-<td>0.517</td>
+<td>4.939</td>
+<td>0.555</td>
 <td>tINS</td>
 <td>FF</td>
-<td>2</td>
-<td>u_rx_hub_synth/n6968_s9/F</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/F</td>
 </tr>
 <tr>
-<td>5.375</td>
+<td>5.413</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/I3</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/I1</td>
 </tr>
 <tr>
-<td>5.746</td>
+<td>5.968</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/F</td>
+</tr>
+<tr>
+<td>6.442</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/I3</td>
+</tr>
+<tr>
+<td>6.813</td>
 <td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s19/F</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/F</td>
 </tr>
 <tr>
-<td>6.220</td>
+<td>7.287</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/I2</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/I3</td>
 </tr>
 <tr>
-<td>6.673</td>
-<td>0.453</td>
-<td>tINS</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s9/F</td>
-</tr>
-<tr>
-<td>7.147</td>
-<td>0.474</td>
-<td>tNET</td>
-<td>FF</td>
-<td>1</td>
-<td>u_rx_hub_synth/ctx.state_1_s4/I1</td>
-</tr>
-<tr>
-<td>7.702</td>
-<td>0.555</td>
+<td>7.658</td>
+<td>0.371</td>
 <td>tINS</td>
 <td>FF</td>
 <td>2</td>
 <td>u_rx_hub_synth/ctx.state_1_s4/F</td>
 </tr>
 <tr>
-<td>8.176</td>
+<td>8.132</td>
 <td>0.474</td>
 <td>tNET</td>
 <td>FF</td>
 <td>1</td>
-<td>u_rx_hub_synth/ctx.active_3_s3/I0</td>
+<td>u_rx_hub_synth/ctx.active_3_s3/I1</td>
 </tr>
 <tr>
-<td>8.725</td>
-<td>0.549</td>
+<td>8.702</td>
+<td>0.570</td>
 <td>tINS</td>
 <td>FR</td>
 <td>4</td>
 <td>u_rx_hub_synth/ctx.active_3_s3/F</td>
 </tr>
 <tr>
-<td>9.085</td>
+<td>9.062</td>
 <td>0.360</td>
 <td>tNET</td>
 <td>RR</td>
@@ -2145,7 +1777,7 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <td>0.000</td>
 <td>tINS</td>
 <td>RR</td>
-<td>189</td>
+<td>233</td>
 <td>i_clk_ibuf/O</td>
 </tr>
 <tr>
@@ -2182,7 +1814,379 @@ C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.s
 <tr>
 <td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 <tr>
-<td class="label">Arrival Data Path Delay:</td><td> cell: 3.261, 37.379%; route: 3.204, 36.720%; tC2Q: 2.260, 25.901%</td></tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 3.238, 37.213%; route: 3.204, 36.817%; tC2Q: 2.260, 25.970%</td></tr>
+<tr>
+<td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
+</table>
+<br/>
+<h3>Path&nbsp5</h3>
+<b>Path Summary:</b></br>
+<table class="summary_table">
+<tr>
+<td class="label">Slack</td>
+<td>1.284</td>
+</tr>
+<tr>
+<td class="label">Data Arrival Time</td>
+<td>9.041</td>
+</tr>
+<tr>
+<td class="label">Data Required Time</td>
+<td>10.325</td>
+</tr>
+<tr>
+<td class="label">From</td>
+<td>u_rx_fifo/mem_mem_0_0_s</td>
+</tr>
+<tr>
+<td class="label">To</td>
+<td>u_rx_hub_synth/ctx.state_1_s0</td>
+</tr>
+<tr>
+<td class="label">Launch Clk</td>
+<td>i_clk[R]</td>
+</tr>
+<tr>
+<td class="label">Latch Clk</td>
+<td>i_clk[R]</td>
+</tr>
+</table>
+<b>Data Arrival Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>i_clk</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>i_clk_ibuf/I</td>
+</tr>
+<tr>
+<td>0.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>233</td>
+<td>i_clk_ibuf/O</td>
+</tr>
+<tr>
+<td>0.360</td>
+<td>0.360</td>
+<td>tNET</td>
+<td>RR</td>
+<td>8</td>
+<td>u_rx_fifo/mem_mem_0_0_s/CLKB</td>
+</tr>
+<tr>
+<td>2.620</td>
+<td>2.260</td>
+<td>tC2Q</td>
+<td>RF</td>
+<td>22</td>
+<td>u_rx_fifo/mem_mem_0_0_s/DO[0]</td>
+</tr>
+<tr>
+<td>3.094</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5191_s0/I1</td>
+</tr>
+<tr>
+<td>3.664</td>
+<td>0.570</td>
+<td>tINS</td>
+<td>FR</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5191_s0/COUT</td>
+</tr>
+<tr>
+<td>3.664</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>RR</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5192_s0/CIN</td>
+</tr>
+<tr>
+<td>3.699</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>RF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5192_s0/COUT</td>
+</tr>
+<tr>
+<td>3.699</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5193_s0/CIN</td>
+</tr>
+<tr>
+<td>3.734</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5193_s0/COUT</td>
+</tr>
+<tr>
+<td>3.734</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5194_s0/CIN</td>
+</tr>
+<tr>
+<td>3.770</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5194_s0/COUT</td>
+</tr>
+<tr>
+<td>3.770</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5195_s0/CIN</td>
+</tr>
+<tr>
+<td>3.805</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5195_s0/COUT</td>
+</tr>
+<tr>
+<td>3.805</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5196_s0/CIN</td>
+</tr>
+<tr>
+<td>3.840</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5196_s0/COUT</td>
+</tr>
+<tr>
+<td>3.840</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5197_s0/CIN</td>
+</tr>
+<tr>
+<td>3.875</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/n5197_s0/COUT</td>
+</tr>
+<tr>
+<td>3.875</td>
+<td>0.000</td>
+<td>tNET</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/n5198_s0/CIN</td>
+</tr>
+<tr>
+<td>3.910</td>
+<td>0.035</td>
+<td>tINS</td>
+<td>FF</td>
+<td>3</td>
+<td>u_rx_hub_synth/n5198_s0/COUT</td>
+</tr>
+<tr>
+<td>4.384</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/I1</td>
+</tr>
+<tr>
+<td>4.939</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s28/F</td>
+</tr>
+<tr>
+<td>5.413</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/I1</td>
+</tr>
+<tr>
+<td>5.968</td>
+<td>0.555</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s21/F</td>
+</tr>
+<tr>
+<td>6.442</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/I3</td>
+</tr>
+<tr>
+<td>6.813</td>
+<td>0.371</td>
+<td>tINS</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s11/F</td>
+</tr>
+<tr>
+<td>7.287</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/I3</td>
+</tr>
+<tr>
+<td>7.658</td>
+<td>0.371</td>
+<td>tINS</td>
+<td>FF</td>
+<td>2</td>
+<td>u_rx_hub_synth/ctx.state_1_s4/F</td>
+</tr>
+<tr>
+<td>8.132</td>
+<td>0.474</td>
+<td>tNET</td>
+<td>FF</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s3/I0</td>
+</tr>
+<tr>
+<td>8.681</td>
+<td>0.549</td>
+<td>tINS</td>
+<td>FR</td>
+<td>2</td>
+<td>u_rx_hub_synth/ctx.state_1_s3/F</td>
+</tr>
+<tr>
+<td>9.041</td>
+<td>0.360</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s0/CE</td>
+</tr>
+</table>
+<b>Data Required Path:</b>
+<table class="summary_table">
+<tr>
+<th>AT</th>
+<th>DELAY</th>
+<th>TYPE</th>
+<th>RF</th>
+<th>FANOUT</th>
+<th>NODE</th>
+</tr>
+<tr>
+<td>10.000</td>
+<td>0.000</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>i_clk</td>
+</tr>
+<tr>
+<td>10.000</td>
+<td>0.000</td>
+<td>tCL</td>
+<td>RR</td>
+<td>1</td>
+<td>i_clk_ibuf/I</td>
+</tr>
+<tr>
+<td>10.000</td>
+<td>0.000</td>
+<td>tINS</td>
+<td>RR</td>
+<td>233</td>
+<td>i_clk_ibuf/O</td>
+</tr>
+<tr>
+<td>10.360</td>
+<td>0.360</td>
+<td>tNET</td>
+<td>RR</td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s0/CLK</td>
+</tr>
+<tr>
+<td>10.325</td>
+<td>-0.035</td>
+<td>tSu</td>
+<td> </td>
+<td>1</td>
+<td>u_rx_hub_synth/ctx.state_1_s0</td>
+</tr>
+</table>
+<b>Path Statistics:</b>
+<table class="summary_table">
+<tr>
+<td class="label">Clock Skew:</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td class="label">Setup Relationship:</td>
+<td>10.000</td>
+</tr>
+<tr>
+<td class="label">Logic Level:</td>
+<td>9</td>
+</tr>
+<tr>
+<td class="label">Arrival Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
+<tr>
+<td class="label">Arrival Data Path Delay:</td><td> cell: 3.217, 37.061%; route: 3.204, 36.906%; tC2Q: 2.260, 26.033%</td></tr>
 <tr>
 <td class="label">Required Clock Path Delay:</td><td> cell: 0.000, 0.000%; route: 0.360, 100.000%</td></tr>
 </table>

@@ -18,7 +18,7 @@
 package led_control_request_pkg;
   import protocol_constants_pkg::*;
 
-  parameter int FRAME_BITS = 56;
+  localparam int FRAME_BITS = 56;
 
   typedef struct packed {
     byte_t header;    // REQ_HEADER (0xAA)
