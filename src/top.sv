@@ -39,6 +39,25 @@ module top (
     output wire [5:0]  leds,
 
     // -------------------------
+    // Drivers TMC5160 (STEP/DIR/ENN por eixo)
+    // -------------------------
+    output wire        tmc_step_x,
+    output wire        tmc_dir_x,
+    output wire        tmc_enn_x,
+    output wire        tmc_step_y,
+    output wire        tmc_dir_y,
+    output wire        tmc_enn_y,
+    output wire        tmc_step_z,
+    output wire        tmc_dir_z,
+    output wire        tmc_enn_z,
+
+    // -------------------------
+    // Entradas de sensores
+    // -------------------------
+    input  wire        i_prox_sensor,
+    input  wire        i_estop_btn,
+
+    // -------------------------
     // Pinos do encoder incremental (ABZ)
     // -------------------------
     input  wire        i_enc_a,
@@ -172,7 +191,13 @@ module top (
     wire                        frame_valid;
     wire                        frame_error;
     spi_service_pkg::byte_t     out_msgType;
-    led_control_request_pkg::led_ctrl_req_bytes_t led_req;
+    led_control_request_pkg::led_ctrl_req_bytes_t       led_req;
+    start_move_request_pkg::start_move_req_bytes_t      start_move_frame;
+    move_queue_add_request_pkg::move_queue_add_req_bytes_t queue_add_frame;
+    move_end_request_pkg::move_end_req_bytes_t          move_end_frame;
+    move_home_request_pkg::move_home_req_bytes_t        move_home_frame;
+    move_probe_level_request_pkg::move_probe_level_req_bytes_t probe_frame;
+    move_queue_status_request_pkg::move_queue_status_bytes_t queue_status_frame;
 
     spi_rx_hub_service u_rx_hub_synth (
       .clk             (i_clk),
@@ -184,12 +209,12 @@ module top (
       .frame_valid     (frame_valid),
       .frame_error     (frame_error),
       .out_msgType     (out_msgType),
-      .move_home_frame (),
-      .start_move_frame(),
-      .move_probe_frame(),
-      .queue_add_frame (),
-      .move_end_frame  (),
-      .queue_status_frame(),
+      .move_home_frame (move_home_frame),
+      .start_move_frame(start_move_frame),
+      .move_probe_frame(probe_frame),
+      .queue_add_frame (queue_add_frame),
+      .move_end_frame  (move_end_frame),
+      .queue_status_frame(queue_status_frame),
       .fpga_status_frame (),
       .led_ctrl_frame  (led_req)
     );
@@ -213,10 +238,7 @@ module top (
     // Consumidor inexistente: aceita sempre (evita WARN de sinal sem driver)
     assign led_stream.ready = 1'b1;
 
-
-    // -------------------------
-    // Encoder incremental (TMCS-28) — posição exposta
-    // -------------------------
+    // Wires do encoder compartilhados com o serviço de movimento
     logic [31:0]        enc_position;
     logic               enc_step_pulse;
     logic               enc_dir;
@@ -225,6 +247,42 @@ module top (
     logic signed [31:0] enc_velocity;
     logic               enc_vel_valid;
 
+    // -------------------------
+    // Serviço de movimento (TMC5160 + tick/sensores)
+    // -------------------------
+    resp_stream_if motion_stream();
+    motion_service u_motion (
+      .clk            (i_clk),
+      .rst_n          (i_resetn),
+      .frame_valid    (frame_valid),
+      .msgType        (out_msgType),
+      .start_move_frame(start_move_frame),
+      .queue_add_frame (queue_add_frame),
+      .move_end_frame  (move_end_frame),
+      .move_home_frame (move_home_frame),
+      .probe_frame     (probe_frame),
+      .queue_status_frame(queue_status_frame),
+      .enc_position    (enc_position),
+      .enc_velocity    (enc_velocity),
+      .i_prox_in       (i_prox_sensor),
+      .i_estop_in      (i_estop_btn),
+      .tmc_step_x      (tmc_step_x),
+      .tmc_dir_x       (tmc_dir_x),
+      .tmc_enn_x       (tmc_enn_x),
+      .tmc_step_y      (tmc_step_y),
+      .tmc_dir_y       (tmc_dir_y),
+      .tmc_enn_y       (tmc_enn_y),
+      .tmc_step_z      (tmc_step_z),
+      .tmc_dir_z       (tmc_dir_z),
+      .tmc_enn_z       (tmc_enn_z),
+      .tx_stream       (motion_stream)
+    );
+    assign motion_stream.ready = 1'b1;
+
+
+    // -------------------------
+    // Encoder incremental (TMCS-28) — posição exposta
+    // -------------------------
     quad_encoder_tmcs28_driver #(
       .POS_WIDTH(32),
       .FILTER_CYCLES(0),          // ajuste conforme ruído da entrada

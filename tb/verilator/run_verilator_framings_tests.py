@@ -26,7 +26,7 @@ cmd = [
     "framings_tb",
     "-Wno-TIMESCALEMOD",
     "-Wno-WIDTHEXPAND",
-] + ["-Mdir", str(obj_dir)] + [str(f) for f in files]
+] + ["-Mdir", str(obj_dir), f"-I{tb_file.parent}"] + [str(f) for f in files]
 compile = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
 print(compile.stdout)
 if compile.returncode != 0:
