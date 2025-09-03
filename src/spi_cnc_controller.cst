@@ -29,6 +29,32 @@ IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8;
 // IO_LOC  "leds[1]"  F15;
 // IO_PORT "leds[1]"  IO_TYPE=LVCMOS18 DRIVE=8 SLEW=SLOW;
 
+// TMC5160 (placeholders para STEP/DIR/ENN de cada eixo)
+// IO_LOC  "tmc_step_x" ???;
+// IO_PORT "tmc_step_x" IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_dir_x"  ???;
+// IO_PORT "tmc_dir_x"  IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_enn_x"  ???;
+// IO_PORT "tmc_enn_x"  IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_step_y" ???;
+// IO_PORT "tmc_step_y" IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_dir_y"  ???;
+// IO_PORT "tmc_dir_y"  IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_enn_y"  ???;
+// IO_PORT "tmc_enn_y"  IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_step_z" ???;
+// IO_PORT "tmc_step_z" IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_dir_z"  ???;
+// IO_PORT "tmc_dir_z"  IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_LOC  "tmc_enn_z"  ???;
+// IO_PORT "tmc_enn_z"  IO_TYPE=LVCMOS18 DRIVE=8;
+
+// Sensores (placeholders)
+// IO_LOC  "i_prox_sensor" ???;
+// IO_PORT "i_prox_sensor" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+// IO_LOC  "i_estop_btn"   ???;
+// IO_PORT "i_estop_btn"   IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
 // Encoder incremental (ABZ) - pinos GCLK recomendados para A/B
 IO_LOC  "i_enc_a"    J1;
 IO_PORT "i_enc_a"    IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKT_5

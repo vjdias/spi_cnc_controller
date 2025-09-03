@@ -15,6 +15,7 @@ interface_root = integrations_root / "interfaces"
 parser_root    = root / "src" / "protocol" / "parsers" / "requests"
 framing_root   = root / "src" / "protocol" / "framings"
 router_root    = root / "src" / "protocol" / "routers"
+driver_root    = root / "src" / "drivers"
 
 tb_dir = root / "tb" / "tests"
 
@@ -37,10 +38,14 @@ files.extend(sorted(package_root.glob("*.sv")))
 files.extend(sorted(interface_root.glob("*.sv")))
 files.extend(sorted(service_root.glob("*.sv")))
 # também pega subpastas relevantes em services
-for sub in ["spi", "led"]:
+for sub in ["spi", "led", "motion", "pid"]:
     subdir = service_root / sub
     if subdir.exists():
         files.extend(sorted(subdir.glob("*.sv")))
+
+# Drivers necessários pelo motion_service
+files.extend(sorted((driver_root / "tmc5160").glob("*.sv")))
+files.extend(sorted((driver_root / "motion").glob("*.sv")))
 
 success = True
 for tb in tb_files:
@@ -58,6 +63,8 @@ for tb in tb_files:
         top,
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
+        "-Wno-LATCH",
+        "-Wno-WIDTHTRUNC",
         f"-I{tb_dir}",
     ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 
