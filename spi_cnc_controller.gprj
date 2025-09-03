@@ -59,6 +59,7 @@
         <File path="src/drivers/emergency_stop/emergency_stop_driver.sv" type="file.verilog" enable="1"/>
         <File path="src/drivers/encoder/quad_encoder_tmcs28_driver.sv" type="file.verilog" enable="1"/>
         <File path="src/drivers/motion/tick_gen.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/pid/pid_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/motion/motion_service.sv" type="file.verilog" enable="1"/>
         <File path="src/top.sv" type="file.verilog" enable="1"/>
         <File path="src/spi_cnc_controller.cst" type="file.cst" enable="1"/>

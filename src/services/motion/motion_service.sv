@@ -95,6 +95,38 @@ module motion_service (
     .o_sync_start   (sync_start)
   );
 
+  // Serviço de controle PID -----------------------------------------------
+  pid_service u_pid (
+    .clk       (clk),
+    .rst_n     (rst_n),
+    .enable    (move_enabled),
+    .pid_tick  (pid_tick),
+    .target_x  (step_x),
+    .target_y  (step_y),
+    .target_z  (step_z),
+    .ff_rate_x (ff_rate_x),
+    .ff_rate_y (ff_rate_y),
+    .ff_rate_z (ff_rate_z),
+    .kp_x      (kp_x),
+    .ki_x      (ki_x),
+    .kd_x      (kd_x),
+    .kp_y      (kp_y),
+    .ki_y      (ki_y),
+    .kd_y      (kd_y),
+    .kp_z      (kp_z),
+    .ki_z      (ki_z),
+    .kd_z      (kd_z),
+    .enc_pos_x (enc_position),
+    .enc_pos_y (enc_position),
+    .enc_pos_z (enc_position),
+    .rate_x    (pid_rate_x),
+    .rate_y    (pid_rate_y),
+    .rate_z    (pid_rate_z),
+    .pid_err_x (pid_err_x),
+    .pid_err_y (pid_err_y),
+    .pid_err_z (pid_err_z)
+  );
+
   // Drivers TMC5160 ----------------------------------------------------------
   logic start_x, start_y, start_z;
   logic stop_all;
@@ -103,7 +135,12 @@ module motion_service (
   // Parâmetros de movimento armazenados
   logic [2:0]  dir_mask;
   logic [31:0] step_x, step_y, step_z;
-  logic [31:0] rate_x, rate_y, rate_z;
+  logic [31:0] ff_rate_x, ff_rate_y, ff_rate_z;
+  logic [31:0] pid_rate_x, pid_rate_y, pid_rate_z;
+  logic [15:0] kp_x, ki_x, kd_x;
+  logic [15:0] kp_y, ki_y, kd_y;
+  logic [15:0] kp_z, ki_z, kd_z;
+  logic [7:0]  pid_err_x, pid_err_y, pid_err_z;
   logic        cont_x, cont_y, cont_z;
   logic [7:0]  current_move_id;
 
@@ -127,7 +164,7 @@ module motion_service (
     .i_period_cycles(32'd0),
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
-    .i_rate_inc  (rate_x),
+    .i_rate_inc  (pid_rate_x),
     .i_pulse_ticks(16'd1),
     .o_step      (tmc_step_x),
     .o_dir       (tmc_dir_x),
@@ -148,7 +185,7 @@ module motion_service (
     .i_period_cycles(32'd0),
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
-    .i_rate_inc  (rate_y),
+    .i_rate_inc  (pid_rate_y),
     .i_pulse_ticks(16'd1),
     .o_step      (tmc_step_y),
     .o_dir       (tmc_dir_y),
@@ -169,7 +206,7 @@ module motion_service (
     .i_period_cycles(32'd0),
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
-    .i_rate_inc  (rate_z),
+    .i_rate_inc  (pid_rate_z),
     .i_pulse_ticks(16'd1),
     .o_step      (tmc_step_z),
     .o_dir       (tmc_dir_z),
@@ -202,9 +239,12 @@ module motion_service (
       step_x       <= 32'd0;
       step_y       <= 32'd0;
       step_z       <= 32'd0;
-      rate_x       <= 32'd0;
-      rate_y       <= 32'd0;
-      rate_z       <= 32'd0;
+      ff_rate_x    <= 32'd0;
+      ff_rate_y    <= 32'd0;
+      ff_rate_z    <= 32'd0;
+      kp_x         <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
+      kp_y         <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
+      kp_z         <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
       cont_x       <= 1'b0;
       cont_y       <= 1'b0;
       cont_z       <= 1'b0;
@@ -266,9 +306,18 @@ module motion_service (
               step_x   <= queue_add_frame.sx;
               step_y   <= queue_add_frame.sy;
               step_z   <= queue_add_frame.sz;
-              rate_x   <= {queue_add_frame.vx,16'd0};
-              rate_y   <= {queue_add_frame.vy,16'd0};
-              rate_z   <= {queue_add_frame.vz,16'd0};
+              ff_rate_x<= {queue_add_frame.vx,16'd0};
+              ff_rate_y<= {queue_add_frame.vy,16'd0};
+              ff_rate_z<= {queue_add_frame.vz,16'd0};
+              kp_x     <= queue_add_frame.kp_x;
+              ki_x     <= queue_add_frame.ki_x;
+              kd_x     <= queue_add_frame.kd_x;
+              kp_y     <= queue_add_frame.kp_y;
+              ki_y     <= queue_add_frame.ki_y;
+              kd_y     <= queue_add_frame.kd_y;
+              kp_z     <= queue_add_frame.kp_z;
+              ki_z     <= queue_add_frame.ki_z;
+              kd_z     <= queue_add_frame.kd_z;
               cont_x   <= 1'b0;
               cont_y   <= 1'b0;
               cont_z   <= 1'b0;
@@ -294,9 +343,12 @@ module motion_service (
               step_x   <= 32'd0;
               step_y   <= 32'd0;
               step_z   <= 32'd0;
-              rate_x   <= {move_home_frame.vhome,16'd0};
-              rate_y   <= {move_home_frame.vhome,16'd0};
-              rate_z   <= {move_home_frame.vhome,16'd0};
+              ff_rate_x<= {move_home_frame.vhome,16'd0};
+              ff_rate_y<= {move_home_frame.vhome,16'd0};
+              ff_rate_z<= {move_home_frame.vhome,16'd0};
+              kp_x     <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
+              kp_y     <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
+              kp_z     <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
               cont_x   <= move_home_frame.axisMask[0];
               cont_y   <= move_home_frame.axisMask[1];
               cont_z   <= move_home_frame.axisMask[2];
@@ -324,6 +376,9 @@ module motion_service (
             r = move_queue_status_response_pkg::make_default();
             r.frameIdEcho = current_move_id;
             r.status      = (busy_x | busy_y | busy_z) ? 8'd0 : 8'd1; // Running/Idle
+            r.pidErrX     = pid_err_x;
+            r.pidErrY     = pid_err_y;
+            r.pidErrZ     = pid_err_z;
             r = move_queue_status_response_pkg::set_parity(r);
             pend_bits <= '0;
             pend_bits[SHIFT_BITS-1 -: move_queue_status_response_pkg::FRAME_BITS]
@@ -336,6 +391,12 @@ module motion_service (
             move_enabled  <= 1'b0;
             move_end_pulse <= 1'b1;
             home_pending  <= 1'b0;
+            ff_rate_x    <= 32'd0;
+            ff_rate_y    <= 32'd0;
+            ff_rate_z    <= 32'd0;
+            kp_x <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
+            kp_y <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
+            kp_z <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
             r = move_end_response_pkg::make_default();
             r.frameIdEcho = move_end_frame.frameId;
             pend_bits      <= '0;
@@ -361,7 +422,7 @@ module motion_service (
   /* verilator lint_off UNUSEDSIGNAL */
   logic _unused;
   assign _unused = ^{probe_frame.header, move_home_frame.header, queue_status_frame.header,
-                    enc_position[0], enc_velocity[0], pid_tick, sync_start};
+                    enc_velocity[0], sync_start};
   /* verilator lint_on UNUSEDSIGNAL */
 endmodule
 `endif

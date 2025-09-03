@@ -38,7 +38,7 @@ files.extend(sorted(package_root.glob("*.sv")))
 files.extend(sorted(interface_root.glob("*.sv")))
 files.extend(sorted(service_root.glob("*.sv")))
 # também pega subpastas relevantes em services
-for sub in ["spi", "led", "motion"]:
+for sub in ["spi", "led", "motion", "pid"]:
     subdir = service_root / sub
     if subdir.exists():
         files.extend(sorted(subdir.glob("*.sv")))

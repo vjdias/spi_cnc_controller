@@ -10,10 +10,10 @@ movimentos.
 1. **START_MOVE** habilita o modo de movimento e gera resposta de eco. Enquanto
    o modo estiver desabilitado, os demais comandos de movimento retornam erro.
 2. **MOVE_QUEUE_ADD** envia parâmetros de direção, velocidade, contagem de
-   passos e ganhos PID. O serviço instancia três drivers
-   `tmc5160_step_dir_driver` em modo síncrono e dispara o movimento para cada
-   eixo conforme o comando. A resposta MOVE_QUEUE_ADD_ACK confirma ou rejeita o
-   item.
+   passos e ganhos PID. O serviço instância os drivers
+   `tmc5160_step_dir_driver` e, em paralelo, repassa setpoints e ganhos ao
+   `pid_service`, que aplica correções sobre a taxa de passos. A resposta
+   MOVE_QUEUE_ADD_ACK confirma ou rejeita o item.
 3. **MOVE_HOME** inicia um movimento contínuo de homing nos eixos indicados,
    usando a mesma velocidade `vhome` para todos. O movimento é finalizado
    quando o sensor de proximidade é acionado e então uma resposta MOVE_HOME é
@@ -30,8 +30,8 @@ movimentos.
   ativa, inibe os drivers e força a saída do modo de movimento.
 - **Sensor de proximidade**: monitorado pelo `lj12a3_proximity_driver` e também
   desabilita os acionamentos quando acionado.
-- **Encoder**: posição e velocidade do `quad_encoder_tmcs28_driver` são expostas
-  ao serviço para implementação futura de controle PID.
+- **Encoder**: posição e velocidade do `quad_encoder_tmcs28_driver` alimentam o
+  `pid_service`, que calcula correções de malha fechada.
 
 ## Tick Gen
 
