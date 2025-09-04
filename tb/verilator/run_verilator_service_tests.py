@@ -15,6 +15,7 @@ interface_root = integrations_root / "interfaces"
 parser_root    = root / "src" / "protocol" / "parsers" / "requests"
 framing_root   = root / "src" / "protocol" / "framings"
 router_root    = root / "src" / "protocol" / "routers"
+driver_root    = root / "src" / "drivers"
 
 tb_dir = root / "tb" / "tests"
 
@@ -25,6 +26,12 @@ tb_files = [
     tb_dir / "spi_tx_buffer_tb.sv",
     tb_dir / "spi_full_flow_led_20_tb.sv",
     tb_dir / "spi_tx_hub_service_tb.sv",
+    # Motion end-to-end tests (SPI -> tick -> STEP)
+    tb_dir / "spi_full_flow_motion_basic_tb.sv",
+    tb_dir / "spi_full_flow_motion_home_tb.sv",
+    tb_dir / "spi_full_flow_motion_multiaxis_tb.sv",
+    tb_dir / "spi_full_flow_motion_early_end_tb.sv",
+    tb_dir / "spi_full_flow_motion_10_moves_tb.sv",
 ]
 
 files = []
@@ -37,10 +44,14 @@ files.extend(sorted(package_root.glob("*.sv")))
 files.extend(sorted(interface_root.glob("*.sv")))
 files.extend(sorted(service_root.glob("*.sv")))
 # também pega subpastas relevantes em services
-for sub in ["spi", "led"]:
+for sub in ["spi", "led", "motion", "pid"]:
     subdir = service_root / sub
     if subdir.exists():
         files.extend(sorted(subdir.glob("*.sv")))
+
+# Drivers necessários pelo motion_service
+files.extend(sorted((driver_root / "tmc5160").glob("*.sv")))
+files.extend(sorted((driver_root / "motion").glob("*.sv")))
 
 success = True
 for tb in tb_files:
@@ -58,6 +69,8 @@ for tb in tb_files:
         top,
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
+        "-Wno-WIDTHTRUNC",
+        "-Wno-LATCH",
         f"-I{tb_dir}",
     ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 

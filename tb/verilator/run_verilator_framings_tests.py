@@ -8,7 +8,8 @@ root = Path(__file__).resolve().parents[2]
 temp_dir = root / "tb" / "tests" / "temp"
 obj_dir = temp_dir / "obj_dir"
 
-tb_file = root / "tb" / "tests" / "framings_tb.sv"
+tb_dir = root / "tb" / "tests"
+tb_file = tb_dir / "framings_tb.sv"
 framing_root = root / "src" / "protocol" / "framings"
 
 files = []
@@ -26,6 +27,7 @@ cmd = [
     "framings_tb",
     "-Wno-TIMESCALEMOD",
     "-Wno-WIDTHEXPAND",
+    f"-I{tb_dir}",
 ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files]
 compile = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
 print(compile.stdout)

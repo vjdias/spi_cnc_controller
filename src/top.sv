@@ -22,18 +22,6 @@ module top (
     output wire        pi_miso,    // MISO (vai em Z quando CS#=1)
 
     // -------------------------
-    // Interface do wrapper (exportada, mas será dirigida internamente)
-    // Mantida por compatibilidade com TBs; não use externamente.
-    // -------------------------
-    input  wire        bus_wr_en,  // não utilizado (driven internamente)
-    input  wire [2:0]  bus_waddr,  // não utilizado
-    input  wire [7:0]  bus_wdata,  // não utilizado
-    input  wire        bus_rd_en,  // não utilizado
-    input  wire [2:0]  bus_raddr,  // não utilizado
-    output wire [7:0]  bus_rdata,  // espelha dado do wrapper
-    output wire        spi_irq,    // espelha IRQ do wrapper
-
-    // -------------------------
     // Sinais de LED (usados por testes de integração)
     // -------------------------
     output wire [5:0]  leds,
@@ -45,13 +33,7 @@ module top (
     input  wire        i_enc_b,
     input  wire        i_enc_z,
     // Exposição da posição (32 bits) para debug/integração
-    output wire [31:0] o_enc_position,
-    // Debug adicionais do encoder
-    output wire signed [31:0] o_enc_velocity,
-    output wire               o_enc_vel_valid,
-    output wire               o_enc_step_pulse_dbg,
-    output wire               o_enc_index_pulse_dbg,
-    output wire               o_enc_illegal_pulse_dbg
+    output wire [31:0] o_enc_position
 );
 
     // -------------------------
@@ -63,10 +45,6 @@ module top (
     wire mosi_slave_i = pi_mosi;
     wire miso_slave_i;
 
-    // Barramento interno do wrapper (TX para o core)
-    wire        wr_en_i;
-    wire [2:0]  waddr_i;
-    wire [7:0]  wdata_i;
     // Barramento interno do wrapper (RX do core)
     wire        rd_en_i;
     wire [2:0]  raddr_i;
@@ -76,10 +54,6 @@ module top (
     // Saída MISO do wrapper vai ao pino externo
     assign pi_miso = miso_slave_i;
 
-    // Tie-offs para interface de escrita do wrapper (não usada neste top)
-    assign wr_en_i  = 1'b0;
-    assign waddr_i  = 3'd0;
-    assign wdata_i  = 8'h00;
 
     // -------------------------
     // Instância do wrapper SPI slave
@@ -90,9 +64,9 @@ module top (
         .i_resetn   (i_resetn),
 
         // escrita (TX)
-        .wr_en      (wr_en_i),
-        .waddr      (waddr_i),
-        .wdata      (wdata_i),
+        .wr_en      (1'b0),
+        .waddr      (3'd0),
+        .wdata      (8'h00),
 
         // leitura (RX)
         .rd_en      (rd_en_i),
@@ -106,10 +80,6 @@ module top (
         .mosi_slave (mosi_slave_i),
         .miso_slave (miso_slave_i)
     );
-
-    // Exporta sinais de status do wrapper
-    assign bus_rdata = rdata_o;
-    assign spi_irq   = irq_o;
 
     // -------------------------
     // Bridge wrapper->bytes (sempre presente; sintetizável)
@@ -249,11 +219,6 @@ module top (
     );
 
     assign o_enc_position = enc_position;
-    assign o_enc_velocity = enc_velocity;
-    assign o_enc_vel_valid = enc_vel_valid;
-    assign o_enc_step_pulse_dbg = enc_step_pulse;
-    assign o_enc_index_pulse_dbg = enc_z_pulse;
-    assign o_enc_illegal_pulse_dbg = enc_illegal;
 
 
 endmodule

@@ -47,6 +47,9 @@
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv" type="verilog"/>
+        <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv" type="verilog"/>
         <File path="C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv" type="verilog"/>
     </FileList>
     <OptionList>

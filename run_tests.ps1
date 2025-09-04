@@ -56,6 +56,27 @@ switch ($simulator) {
 
             vsim -c -l $transcriptPath -modelsimini 'tb/modelsim/modelsim.ini' -do 'tb/modelsim/run_all.tcl'
             if ($LASTEXITCODE -ne 0) { $testExitCode = $LASTEXITCODE }
+
+            # Analisa o transcript em busca de falhas reportadas pelos TBs (linhas com "Falha:")
+            if (Test-Path $transcriptPath) {
+                $failLines = Select-String -Path $transcriptPath -Pattern 'Falha:\s*' -SimpleMatch -ErrorAction SilentlyContinue
+                if ($failLines) {
+                    $failCount = $failLines.Count
+                    # Extrai o texto após 'Falha:' em cada linha
+                    $failNames = @()
+                    foreach ($ln in $failLines) {
+                        $name = ($ln.Line -replace '.*Falha:\s*','').Trim()
+                        if ($name) { $failNames += $name } else { $failNames += '(sem_nome)' }
+                    }
+                    Write-Error ("TEST FALHAS DETECTADAS: quantidade={0}" -f $failCount)
+                    Write-Error ("Falhas: {0}" -f ($failNames -join ', '))
+                    if ($testExitCode -eq 0) { $testExitCode = 1 }
+                } else {
+                    Write-Host "INFO: Nenhuma 'Falha:' encontrada no transcript."
+                }
+            } else {
+                Write-Warning "Transcript nao encontrado em $transcriptPath; nao foi possivel inspecionar falhas."
+            }
         }
     }
 }

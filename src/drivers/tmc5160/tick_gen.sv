@@ -2,16 +2,6 @@
 // tick_gen.sv
 // Gerador de tick base para sincronismo entre múltiplos tmc5160_step_dir_driver
 // e marcação de período de controle (PID) opcional.
-//
-// - Gera pulso o_tick (1 ciclo) a cada i_tick_div ciclos de clk
-// - Gera pulso o_pid_tick (1 ciclo) a cada i_pid_div ticks (baseados em o_tick)
-// - Alinha um pulso o_sync_start ao próximo o_tick quando requisitado
-//
-// Observações
-// - Mantido genérico para que o PID e o planejamento de trajetória
-//   sejam módulos separados, mas com base de tempo comum (o_tick).
-// - Use o o_tick como entrada i_tick dos drivers tmc5160 em SYNC_MODE=1.
-// - Use o o_pid_tick como período de amostragem do controlador PID.
 // -----------------------------------------------------------------------------
 `ifndef TICK_GEN_SV
 `define TICK_GEN_SV

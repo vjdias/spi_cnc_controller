@@ -43,6 +43,9 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv'
 Compiling module 'top'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":9)
 Compiling module 'spi_slave'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":12)
@@ -56,11 +59,6 @@ Compiling module 'led_service(tx_stream=resp_stream_if_producer)'("C:\Users\Vald
 Compiling module 'quad_encoder_tmcs28_driver(POS_WIDTH=32'b00000000000000000000000000100000,FILTER_CYCLES=32'b00000000000000000000000000000000,INDEX_OFFSET=32'b00000000000000000000000000000000,MODULO=32'b00000000000000000000000000000000,VEL_WINDOW_CYCLES=32'b00000000000000000000000000000000,COUNT_MODE=32'b00000000000000000000000000000100)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv":18)
 NOTE  (EX0101) : Current top module is "top"
 [5%] Running netlist conversion ...
-WARN  (CV0016) : Input bus_wr_en is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":28)
-WARN  (CV0016) : Input bus_waddr is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":29)
-WARN  (CV0016) : Input bus_wdata is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":30)
-WARN  (CV0016) : Input bus_rd_en is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":31)
-WARN  (CV0016) : Input bus_raddr is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":32)
 Running device independent optimization ...
 [10%] Optimizing Phase 0 completed
 [15%] Optimizing Phase 1 completed
