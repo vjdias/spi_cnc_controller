@@ -230,7 +230,7 @@ module spi_full_flow_motion_10_moves_tb;
       spi_service_pkg::byte_t vx, spi_service_pkg::byte_t vy, spi_service_pkg::byte_t vz
     );
     move_queue_add_request_pkg::move_queue_add_req_bytes_t req;
-    logic [47:0] raw;
+    logic [move_queue_add_request_pkg::FRAME_BITS-1:0] raw;
     req = move_queue_add_request_pkg::make_default();
     req.frameId = frameId;
     req.dirMask = dirMask;
@@ -241,7 +241,7 @@ module spi_full_flow_motion_10_moves_tb;
     req.kp_z = 16'd0; req.ki_z = 16'd0; req.kd_z = 16'd0;
     req = move_queue_add_request_pkg::set_parity(req);
     raw = move_queue_add_request_pkg::encoder(req);
-    for (int i = 0; i < 6; i++) begin
+    for (int i = 0; i < (move_queue_add_request_pkg::FRAME_BITS/8); i++) begin
       if (TB_RESPECT_BUSY) begin
         do @(posedge clk); while (slave_busy);
       end else begin
@@ -250,7 +250,7 @@ module spi_full_flow_motion_10_moves_tb;
       if (!started) begin
         start_cycle = cycle_ctr; started = 1'b1;
       end
-      inq.push_back(raw[47 - i*8 -: 8]);
+      inq.push_back(raw[move_queue_add_request_pkg::FRAME_BITS-1 - i*8 -: 8]);
     end
     messages_sent++;
   endtask

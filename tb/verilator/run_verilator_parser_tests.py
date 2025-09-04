@@ -2,6 +2,7 @@
 import subprocess
 from pathlib import Path
 import sys
+import shutil
 
 root = Path(__file__).resolve().parents[2]
 temp_dir = root / "tb" / "tests" / "temp"
@@ -34,6 +35,11 @@ for tb in tb_files:
     obj_dir.mkdir(parents=True, exist_ok=True)
 
     top = tb.stem
+    # Garante que o Verilator está disponível
+    if shutil.which("verilator") is None:
+        print("Verilator não encontrado no PATH. Instale-o ou use ModelSim (vsim).")
+        sys.exit(1)
+
     cmd = [
         "verilator",
         "--sv",

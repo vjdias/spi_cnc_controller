@@ -98,13 +98,13 @@ module spi_full_flow_motion_multiaxis_tb;
   endtask
   task automatic send_move_queue_add_all(spi_service_pkg::byte_t frameId, spi_service_pkg::byte_t dirMask,
     int sx, int sy, int sz, spi_service_pkg::byte_t v);
-    move_queue_add_request_pkg::move_queue_add_req_bytes_t req; logic [47:0] raw;
+    move_queue_add_request_pkg::move_queue_add_req_bytes_t req; logic [move_queue_add_request_pkg::FRAME_BITS-1:0] raw;
     req = move_queue_add_request_pkg::make_default();
     req.frameId = frameId; req.dirMask = dirMask; req.sx = sx; req.sy = sy; req.sz = sz;
     req.vx = v; req.vy = v; req.vz = v;
     req.kp_x=0; req.ki_x=0; req.kd_x=0; req.kp_y=0; req.ki_y=0; req.kd_y=0; req.kp_z=0; req.ki_z=0; req.kd_z=0;
     req = move_queue_add_request_pkg::set_parity(req); raw = move_queue_add_request_pkg::encoder(req);
-    for (int i=0;i<6;i++) begin do @(posedge clk); while (slave_busy); inq.push_back(raw[47 - i*8 -: 8]); end
+    for (int i=0;i<(move_queue_add_request_pkg::FRAME_BITS/8);i++) begin do @(posedge clk); while (slave_busy); inq.push_back(raw[move_queue_add_request_pkg::FRAME_BITS-1 - i*8 -: 8]); end
   endtask
 
   // Contagem e marcação de ciclos das bordas de subida

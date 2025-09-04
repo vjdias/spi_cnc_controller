@@ -17,6 +17,11 @@ for subdir in ["constants", "utils", "requests", "responses"]:
     files.extend(sorted((framing_root / subdir).glob("*.sv")))
 files.append(tb_file)
 
+# Garante que o Verilator está disponível
+if shutil.which("verilator") is None:
+    print("Verilator não encontrado no PATH. Instale-o ou use ModelSim (vsim).")
+    sys.exit(1)
+
 obj_dir.mkdir(parents=True, exist_ok=True)
 shutil.rmtree(obj_dir, ignore_errors=True)
 cmd = [

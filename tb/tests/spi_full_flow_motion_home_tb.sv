@@ -12,6 +12,14 @@ module spi_full_flow_motion_home_tb;
   import move_home_request_pkg::*;
   import move_home_response_pkg::*;
 
+  // Dump de ondas para inspeção (Verilator)
+`ifdef VERILATOR
+  initial begin
+    $dumpfile("tb/tests/temp/spi_full_flow_motion_home_tb.vcd");
+    $dumpvars(0, spi_full_flow_motion_home_tb);
+  end
+`endif
+
   // Clock/reset
   logic clk = 0;
   logic rst_n = 0;
@@ -223,7 +231,9 @@ module spi_full_flow_motion_home_tb;
     int prev_cnt;
     inq = {};
     enc_pos = 32'd0; enc_vel = 32'sd0;
-    prox_in = 1'b1; // PROX NO seguro
+    // Em simulação o driver de proximidade é configurado como PNP/NO (ativo-alto).
+    // Portanto, o nível "seguro" (não acionado) é 0, e 1 aciona o sensor.
+    prox_in = 1'b0; // PROX seguro (não acionado)
     estop_in = 1'b1; // E-STOP NC seguro
     // Resets performed in always_ff blocks
 
@@ -245,7 +255,7 @@ module spi_full_flow_motion_home_tb;
     end
     `TEST_ASSERT(step_count_x >= 5, "timeout_steps_home_start")
 
-    // Dispara sensor de proximidade -> deve gerar resposta MOVE_HOME
+    // Dispara sensor de proximidade (ativo-alto) -> deve gerar resposta MOVE_HOME
     prox_in = 1'b1;
 
     // Espera bytes: 4 (start_move) + 8 (move_home resp) = 12

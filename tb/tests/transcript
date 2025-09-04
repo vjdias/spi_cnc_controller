@@ -1,0 +1,10 @@
+# vsim -L simlib spi_full_flow_motion_home_tb 
+# Start time: 12:50:42 on Sep 04,2025
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 12:50:43 on Sep 04,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+ do tb/modelsim/compile_only.tcl
+# Cannot open macro file: tb/modelsim/compile_only.tcl
+cd ..

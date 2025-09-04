@@ -51,6 +51,9 @@ for sub in ["spi", "led", "motion", "pid"]:
 
 # Drivers necessários pelo motion_service
 files.extend(sorted((driver_root / "tmc5160").glob("*.sv")))
+# Drivers adicionais usados pelo motion_service (sensores/segurança)
+files.extend(sorted((driver_root / "proximity_sensor").glob("*.sv")))
+files.extend(sorted((driver_root / "emergency_stop").glob("*.sv")))
 files.extend(sorted((driver_root / "motion").glob("*.sv")))
 
 success = True
@@ -65,6 +68,7 @@ for tb in tb_files:
         "verilator",
         "--sv",
         "--binary",
+        "--trace",
         "--top-module",
         top,
         "-Wno-TIMESCALEMOD",

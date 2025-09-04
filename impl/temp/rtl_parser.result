@@ -43,7 +43,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-    "InstLine" : 101,
+    "InstLine" : 106,
     "InstName" : "u_tick",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv",
     "ModuleLine" : 9,
@@ -51,7 +51,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-    "InstLine" : 147,
+    "InstLine" : 152,
     "InstName" : "u_pid",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv",
     "ModuleLine" : 12,
@@ -59,7 +59,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-    "InstLine" : 183,
+    "InstLine" : 188,
     "InstName" : "u_drv_x",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
     "ModuleLine" : 16,
@@ -67,7 +67,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-    "InstLine" : 204,
+    "InstLine" : 209,
     "InstName" : "u_drv_y",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
     "ModuleLine" : 16,
@@ -75,7 +75,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-    "InstLine" : 225,
+    "InstLine" : 230,
     "InstName" : "u_drv_z",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
     "ModuleLine" : 16,

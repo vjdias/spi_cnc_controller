@@ -92,8 +92,13 @@ module motion_service (
   );
 
   // Gerador de tick compartilhado --------------------------------------------
-  localparam logic [31:0] TICK_DIV = 32'd1000;   // valores fixos iniciais
+`ifdef __SIM_BUILD__
+  localparam logic [31:0] TICK_DIV = 32'd1;      // sim: tick todo ciclo
+  localparam logic [31:0] PID_DIV  = 32'd64;     // sim: PID mais frequente
+`else
+  localparam logic [31:0] TICK_DIV = 32'd1000;   // hw: valores fixos iniciais
   localparam logic [31:0] PID_DIV  = 32'd10000;
+`endif
   logic tick, pid_tick, sync_start;
   logic sync_req;
   logic tick_enable;
@@ -193,7 +198,7 @@ module motion_service (
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
     .i_rate_inc  (pid_rate_x),
-    .i_pulse_ticks(16'd1),
+    .i_pulse_ticks(16'd4),
     .o_step      (tmc_step_x),
     .o_dir       (tmc_dir_x),
     .o_enn       (tmc_enn_x),
@@ -214,7 +219,7 @@ module motion_service (
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
     .i_rate_inc  (pid_rate_y),
-    .i_pulse_ticks(16'd1),
+    .i_pulse_ticks(16'd4),
     .o_step      (tmc_step_y),
     .o_dir       (tmc_dir_y),
     .o_enn       (tmc_enn_y),
@@ -235,7 +240,7 @@ module motion_service (
     .i_pulse_cycles (32'd0),
     .i_tick      (tick),
     .i_rate_inc  (pid_rate_z),
-    .i_pulse_ticks(16'd1),
+    .i_pulse_ticks(16'd4),
     .o_step      (tmc_step_z),
     .o_dir       (tmc_dir_z),
     .o_enn       (tmc_enn_z),
@@ -244,7 +249,8 @@ module motion_service (
   );
 
   // FSM de controle ----------------------------------------------------------
-
+  // Máscara de starts pendentes (alinhamento com o próximo tick)
+  logic [2:0] start_pending;
   // Buffer de publicação no stream genérico de respostas
   localparam int SHIFT_BITS = spi_service_pkg::RESP_MAX_BYTES * 8;
   logic                      pending;
@@ -279,6 +285,7 @@ module motion_service (
       home_pending <= 1'b0;
       home_frame_id <= 8'd0;
       home_axis_mask <= 3'd0;
+      start_pending <= 3'b000;
     end else begin
       start_x      <= 1'b0;
       start_y      <= 1'b0;
@@ -290,7 +297,8 @@ module motion_service (
         pending <= 1'b0;
       end
 
-      if (estop_inhibit)
+      // Em simulação, não derruba move_enabled por E-STOP (SAFETY_ENABLE=0)
+      if (SAFETY_ENABLE && estop_inhibit)
         move_enabled <= 1'b0;
 
       // Resposta de homing quando sensor aciona
@@ -311,6 +319,14 @@ module motion_service (
         cont_x <= 1'b0;
         cont_y <= 1'b0;
         cont_z <= 1'b0;
+      end
+
+      // Emite starts alinhados ao próximo tick
+      if (sync_start && (start_pending != 3'b000)) begin
+        start_x       <= start_pending[0];
+        start_y       <= start_pending[1];
+        start_z       <= start_pending[2];
+        start_pending <= 3'b000;
       end
 
       if (frame_valid) begin
@@ -348,9 +364,12 @@ module motion_service (
               cont_x   <= 1'b0;
               cont_y   <= 1'b0;
               cont_z   <= 1'b0;
-              start_x  <= (queue_add_frame.sx != 0);
-              start_y  <= (queue_add_frame.sy != 0);
-              start_z  <= (queue_add_frame.sz != 0);
+              // programa start alinhado ao próximo tick
+              start_pending[0] <= (queue_add_frame.sx != 0);
+              start_pending[1] <= (queue_add_frame.sy != 0);
+              start_pending[2] <= (queue_add_frame.sz != 0);
+              if ((queue_add_frame.sx!=0) || (queue_add_frame.sy!=0) || (queue_add_frame.sz!=0))
+                sync_req <= 1'b1;
               current_move_id <= queue_add_frame.frameId;
               r = move_queue_add_response_pkg::make_default_ok(queue_add_frame.frameId);
             end else begin
@@ -379,9 +398,9 @@ module motion_service (
               cont_x   <= move_home_frame.axisMask[0];
               cont_y   <= move_home_frame.axisMask[1];
               cont_z   <= move_home_frame.axisMask[2];
-              start_x  <= move_home_frame.axisMask[0];
-              start_y  <= move_home_frame.axisMask[1];
-              start_z  <= move_home_frame.axisMask[2];
+              // programa start alinhado ao próximo tick
+              start_pending    <= move_home_frame.axisMask[2:0];
+              if (|move_home_frame.axisMask[2:0]) sync_req <= 1'b1;
               home_frame_id  <= move_home_frame.frameId;
               home_axis_mask <= move_home_frame.axisMask[2:0];
               home_pending   <= |move_home_frame.axisMask[2:0];
