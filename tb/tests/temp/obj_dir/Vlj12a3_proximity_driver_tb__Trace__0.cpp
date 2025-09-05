@@ -52,28 +52,23 @@ void Vlj12a3_proximity_driver_tb___024root__trace_chg_0_sub_0(Vlj12a3_proximity_
         bufp->chgBit(oldp+22,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__in_sync));
         bufp->chgBit(oldp+23,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_active));
         bufp->chgBit(oldp+24,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state));
-        bufp->chgBit(oldp+25,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_q));
-        bufp->chgCData(oldp+26,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__cnt),2);
-        bufp->chgBit(oldp+27,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_meta));
-        bufp->chgBit(oldp+28,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync));
-        bufp->chgBit(oldp+29,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active));
-        bufp->chgBit(oldp+30,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_q));
-        bufp->chgBit(oldp+31,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_meta));
-        bufp->chgBit(oldp+32,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync));
-        bufp->chgBit(oldp+33,((1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync)))));
-        bufp->chgBit(oldp+34,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active));
-        bufp->chgBit(oldp+35,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_q));
-        bufp->chgBit(oldp+36,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_meta));
-        bufp->chgBit(oldp+37,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync));
-        bufp->chgBit(oldp+38,((1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync)))));
-        bufp->chgBit(oldp+39,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active));
-        bufp->chgBit(oldp+40,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_q));
-        bufp->chgBit(oldp+41,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_meta));
-        bufp->chgBit(oldp+42,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync));
-        bufp->chgBit(oldp+43,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active));
-        bufp->chgBit(oldp+44,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_q));
+        bufp->chgCData(oldp+25,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__cnt),2);
+        bufp->chgBit(oldp+26,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_meta));
+        bufp->chgBit(oldp+27,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync));
+        bufp->chgBit(oldp+28,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active));
+        bufp->chgBit(oldp+29,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_meta));
+        bufp->chgBit(oldp+30,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync));
+        bufp->chgBit(oldp+31,((1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync)))));
+        bufp->chgBit(oldp+32,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active));
+        bufp->chgBit(oldp+33,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_meta));
+        bufp->chgBit(oldp+34,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync));
+        bufp->chgBit(oldp+35,((1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync)))));
+        bufp->chgBit(oldp+36,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active));
+        bufp->chgBit(oldp+37,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_meta));
+        bufp->chgBit(oldp+38,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync));
+        bufp->chgBit(oldp+39,(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active));
     }
-    bufp->chgBit(oldp+45,(vlSelf->lj12a3_proximity_driver_tb__DOT__clk));
+    bufp->chgBit(oldp+40,(vlSelf->lj12a3_proximity_driver_tb__DOT__clk));
 }
 
 void Vlj12a3_proximity_driver_tb___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

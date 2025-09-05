@@ -1,4 +1,0 @@
-Vspi_full_flow_tick_count_tb_spi_fifo_if__Slow.o: \
- Vspi_full_flow_tick_count_tb_spi_fifo_if__Slow.cpp \
- Vspi_full_flow_tick_count_tb__pch.h Vspi_full_flow_tick_count_tb__Syms.h \
- Vspi_full_flow_tick_count_tb_spi_fifo_if.h

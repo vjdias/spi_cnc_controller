@@ -1,0 +1,127 @@
+Resumo: gerei variações de constraints (timing e físicas já no projeto), rodei a síntese/PNR com a CLI da Gowin (gw_sh) e coletei relatórios para 27 MHz, 135 MHz e um sweep do clock de SPI (50/100 MHz). Os resultados estão em impl/pnr/reports.
+
+O Que Eu Rodei
+
+gw_sh: rodei a síntese e PnR via Tcl para variações de SDC.
+27 MHz e 135 MHz: scripts/run_gowin_sweep.tcl
+SPI 50/100 MHz (sys=27 MHz): scripts/run_gowin_spi_sweep.tcl
+Comandos para repetir:
+
+gw_sh scripts/run_gowin_sweep.tcl
+gw_sh scripts/run_gowin_spi_sweep.tcl
+Relatórios gerados:
+
+impl/pnr/reports/timing_27.rpt.txt
+impl/pnr/reports/timing_135.rpt.txt
+impl/pnr/reports/timing_spi50.rpt.txt
+impl/pnr/reports/timing_spi100.rpt.txt
+Cópias dos HTMLs e dos “timing_paths” estão no mesmo diretório.
+Resultados (dados principais)
+
+Sys 27 MHz (periodo 37.037 ns):
+Slack (setup) pior: +28.032 ns
+Atraso de caminho crítico (arrival): ~15.471 ns ⇒ Fmáx ≈ 1/15.471 ns ≈ 64.6 MHz
+Caminho crítico: majoritariamente em u_rx_hub_synth (SPI RX Hub).
+Fonte: impl/pnr/reports/timing_27.timing_paths (linhas iniciais)
+Sys 135 MHz (periodo 7.407 ns):
+Slack (setup) pior: −0.875 ns (violação)
+Atraso de caminho crítico (arrival): ~14.748 ns ⇒ Fmáx ≈ 1/14.748 ns ≈ 67.8 MHz
+Fonte: impl/pnr/reports/timing_135.timing_paths (linhas iniciais)
+SPI SCLK 50 MHz (sys=27 MHz):
+Slack (setup) pior: +17.400 ns
+Arrival ~9.066 ns (bom margem)
+Fonte: impl/pnr/reports/timing_spi50.timing_paths
+SPI SCLK 100 MHz (sys=27 MHz):
+Slack (setup) pior: +7.375 ns
+Arrival ~9.092 ns (ainda com folga)
+Caminho em u_spi_slave/u_spi_slave_core/* (núcleo SPI).
+Fonte: impl/pnr/reports/timing_spi100.timing_paths
+Leitura rápida:
+
+O domínio de sistema fecha com sobra grande a 27 MHz e falha a 135 MHz; o Fmáx atual do core de sistema está ~65–68 MHz (sem mudanças na lógica).
+O domínio do SPI (síncrono a pi_sclk) fecha confortavelmente a 50 MHz e ainda fecha a 100 MHz com folga significativa.
+Arquivos Criados/Atualizados
+
+Timing SDCs:
+constraints/timing_27.sdc e constraints/timing_135.sdc
+constraints/timing_27_spi50.sdc e constraints/timing_27_spi100.sdc
+Scripts de automação (gw_sh Tcl):
+scripts/run_gowin_sweep.tcl (27/135 MHz)
+scripts/run_gowin_spi_sweep.tcl (SPI 50/100 MHz)
+Guias solicitados (baixados):
+constraints/SUG940E.pdf (Timing)
+constraints/SUG935E.pdf (Physical)
+Referências úteis no projeto:
+
+constraints/timing.sdc:6 — clock base de sistema (27 MHz).
+constraints/README.md:7 — nota sobre clocks e grupos assíncronos.
+src/spi_cnc_controller.cst:7 — mapeamento e IO_TYPE; pi_sclk já em GCLKT_7.
+src/top.sv:13 — porta i_clk (clock do sistema), src/top.sv:19 — pi_sclk.
+Recomendações de Constraint (próximo passo)
+
+Timing (SDC):
+Manter create_clock em i_clk conforme alvo (27 MHz para produção atual).
+Domínios: set_clock_groups -asynchronous -group {sys_clk} -group {pi_sclk} (já feito).
+SPI I/O models: adicionar set_input_delay/-output_delay relativo a pi_sclk para pi_mosi, pi_csn, pi_miso, com base no datasheet do mestre SPI (RPi). Exemplo genérico (ajuste após medição):
+set_input_delay -clock pi_sclk -max 3.0 -min 0.5 [get_ports {pi_mosi pi_csn}]
+set_output_delay -clock pi_sclk -max 3.0 -min -0.5 [get_ports {pi_miso}]
+Se mirarmos >27 MHz de sistema, o gargalo está em spi_rx_hub_service.sv; será preciso pipelinar/retiming para empurrar Fmáx acima de ~70 MHz.
+Físico (CST):
+Confirme Vccio/nível lógico: hoje está LVCMOS18. Se conectar direto ao Raspberry Pi (3V3), deve ser LVCMOS33 e o banco precisa estar a 3V3. Se há level shifters para 1V8, manter LVCMOS18.
+pi_miso de saída: considerar SLEW=FAST e DRIVE=8/12 para bordas limpas em altas taxas (avaliar overshoot/EMI).
+STEP/DIR para TMC5160: use SLEW=SLOW e DRIVE moderado (ex.: 8) para reduzir ringing; essas linhas raramente precisam slew rápido.
+Encoders AB em GCLK: já mapeados (bom). Mantenha trilhas curtas e pull-ups internos/externos consistentes com o ruído do ambiente.
+Sugestão de Configuração “Base”
+
+Produção estável (controle): sys=27 MHz, SPI até 50–100 MHz.
+Use constraints/timing_27.sdc com atualização do pi_sclk para a taxa real e acrescente os delays de IO do SPI.
+Alta performance (parcial): manter sys ≈ 27–54 MHz e gerar clocks dedicados via PLL (por exemplo 81/108 MHz) apenas para módulos que exigem taxa alta (p. ex. geração de passos), com CDC explícito. Evita quebrar o caminho crítico do HUB SPI.
+Deseja que eu:
+
+Ajuste timing.sdc para incluir set_input_delay/set_output_delay do SPI com valores provisórios e gere mais um sweep?
+Revisite spi_rx_hub_service.sv para sugerir um pipeline mínimo visando empurrar o Fmáx do sistema para ~100 MHz?
+Atualize o .cst para o padrão elétrico correto (LVCMOS33 vs LVCMOS18) conforme seu hardware e aplique SLEW/DRIVE recomendados?
+
+
+9 files changed
++244
+-0
+
+Undo
+
+View changes
+timing_135.sdc
++13
+-0
+
+timing_27.sdc
++13
+-0
+
+timing_27_spi100.sdc
++9
+-0
+
+timing_27_spi50.sdc
++9
+-0
+
+cmd_135.do
++19
+-0
+
+cmd_27.do
++19
+-0
+
+run_gowin_spi_sweep.tcl
++66
+-0
+
+run_gowin_sweep.tcl
++63
+-0
+
+run_pnr_sweep.tcl
++33
+-0

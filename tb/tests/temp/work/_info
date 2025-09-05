@@ -11,7 +11,7 @@ cModel Technology
 Z0 dC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller
 vbyte_fifo_sync
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1757051885
+Z2 !s110 1757099127
 !i10b 1
 !s100 n3LZ9cB5TTH6?dEn7KbBN0
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -28,7 +28,7 @@ Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1757051885.000000
+Z6 !s108 1757099127.000000
 Z7 !s107 C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv|
 Z8 !s90 -sv|-mfcu|+define+SIM_STUB_SPI_CORE+ROUTER_IGNORE_NOISE|+incdir+C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv|
 !i113 1
@@ -443,17 +443,17 @@ vlj12a3_proximity_driver
 R1
 R2
 !i10b 1
-!s100 P5kKX6P3=Lm:RgOQ2L4Pd2
+!s100 6Y54GEQ_gJ]8d>[NB1_``1
 R3
-ImE];2T^2ChTcm4fZC1NG:0
+In_Q24P0XY]fl<<5jBN3M_1
 R4
 S1
 R0
-w1757050556
+w1757092295
 8C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv
 FC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv
 !i122 0
-L0 16 97
+L0 16 96
 R5
 r1
 !s85 0
@@ -469,17 +469,17 @@ vlj12a3_proximity_driver_tb
 R1
 R2
 !i10b 1
-!s100 FZz?ZBZE8N<54bDC94U6k3
+!s100 HHd94ISbP9i_EN1dbjAh<0
 R3
-IK3XMMBN^5FUj[ZlkjMMIS0
+IKaiCa4XYJ60?5XL<8?<@W3
 R4
 S1
 R0
-w1757051101
+w1757092956
 8C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv
 FC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv
 !i122 2
-L0 4 139
+L0 4 142
 R5
 r1
 !s85 0
@@ -1420,7 +1420,7 @@ IKYM`k]IOHDVzKW29RbFG]1
 R4
 S1
 R0
-w1756999185
+w1757052663
 8C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv
 FC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv
 !i122 2

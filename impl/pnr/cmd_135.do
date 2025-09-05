@@ -1,0 +1,19 @@
+-d C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg
+-p GW2A-18C-PBGA256-8
+-pn GW2A-LV18PG256C8/I7
+-cst C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller.cst
+-cfg C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\device.cfg
+-sdc C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\constraints\timing_135.sdc
+-bit
+-tr
+-ph
+-timing
+-cst_error
+-convert_sdp32_36_to_sdp16_18
+-place_option 0
+-route_option 0
+-clock_route_order 0
+-correct_hold 1
+-route_maxfan 23
+-global_freq 100.000
+

@@ -2,23 +2,35 @@
  "Device" : "GW2A-18C",
  "Files" : [
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv",
    "Type" : "verilog"
   },
   {
@@ -86,6 +98,10 @@
    "Type" : "verilog"
   },
   {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv",
    "Type" : "verilog"
   },
@@ -118,23 +134,35 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv",
-   "Type" : "verilog"
-  },
-  {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv",
    "Type" : "verilog"
   },
   {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv",
    "Type" : "verilog"
   },
   {
@@ -155,34 +183,6 @@
   },
   {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
    "Type" : "verilog"
   },
   {

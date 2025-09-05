@@ -51,9 +51,9 @@ module lj12a3_proximity_driver #(
   //      - PNP NO: ativo quando in_sync == 1
   //      - NPN NC: ativo quando in_sync == 1
   //      - PNP NC: ativo quando in_sync == 0
-  // Modo simplificado: mapeia diretamente a entrada (sem sincronizador)
-  wire raw_active = IS_NORMALLY_OPEN ? (IS_PNP ? i_sensor_in : ~i_sensor_in)
-                                     : (IS_PNP ? ~i_sensor_in : i_sensor_in);
+  // Usa a versão sincronizada da entrada para evitar metaestabilidade.
+  wire raw_active = IS_NORMALLY_OPEN ? (IS_PNP ? in_sync : ~in_sync)
+                                     : (IS_PNP ? ~in_sync : in_sync);
 
   // 3) Debounce opcional
   logic debounced_active; // estado estável atual (registrado)
@@ -92,20 +92,18 @@ module lj12a3_proximity_driver #(
   endgenerate
 
   // 4) Saídas e pulsos de borda (registrados para 1 ciclo)
-  logic debounced_q;
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      debounced_q       <= 1'b0;
       o_active          <= 1'b0;
       o_active_pulse    <= 1'b0;
       o_inactive_pulse  <= 1'b0;
+      debounced_active  <= 1'b0;
     end else begin
       // Pulsos calculados a partir do próximo valor estável vs. valor atual
       o_active_pulse    <= ( debounced_next & ~debounced_active);
       o_inactive_pulse  <= (~debounced_next &  debounced_active);
       // Avança estado estável e memória do anterior
       o_active          <= debounced_next;
-      debounced_q       <= debounced_active; // mantém histórico de 1 ciclo
       debounced_active  <= debounced_next;
     end
   end

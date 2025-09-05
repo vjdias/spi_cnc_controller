@@ -117,19 +117,19 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       88);
+                                                       91);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       88);
+                                                       91);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       88);
+                                                       91);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n = 1U;
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_pnp_no = 1U;
@@ -143,12 +143,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no))) {
@@ -161,12 +161,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no))) {
@@ -183,22 +183,22 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_pnp_no) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__0__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       93);
+                                                       96);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VdlySched.delay(0U, nullptr, 
                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                       93);
+                                       96);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no)) 
                               & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no))))))) {
         VL_WRITEF("Falha: pnp_no_pulses_clear\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 93, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 96, "");
     }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_pnp_no = 0U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__1__max_cycles = 0x10U;
@@ -211,12 +211,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no))) {
@@ -229,12 +229,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no))) {
@@ -251,22 +251,22 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_pnp_no) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__1__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       96);
+                                                       99);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VdlySched.delay(0U, nullptr, 
                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                       96);
+                                       99);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no)) 
                               & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no))))))) {
         VL_WRITEF("Falha: pnp_no_pulses_clear2\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 96, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 99, "");
     }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_npn_no = 0U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__2__max_cycles = 0x10U;
@@ -279,12 +279,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no))) {
@@ -297,12 +297,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no))) {
@@ -319,22 +319,22 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_npn_no) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__2__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       101);
+                                                       104);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VdlySched.delay(0U, nullptr, 
                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                       101);
+                                       104);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no)) 
                               & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no))))))) {
         VL_WRITEF("Falha: npn_no_pulses_clear\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 101, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 104, "");
     }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_npn_no = 1U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__3__max_cycles = 0x10U;
@@ -347,12 +347,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no))) {
@@ -365,12 +365,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no))) {
@@ -387,14 +387,23 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_npn_no) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__3__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       104);
+                                                       107);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       107);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no))))))) {
+        VL_WRITEF("Falha: npn_no_pulses_clear2\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 107, "");
+    }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_npn_nc = 1U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__4__max_cycles = 0x10U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__4__expect_active = 1U;
@@ -406,12 +415,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc))) {
@@ -424,12 +433,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc))) {
@@ -446,14 +455,23 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_npn_nc) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__4__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       109);
+                                                       112);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       112);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc))))))) {
+        VL_WRITEF("Falha: npn_nc_pulses_clear\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 112, "");
+    }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_npn_nc = 0U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__5__max_cycles = 0x10U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__5__expect_active = 0U;
@@ -465,12 +483,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc))) {
@@ -483,12 +501,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc))) {
@@ -505,14 +523,23 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_npn_nc) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__5__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       112);
+                                                       115);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       115);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc))))))) {
+        VL_WRITEF("Falha: npn_nc_pulses_clear2\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 115, "");
+    }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_pnp_nc = 0U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__6__max_cycles = 0x10U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__6__expect_active = 1U;
@@ -524,12 +551,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc))) {
@@ -542,12 +569,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc))) {
@@ -564,14 +591,23 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_pnp_nc) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__6__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       117);
+                                                       120);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       120);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc))))))) {
+        VL_WRITEF("Falha: pnp_nc_pulses_clear\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 120, "");
+    }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_pnp_nc = 1U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__7__max_cycles = 0x10U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__7__expect_active = 0U;
@@ -583,12 +619,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc))) {
@@ -601,12 +637,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc))) {
@@ -623,87 +659,96 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_pnp_nc) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__7__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       120);
+                                                       123);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       123);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc))))))) {
+        VL_WRITEF("Falha: pnp_nc_pulses_clear2\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 123, "");
+    }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_db = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       124);
+                                                       127);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_db = 0U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       126);
+                                                       129);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     if (VL_UNLIKELY((1U & (~ (((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_db)) 
                                & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db))) 
                               & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db))))))) {
         VL_WRITEF("Falha: debounce_glitch_ignored\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 127, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 130, "");
     }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_db = 1U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__8__max_cycles = 0x32U;
@@ -716,12 +761,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db))) {
@@ -734,12 +779,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db))) {
@@ -756,22 +801,22 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_db) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__8__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       132);
+                                                       135);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     co_await vlSelf->__VdlySched.delay(0U, nullptr, 
                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                       132);
+                                       135);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db)) 
                               & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db))))))) {
         VL_WRITEF("Falha: debounce_pulses_clear\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 132, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 135, "");
     }
     vlSelf->lj12a3_proximity_driver_tb__DOT__s_db = 0U;
     __Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__9__max_cycles = 0x32U;
@@ -784,12 +829,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                nullptr, 
                                                                "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                               66);
+                                                               69);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             co_await vlSelf->__VdlySched.delay(0U, 
                                                nullptr, 
                                                "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                               68);
+                                               71);
             vlSelf->__Vm_traceActivity[2U] = 1U;
             if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db) 
                  | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db))) {
@@ -802,12 +847,12 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
                                                                        nullptr, 
                                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                                       73);
+                                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     co_await vlSelf->__VdlySched.delay(0U, 
                                                        nullptr, 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       73);
+                                                       76);
                     vlSelf->__Vm_traceActivity[2U] = 1U;
                     if (((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db) 
                          | (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db))) {
@@ -824,16 +869,25 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
     if (VL_UNLIKELY(((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__act_db) 
                      != (IData)(__Vtask_lj12a3_proximity_driver_tb__DOT__wait_active_with_pulse__9__expect_active)))) {
         VL_WRITEF("Falha: wait_active_target\n");
-        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 79, "");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 82, "");
     }
     co_await vlSelf->__VtrigSched_h7e5b5a5e__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge lj12a3_proximity_driver_tb.clk)", 
                                                        "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                                       137);
+                                                       140);
     vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VdlySched.delay(0U, nullptr, 
+                                       "tb/tests/lj12a3_proximity_driver_tb.sv", 
+                                       140);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    if (VL_UNLIKELY((1U & (~ ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db)) 
+                              & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db))))))) {
+        VL_WRITEF("Falha: debounce_pulses_clear2\n");
+        VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 140, "");
+    }
     VL_WRITEF("Sucesso: lj12a3_proximity_driver_tb\n");
-    VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 140, "");
+    VL_FINISH_MT("tb/tests/lj12a3_proximity_driver_tb.sv", 143, "");
     vlSelf->__Vm_traceActivity[2U] = 1U;
 }
 
@@ -846,7 +900,7 @@ VL_INLINE_OPT VlCoroutine Vlj12a3_proximity_driver_tb___024root___eval_initial__
         co_await vlSelf->__VdlySched.delay(0x1388ULL, 
                                            nullptr, 
                                            "tb/tests/lj12a3_proximity_driver_tb.sv", 
-                                           16);
+                                           19);
         vlSelf->lj12a3_proximity_driver_tb__DOT__clk 
             = (1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__clk)));
     }
@@ -890,66 +944,41 @@ VL_INLINE_OPT void Vlj12a3_proximity_driver_tb___024root___nba_sequent__TOP__0(V
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db 
             = ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state)) 
                & (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_active));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_q 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_active;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc 
             = (1U & ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync)) 
                      & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active))));
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc 
             = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync) 
                & (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_q 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc 
             = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync) 
                & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active)));
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc 
             = ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync)) 
                & (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_q 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no 
             = (1U & ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync)) 
                      & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active))));
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no 
             = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync) 
                & (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_q 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no 
             = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync) 
                & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active)));
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no 
             = ((~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync)) 
                & (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_q 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_active 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active 
-            = (1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync)));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active 
-            = (1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync)));
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active 
-            = vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync;
     } else {
         __Vdly__lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__cnt = 0U;
         __Vdly__lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state = 0U;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_q = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_db = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_db = 0U;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_q = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_nc = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_nc = 0U;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_q = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_nc = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_nc = 0U;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_q = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_npn_no = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_npn_no = 0U;
-        vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_q = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ap_pnp_no = 0U;
         vlSelf->lj12a3_proximity_driver_tb__DOT__ip_pnp_no = 0U;
     }
@@ -973,6 +1002,21 @@ VL_INLINE_OPT void Vlj12a3_proximity_driver_tb___024root___nba_sequent__TOP__0(V
     vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__in_sync 
         = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
            && (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__in_meta));
+    vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__debounced_active 
+        = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
+           && (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state));
+    vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__debounced_active 
+        = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
+           && (1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_nc__DOT__in_sync))));
+    vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__debounced_active 
+        = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
+           && (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_nc__DOT__in_sync));
+    vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__debounced_active 
+        = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
+           && (1U & (~ (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_npn_no__DOT__in_sync))));
+    vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__debounced_active 
+        = ((IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__rst_n) 
+           && (IData)(vlSelf->lj12a3_proximity_driver_tb__DOT__u_pnp_no__DOT__in_sync));
     vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state 
         = __Vdly__lj12a3_proximity_driver_tb__DOT__u_db__DOT__g_with_debounce__DOT__stable_state;
     vlSelf->lj12a3_proximity_driver_tb__DOT__u_db__DOT__in_meta 
