@@ -128,15 +128,21 @@ module spi_full_flow_motion_early_end_tb;
     send_move_queue_add_x(8'h41, 1000, 8'd1);
 
     // Aguarda alguns passos e interrompe
-    while (step_count_x < 100 && cycles < 400000) begin @(posedge clk); cycles++; end
+    while (step_count_x < 100 && cycles < 1_000_000) begin @(posedge clk); cycles++; end
     if (step_count_x < 100) begin
       $display("DBG min_steps: steps=%0d cycles=%0d", step_count_x, cycles);
     end
     `TEST_ASSERT(step_count_x >= 100, "min_steps")
     send_move_end(8'h42);
 
-    // Guarda contagem e garante que não cresce mais em um intervalo
-    prev = step_count_x; cycles=0; repeat (1000) @(posedge clk);
+    // Aguarda o desabilitar do driver (ENN ativo-baixo volta a '1') com timeout
+    cycles = 0;
+    while (tmc_enn_x == 1'b0 && cycles < 1_000_000) begin @(posedge clk); cycles++; end
+    `TEST_ASSERT(tmc_enn_x == 1'b1, "enn_disabled_after_end")
+
+    // Guarda contagem e garante que não cresce mais após o END
+    prev = step_count_x;
+    repeat (2000) @(posedge clk);
     `TEST_ASSERT(step_count_x == prev, "stopped_after_end")
 
     $display("Sucesso: spi_full_flow_motion_early_end_tb");

@@ -1,0 +1,163 @@
+`timescale 1ns/1ps
+`include "lib/test_macros.svh"
+
+module spi_full_flow_tick_count_tb;
+  // Verifica que o tick_gen gera exatamente a quantidade de ticks
+  // necessária para completar um movimento N em X, via fluxo completo SPI.
+
+  import spi_service_pkg::*;
+  import protocol_constants_pkg::*;
+  import start_move_request_pkg::*;
+  import move_queue_add_request_pkg::*;
+  import move_queue_status_request_pkg::*;
+
+  // Clock/reset
+  logic clk = 0; logic rst_n = 0; always #5 clk = ~clk; // 100 MHz
+
+  // RX path
+  spi_fifo_if rx_fifo();
+  logic rd_en; logic [2:0] raddr; spi_service_pkg::byte_t rdata; logic irq;
+  logic spi_byte_valid; spi_service_pkg::byte_t spi_byte; logic overflow_error; logic slave_busy;
+  logic frame_valid, frame_error; spi_service_pkg::byte_t out_msgType;
+  start_move_request_pkg::start_move_req_bytes_t start_move_frame;
+  move_queue_add_request_pkg::move_queue_add_req_bytes_t queue_add_frame;
+  move_queue_status_request_pkg::move_queue_status_bytes_t queue_status_frame;
+
+  // Motion
+  logic [31:0] enc_pos; logic signed [31:0] enc_vel; logic prox_in, estop_in;
+  logic tmc_step_x, tmc_dir_x, tmc_enn_x;
+  logic tmc_step_y, tmc_dir_y, tmc_enn_y;
+  logic tmc_step_z, tmc_dir_z, tmc_enn_z;
+
+  // TX path (stream -> fifo -> bytes)
+  spi_fifo_if #(.DEPTH(TX_FIFO_DEPTH), .DROP_OLD_ON_FULL(1)) tx_fifo();
+  logic tx_busy; resp_stream_if motion_stream(); resp_stream_if streams[1]();
+  logic wr_en; logic [2:0] waddr; logic [7:0] wdata;
+
+  // DUTs
+  spi_rx_slave_service u_rxbridge(
+    .clk(clk), .rst_n(rst_n), .rd_en(rd_en), .raddr(raddr), .rdata(rdata), .irq(irq),
+    .spi_byte_valid(spi_byte_valid), .spi_byte(spi_byte)
+  );
+  spi_rx_mosi_service u_cap(
+    .clk(clk), .rst_n(rst_n), .spi_byte_valid(spi_byte_valid), .spi_byte(spi_byte),
+    .fifo(rx_fifo), .overflow_error(overflow_error), .slave_busy(slave_busy)
+  );
+  spi_rx_hub_service u_cons(
+    .clk(clk), .rst_n(rst_n), .fifo(rx_fifo),
+    .frame_valid(frame_valid), .frame_error(frame_error), .out_msgType(out_msgType),
+    .move_home_frame(), .start_move_frame(start_move_frame), .move_probe_frame(),
+    .queue_add_frame(queue_add_frame), .move_end_frame(), .queue_status_frame(queue_status_frame),
+    .fpga_status_frame(), .led_ctrl_frame()
+  );
+  motion_service u_motion(
+    .clk(clk), .rst_n(rst_n), .frame_valid(frame_valid), .msgType(out_msgType),
+    .start_move_frame(start_move_frame), .queue_add_frame(queue_add_frame),
+    .move_end_frame('0), .move_home_frame('0), .probe_frame('0), .queue_status_frame(queue_status_frame),
+    .enc_position(enc_pos), .enc_velocity(enc_vel), .i_prox_in(prox_in), .i_estop_in(estop_in),
+    .tmc_step_x(tmc_step_x), .tmc_dir_x(tmc_dir_x), .tmc_enn_x(tmc_enn_x),
+    .tmc_step_y(tmc_step_y), .tmc_dir_y(tmc_dir_y), .tmc_enn_y(tmc_enn_y),
+    .tmc_step_z(tmc_step_z), .tmc_dir_z(tmc_dir_z), .tmc_enn_z(tmc_enn_z),
+    .tx_stream(motion_stream)
+  );
+  assign streams[0].valid = motion_stream.valid;
+  assign streams[0].bits  = motion_stream.bits;
+  assign streams[0].len   = motion_stream.len;
+  assign motion_stream.ready = streams[0].ready;
+  spi_tx_hub_service #(.NUM_STREAMS(1)) u_tx(
+    .clk(clk), .rst_n(rst_n), .streams(streams), .tx_fifo(tx_fifo), .tx_busy(tx_busy)
+  );
+  spi_tx_miso_service #(.WAIT_CYCLES(2)) u_miso(
+    .clk(clk), .rst_n(rst_n), .tx_fifo(tx_fifo), .wr_en(wr_en), .waddr(waddr), .wdata(wdata)
+  );
+
+  // Master wrapper
+  spi_service_pkg::byte_t inq[$];
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      irq   <= 1'b0;
+      rdata <= '0;
+    end else begin
+      irq <= (inq.size() != 0);
+      if (rd_en && inq.size() != 0)
+        rdata <= inq.pop_front();
+    end
+  end
+
+  // Helpers
+  task automatic send_start_move(spi_service_pkg::byte_t frameId);
+    start_move_request_pkg::start_move_req_bytes_t req; logic [31:0] raw;
+    req = start_move_request_pkg::make_default(); req.frameId = frameId; raw = start_move_request_pkg::encoder(req);
+    for (int i=0;i<4;i++) begin do @(posedge clk); while (slave_busy); inq.push_back(raw[31 - i*8 -: 8]); end
+  endtask
+  task automatic send_move_queue_add_x(spi_service_pkg::byte_t frameId, int sx, spi_service_pkg::byte_t v);
+    move_queue_add_request_pkg::move_queue_add_req_bytes_t req; logic [move_queue_add_request_pkg::FRAME_BITS-1:0] raw;
+    req = move_queue_add_request_pkg::make_default();
+    req.frameId=frameId; req.dirMask=8'b0000_0001; req.sx=sx; req.sy=0; req.sz=0;
+    req.vx=v; req.vy=0; req.vz=0; req.kp_x=0; req.ki_x=0; req.kd_x=0; req.kp_y=0; req.ki_y=0; req.kd_y=0; req.kp_z=0; req.ki_z=0; req.kd_z=0;
+    req = move_queue_add_request_pkg::set_parity(req); raw = move_queue_add_request_pkg::encoder(req);
+    for (int i=0;i<(move_queue_add_request_pkg::FRAME_BITS/8);i++) begin do @(posedge clk); while (slave_busy); inq.push_back(raw[move_queue_add_request_pkg::FRAME_BITS-1 - i*8 -: 8]); end
+  endtask
+
+  // Contadores de passos e ticks
+  int step_count_x; logic prev_x;
+  int tick_count_while_busy;
+  logic prev_busy_x;
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      prev_x <= 1'b0; step_count_x <= 0;
+      prev_busy_x <= 1'b0; tick_count_while_busy <= 0;
+    end else begin
+      prev_x <= tmc_step_x;
+      if (tmc_step_x && !prev_x) step_count_x <= step_count_x + 1;
+      // Conta ticks apenas enquanto o driver X estiver ocupado
+      prev_busy_x <= u_motion.busy_x;
+      if (u_motion.busy_x && u_motion.tick)
+        tick_count_while_busy <= tick_count_while_busy + 1;
+    end
+  end
+
+  // Sequência do teste
+  initial begin
+    int N;            // passos
+    int cycles;
+    int expected_ticks;
+    int steps_after;
+    int ticks_after;
+    N = 12;
+    inq={}; enc_pos=0; enc_vel=0; prox_in=1; estop_in=1;
+    repeat (4) @(posedge clk); rst_n=1;
+
+    send_start_move(8'h50);
+    send_move_queue_add_x(8'h51, N, 8'd1); // 1.0 step/tick
+
+    // Espera driver ficar ocupado e completar N passos (timeout razoável)
+    cycles = 0;
+    while (!u_motion.busy_x && cycles < 2000000) begin @(posedge clk); cycles++; end
+    `TEST_ASSERT(u_motion.busy_x, "driver_busy_start")
+
+    cycles = 0;
+    while ((step_count_x < N || u_motion.busy_x) && cycles < 100000000) begin @(posedge clk); cycles++; end
+    // Deve completar exatamente N passos
+    `TEST_ASSERT(step_count_x == N, "steps_exact")
+    `TEST_ASSERT(!u_motion.busy_x,   "driver_idle_end")
+
+    // Para SYNC_MODE com i_pulse_ticks=4 e rate=1.0, o driver fica busy
+    // por (i_pulse_ticks + 1) ticks por passo (um tick para engajar o pulso
+    // e 4 ticks de largura): total = N*5
+    expected_ticks = N*5;
+    `TEST_ASSERT(tick_count_while_busy == expected_ticks, "tick_count_matches")
+
+    // Soak: garante que não surgem passos/ticks a mais após terminar (N=12)
+    steps_after = step_count_x;
+    ticks_after = tick_count_while_busy;
+    // Espera prolongada (10k ciclos de clk)
+    repeat (10000) @(posedge clk);
+    `TEST_ASSERT(step_count_x == steps_after, "no_steps_after_idle")
+    `TEST_ASSERT(tick_count_while_busy == ticks_after, "no_busy_ticks_after_idle")
+
+    $display("Sucesso: spi_full_flow_tick_count_tb (ticks=%0d exp=%0d steps=%0d)",
+             tick_count_while_busy, expected_ticks, step_count_x);
+    $finish;
+  end
+endmodule

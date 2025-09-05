@@ -16,7 +16,7 @@ module request_router_tb;
   initial begin
     router_ctx_t ctx;
     logic frame_valid, frame_error;
-    byte_t mtype;
+    protocol_constants_pkg::byte_t mtype;
     start_move_req_bytes_t    start_move_out;
     move_end_req_bytes_t      move_end_out;
     move_home_req_bytes_t     move_home_out;
@@ -33,7 +33,7 @@ module request_router_tb;
     move_queue_status_bytes_t    qs_in;
     request_fpga_status_bytes_t  fs_in;
     led_ctrl_req_bytes_t         lc_in;
-    byte_t b;
+    protocol_constants_pkg::byte_t b;
     logic [335:0] raw; // tamanho máximo (queue_add)
 
     // --- START_MOVE sucesso ---

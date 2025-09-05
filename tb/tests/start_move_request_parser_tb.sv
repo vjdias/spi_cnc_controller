@@ -13,7 +13,7 @@ module start_move_request_parser_tb;
     logic frame_valid;
     logic frame_error;
     logic [31:0] raw;
-    byte_t b;
+    protocol_constants_pkg::byte_t b;
 
     // Frame válido
     in = make_default();

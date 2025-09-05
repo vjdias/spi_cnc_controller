@@ -1,0 +1,121 @@
+# vsim -L simlib spi_full_flow_led_basic_tb 
+# Start time: 01:55:12 on Sep 05,2025
+# Loading sv_std.std
+# Loading work.protocol_constants_pkg
+# Loading work.led_control_response_pkg
+# Loading work.led_control_request_pkg
+# Loading work.move_probe_level_response_pkg
+# Loading work.move_queue_add_request_pkg
+# Loading work.spi_service_pkg
+# Loading work.spi_full_flow_led_basic_tb
+# Loading work.spi_fifo_if
+# Loading work.resp_stream_if
+# Loading work.spi_rx_slave_service
+# Loading work.spi_rx_mosi_service
+# Loading work.led_control_req_parser_pkg
+# Loading work.fpga_status_request_pkg
+# Loading work.fpga_status_req_parser_pkg
+# Loading work.move_queue_status_request_pkg
+# Loading work.move_queue_status_req_parser_pkg
+# Loading work.move_end_request_pkg
+# Loading work.move_end_req_parser_pkg
+# Loading work.move_queue_add_req_parser_pkg
+# Loading work.move_probe_level_request_pkg
+# Loading work.move_probe_level_req_parser_pkg
+# Loading work.start_move_request_pkg
+# Loading work.start_move_req_parser_pkg
+# Loading work.move_home_request_pkg
+# Loading work.move_home_req_parser_pkg
+# Loading work.request_router_pkg
+# Loading work.spi_rx_hub_service
+# Loading work.led_service
+# Loading work.spi_tx_hub_service
+# Loading work.spi_tx_miso_service
+do tb/tests/modelsim/waves_led_full_flow.do
+# Cannot open macro file: tb/tests/modelsim/waves_led_full_flow.do
+do tb/modelsim/waves_led_full_flow.do
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/clk'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 5
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/rst_n'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 6
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/irq'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 9
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/rd_en'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 10
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/raddr'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 11
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/rdata'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 12
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/spi_byte_valid'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 13
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/spi_byte'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 14
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/slave_busy'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 15
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/rx_fifo/count'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 16
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/u_cons/frame_valid'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 19
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/u_cons/frame_error'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 20
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/u_cons/out_msgType'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 21
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/leds'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 24
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/resp_valid'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 25
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/resp_frame'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 26
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/resp_frame.frameIdEcho'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 27
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/resp_frame.ledMask'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 28
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/resp_frame.status'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 29
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/tx_fifo/count'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 32
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/wr_en'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 33
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/waddr'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 34
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/wdata'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 35
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/cycle_ctr'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 38
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/busy_rise_count'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 39
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/busy_cycle_count'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 40
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/max_rx_occupancy'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 41
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/max_tx_occupancy'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 42
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/tx_pause_cycles'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 43
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/messages_sent'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 44
+# ** UI-Msg: (vish-4014) No objects found matching '/spi_full_flow_led_20_tb/messages_received'.
+# Executing ONERROR command at macro ./tb/modelsim/waves_led_full_flow.do line 45
+# Sucesso: spi_full_flow_led_basic_tb (10 mudanÃ§as)
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv(138)
+#    Time: 4215 ns  Iteration: 1  Instance: /spi_full_flow_led_basic_tb
+# 1
+# Break in Module spi_full_flow_led_basic_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv line 138
+do tb/modelsim/waves_led_basic.do
+# Break key hit
+# Break in Module spi_full_flow_led_basic_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv line 65
+restart -f
+restart -f
+
+restart -f
+do tb/modelsim/waves_led_basic.do
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# Sucesso: spi_full_flow_led_basic_tb (10 mudanÃ§as)
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv(138)
+#    Time: 4215 ns  Iteration: 1  Instance: /spi_full_flow_led_basic_tb
+# 1
+# Break in Module spi_full_flow_led_basic_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv line 138
+# End time: 02:04:12 on Sep 05,2025, Elapsed time: 0:09:00
+# Errors: 0, Warnings: 0

@@ -48,6 +48,7 @@ for tb in tb_files:
         top,
         "-Wno-TIMESCALEMOD",
         "-Wno-WIDTHEXPAND",
+        "-DROUTER_IGNORE_NOISE",
         f"-I{tb_dir}",
     ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 

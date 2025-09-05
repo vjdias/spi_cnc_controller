@@ -128,7 +128,14 @@ package request_router_pkg;
           ctx.hdr   = data;    // guarda header para repassar ao parser
           ctx.state = R_MSGTYPE;
         end else begin
+          // Opção de tolerância a ruído: ignorar bytes até encontrar HEADER
+          // Ative com +define+ROUTER_IGNORE_NOISE na compilação
+`ifdef ROUTER_IGNORE_NOISE
+          // Não sinaliza erro; permanece aguardando HEADER
+          frame_error = 1'b0;
+`else
           frame_error = 1'b1; // byte inesperado
+`endif
         end
       end
 

@@ -10,7 +10,7 @@ z2
 cModel Technology
 Z0 dC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller
 vALU
-Z1 !s110 1757013462
+Z1 !s110 1757048066
 !i10b 1
 !s100 0gPecL;gCUBVdF6jBkzNC0
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -26,7 +26,7 @@ Z7 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z8 !s108 1757013461.000000
+Z8 !s108 1757048066.000000
 !s107 C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v|
 Z9 !s90 -work|simlib|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v|
 !i113 1
@@ -1954,7 +1954,7 @@ R10
 R11
 n@m@u@x2
 Umux2
-!s110 1757013461
+R1
 !i10b 1
 !s100 CTWcWd:cO88<1LCE:mSlm2
 R2

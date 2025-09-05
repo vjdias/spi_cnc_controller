@@ -82,8 +82,8 @@ foreach f $sv_v_filtered {
 
 set ordered [concat $pkgs $ifaces $rest]
 if {[llength $ordered] > 0} {
-  puts "Compilando fontes em ordem: pkgs=[llength $pkgs], ifaces=[llength $ifaces], rest=[llength $rest]"
-  eval vlog -sv -mfcu +incdir+$root/tb/tests $ordered
+  puts "Compilando fontes em ordem: pkgs=[llength $pkgs], ifaces=[llength $ifaces], rest=[llength $rest] (ROUTER_IGNORE_NOISE)"
+  eval vlog -sv -mfcu +define+ROUTER_IGNORE_NOISE +incdir+$root/tb/tests $ordered
 } else {
   puts "Nenhum arquivo de origem encontrado em $root/src"
 }

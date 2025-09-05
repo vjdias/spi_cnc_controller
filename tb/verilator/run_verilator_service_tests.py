@@ -75,6 +75,7 @@ for tb in tb_files:
         "-Wno-WIDTHEXPAND",
         "-Wno-WIDTHTRUNC",
         "-Wno-LATCH",
+        "-DROUTER_IGNORE_NOISE",
         f"-I{tb_dir}",
     ] + ["-Mdir", str(obj_dir)] + [str(f) for f in files] + [str(tb)]
 

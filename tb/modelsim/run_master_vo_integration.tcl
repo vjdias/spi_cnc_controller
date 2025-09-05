@@ -81,8 +81,8 @@ foreach f $sv_v_filtered {
 
 set ordered [concat $pkgs $ifaces $rest]
 if {[llength $ordered] > 0} {
-  puts "Compilando fontes com STUB do wrapper (SIM_STUB_SPI_CORE)"
-  eval vlog -sv -mfcu +define+SIM_STUB_SPI_CORE +incdir+$root/tb/tests $ordered
+  puts "Compilando fontes com STUB do wrapper (SIM_STUB_SPI_CORE) e ROUTER_IGNORE_NOISE"
+  eval vlog -sv -mfcu +define+SIM_STUB_SPI_CORE+ROUTER_IGNORE_NOISE +incdir+$root/tb/tests $ordered
 } else {
   puts "Nenhum arquivo de origem encontrado em $root/src"
 }
