@@ -1,0 +1,4 @@
+Vspi_full_flow_tick_count_tb_spi_fifo_if__DepSet_h89338b03__0.o: \
+ Vspi_full_flow_tick_count_tb_spi_fifo_if__DepSet_h89338b03__0.cpp \
+ Vspi_full_flow_tick_count_tb__pch.h \
+ Vspi_full_flow_tick_count_tb_spi_fifo_if.h

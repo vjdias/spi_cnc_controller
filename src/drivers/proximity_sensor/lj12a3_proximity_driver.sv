@@ -51,17 +51,17 @@ module lj12a3_proximity_driver #(
   //      - PNP NO: ativo quando in_sync == 1
   //      - NPN NC: ativo quando in_sync == 1
   //      - PNP NC: ativo quando in_sync == 0
-  wire raw_active = IS_NORMALLY_OPEN ? (IS_PNP ? in_sync : ~in_sync)
-                                     : (IS_PNP ? ~in_sync : in_sync);
+  // Modo simplificado: mapeia diretamente a entrada (sem sincronizador)
+  wire raw_active = IS_NORMALLY_OPEN ? (IS_PNP ? i_sensor_in : ~i_sensor_in)
+                                     : (IS_PNP ? ~i_sensor_in : i_sensor_in);
 
   // 3) Debounce opcional
-  logic debounced_active;
+  logic debounced_active; // estado estável atual (registrado)
+  logic debounced_next;   // próximo estado estável (com debounce aplicado)
   generate
     if (DEBOUNCE_CYCLES == 0) begin : g_no_debounce
-      always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) debounced_active <= 1'b0;
-        else        debounced_active <= raw_active;
-      end
+      // Sem debounce: próximo estado segue o raw_active
+      assign debounced_next = raw_active;
     end else begin : g_with_debounce
       localparam int unsigned CNTW = (DEBOUNCE_CYCLES <= 1) ? 1 : $clog2(DEBOUNCE_CYCLES);
       logic [CNTW-1:0] cnt;
@@ -86,28 +86,29 @@ module lj12a3_proximity_driver #(
         end
       end
 
-      always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) debounced_active <= 1'b0;
-        else        debounced_active <= stable_state;
-      end
+      // Com debounce: próximo estado vem do estado estável filtrado
+      assign debounced_next = stable_state;
     end
   endgenerate
 
-  // 4) Saídas e pulsos de borda
+  // 4) Saídas e pulsos de borda (registrados para 1 ciclo)
   logic debounced_q;
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      debounced_q <= 1'b0;
-      o_active    <= 1'b0;
+      debounced_q       <= 1'b0;
+      o_active          <= 1'b0;
+      o_active_pulse    <= 1'b0;
+      o_inactive_pulse  <= 1'b0;
     end else begin
-      debounced_q <= debounced_active;
-      o_active    <= debounced_active;
+      // Pulsos calculados a partir do próximo valor estável vs. valor atual
+      o_active_pulse    <= ( debounced_next & ~debounced_active);
+      o_inactive_pulse  <= (~debounced_next &  debounced_active);
+      // Avança estado estável e memória do anterior
+      o_active          <= debounced_next;
+      debounced_q       <= debounced_active; // mantém histórico de 1 ciclo
+      debounced_active  <= debounced_next;
     end
   end
 
-  assign o_active_pulse   = ( debounced_active & ~debounced_q);
-  assign o_inactive_pulse = (~debounced_active &  debounced_q);
-
 endmodule
 `endif
-
