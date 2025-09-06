@@ -27,13 +27,38 @@ module top (
     output wire [5:0]  leds,
 
     // -------------------------
-    // Pinos do encoder incremental (ABZ)
+    // Pinos do encoder incremental (ABZ) — eixo X (mantém compatibilidade)
     // -------------------------
     input  wire        i_enc_a,
     input  wire        i_enc_b,
     input  wire        i_enc_z,
-    // Exposição da posição (32 bits) para debug/integração
-    output wire [31:0] o_enc_position
+    // Eixo Y
+    input  wire        i_enc_a_y,
+    input  wire        i_enc_b_y,
+    input  wire        i_enc_z_y,
+    // Eixo Z
+    input  wire        i_enc_a_z,
+    input  wire        i_enc_b_z,
+    input  wire        i_enc_z_z,
+    // Exposição das posições (32 bits) para debug/integração
+    output wire [31:0] o_enc_position,
+    output wire [31:0] o_enc_position_y,
+    output wire [31:0] o_enc_position_z,
+
+    // Sensores (globais por enquanto)
+    input  wire        i_prox_in,
+    input  wire        i_estop_in,
+
+    // Saídas para drivers TMC5160 (X/Y/Z)
+    output wire        tmc_step_x,
+    output wire        tmc_dir_x,
+    output wire        tmc_enn_x,
+    output wire        tmc_step_y,
+    output wire        tmc_dir_y,
+    output wire        tmc_enn_y,
+    output wire        tmc_step_z,
+    output wire        tmc_dir_z,
+    output wire        tmc_enn_z
 );
 
     // -------------------------
@@ -142,6 +167,12 @@ module top (
     wire                        frame_valid;
     wire                        frame_error;
     spi_service_pkg::byte_t     out_msgType;
+    // Frames para motion
+    start_move_request_pkg::start_move_req_bytes_t        start_move_frame_w;
+    move_queue_add_request_pkg::move_queue_add_req_bytes_t queue_add_frame_w;
+    move_end_request_pkg::move_end_req_bytes_t             move_end_frame_w;
+    move_home_request_pkg::move_home_req_bytes_t           move_home_frame_w;
+    move_queue_status_request_pkg::move_queue_status_bytes_t queue_status_frame_w;
     led_control_request_pkg::led_ctrl_req_bytes_t led_req;
 
     spi_rx_hub_service u_rx_hub_synth (
@@ -154,12 +185,12 @@ module top (
       .frame_valid     (frame_valid),
       .frame_error     (frame_error),
       .out_msgType     (out_msgType),
-      .move_home_frame (),
-      .start_move_frame(),
+      .move_home_frame (move_home_frame_w),
+      .start_move_frame(start_move_frame_w),
       .move_probe_frame(),
-      .queue_add_frame (),
-      .move_end_frame  (),
-      .queue_status_frame(),
+      .queue_add_frame (queue_add_frame_w),
+      .move_end_frame  (move_end_frame_w),
+      .queue_status_frame(queue_status_frame_w),
       .fpga_status_frame (),
       .led_ctrl_frame  (led_req)
     );
@@ -185,8 +216,9 @@ module top (
 
 
     // -------------------------
-    // Encoder incremental (TMCS-28) — posição exposta
+    // Encoders incrementais (TMCS-28) — posições expostas
     // -------------------------
+    // Eixo X (mantém nomes antigos para compatibilidade do .cst)
     logic [31:0]        enc_position;
     logic               enc_step_pulse;
     logic               enc_dir;
@@ -218,7 +250,103 @@ module top (
       .o_vel_valid   (enc_vel_valid)
     );
 
-    assign o_enc_position = enc_position;
+    // Eixo Y
+    logic [31:0]        enc_position_y;
+    logic               enc_step_pulse_y;
+    logic               enc_dir_y;
+    logic               enc_z_pulse_y;
+    logic               enc_illegal_y;
+    logic signed [31:0] enc_velocity_y;
+    logic               enc_vel_valid_y;
+
+    quad_encoder_tmcs28_driver #(
+      .POS_WIDTH(32),
+      .FILTER_CYCLES(0),
+      .RESET_ON_INDEX(1'b1),
+      .INDEX_OFFSET(0),
+      .MODULO(0),
+      .VEL_WINDOW_CYCLES(0),
+      .COUNT_MODE(4)
+    ) u_quad_enc_y (
+      .clk           (i_clk),
+      .rst_n         (i_resetn),
+      .i_enc_a       (i_enc_a_y),
+      .i_enc_b       (i_enc_b_y),
+      .i_enc_z       (i_enc_z_y),
+      .o_position    (enc_position_y),
+      .o_step_pulse  (enc_step_pulse_y),
+      .o_dir         (enc_dir_y),
+      .o_index_pulse (enc_z_pulse_y),
+      .o_illegal_pulse(enc_illegal_y),
+      .o_velocity    (enc_velocity_y),
+      .o_vel_valid   (enc_vel_valid_y)
+    );
+
+    // Eixo Z
+    logic [31:0]        enc_position_z;
+    logic               enc_step_pulse_z;
+    logic               enc_dir_z;
+    logic               enc_z_pulse_z;
+    logic               enc_illegal_z;
+    logic signed [31:0] enc_velocity_z;
+    logic               enc_vel_valid_z;
+
+    quad_encoder_tmcs28_driver #(
+      .POS_WIDTH(32),
+      .FILTER_CYCLES(0),
+      .RESET_ON_INDEX(1'b1),
+      .INDEX_OFFSET(0),
+      .MODULO(0),
+      .VEL_WINDOW_CYCLES(0),
+      .COUNT_MODE(4)
+    ) u_quad_enc_z (
+      .clk           (i_clk),
+      .rst_n         (i_resetn),
+      .i_enc_a       (i_enc_a_z),
+      .i_enc_b       (i_enc_b_z),
+      .i_enc_z       (i_enc_z_z),
+      .o_position    (enc_position_z),
+      .o_step_pulse  (enc_step_pulse_z),
+      .o_dir         (enc_dir_z),
+      .o_index_pulse (enc_z_pulse_z),
+      .o_illegal_pulse(enc_illegal_z),
+      .o_velocity    (enc_velocity_z),
+      .o_vel_valid   (enc_vel_valid_z)
+    );
+
+    assign o_enc_position   = enc_position;
+    assign o_enc_position_y = enc_position_y;
+    assign o_enc_position_z = enc_position_z;
+
+    // -------------------------
+    // Motion service (orquestra 3 eixos)
+    // -------------------------
+    motion_service u_motion (
+      .clk                 (i_clk),
+      .rst_n               (i_resetn),
+      .frame_valid         (frame_valid),
+      .msgType             (out_msgType),
+      .start_move_frame    (start_move_frame_w),
+      .queue_add_frame     (queue_add_frame_w),
+      .move_end_frame      (move_end_frame_w),
+      .move_home_frame     (move_home_frame_w),
+      .probe_frame         ('0),
+      .queue_status_frame  (queue_status_frame_w),
+      .enc_position        (enc_position),   // provisório: usa X para todos
+      .enc_velocity        (32'sd0),
+      .i_prox_in           (i_prox_in),
+      .i_estop_in          (i_estop_in),
+      .tmc_step_x          (tmc_step_x),
+      .tmc_dir_x           (tmc_dir_x),
+      .tmc_enn_x           (tmc_enn_x),
+      .tmc_step_y          (tmc_step_y),
+      .tmc_dir_y           (tmc_dir_y),
+      .tmc_enn_y           (tmc_enn_y),
+      .tmc_step_z          (tmc_step_z),
+      .tmc_dir_z           (tmc_dir_z),
+      .tmc_enn_z           (tmc_enn_z),
+      .tx_stream           ()                 // não roteado ao TX HUB neste top
+    );
 
 
 endmodule

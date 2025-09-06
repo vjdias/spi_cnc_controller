@@ -21,7 +21,7 @@ IO_LOC  "pi_mosi"    F14;
 IO_PORT "pi_mosi"    IO_TYPE=LVCMOS18 PULL_MODE=UP;
 
 IO_LOC  "pi_miso"    F16;
-IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8;
+IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8; // edge rate per default; adjust if needed
 
 // LEDs (exemplo)
 // IO_LOC  "leds[0]"  B12;
@@ -31,7 +31,7 @@ IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8;
 
 // TMC5160 (placeholders para STEP/DIR/ENN de cada eixo)
 // IO_LOC  "tmc_step_x" ???;
-// IO_PORT "tmc_step_x" IO_TYPE=LVCMOS18 DRIVE=8;
+// IO_PORT "tmc_step_x" IO_TYPE=LVCMOS18 DRIVE=8; // reduce ringing via external RC if needed
 // IO_LOC  "tmc_dir_x"  ???;
 // IO_PORT "tmc_dir_x"  IO_TYPE=LVCMOS18 DRIVE=8;
 // IO_LOC  "tmc_enn_x"  ???;
@@ -49,6 +49,10 @@ IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8;
 // IO_LOC  "tmc_enn_z"  ???;
 // IO_PORT "tmc_enn_z"  IO_TYPE=LVCMOS18 DRIVE=8;
 
+// Nota: Se seu hardware usa 3V3 direto (sem level-shifter) conectando ao Raspberry Pi e TMC5160,
+// troque IO_TYPE de LVCMOS18 para LVCMOS33 nestes pinos e garanta VCCIO do banco em 3V3.
+// Caso mantenha level-shifter para 1V8, deixe LVCMOS18.
+
 // Sensores (placeholders)
 // IO_LOC  "i_prox_sensor" ???;
 // IO_PORT "i_prox_sensor" IO_TYPE=LVCMOS18 PULL_MODE=UP;
@@ -64,3 +68,20 @@ IO_PORT "i_enc_b"    IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKC_5
 
 IO_LOC  "i_enc_z"    H3;
 IO_PORT "i_enc_z"    IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// Encoders adicionais (Y/Z) — ajuste pinos conforme seu esquemático
+// Eixo Y
+// IO_LOC  "i_enc_a_y"  ???;
+// IO_PORT "i_enc_a_y"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // idealmente pino GCLK
+// IO_LOC  "i_enc_b_y"  ???;
+// IO_PORT "i_enc_b_y"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // idealmente pino GCLK
+// IO_LOC  "i_enc_z_y"  ???;
+// IO_PORT "i_enc_z_y"  IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// Eixo Z
+// IO_LOC  "i_enc_a_z"  ???;
+// IO_PORT "i_enc_a_z"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // idealmente pino GCLK
+// IO_LOC  "i_enc_b_z"  ???;
+// IO_PORT "i_enc_b_z"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // idealmente pino GCLK
+// IO_LOC  "i_enc_z_z"  ???;
+// IO_PORT "i_enc_z_z"  IO_TYPE=LVCMOS18 PULL_MODE=UP;

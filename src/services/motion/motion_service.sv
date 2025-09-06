@@ -2,44 +2,33 @@
 // motion_service.sv
 //
 // Serviço de movimentação para os eixos X/Y/Z controlados por drivers
-// TMC5160 em modo STEP/DIR. Lê frames START_MOVE, MOVE_QUEUE_ADD e MOVE_END
-// decodificados pelo spi_rx_hub_service e controla geração de passos, além de
-// monitorar sensores de parada de emergência e de proximidade. Um START_MOVE
-// habilita o acesso às demais requisições; após um MOVE_END ou evento de
-// emergência é necessário novo START_MOVE.
-//
-// O serviço utiliza um gerador de "tick" comum (tick_gen) com divisores fixos
-// e instância três drivers tmc5160_step_dir_driver em modo síncrono. Respostas
-// dos comandos são publicadas no stream genérico de respostas.
+// TMC5160 em modo STEP/DIR. Orquestra três axis_controller (um por eixo),
+// que agregam PID + driver + sensor local de proximidade. Recebe frames
+// START_MOVE, MOVE_QUEUE_ADD, MOVE_END, MOVE_HOME e publica respostas
+// via stream genérico.
 // -----------------------------------------------------------------------------
 `ifndef MOTION_SERVICE_SV
 `define MOTION_SERVICE_SV
-// Disponível somente em simulação (ModelSim/Verilator)
-`ifdef MODEL_TECH
-`define __SIM_BUILD__
-`endif
-`ifdef VERILATOR
-`define __SIM_BUILD__
-`endif
+
 module motion_service (
     input  logic clk,
     input  logic rst_n,
-    // Frames decodificados e sinalização de validade
+    // Frames decodificados
     input  logic frame_valid,
     input  spi_service_pkg::byte_t msgType,
-    input  start_move_request_pkg::start_move_req_bytes_t start_move_frame,
-    input  move_queue_add_request_pkg::move_queue_add_req_bytes_t queue_add_frame,
-    input  move_end_request_pkg::move_end_req_bytes_t move_end_frame,
-    input  move_home_request_pkg::move_home_req_bytes_t move_home_frame,
-    input  move_probe_level_request_pkg::move_probe_level_req_bytes_t probe_frame,
-    input  move_queue_status_request_pkg::move_queue_status_bytes_t queue_status_frame,
-    // Feedback do encoder para controle futuro
+    input  var start_move_request_pkg::start_move_req_bytes_t        start_move_frame,
+    input  var move_queue_add_request_pkg::move_queue_add_req_bytes_t queue_add_frame,
+    input  var move_end_request_pkg::move_end_req_bytes_t            move_end_frame,
+    input  var move_home_request_pkg::move_home_req_bytes_t          move_home_frame,
+    input  var move_probe_level_request_pkg::move_probe_level_req_bytes_t probe_frame,
+    input  var move_queue_status_request_pkg::move_queue_status_bytes_t   queue_status_frame,
+    // Feedback (provisório: mesmos sinais para X/Y/Z)
     input  logic [31:0]        enc_position,
     input  logic signed [31:0] enc_velocity,
-    // Entradas brutas de sensores
+    // Sensores brutos
     input  logic i_prox_in,
     input  logic i_estop_in,
-    // Saídas físicas para os TMC5160 (três eixos)
+    // Saídas físicas (TMC5160)
     output logic tmc_step_x, tmc_dir_x, tmc_enn_x,
     output logic tmc_step_y, tmc_dir_y, tmc_enn_y,
     output logic tmc_step_z, tmc_dir_z, tmc_enn_z,
@@ -60,17 +49,13 @@ module motion_service (
   import move_queue_add_response_pkg::*;
   import move_end_response_pkg::*;
 
-  // Sensores -----------------------------------------------------------------
+  // Proximidade global (para simplificar; pode-se ter um por eixo futuramente)
   logic prox_active;
-`ifdef __SIM_BUILD__
-  // Em simulação, trata PROX como ativo-alto (PNP/NO) para facilitar TBs
+  // Em simulação e por padrão, trata PROX como PNP/NO (ativo-alto)
   lj12a3_proximity_driver #(
     .IS_PNP(1'b1),
     .IS_NORMALLY_OPEN(1'b1)
   ) u_prox (
-`else
-  lj12a3_proximity_driver u_prox (
-`endif
     .clk        (clk),
     .rst_n      (rst_n),
     .i_sensor_in(i_prox_in),
@@ -79,6 +64,7 @@ module motion_service (
     .o_inactive_pulse()
   );
 
+  // E-STOP
   logic estop_inhibit;
   emergency_stop_driver u_estop (
     .clk              (clk),
@@ -91,18 +77,17 @@ module motion_service (
     .o_inhibit        (estop_inhibit)
   );
 
-  // Gerador de tick compartilhado --------------------------------------------
+  // Tick compartilhado
 `ifdef __SIM_BUILD__
-  localparam logic [31:0] TICK_DIV = 32'd1;      // sim: tick todo ciclo
-  localparam logic [31:0] PID_DIV  = 32'd64;     // sim: PID mais frequente
+  localparam logic [31:0] TICK_DIV = 32'd1;
+  localparam logic [31:0] PID_DIV  = 32'd64;
 `else
-  localparam logic [31:0] TICK_DIV = 32'd1000;   // hw: valores fixos iniciais
+  localparam logic [31:0] TICK_DIV = 32'd1000;
   localparam logic [31:0] PID_DIV  = 32'd10000;
 `endif
   logic tick, pid_tick, sync_start;
   logic sync_req;
   logic tick_enable;
-
   tick_gen u_tick (
     .clk            (clk),
     .rst_n          (rst_n),
@@ -114,212 +99,116 @@ module motion_service (
     .o_pid_tick     (pid_tick),
     .o_sync_start   (sync_start)
   );
- 
-  // Drivers wiring and state (declared before use)
+
+  // Estado de movimento
+  logic move_enabled;
   logic start_x, start_y, start_z;
   logic stop_all;
-  // Parâmetros de movimento armazenados
   logic [2:0]  dir_mask;
   logic [31:0] step_x, step_y, step_z;
   logic [31:0] ff_rate_x, ff_rate_y, ff_rate_z;
-  logic [31:0] pid_rate_x, pid_rate_y, pid_rate_z;
   logic [15:0] kp_x, ki_x, kd_x;
   logic [15:0] kp_y, ki_y, kd_y;
   logic [15:0] kp_z, ki_z, kd_z;
-  logic [7:0]  pid_err_x, pid_err_y, pid_err_z;
   logic        cont_x, cont_y, cont_z;
-  logic [7:0]  current_move_id;
+  logic        busy_x, busy_y, busy_z;
+  logic [7:0]  pid_err_x, pid_err_y, pid_err_z;
+  logic        move_end_pulse;
   // Controle de homing
   logic        home_pending;
   logic [7:0]  home_frame_id;
   logic [2:0]  home_axis_mask;
-  // Pulsos de parada provenientes de MOVE_END
-  logic move_end_pulse;
-  // Busy flags dos drivers
-  logic busy_x, busy_y, busy_z;
-  // Em simulação, desabilita intertravamento por sensores, para permitir
-  // validar o pipeline sem wiring físico de sensores.
+
 `ifdef __SIM_BUILD__
   localparam bit SAFETY_ENABLE = 1'b0;
 `else
   localparam bit SAFETY_ENABLE = 1'b1;
 `endif
   assign stop_all = ((SAFETY_ENABLE ? (estop_inhibit | prox_active) : 1'b0) | move_end_pulse);
-  // Habilitação de movimento
-  logic move_enabled;
 
-  // Serviço de controle PID -----------------------------------------------
-  pid_service u_pid (
-    .clk       (clk),
-    .rst_n     (rst_n),
-    .enable    (move_enabled),
-    .pid_tick  (pid_tick),
-    .target_x  (step_x),
-    .target_y  (step_y),
-    .target_z  (step_z),
-    .ff_rate_x (ff_rate_x),
-    .ff_rate_y (ff_rate_y),
-    .ff_rate_z (ff_rate_z),
-    .kp_x      (kp_x),
-    .ki_x      (ki_x),
-    .kd_x      (kd_x),
-    .kp_y      (kp_y),
-    .ki_y      (ki_y),
-    .kd_y      (kd_y),
-    .kp_z      (kp_z),
-    .ki_z      (ki_z),
-    .kd_z      (kd_z),
-    .enc_pos_x (enc_position),
-    .enc_pos_y (enc_position),
-    .enc_pos_z (enc_position),
-    .rate_x    (pid_rate_x),
-    .rate_y    (pid_rate_y),
-    .rate_z    (pid_rate_z),
-    .pid_err_x (pid_err_x),
-    .pid_err_y (pid_err_y),
-    .pid_err_z (pid_err_z)
-  );
-
-  // Habilitação dos drivers: ignora sensores em simulação
+  // Eixos (axis_controller agrega PID + driver + prox local — usa prox global por ora)
   logic drv_enable;
   assign drv_enable = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active)
                                     :  tick_enable;
 
-  tmc5160_step_dir_driver #(.SYNC_MODE(1)) u_drv_x (
-    .clk         (clk),
-    .rst_n       (rst_n),
-    .i_enable    (drv_enable),
-    .i_dir       (dir_mask[0]),
-    .i_start     (start_x),
-    .i_stop      (stop_all),
-    .i_continuous(cont_x),
-    .i_steps     (step_x),
-    .i_period_cycles(32'd0),
-    .i_pulse_cycles (32'd0),
-    .i_tick      (tick),
-    .i_rate_inc  (pid_rate_x),
-    .i_pulse_ticks(16'd4),
-    .o_step      (tmc_step_x),
-    .o_dir       (tmc_dir_x),
-    .o_enn       (tmc_enn_x),
-    .o_busy      (busy_x),
-    .o_done_pulse()
+  axis_controller u_axis_x (
+    .clk(clk), .rst_n(rst_n),
+    .i_enable(drv_enable), .i_dir(dir_mask[0]), .i_start(start_x), .i_stop(stop_all),
+    .i_continuous(cont_x), .i_steps(step_x), .i_tick(tick), .i_pid_tick(pid_tick),
+    .i_target(step_x), .i_ff_rate(ff_rate_x), .i_kp(kp_x), .i_ki(ki_x), .i_kd(kd_x),
+    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .o_step(tmc_step_x), .o_dir(tmc_dir_x), .o_enn(tmc_enn_x), .o_busy(busy_x),
+    .o_position(), .o_prox_active()
   );
 
-  tmc5160_step_dir_driver #(.SYNC_MODE(1)) u_drv_y (
-    .clk         (clk),
-    .rst_n       (rst_n),
-    .i_enable    (drv_enable),
-    .i_dir       (dir_mask[1]),
-    .i_start     (start_y),
-    .i_stop      (stop_all),
-    .i_continuous(cont_y),
-    .i_steps     (step_y),
-    .i_period_cycles(32'd0),
-    .i_pulse_cycles (32'd0),
-    .i_tick      (tick),
-    .i_rate_inc  (pid_rate_y),
-    .i_pulse_ticks(16'd4),
-    .o_step      (tmc_step_y),
-    .o_dir       (tmc_dir_y),
-    .o_enn       (tmc_enn_y),
-    .o_busy      (busy_y),
-    .o_done_pulse()
+  axis_controller u_axis_y (
+    .clk(clk), .rst_n(rst_n),
+    .i_enable(drv_enable), .i_dir(dir_mask[1]), .i_start(start_y), .i_stop(stop_all),
+    .i_continuous(cont_y), .i_steps(step_y), .i_tick(tick), .i_pid_tick(pid_tick),
+    .i_target(step_y), .i_ff_rate(ff_rate_y), .i_kp(kp_y), .i_ki(ki_y), .i_kd(kd_y),
+    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .o_step(tmc_step_y), .o_dir(tmc_dir_y), .o_enn(tmc_enn_y), .o_busy(busy_y),
+    .o_position(), .o_prox_active()
   );
 
-  tmc5160_step_dir_driver #(.SYNC_MODE(1)) u_drv_z (
-    .clk         (clk),
-    .rst_n       (rst_n),
-    .i_enable    (drv_enable),
-    .i_dir       (dir_mask[2]),
-    .i_start     (start_z),
-    .i_stop      (stop_all),
-    .i_continuous(cont_z),
-    .i_steps     (step_z),
-    .i_period_cycles(32'd0),
-    .i_pulse_cycles (32'd0),
-    .i_tick      (tick),
-    .i_rate_inc  (pid_rate_z),
-    .i_pulse_ticks(16'd4),
-    .o_step      (tmc_step_z),
-    .o_dir       (tmc_dir_z),
-    .o_enn       (tmc_enn_z),
-    .o_busy      (busy_z),
-    .o_done_pulse()
+  axis_controller u_axis_z (
+    .clk(clk), .rst_n(rst_n),
+    .i_enable(drv_enable), .i_dir(dir_mask[2]), .i_start(start_z), .i_stop(stop_all),
+    .i_continuous(cont_z), .i_steps(step_z), .i_tick(tick), .i_pid_tick(pid_tick),
+    .i_target(step_z), .i_ff_rate(ff_rate_z), .i_kp(kp_z), .i_ki(ki_z), .i_kd(kd_z),
+    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .o_step(tmc_step_z), .o_dir(tmc_dir_z), .o_enn(tmc_enn_z), .o_busy(busy_z),
+    .o_position(), .o_prox_active()
   );
 
-  // FSM de controle ----------------------------------------------------------
-  // Máscara de starts pendentes (alinhamento com o próximo tick)
+  // FSM de controle e stream de respostas -----------------------------------
   logic [2:0] start_pending;
-  // Buffer de publicação no stream genérico de respostas
   localparam int SHIFT_BITS = spi_service_pkg::RESP_MAX_BYTES * 8;
   logic                      pending;
   logic [SHIFT_BITS-1:0]     pend_bits;
   int unsigned               pend_len;
+  // move_end_pulse já declarado acima
+  logic [7:0]                current_move_id;
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      move_enabled <= 1'b0;
-      start_x      <= 1'b0;
-      start_y      <= 1'b0;
-      start_z      <= 1'b0;
-      sync_req     <= 1'b0;
+      move_enabled   <= 1'b0;
+      start_x        <= 1'b0;
+      start_y        <= 1'b0;
+      start_z        <= 1'b0;
+      sync_req       <= 1'b0;
       move_end_pulse <= 1'b0;
-      pending      <= 1'b0;
-      pend_bits    <= '0;
-      pend_len     <= '0;
-      dir_mask     <= 3'd0;
-      step_x       <= 32'd0;
-      step_y       <= 32'd0;
-      step_z       <= 32'd0;
-      ff_rate_x    <= 32'd0;
-      ff_rate_y    <= 32'd0;
-      ff_rate_z    <= 32'd0;
-      kp_x         <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
-      kp_y         <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
-      kp_z         <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
-      cont_x       <= 1'b0;
-      cont_y       <= 1'b0;
-      cont_z       <= 1'b0;
-      current_move_id <= 8'd0;
-      home_pending <= 1'b0;
-      home_frame_id <= 8'd0;
+      pending        <= 1'b0;
+      pend_bits      <= '0;
+      pend_len       <= '0;
+      dir_mask       <= 3'd0;
+      step_x         <= 32'd0;
+      step_y         <= 32'd0;
+      step_z         <= 32'd0;
+      ff_rate_x      <= 32'd0;
+      ff_rate_y      <= 32'd0;
+      ff_rate_z      <= 32'd0;
+      kp_x <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
+      kp_y <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
+      kp_z <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
+      cont_x         <= 1'b0;
+      cont_y         <= 1'b0;
+      cont_z         <= 1'b0;
+      current_move_id<= 8'd0;
+      start_pending  <= 3'b000;
+      home_pending   <= 1'b0;
+      home_frame_id  <= 8'd0;
       home_axis_mask <= 3'd0;
-      start_pending <= 3'b000;
     end else begin
-      start_x      <= 1'b0;
-      start_y      <= 1'b0;
-      start_z      <= 1'b0;
-      sync_req     <= 1'b0;
+      start_x        <= 1'b0;
+      start_y        <= 1'b0;
+      start_z        <= 1'b0;
+      sync_req       <= 1'b0;
       move_end_pulse <= 1'b0;
 
-      if (pending && tx_stream.ready) begin
-        pending <= 1'b0;
-      end
-
-      // Em simulação, não derruba move_enabled por E-STOP (SAFETY_ENABLE=0)
+      // Em simulação, não derruba por E-STOP (SAFETY_ENABLE=0)
       if (SAFETY_ENABLE && estop_inhibit)
         move_enabled <= 1'b0;
-
-      // Resposta de homing quando sensor aciona
-      if (home_pending && prox_active) begin
-        move_home_resp_bytes_t r;
-        r = move_home_response_pkg::make_default();
-        r.frameIdEcho = home_frame_id;
-        r.status      = 8'd0; // ALL_OK
-        r.axisHomeMask = {5'b0, home_axis_mask};
-        r.errorFlags  = 8'd0;
-        r             = move_home_response_pkg::set_parity(r);
-        pend_bits <= '0;
-        pend_bits[SHIFT_BITS-1 -: move_home_response_pkg::FRAME_BITS]
-                  <= move_home_response_pkg::encoder(r);
-        pend_len  <= move_home_response_pkg::FRAME_BITS/8; // 8
-        pending   <= 1'b1;
-        home_pending <= 1'b0;
-        cont_x <= 1'b0;
-        cont_y <= 1'b0;
-        cont_z <= 1'b0;
-      end
 
       // Emite starts alinhados ao próximo tick
       if (sync_start && (start_pending != 3'b000)) begin
@@ -329,12 +218,32 @@ module motion_service (
         start_pending <= 3'b000;
       end
 
+      // Resposta de homing quando sensor aciona
+      if (home_pending && prox_active && !pending) begin
+        move_home_resp_bytes_t r;
+        r = move_home_response_pkg::make_default();
+        r.frameIdEcho  = home_frame_id;
+        r.status       = 8'd0; // ALL_OK
+        r.axisHomeMask = {5'b0, home_axis_mask};
+        r.errorFlags   = 8'd0;
+        r = move_home_response_pkg::set_parity(r);
+        pend_bits <= '0;
+        pend_bits[SHIFT_BITS-1 -: move_home_response_pkg::FRAME_BITS]
+                  <= move_home_response_pkg::encoder(r);
+        pend_len  <= move_home_response_pkg::FRAME_BITS/8;
+        pending   <= 1'b1;
+        home_pending <= 1'b0;
+        cont_x <= 1'b0;
+        cont_y <= 1'b0;
+        cont_z <= 1'b0;
+      end
+
       if (frame_valid) begin
         case (msgType)
           START_MOVE_TYPE: begin
             start_move_resp_bytes_t r;
             move_enabled <= 1'b1;
-            sync_req     <= 1'b1; // alinhamento no próximo tick
+            sync_req     <= 1'b1;
             r = start_move_response_pkg::make_default();
             r.frameIdEcho = start_move_frame.frameId;
             pend_bits      <= '0;
@@ -345,26 +254,25 @@ module motion_service (
           MOVE_TYPE: begin
             move_queue_add_resp_bytes_t r;
             if (move_enabled) begin
-              dir_mask <= queue_add_frame.dirMask[2:0];
-              step_x   <= queue_add_frame.sx;
-              step_y   <= queue_add_frame.sy;
-              step_z   <= queue_add_frame.sz;
-              ff_rate_x<= {queue_add_frame.vx,16'd0};
-              ff_rate_y<= {queue_add_frame.vy,16'd0};
-              ff_rate_z<= {queue_add_frame.vz,16'd0};
-              kp_x     <= queue_add_frame.kp_x;
-              ki_x     <= queue_add_frame.ki_x;
-              kd_x     <= queue_add_frame.kd_x;
-              kp_y     <= queue_add_frame.kp_y;
-              ki_y     <= queue_add_frame.ki_y;
-              kd_y     <= queue_add_frame.kd_y;
-              kp_z     <= queue_add_frame.kp_z;
-              ki_z     <= queue_add_frame.ki_z;
-              kd_z     <= queue_add_frame.kd_z;
-              cont_x   <= 1'b0;
-              cont_y   <= 1'b0;
-              cont_z   <= 1'b0;
-              // programa start alinhado ao próximo tick
+              dir_mask  <= queue_add_frame.dirMask[2:0];
+              step_x    <= queue_add_frame.sx;
+              step_y    <= queue_add_frame.sy;
+              step_z    <= queue_add_frame.sz;
+              ff_rate_x <= {queue_add_frame.vx,16'd0};
+              ff_rate_y <= {queue_add_frame.vy,16'd0};
+              ff_rate_z <= {queue_add_frame.vz,16'd0};
+              kp_x      <= queue_add_frame.kp_x;
+              ki_x      <= queue_add_frame.ki_x;
+              kd_x      <= queue_add_frame.kd_x;
+              kp_y      <= queue_add_frame.kp_y;
+              ki_y      <= queue_add_frame.ki_y;
+              kd_y      <= queue_add_frame.kd_y;
+              kp_z      <= queue_add_frame.kp_z;
+              ki_z      <= queue_add_frame.ki_z;
+              kd_z      <= queue_add_frame.kd_z;
+              cont_x    <= 1'b0;
+              cont_y    <= 1'b0;
+              cont_z    <= 1'b0;
               start_pending[0] <= (queue_add_frame.sx != 0);
               start_pending[1] <= (queue_add_frame.sy != 0);
               start_pending[2] <= (queue_add_frame.sz != 0);
@@ -379,41 +287,40 @@ module motion_service (
             pend_bits <= '0;
             pend_bits[SHIFT_BITS-1 -: move_queue_add_response_pkg::FRAME_BITS]
                       <= move_queue_add_response_pkg::encoder(r);
-            pend_len  <= move_queue_add_response_pkg::FRAME_BITS/8; // 6
+            pend_len  <= move_queue_add_response_pkg::FRAME_BITS/8;
             pending   <= 1'b1;
           end
           MOVE_HOME_TYPE: begin
-            move_home_resp_bytes_t r;
             if (move_enabled) begin
-              dir_mask <= move_home_frame.dirMask[2:0];
-              step_x   <= 32'd0;
-              step_y   <= 32'd0;
-              step_z   <= 32'd0;
-              ff_rate_x<= {move_home_frame.vhome,16'd0};
-              ff_rate_y<= {move_home_frame.vhome,16'd0};
-              ff_rate_z<= {move_home_frame.vhome,16'd0};
-              kp_x     <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
-              kp_y     <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
-              kp_z     <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
-              cont_x   <= move_home_frame.axisMask[0];
-              cont_y   <= move_home_frame.axisMask[1];
-              cont_z   <= move_home_frame.axisMask[2];
-              // programa start alinhado ao próximo tick
+              dir_mask  <= move_home_frame.dirMask[2:0];
+              step_x    <= 32'd0;
+              step_y    <= 32'd0;
+              step_z    <= 32'd0;
+              ff_rate_x <= {move_home_frame.vhome,16'd0};
+              ff_rate_y <= {move_home_frame.vhome,16'd0};
+              ff_rate_z <= {move_home_frame.vhome,16'd0};
+              kp_x      <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
+              kp_y      <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
+              kp_z      <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
+              cont_x    <= move_home_frame.axisMask[0];
+              cont_y    <= move_home_frame.axisMask[1];
+              cont_z    <= move_home_frame.axisMask[2];
               start_pending    <= move_home_frame.axisMask[2:0];
               if (|move_home_frame.axisMask[2:0]) sync_req <= 1'b1;
-              home_frame_id  <= move_home_frame.frameId;
-              home_axis_mask <= move_home_frame.axisMask[2:0];
-              home_pending   <= |move_home_frame.axisMask[2:0];
-              current_move_id <= move_home_frame.frameId;
+              current_move_id  <= move_home_frame.frameId;
+              home_pending     <= |move_home_frame.axisMask[2:0];
+              home_frame_id    <= move_home_frame.frameId;
+              home_axis_mask   <= move_home_frame.axisMask[2:0];
             end else begin
+              move_home_resp_bytes_t r;
               r = move_home_response_pkg::make_default();
               r.frameIdEcho = move_home_frame.frameId;
-              r.status      = 8'd1; // BUSY/desabilitado
+              r.status      = 8'd1; // desabilitado
               r = move_home_response_pkg::set_parity(r);
               pend_bits <= '0;
               pend_bits[SHIFT_BITS-1 -: move_home_response_pkg::FRAME_BITS]
                         <= move_home_response_pkg::encoder(r);
-              pend_len  <= move_home_response_pkg::FRAME_BITS/8; //8
+              pend_len  <= move_home_response_pkg::FRAME_BITS/8;
               pending   <= 1'b1;
             end
           end
@@ -422,12 +329,11 @@ module motion_service (
             r = move_queue_status_response_pkg::make_default();
             r.frameIdEcho = current_move_id;
             r.status      = (busy_x | busy_y | busy_z) ? 8'd0 : 8'd1; // Running/Idle
-            r.pidErrX     = pid_err_x;
-            r.pidErrY     = pid_err_y;
-            r.pidErrZ     = pid_err_z;
+            r.pidErrX     = 8'd0;
+            r.pidErrY     = 8'd0;
+            r.pidErrZ     = 8'd0;
             r = move_queue_status_response_pkg::set_parity(r);
             pend_bits <= '0;
-            // FRAME_BITS não definido no pacote; usa largura explícita (96 bits / 12 bytes)
             pend_bits[SHIFT_BITS-1 -: 96]
                       <= move_queue_status_response_pkg::encoder(r);
             pend_len  <= 12;
@@ -437,7 +343,6 @@ module motion_service (
             move_end_resp_bytes_t r;
             move_enabled  <= 1'b0;
             move_end_pulse <= 1'b1;
-            home_pending  <= 1'b0;
             ff_rate_x    <= 32'd0;
             ff_rate_y    <= 32'd0;
             ff_rate_z    <= 32'd0;
@@ -451,26 +356,19 @@ module motion_service (
             pend_len       <= 4;
             pending        <= 1'b1;
           end
-          default: begin
-          end
+          default: begin end
         endcase
       end
+
+      if (pending && tx_stream.ready)
+        pending <= 1'b0;
     end
   end
 
   assign tick_enable = move_enabled;
-
-  // Stream de respostas ------------------------------------------------------
   assign tx_stream.valid = pending;
   assign tx_stream.bits  = pend_bits;
   assign tx_stream.len   = pend_len;
 
-  // Supressão de avisos de sinais não utilizados
-  /* verilator lint_off UNUSEDSIGNAL */
-  logic _unused;
-  assign _unused = ^{probe_frame.header, move_home_frame.header, queue_status_frame.header,
-                    enc_velocity[0], sync_start};
-  /* verilator lint_on UNUSEDSIGNAL */
 endmodule
 `endif
-

@@ -1,7 +1,7 @@
 Reading netlist file: "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg"
 Parsing netlist file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg" completed
 Processing netlist completed
-Reading constraint file: "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller.cst"
+Reading constraint file: "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller_3v3.cst"
 Physical Constraint parsed completed
 Running placement......
 [10%] Placement Phase 0 completed
@@ -25,5 +25,5 @@ Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_contr
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.html" completed
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.txt" completed
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.tr.html" completed
-Fri Sep  5 16:29:06 2025
+Sat Sep  6 11:20:30 2025
 

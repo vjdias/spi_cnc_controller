@@ -29,3 +29,28 @@ Arquivos criados/alterados
 Próximos passos
 - Ajustar `timing.sdc` para o domínio SPI (período real ou declarar assíncrono).
 - Completar/ajustar `spi_cnc_controller.cst` conforme o esquemático/placa.
+
+## Sweep (varredura) e melhoria de timing
+
+- O que é sweep: executar síntese/PNR repetidas vezes variando um parâmetro (período de clock, delays de I/O, etc.) para comparar WNS/TNS e caminhos críticos.
+- Scripts:
+  - `scripts/run_gowin_sweep.tcl` (varre sys_clk 27/135 MHz)
+  - `scripts/run_gowin_spi_sweep.tcl` (varre pi_sclk 50/100 MHz com sys_clk=27 MHz)
+  - Relatórios em `impl/pnr/reports/*`.
+
+### Pipeline no SPI RX Hub (baixo impacto)
+
+- Mudança: inserimos 1 estágio de registro no `spi_rx_hub_service.sv` (versão sintetizável) para processar cada byte no ciclo seguinte ao da leitura da FIFO. Mantém throughput de 1 byte/ciclo (duas regs: preload e process), adiciona +1 ciclo de latência.
+- Motivação: reduzir a profundidade combinatória no caminho `ctx -> feed() -> ctx` do roteador de requisições.
+- Efeito medido (após PNR):
+  - sys 27 MHz: caminho crítico ≈ 14,83 ns (slack +28,68 ns)
+  - sys 135 MHz: slack ≈ +0,06 ns (fecha no limite), caminho crítico ≈ 13,82 ns
+- Locais úteis:
+  - Código: `src/services/spi/spi_rx_hub_service.sv`
+  - Caminhos: `impl/pnr/reports/timing_27.timing_paths` e `timing_135.timing_paths`
+
+### I/O timing do SPI
+
+- Adicionamos `set_input_delay`/`set_output_delay` provisórios relativos a `pi_sclk` em:
+  - `constraints/timing.sdc`, `constraints/timing_27_spi50.sdc`, `constraints/timing_27_spi100.sdc`
+- Ajuste esses valores com base no datasheet do mestre SPI (ex.: Raspberry Pi) para refletir melhor tSU/tH no receptor.

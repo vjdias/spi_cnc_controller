@@ -65,7 +65,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Physical Constraints File</td>
-<td>C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller.cst</td>
+<td>C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller_3v3.cst</td>
 </tr>
 <tr>
 <td class="label">Timing Constraints File</td>
@@ -89,7 +89,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Created Time</td>
-<td>Fri Sep  5 16:15:59 2025
+<td>Fri Sep  5 18:35:40 2025
 </td>
 </tr>
 <tr>
@@ -161,22 +161,22 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <table class="summary_table">
 <tr>
 <td class="label">Total Power (mW)</td>
-<td>163.812</td>
+<td>196.902</td>
 </tr>
 <tr>
 <td class="label">Quiescent Power (mW)</td>
-<td>121.152</td>
+<td>121.127</td>
 </tr>
 <tr>
 <td class="label">Dynamic Power (mW)</td>
-<td>42.660</td>
+<td>75.775</td>
 </tr>
 </table>
 <h2><a name="Thermal_Info">Thermal Information:</a></h2>
 <table class="summary_table">
 <tr>
 <td class="label">Junction Temperature</td>
-<td>30.245</td>
+<td>31.305</td>
 </tr>
 <tr>
 <td class="label">Theta JA</td>
@@ -184,7 +184,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Max Allowed Ambient Temperature</td>
-<td>79.755</td>
+<td>78.695</td>
 </tr>
 </table>
 <h2><a name="Supply_Summary">Supply Information:</a></h2>
@@ -199,23 +199,30 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <tr>
 <td>VCC</td>
 <td>1.000</td>
-<td>24.000</td>
-<td>69.946</td>
-<td>93.946</td>
+<td>29.780</td>
+<td>69.863</td>
+<td>99.643</td>
 </tr>
 <tr>
 <td>VCCX</td>
 <td>3.300</td>
-<td>3.662</td>
+<td>9.002</td>
 <td>15.000</td>
-<td>61.585</td>
+<td>79.207</td>
 </tr>
 <tr>
 <td>VCCIO18</td>
 <td>1.800</td>
-<td>3.653</td>
-<td>0.948</td>
-<td>8.280</td>
+<td>8.917</td>
+<td>0.917</td>
+<td>17.702</td>
+</tr>
+<tr>
+<td>VCCIO33</td>
+<td>3.300</td>
+<td>0.072</td>
+<td>0.034</td>
+<td>0.349</td>
 </tr>
 </table>
 <h1><a name="Detail">Power Details</a></h1>
@@ -229,15 +236,15 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td>Logic</td>
-<td>1.051</td>
+<td>1.481</td>
 <td>NA</td>
-<td>15.938</td>
+<td>16.238</td>
 </tr>
 <tr>
 <td>IO</td>
-<td>32.219
-<td>9.898
-<td>18.246
+<td>78.046
+<td>23.049
+<td>17.426
 </tr>
 <tr>
 <td>BSRAM</td>
@@ -255,8 +262,8 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td>top</td>
-<td>20.310</td>
-<td>20.310(20.310)</td>
+<td>20.740</td>
+<td>20.740(20.740)</td>
 <tr>
 <td>top/u_led_synth/</td>
 <td>0.016</td>
@@ -265,6 +272,14 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <td>top/u_quad_enc/</td>
 <td>0.206</td>
 <td>0.206(0.000)</td>
+<tr>
+<td>top/u_quad_enc_y/</td>
+<td>0.203</td>
+<td>0.203(0.000)</td>
+<tr>
+<td>top/u_quad_enc_z/</td>
+<td>0.210</td>
+<td>0.210(0.000)</td>
 <tr>
 <td>top/u_rx_bridge/</td>
 <td>0.014</td>
@@ -275,12 +290,12 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <td>0.012(0.000)</td>
 <tr>
 <td>top/u_rx_fifo/</td>
-<td>19.454</td>
-<td>19.454(0.000)</td>
+<td>19.468</td>
+<td>19.468(0.000)</td>
 <tr>
 <td>top/u_rx_hub_synth/</td>
-<td>0.523</td>
-<td>0.523(0.000)</td>
+<td>0.526</td>
+<td>0.526(0.000)</td>
 <tr>
 <td>top/u_spi_slave/</td>
 <td>0.085</td>
@@ -300,7 +315,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <tr>
 <td>sys_clk</td>
 <td>135.007</td>
-<td>20.334</td>
+<td>20.774</td>
 </tr>
 <tr>
 <td>pi_sclk</td>

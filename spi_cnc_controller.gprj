@@ -44,7 +44,9 @@
         <File path="src/services/integrations/packages/spi_service_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/services/integrations/rtl/byte_fifo_sync_rtl.sv" type="file.verilog" enable="1"/>
         <File path="src/services/led/led_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/motion/axis_controller.sv" type="file.verilog" enable="1"/>
         <File path="src/services/motion/motion_service.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/motion/pid_axis.sv" type="file.verilog" enable="1"/>
         <File path="src/services/motion/pid_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/spi/spi_rx_hub_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/spi/spi_rx_mosi_service.sv" type="file.verilog" enable="1"/>
@@ -52,12 +54,17 @@
         <File path="src/services/spi/spi_tx_hub_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/spi/spi_tx_miso_service.sv" type="file.verilog" enable="1"/>
         <File path="src/top.sv" type="file.verilog" enable="1"/>
-        <File path="src/spi_cnc_controller.cst" type="file.cst" enable="1"/>
+        <File path="src/spi_cnc_controller.cst" type="file.cst" enable="0"/>
+        <File path="src/spi_cnc_controller_3v3.cst" type="file.cst" enable="1"/>
+        <File path="src/spi_cnc_controller_drive12.cst" type="file.cst" enable="0"/>
+        <File path="src/spi_cnc_controller_drive4.cst" type="file.cst" enable="0"/>
         <File path="constraints/timing.sdc" type="file.sdc" enable="1"/>
         <File path="constraints/timing_135.sdc" type="file.sdc" enable="0"/>
         <File path="constraints/timing_27.sdc" type="file.sdc" enable="0"/>
         <File path="constraints/timing_27_spi100.sdc" type="file.sdc" enable="0"/>
         <File path="constraints/timing_27_spi50.sdc" type="file.sdc" enable="0"/>
+        <File path="constraints/timing_50.sdc" type="file.sdc" enable="0"/>
+        <File path="constraints/timing_54.sdc" type="file.sdc" enable="0"/>
         <File path="src/drivers/spi/spi_master/spi_master.ipc" type="file.other" enable="1"/>
     </FileList>
 </Project>

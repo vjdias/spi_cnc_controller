@@ -1,0 +1,119 @@
+﻿*** GOWIN Tcl Command Line Console  *** 
+Open project C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/spi_cnc_controller.gprj finished
+unable to add file "src/spi_cnc_controller_3v3.cst", already in project
+Note: 3V3 CST already added
+disable src/spi_cnc_controller.cst
+enable src/spi_cnc_controller_3v3.cst
+disable constraints/timing_27.sdc
+disable constraints/timing_135.sdc
+disable constraints/timing_27_spi50.sdc
+disable constraints/timing_27_spi100.sdc
+enable constraints/timing.sdc
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_master\spi_master.v'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\constants\protocol_constants_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\fpga_status_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\led_control_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_end_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_home_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_probe_level_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_queue_add_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_queue_status_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\start_move_request_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\fpga_status_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\led_control_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_end_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_home_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_probe_level_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_add_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_status_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\start_move_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\utils\bytes_util_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\fpga_status_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\led_control_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\move_end_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\move_home_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\move_probe_level_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\move_queue_add_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\move_queue_status_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\parsers\requests\start_move_req_parser_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\routers\request_router_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\packages\spi_service_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\interfaces\resp_stream_if.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\interfaces\spi_fifo_if.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_hub_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_miso_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv'
+Compiling module 'top'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":9)
+Compiling module 'spi_slave'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":12)
+Compiling module '**'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_master\spi_master.v":399)
+Compiling module 'spi_rx_slave_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv":16)
+Compiling module 'spi_rx_mosi_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv":52)
+Compiling module 'byte_fifo_sync(DEPTH=210)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":9)
+Extracting RAM for identifier 'mem'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":27)
+Compiling module 'spi_rx_hub_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv":99)
+Compiling module 'led_service(tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv":10)
+Compiling module 'quad_encoder_tmcs28_driver(POS_WIDTH=32'b00000000000000000000000000100000,FILTER_CYCLES=32'b00000000000000000000000000000000,INDEX_OFFSET=32'b00000000000000000000000000000000,MODULO=32'b00000000000000000000000000000000,VEL_WINDOW_CYCLES=32'b00000000000000000000000000000000,COUNT_MODE=32'b00000000000000000000000000000100)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv":18)
+NOTE  (EX0101) : Current top module is "top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg" completed
+[100%] Generate report file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller_syn.rpt.html" completed
+GowinSynthesis finish
+Reading netlist file: "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg"
+Parsing netlist file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg" completed
+Processing netlist completed
+Reading constraint file: "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller_3v3.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.power.html" completed
+Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.pin.html" completed
+Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.html" completed
+Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.txt" completed
+Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.tr.html" completed
+Fri Sep  5 17:54:07 2025
+

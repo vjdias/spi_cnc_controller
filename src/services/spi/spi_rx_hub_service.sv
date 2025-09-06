@@ -16,6 +16,10 @@
 `ifdef VERILATOR
 `define __SIM_BUILD__
 `endif
+
+// -----------------------------------------------------------------------------
+// Versão de simulação (usa interface de FIFO direta)
+// -----------------------------------------------------------------------------
 `ifdef __SIM_BUILD__
 module spi_rx_hub_service (
     input  logic           clk,
@@ -47,8 +51,6 @@ module spi_rx_hub_service (
 
   router_ctx_t ctx;
 
-  // Contexto inicial é aplicado via reset em always_ff
-
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       ctx           <= request_router_pkg::init();
@@ -64,13 +66,12 @@ module spi_rx_hub_service (
       fpga_status_frame  = fpga_status_request_pkg::make_default();
       led_ctrl_frame     = led_control_request_pkg::make_default();
     end else begin
-      // Sinais baixos por padrão a cada ciclo
       frame_valid = 1'b0;
       frame_error = 1'b0;
 
       if (!fifo.empty) begin
         spi_service_pkg::byte_t data;
-        fifo.read(data); // obtém próximo byte da fila
+        fifo.read(data);
         ctx <= request_router_pkg::feed(
                  ctx,
                  data,
@@ -90,6 +91,10 @@ module spi_rx_hub_service (
     end
   end
 endmodule
+
+// -----------------------------------------------------------------------------
+// Versão sintetizável (handshake da FIFO + pipeline de 1 ciclo)
+// -----------------------------------------------------------------------------
 `else
 module spi_rx_hub_service (
     input  logic           clk,
@@ -125,6 +130,10 @@ module spi_rx_hub_service (
 
   router_ctx_t ctx;
 
+  // Pipeline de 1 ciclo: stage0 captura, stage1 processa
+  logic        stage0_valid, stage1_valid;
+  logic [7:0]  stage0_data,  stage1_data;
+
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       ctx           <= request_router_pkg::init();
@@ -140,19 +149,29 @@ module spi_rx_hub_service (
       fpga_status_frame  <= fpga_status_request_pkg::make_default();
       led_ctrl_frame     <= led_control_request_pkg::make_default();
       fifo_rd_en         <= 1'b0;
+      stage0_valid       <= 1'b0;
+      stage1_valid       <= 1'b0;
+      stage0_data        <= '0;
+      stage1_data        <= '0;
     end else begin
       // Defaults
       frame_valid <= 1'b0;
       frame_error <= 1'b0;
       fifo_rd_en  <= 1'b0;
 
-      // Solicita leitura quando houver dado
-      if (!fifo_empty) begin
+      // Lê quando há dado e stage0 livre
+      if (!fifo_empty && !stage0_valid) begin
         fifo_rd_en <= 1'b1;
       end
 
-      if (fifo_rd_valid) begin
-        // Captura em variáveis locais (evita mix de = e <= nas saídas)
+      // Avança pipeline
+      stage1_valid <= stage0_valid;
+      stage1_data  <= stage0_data;
+      stage0_valid <= fifo_rd_valid;
+      stage0_data  <= fifo_rd_data;
+
+      // Processa byte do stage1
+      if (stage1_valid) begin
         logic                   frame_valid_w;
         logic                   frame_error_w;
         spi_service_pkg::byte_t out_msgType_w;
@@ -161,7 +180,7 @@ module spi_rx_hub_service (
         out_msgType_w = '0;
         ctx <= request_router_pkg::feed(
                  ctx,
-                 protocol_constants_pkg::byte_t'(fifo_rd_data),
+                 protocol_constants_pkg::byte_t'(stage1_data),
                  frame_valid_w,
                  frame_error_w,
                  out_msgType_w,

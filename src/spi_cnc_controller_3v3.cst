@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// Physical Constraints (.cst) - IO_LOC / IO_PORT (3V3 variant)
+// -----------------------------------------------------------------------------
+
+// Clock e reset (3V3)
+IO_LOC  "i_clk"      C8;
+IO_PORT "i_clk"      IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "i_resetn"   F13;
+IO_PORT "i_resetn"   IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// SPI do Raspberry Pi (3V3)
+IO_LOC  "pi_sclk"    A9;
+IO_PORT "pi_sclk"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "pi_csn"     G12;
+IO_PORT "pi_csn"     IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "pi_mosi"    F14;
+IO_PORT "pi_mosi"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "pi_miso"    F16;
+IO_PORT "pi_miso"    IO_TYPE=LVCMOS33 DRIVE=8;
+
+// Encoder incremental (ABZ) - pinos GCLK recomendados para A/B (3V3)
+IO_LOC  "i_enc_a"    J1;
+IO_PORT "i_enc_a"    IO_TYPE=LVCMOS33 PULL_MODE=UP;   // GCLKT_5
+
+IO_LOC  "i_enc_b"    J3;
+IO_PORT "i_enc_b"    IO_TYPE=LVCMOS33 PULL_MODE=UP;   // GCLKC_5
+
+IO_LOC  "i_enc_z"    H3;
+IO_PORT "i_enc_z"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
