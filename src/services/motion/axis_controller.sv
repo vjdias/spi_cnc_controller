@@ -43,15 +43,9 @@ module axis_controller #(
     output logic                   o_prox_active
   );
 
-  // Proximidade (debounce / flancos)
-  lj12a3_proximity_driver u_prox (
-    .clk        (clk),
-    .rst_n      (rst_n),
-    .i_sensor_in(i_prox_in),
-    .o_active   (o_prox_active),
-    .o_active_pulse(),
-    .o_inactive_pulse()
-  );
+  // Proximidade: neste nível, apenas exportamos o nível bruto
+  // (debounce e política de segurança ficam no motion_service)
+  assign o_prox_active = i_prox_in;
 
   // PID de eixo (proporcional)
   logic [31:0] rate_inc;

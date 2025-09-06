@@ -23,19 +23,24 @@ module pid_axis (
       input logic [15:0] kp_i,
       input logic [31:0] position_i
     );
+    // Larguras explícitas para evitar truncamentos implícitos:
+    // kp_ext (17), err (33) => mult (50)
     logic signed [32:0] err;
-    logic signed [47:0] mult;
-    logic signed [31:0] adj;
-    logic signed [31:0] sum;
-    err  = $signed(target_i) - $signed(position_i);
-    mult = $signed({1'b0,kp_i}) * err;
-    adj  = mult >>> KP_SHIFT;
-    sum  = $signed(ff_rate_i) + adj;
-    if (sum < 0)
+    logic signed [16:0] kp_ext;
+    logic signed [49:0] mult_full;
+    logic signed [49:0] adj_full;
+    logic signed [49:0] sum_full;
+    err      = $signed(target_i) - $signed(position_i);
+    kp_ext   = $signed({1'b0, kp_i});
+    mult_full = kp_ext * err;                  // 17+33=50 bits
+    adj_full  = mult_full >>> KP_SHIFT;        // mantém 50 bits
+    // Sign-extend ff_rate_i (32 -> 50) antes de somar
+    sum_full  = $signed({{18{ff_rate_i[31]}}, ff_rate_i}) + adj_full;
+    if (sum_full <= 0)
       return 32'd0;
     else
-      return sum[31:0];
-  endfunction
+      return sum_full[31:0];                   // fatia explícita
+    endfunction
 
   always_comb begin
     if (!enable) begin
@@ -53,4 +58,3 @@ module pid_axis (
   /* verilator lint_on UNUSEDSIGNAL */
 endmodule
 `endif
-

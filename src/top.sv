@@ -29,9 +29,9 @@ module top (
     // -------------------------
     // Pinos do encoder incremental (ABZ) — eixo X (mantém compatibilidade)
     // -------------------------
-    input  wire        i_enc_a,
-    input  wire        i_enc_b,
-    input  wire        i_enc_z,
+    input  wire        i_enc_a_x,
+    input  wire        i_enc_b_x,
+    input  wire        i_enc_z_x,
     // Eixo Y
     input  wire        i_enc_a_y,
     input  wire        i_enc_b_y,
@@ -40,13 +40,13 @@ module top (
     input  wire        i_enc_a_z,
     input  wire        i_enc_b_z,
     input  wire        i_enc_z_z,
-    // Exposição das posições (32 bits) para debug/integração
-    output wire [31:0] o_enc_position,
-    output wire [31:0] o_enc_position_y,
-    output wire [31:0] o_enc_position_z,
+    // Sinal único de movimento agregado
+    output wire        o_moving,
 
-    // Sensores (globais por enquanto)
-    input  wire        i_prox_in,
+    // Sensores de proximidade por eixo
+    input  wire        i_prox_in_x,
+    input  wire        i_prox_in_y,
+    input  wire        i_prox_in_z,
     input  wire        i_estop_in,
 
     // Saídas para drivers TMC5160 (X/Y/Z)
@@ -83,15 +83,20 @@ module top (
     // -------------------------
     // Instância do wrapper SPI slave
     // -------------------------
+    // Wires para TX (MISO) agregados em HW
+    wire        tx_wr_en;
+    wire [2:0]  tx_waddr;
+    wire [7:0]  tx_wdata;
+
     spi_slave u_spi_slave (
         // clock/reset
         .i_clk      (i_clk),
         .i_resetn   (i_resetn),
 
         // escrita (TX)
-        .wr_en      (1'b0),
-        .waddr      (3'd0),
-        .wdata      (8'h00),
+        .wr_en      (tx_wr_en),
+        .waddr      (tx_waddr),
+        .wdata      (tx_wdata),
 
         // leitura (RX)
         .rd_en      (rd_en_i),
@@ -211,8 +216,106 @@ module top (
       .tx_stream  (led_stream)
     );
 
-    // Consumidor inexistente: aceita sempre (evita WARN de sinal sem driver)
-    assign led_stream.ready = 1'b1;
+    // Interface de stream para o motion_service
+    resp_stream_if motion_stream();
+
+    // -------------------------
+    // Agregador de TX sintetizável (2 streams: LED e Motion)
+    // Serializa frames (bits/len) em bytes e escreve no spi_slave
+    // -------------------------
+    localparam int SHIFT_BITS = spi_service_pkg::RESP_MAX_BYTES * 8; // 20B → 160 bits
+    localparam int LENW       = 5; // até 20 bytes
+
+    // Espelhos dos sinais das interfaces (para indexação por stream)
+    // 0 = LED, 1 = Motion
+    logic                     stream_valid   [2];
+    logic [SHIFT_BITS-1:0]    stream_bits    [2];
+    logic [31:0]              stream_len32   [2];
+    logic                     stream_ready   [2];
+
+    // Mapeia interfaces → arrays
+    assign stream_valid[0] = led_stream.valid;
+    assign stream_bits [0] = led_stream.bits;
+    assign stream_len32[0] = led_stream.len;
+    assign led_stream.ready = stream_ready[0];
+
+    assign stream_valid[1] = motion_stream.valid;
+    assign stream_bits [1] = motion_stream.bits;
+    assign stream_len32[1] = motion_stream.len;
+    assign motion_stream.ready = stream_ready[1];
+
+    // RR com seleção combinacional (similar ao spi_tx_hub_service)
+    typedef enum logic [0:0] {IDLE=1'b0, SEND=1'b1} tx_state_t;
+    tx_state_t                 tx_state;
+    logic                      rr_sel;         // 0: LED primeiro, 1: Motion primeiro
+    logic [SHIFT_BITS-1:0]     tx_shift;
+    logic [LENW-1:0]           tx_len;
+    logic [LENW-1:0]           tx_idx;
+    // seleção combinacional do stream
+    logic                      pick;
+    logic                      pick_idx;       // 0 = LED, 1 = Motion
+
+    // Default de outputs
+    assign tx_waddr = 3'd0;
+
+    // Combinacional: decidir pick e prontos
+    always @* begin
+      // defaults
+      stream_ready[0] = 1'b0;
+      stream_ready[1] = 1'b0;
+      pick            = 1'b0;
+      pick_idx        = rr_sel;
+      if (tx_state == IDLE) begin
+        if (stream_valid[rr_sel]) begin
+          pick     = 1'b1;
+          pick_idx = rr_sel;
+          stream_ready[pick_idx] = 1'b1;
+        end else if (stream_valid[~rr_sel]) begin
+          pick     = 1'b1;
+          pick_idx = ~rr_sel;
+          stream_ready[pick_idx] = 1'b1;
+        end
+      end
+    end
+
+    // FSM do agregador
+    always_ff @(posedge i_clk or negedge i_resetn) begin
+      if (!i_resetn) begin
+        tx_state <= IDLE;
+        rr_sel   <= 1'b0;
+        tx_shift <= '0;
+        tx_len   <= '0;
+        tx_idx   <= '0;
+      end else begin
+        unique case (tx_state)
+          IDLE: begin
+            tx_idx <= '0; // pronto para aceitar novo frame
+            if (pick) begin
+              tx_shift <= stream_bits[pick_idx];
+              tx_len   <= stream_len32[pick_idx][LENW-1:0];
+              tx_state <= SEND;
+              // alterna prioridade a partir do escolhido
+              rr_sel   <= ~pick_idx;
+            end
+          end
+          SEND: begin
+            // Envia 1 byte por ciclo para o spi_slave (endereço 0)
+            if (tx_idx + 1 >= tx_len) begin
+              // último byte neste ciclo → volta ao IDLE no próximo
+              tx_idx  <= '0;
+              tx_state<= IDLE;
+            end else begin
+              tx_idx <= tx_idx + 1'b1;
+            end
+          end
+          default: tx_state <= IDLE;
+        endcase
+      end
+    end
+
+    // Pulsos de escrita e dados
+    assign tx_wr_en = (tx_state == SEND);
+    assign tx_wdata = tx_shift[SHIFT_BITS-1 - tx_idx*8 -: 8];
 
 
     // -------------------------
@@ -238,9 +341,9 @@ module top (
     ) u_quad_enc (
       .clk           (i_clk),
       .rst_n         (i_resetn),
-      .i_enc_a       (i_enc_a),
-      .i_enc_b       (i_enc_b),
-      .i_enc_z       (i_enc_z),
+      .i_enc_a       (i_enc_a_x),
+      .i_enc_b       (i_enc_b_x),
+      .i_enc_z       (i_enc_z_x),
       .o_position    (enc_position),
       .o_step_pulse  (enc_step_pulse),
       .o_dir         (enc_dir),
@@ -314,14 +417,15 @@ module top (
       .o_vel_valid   (enc_vel_valid_z)
     );
 
-    assign o_enc_position   = enc_position;
-    assign o_enc_position_y = enc_position_y;
-    assign o_enc_position_z = enc_position_z;
+    // As posições ficam internas; expomos apenas um flag agregado de movimento
 
     // -------------------------
     // Motion service (orquestra 3 eixos)
     // -------------------------
-    motion_service u_motion (
+    motion_service #(
+      .PROX_IS_PNP(1'b0), // NPN
+      .PROX_IS_NO (1'b1)  // Normalmente Aberto (ajuste para 1'b0 se for NC)
+    ) u_motion (
       .clk                 (i_clk),
       .rst_n               (i_resetn),
       .frame_valid         (frame_valid),
@@ -332,9 +436,12 @@ module top (
       .move_home_frame     (move_home_frame_w),
       .probe_frame         ('0),
       .queue_status_frame  (queue_status_frame_w),
-      .enc_position        (enc_position),   // provisório: usa X para todos
-      .enc_velocity        (32'sd0),
-      .i_prox_in           (i_prox_in),
+      .enc_pos_x           (enc_position),
+      .enc_pos_y           (enc_position_y),
+      .enc_pos_z           (enc_position_z),
+      .i_prox_in_x         (i_prox_in_x),
+      .i_prox_in_y         (i_prox_in_y),
+      .i_prox_in_z         (i_prox_in_z),
       .i_estop_in          (i_estop_in),
       .tmc_step_x          (tmc_step_x),
       .tmc_dir_x           (tmc_dir_x),
@@ -345,7 +452,8 @@ module top (
       .tmc_step_z          (tmc_step_z),
       .tmc_dir_z           (tmc_dir_z),
       .tmc_enn_z           (tmc_enn_z),
-      .tx_stream           ()                 // não roteado ao TX HUB neste top
+      .o_moving            (o_moving),
+      .tx_stream           (motion_stream)    // tie-off em HW (ready=1)
     );
 
 

@@ -10,7 +10,12 @@
 `ifndef MOTION_SERVICE_SV
 `define MOTION_SERVICE_SV
 
-module motion_service (
+module motion_service #(
+    // Configuração elétrica dos sensores de proximidade por eixo
+    // PROX_IS_PNP=1 => PNP; 0 => NPN. PROX_IS_NO=1 => Normalmente Aberto; 0 => Normalmente Fechado
+    parameter bit PROX_IS_PNP = 1'b1,
+    parameter bit PROX_IS_NO  = 1'b1
+) (
     input  logic clk,
     input  logic rst_n,
     // Frames decodificados
@@ -22,16 +27,21 @@ module motion_service (
     input  var move_home_request_pkg::move_home_req_bytes_t          move_home_frame,
     input  var move_probe_level_request_pkg::move_probe_level_req_bytes_t probe_frame,
     input  var move_queue_status_request_pkg::move_queue_status_bytes_t   queue_status_frame,
-    // Feedback (provisório: mesmos sinais para X/Y/Z)
-    input  logic [31:0]        enc_position,
-    input  logic signed [31:0] enc_velocity,
-    // Sensores brutos
-    input  logic i_prox_in,
+    // Feedback de encoders por eixo (posição absoluta)
+    input  logic [31:0]        enc_pos_x,
+    input  logic [31:0]        enc_pos_y,
+    input  logic [31:0]        enc_pos_z,
+    // Sensores brutos por eixo
+    input  logic i_prox_in_x,
+    input  logic i_prox_in_y,
+    input  logic i_prox_in_z,
     input  logic i_estop_in,
     // Saídas físicas (TMC5160)
     output logic tmc_step_x, tmc_dir_x, tmc_enn_x,
     output logic tmc_step_y, tmc_dir_y, tmc_enn_y,
     output logic tmc_step_z, tmc_dir_z, tmc_enn_z,
+    // Indicador agregado de movimento
+    output logic o_moving,
     // Publicação de respostas
     resp_stream_if.producer tx_stream
 );
@@ -49,20 +59,30 @@ module motion_service (
   import move_queue_add_response_pkg::*;
   import move_end_response_pkg::*;
 
-  // Proximidade global (para simplificar; pode-se ter um por eixo futuramente)
-  logic prox_active;
-  // Em simulação e por padrão, trata PROX como PNP/NO (ativo-alto)
+  // Proximidade por eixo (PNP/NO, ativo-alto)
+  logic prox_active_x, prox_active_y, prox_active_z;
   lj12a3_proximity_driver #(
-    .IS_PNP(1'b1),
-    .IS_NORMALLY_OPEN(1'b1)
-  ) u_prox (
-    .clk        (clk),
-    .rst_n      (rst_n),
-    .i_sensor_in(i_prox_in),
-    .o_active   (prox_active),
-    .o_active_pulse(),
-    .o_inactive_pulse()
+    .IS_PNP(PROX_IS_PNP), .IS_NORMALLY_OPEN(PROX_IS_NO)
+  ) u_prox_x (
+    .clk(clk), .rst_n(rst_n), .i_sensor_in(i_prox_in_x),
+    .o_active(prox_active_x), .o_active_pulse(), .o_inactive_pulse()
   );
+  lj12a3_proximity_driver #(
+    .IS_PNP(PROX_IS_PNP), .IS_NORMALLY_OPEN(PROX_IS_NO)
+  ) u_prox_y (
+    .clk(clk), .rst_n(rst_n), .i_sensor_in(i_prox_in_y),
+    .o_active(prox_active_y), .o_active_pulse(), .o_inactive_pulse()
+  );
+  lj12a3_proximity_driver #(
+    .IS_PNP(PROX_IS_PNP), .IS_NORMALLY_OPEN(PROX_IS_NO)
+  ) u_prox_z (
+    .clk(clk), .rst_n(rst_n), .i_sensor_in(i_prox_in_z),
+    .o_active(prox_active_z), .o_active_pulse(), .o_inactive_pulse()
+  );
+
+  // Máscara combinacional de proximidade por eixo
+  logic [2:0] prox_mask;
+  assign prox_mask = {prox_active_z, prox_active_y, prox_active_x};
 
   // E-STOP
   logic estop_inhibit;
@@ -103,7 +123,7 @@ module motion_service (
   // Estado de movimento
   logic move_enabled;
   logic start_x, start_y, start_z;
-  logic stop_all;
+  logic stop_x, stop_y, stop_z;
   logic [2:0]  dir_mask;
   logic [31:0] step_x, step_y, step_z;
   logic [31:0] ff_rate_x, ff_rate_y, ff_rate_z;
@@ -124,39 +144,60 @@ module motion_service (
 `else
   localparam bit SAFETY_ENABLE = 1'b1;
 `endif
-  assign stop_all = ((SAFETY_ENABLE ? (estop_inhibit | prox_active) : 1'b0) | move_end_pulse);
+  // Stop/enable por eixo (E-STOP global + prox do próprio eixo)
+  assign stop_x = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_x) : 1'b0) | move_end_pulse);
+  assign stop_y = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_y) : 1'b0) | move_end_pulse);
+  assign stop_z = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_z) : 1'b0) | move_end_pulse);
 
-  // Eixos (axis_controller agrega PID + driver + prox local — usa prox global por ora)
-  logic drv_enable;
-  assign drv_enable = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active)
-                                    :  tick_enable;
+  // Cálculo de velocidades por eixo (diferença por pid_tick)
+  logic [31:0]        enc_pos_x_q, enc_pos_y_q, enc_pos_z_q;
+  logic signed [31:0] enc_vel_x, enc_vel_y, enc_vel_z;
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      enc_pos_x_q <= '0; enc_pos_y_q <= '0; enc_pos_z_q <= '0;
+      enc_vel_x   <= '0; enc_vel_y   <= '0; enc_vel_z   <= '0;
+    end else if (pid_tick) begin
+      enc_vel_x   <= $signed(enc_pos_x) - $signed(enc_pos_x_q);
+      enc_vel_y   <= $signed(enc_pos_y) - $signed(enc_pos_y_q);
+      enc_vel_z   <= $signed(enc_pos_z) - $signed(enc_pos_z_q);
+      enc_pos_x_q <= enc_pos_x;
+      enc_pos_y_q <= enc_pos_y;
+      enc_pos_z_q <= enc_pos_z;
+    end
+  end
+
+  // Eixos (axis_controller agrega PID + driver + prox local — usa prox local)
+  logic drv_enable_x, drv_enable_y, drv_enable_z;
+  assign drv_enable_x = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_x) : tick_enable;
+  assign drv_enable_y = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_y) : tick_enable;
+  assign drv_enable_z = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_z) : tick_enable;
 
   axis_controller u_axis_x (
     .clk(clk), .rst_n(rst_n),
-    .i_enable(drv_enable), .i_dir(dir_mask[0]), .i_start(start_x), .i_stop(stop_all),
+    .i_enable(drv_enable_x), .i_dir(dir_mask[0]), .i_start(start_x), .i_stop(stop_x),
     .i_continuous(cont_x), .i_steps(step_x), .i_tick(tick), .i_pid_tick(pid_tick),
     .i_target(step_x), .i_ff_rate(ff_rate_x), .i_kp(kp_x), .i_ki(ki_x), .i_kd(kd_x),
-    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .i_enc_pos(enc_pos_x), .i_enc_vel(enc_vel_x), .i_prox_in(i_prox_in_x),
     .o_step(tmc_step_x), .o_dir(tmc_dir_x), .o_enn(tmc_enn_x), .o_busy(busy_x),
     .o_position(), .o_prox_active()
   );
 
   axis_controller u_axis_y (
     .clk(clk), .rst_n(rst_n),
-    .i_enable(drv_enable), .i_dir(dir_mask[1]), .i_start(start_y), .i_stop(stop_all),
+    .i_enable(drv_enable_y), .i_dir(dir_mask[1]), .i_start(start_y), .i_stop(stop_y),
     .i_continuous(cont_y), .i_steps(step_y), .i_tick(tick), .i_pid_tick(pid_tick),
     .i_target(step_y), .i_ff_rate(ff_rate_y), .i_kp(kp_y), .i_ki(ki_y), .i_kd(kd_y),
-    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .i_enc_pos(enc_pos_y), .i_enc_vel(enc_vel_y), .i_prox_in(i_prox_in_y),
     .o_step(tmc_step_y), .o_dir(tmc_dir_y), .o_enn(tmc_enn_y), .o_busy(busy_y),
     .o_position(), .o_prox_active()
   );
 
   axis_controller u_axis_z (
     .clk(clk), .rst_n(rst_n),
-    .i_enable(drv_enable), .i_dir(dir_mask[2]), .i_start(start_z), .i_stop(stop_all),
+    .i_enable(drv_enable_z), .i_dir(dir_mask[2]), .i_start(start_z), .i_stop(stop_z),
     .i_continuous(cont_z), .i_steps(step_z), .i_tick(tick), .i_pid_tick(pid_tick),
     .i_target(step_z), .i_ff_rate(ff_rate_z), .i_kp(kp_z), .i_ki(ki_z), .i_kd(kd_z),
-    .i_enc_pos(enc_position), .i_enc_vel(enc_velocity), .i_prox_in(i_prox_in),
+    .i_enc_pos(enc_pos_z), .i_enc_vel(enc_vel_z), .i_prox_in(i_prox_in_z),
     .o_step(tmc_step_z), .o_dir(tmc_dir_z), .o_enn(tmc_enn_z), .o_busy(busy_z),
     .o_position(), .o_prox_active()
   );
@@ -218,13 +259,13 @@ module motion_service (
         start_pending <= 3'b000;
       end
 
-      // Resposta de homing quando sensor aciona
-      if (home_pending && prox_active && !pending) begin
+      // Resposta de homing quando sensor(es) do(s) eixo(s) requisitado(s) acionam
+      if (home_pending && (|(prox_mask & home_axis_mask)) && !pending) begin
         move_home_resp_bytes_t r;
         r = move_home_response_pkg::make_default();
         r.frameIdEcho  = home_frame_id;
         r.status       = 8'd0; // ALL_OK
-        r.axisHomeMask = {5'b0, home_axis_mask};
+        r.axisHomeMask = {5'b0, (prox_mask & home_axis_mask)};
         r.errorFlags   = 8'd0;
         r = move_home_response_pkg::set_parity(r);
         pend_bits <= '0;
@@ -366,6 +407,7 @@ module motion_service (
   end
 
   assign tick_enable = move_enabled;
+  assign o_moving    = (busy_x | busy_y | busy_z);
   assign tx_stream.valid = pending;
   assign tx_stream.bits  = pend_bits;
   assign tx_stream.len   = pend_len;

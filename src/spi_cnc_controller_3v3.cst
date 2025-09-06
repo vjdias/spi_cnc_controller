@@ -1,34 +1,53 @@
-// -----------------------------------------------------------------------------
-// Physical Constraints (.cst) - IO_LOC / IO_PORT (3V3 variant)
-// -----------------------------------------------------------------------------
+//Copyright (C)2014-2025 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//Tool Version: V1.9.11.01 (64-bit)
+//Part Number: GW2A-LV18PG256C8/I7
+//Device: GW2A-18
+//Device Version: C
+//Created Time: Sat 09 06 15:57:26 2025
 
-// Clock e reset (3V3)
-IO_LOC  "i_clk"      C8;
-IO_PORT "i_clk"      IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
-IO_LOC  "i_resetn"   F13;
-IO_PORT "i_resetn"   IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
-// SPI do Raspberry Pi (3V3)
-IO_LOC  "pi_sclk"    A9;
-IO_PORT "pi_sclk"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
-IO_LOC  "pi_csn"     G12;
-IO_PORT "pi_csn"     IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
-IO_LOC  "pi_mosi"    F14;
-IO_PORT "pi_mosi"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
-IO_LOC  "pi_miso"    F16;
-IO_PORT "pi_miso"    IO_TYPE=LVCMOS33 DRIVE=8;
-
-// Encoder incremental (ABZ) - pinos GCLK recomendados para A/B (3V3)
-IO_LOC  "i_enc_a"    J1;
-IO_PORT "i_enc_a"    IO_TYPE=LVCMOS33 PULL_MODE=UP;   // GCLKT_5
-
-IO_LOC  "i_enc_b"    J3;
-IO_PORT "i_enc_b"    IO_TYPE=LVCMOS33 PULL_MODE=UP;   // GCLKC_5
-
-IO_LOC  "i_enc_z"    H3;
-IO_PORT "i_enc_z"    IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
+IO_LOC "pi_miso" F16;
+IO_PORT "pi_miso" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "tmc_enn_z" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_dir_z" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_step_z" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_enn_y" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_dir_y" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_step_y" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_enn_x" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_dir_x" IO_TYPE=LVCMOS33;
+IO_PORT "tmc_step_x" IO_TYPE=LVCMOS33;
+IO_PORT "o_moving" IO_TYPE=LVCMOS33;
+IO_PORT "leds[5]" IO_TYPE=LVCMOS33;
+IO_PORT "leds[4]" IO_TYPE=LVCMOS33;
+IO_PORT "leds[3]" IO_TYPE=LVCMOS33;
+IO_PORT "leds[2]" IO_TYPE=LVCMOS33;
+IO_PORT "leds[1]" IO_TYPE=LVCMOS33;
+IO_PORT "leds[0]" IO_TYPE=LVCMOS33;
+IO_PORT "i_estop_in" IO_TYPE=LVCMOS33;
+IO_PORT "i_prox_in_z" IO_TYPE=LVCMOS33;
+IO_PORT "i_prox_in_y" IO_TYPE=LVCMOS33;
+IO_PORT "i_prox_in_x" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_z_z" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_b_z" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_a_z" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_z_y" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_b_y" IO_TYPE=LVCMOS33;
+IO_PORT "i_enc_a_y" IO_TYPE=LVCMOS33;
+IO_LOC "i_enc_z_x" H3;
+IO_PORT "i_enc_z_x" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "i_enc_b_x" J3;
+IO_PORT "i_enc_b_x" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "i_enc_a_x" J1;
+IO_PORT "i_enc_a_x" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "pi_mosi" F14;
+IO_PORT "pi_mosi" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "pi_csn" G12;
+IO_PORT "pi_csn" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "pi_sclk" A9;
+IO_PORT "pi_sclk" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "i_resetn" F13;
+IO_PORT "i_resetn" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "i_clk" C8;
+IO_PORT "i_clk" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;

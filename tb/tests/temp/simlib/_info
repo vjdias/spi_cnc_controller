@@ -10,7 +10,7 @@ z2
 cModel Technology
 Z0 dC:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller
 vALU
-Z1 !s110 1757171423
+Z1 !s110 1757184738
 !i10b 1
 !s100 0gPecL;gCUBVdF6jBkzNC0
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -26,7 +26,7 @@ Z7 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z8 !s108 1757171423.000000
+Z8 !s108 1757184738.000000
 !s107 C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v|
 Z9 !s90 -work|simlib|C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v|
 !i113 1
@@ -106,7 +106,7 @@ R10
 R11
 n@b@u@f@s
 vCLKDIV
-R1
+Z13 !s110 1757184739
 !i10b 1
 !s100 NCGzb9`kFK7ie]kfhIQ>33
 R2
@@ -130,7 +130,7 @@ R10
 R11
 n@c@l@k@d@i@v
 vDCS
-R1
+R13
 !i10b 1
 !s100 MkWOZl7d9?glKl_5B7^k20
 R2
@@ -634,7 +634,7 @@ R10
 R11
 n@d@f@f@s@e
 vDHCEN
-R1
+R13
 !i10b 1
 !s100 z3F1O7A9h9^<nQ5CRcF=;1
 R2
@@ -754,7 +754,7 @@ R10
 R11
 n@d@l@e
 vDLL
-R1
+R13
 !i10b 1
 !s100 lUDk4@?omTD;5We38m@JW3
 R2
@@ -778,7 +778,7 @@ R10
 R11
 n@d@l@l
 vDLLDLY
-R1
+R13
 !i10b 1
 !s100 <_ggmOa:?00HQn1[jNCiz3
 R2
@@ -1042,7 +1042,7 @@ R10
 R11
 n@d@p@x9
 vDQCE
-R1
+R13
 !i10b 1
 !s100 N>;bn_3<0cPE1bD_?>Q`32
 R2
@@ -1066,7 +1066,7 @@ R10
 R11
 n@d@q@c@e
 vDQS
-R1
+R13
 !i10b 1
 !s100 ^:af_I1UB<1Eh:`cS;[Oo1
 R2
@@ -1090,7 +1090,7 @@ R10
 R11
 n@d@q@s
 vELVDS_IBUF
-R1
+R13
 !i10b 1
 !s100 ZY@T^h5c9LKK9nc]FG8zQ2
 R2
@@ -1114,7 +1114,7 @@ R10
 R11
 n@e@l@v@d@s_@i@b@u@f
 vELVDS_IOBUF
-R1
+R13
 !i10b 1
 !s100 f;h5NW`gQh[`iPCjbM8jY1
 R2
@@ -1138,7 +1138,7 @@ R10
 R11
 n@e@l@v@d@s_@i@o@b@u@f
 vELVDS_OBUF
-R1
+R13
 !i10b 1
 !s100 j;aXD;g2O?aZ4<oo1^NUf0
 R2
@@ -1162,7 +1162,7 @@ R10
 R11
 n@e@l@v@d@s_@o@b@u@f
 vELVDS_TBUF
-R1
+R13
 !i10b 1
 !s100 ?6A4a830VEX?Li^Fz:iE03
 R2
