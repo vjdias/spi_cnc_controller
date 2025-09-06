@@ -1,7 +1,7 @@
-// axis_controller.sv — Controlador de um eixo (PID + TMC5160 + sensores)
-`ifndef AXIS_CONTROLLER_SV
-`define AXIS_CONTROLLER_SV
-module axis_controller #(
+// axis_controller_service.sv — Controlador de um eixo (PID + TMC5160 + sensores)
+`ifndef AXIS_CONTROLLER_SERVICE_SV
+`define AXIS_CONTROLLER_SERVICE_SV
+module axis_controller_service #(
     parameter int POS_WIDTH = 32,
     parameter int PULSE_TICKS_DEFAULT = 4
   )(
@@ -50,7 +50,7 @@ module axis_controller #(
   // PID de eixo (proporcional)
   logic [31:0] rate_inc;
   logic  [7:0] pid_err;
-  pid_axis u_pid (
+  pid_axis_service u_pid (
     .clk      (clk),
     .rst_n    (rst_n),
     .enable   (i_enable),

@@ -158,7 +158,7 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
    "Type" : "verilog"
   },
   {
@@ -166,7 +166,7 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv",
    "Type" : "verilog"
   },
   {

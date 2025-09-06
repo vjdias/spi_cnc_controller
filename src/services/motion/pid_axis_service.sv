@@ -1,7 +1,7 @@
-// pid_axis.sv — PID proporcional (simplificado) para um eixo
-`ifndef PID_AXIS_SV
-`define PID_AXIS_SV
-module pid_axis (
+// pid_axis_service.sv — PID proporcional (simplificado) para um eixo
+`ifndef PID_AXIS_SERVICE_SV
+`define PID_AXIS_SERVICE_SV
+module pid_axis_service (
     input  logic        clk,
     input  logic        rst_n,
     input  logic        enable,

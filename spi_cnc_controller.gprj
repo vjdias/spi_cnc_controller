@@ -44,9 +44,9 @@
         <File path="src/services/integrations/packages/spi_service_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/services/integrations/rtl/byte_fifo_sync_rtl.sv" type="file.verilog" enable="1"/>
         <File path="src/services/led/led_service.sv" type="file.verilog" enable="1"/>
-        <File path="src/services/motion/axis_controller.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/motion/axis_controller_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/motion/motion_service.sv" type="file.verilog" enable="1"/>
-        <File path="src/services/motion/pid_axis.sv" type="file.verilog" enable="1"/>
+        <File path="src/services/motion/pid_axis_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/motion/pid_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/spi/spi_rx_hub_service.sv" type="file.verilog" enable="1"/>
         <File path="src/services/spi/spi_rx_mosi_service.sv" type="file.verilog" enable="1"/>

@@ -166,13 +166,13 @@ module motion_service #(
     end
   end
 
-  // Eixos (axis_controller agrega PID + driver + prox local — usa prox local)
+  // Eixos (axis_controller_service agrega PID + driver + prox local — usa prox local)
   logic drv_enable_x, drv_enable_y, drv_enable_z;
   assign drv_enable_x = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_x) : tick_enable;
   assign drv_enable_y = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_y) : tick_enable;
   assign drv_enable_z = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_z) : tick_enable;
 
-  axis_controller u_axis_x (
+  axis_controller_service u_axis_x (
     .clk(clk), .rst_n(rst_n),
     .i_enable(drv_enable_x), .i_dir(dir_mask[0]), .i_start(start_x), .i_stop(stop_x),
     .i_continuous(cont_x), .i_steps(step_x), .i_tick(tick), .i_pid_tick(pid_tick),
@@ -182,7 +182,7 @@ module motion_service #(
     .o_position(), .o_prox_active()
   );
 
-  axis_controller u_axis_y (
+  axis_controller_service u_axis_y (
     .clk(clk), .rst_n(rst_n),
     .i_enable(drv_enable_y), .i_dir(dir_mask[1]), .i_start(start_y), .i_stop(stop_y),
     .i_continuous(cont_y), .i_steps(step_y), .i_tick(tick), .i_pid_tick(pid_tick),
@@ -192,7 +192,7 @@ module motion_service #(
     .o_position(), .o_prox_active()
   );
 
-  axis_controller u_axis_z (
+  axis_controller_service u_axis_z (
     .clk(clk), .rst_n(rst_n),
     .i_enable(drv_enable_z), .i_dir(dir_mask[2]), .i_start(start_z), .i_stop(stop_z),
     .i_continuous(cont_z), .i_steps(step_z), .i_tick(tick), .i_pid_tick(pid_tick),

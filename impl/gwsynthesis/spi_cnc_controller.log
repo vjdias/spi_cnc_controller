@@ -39,9 +39,9 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\interfaces\spi_fifo_if.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv'
@@ -63,8 +63,8 @@ Compiling module 'motion_service(PROX_IS_PNP=1'b0,tx_stream=resp_stream_if_produ
 Compiling module 'lj12a3_proximity_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv":16)
 Compiling module 'emergency_stop_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv":16)
 Compiling module 'tick_gen'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv":9)
-Compiling module 'axis_controller'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller.sv":4)
-Compiling module 'pid_axis'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis.sv":4)
+Compiling module 'axis_controller_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller_service.sv":4)
+Compiling module 'pid_axis_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv":4)
 Compiling module 'tmc5160_step_dir_driver(SYNC_MODE=32'b00000000000000000000000000000001)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv":16)
 NOTE  (EX0101) : Current top module is "top"
 [5%] Running netlist conversion ...

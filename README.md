@@ -110,8 +110,8 @@ Os testes são executados em modo texto e o resultado de cada testbench é mostr
   - Segurança: E‑STOP e PROX por eixo bloqueiam enable/geram `stop_x/y/z`.
   - Publica `o_moving` (busy agregado dos eixos) e frames em `tx_stream`.
 
-- Controlador por eixo: `src/services/motion/axis_controller.sv`.
-  - PID proporcional (`pid_axis`), modo STEP/DIR síncrono (`tmc5160_step_dir_driver`) e PROX local pass‑through.
+- Controlador por eixo: `src/services/motion/axis_controller_service.sv`.
+  - PID proporcional (`pid_axis_service`), modo STEP/DIR síncrono (`tmc5160_step_dir_driver`) e PROX local pass‑through.
   - Largura do pulso STEP (ticks): `PULSE_TICKS_DEFAULT`.
 
 - Encoders: `src/top.sv:235` (X), `src/top.sv:267` (Y), `src/top.sv:299` (Z), driver `quad_encoder_tmcs28_driver.sv`.
@@ -201,15 +201,15 @@ Este capítulo documenta cada bloco do projeto — propósito, entradas/saídas 
   - Sensores: `i_prox_in_x/y/z` (por eixo; configuráveis via parâmetros `PROX_IS_PNP` e `PROX_IS_NO`). No `top` padrão está definido como NPN/NO (`PROX_IS_PNP=0`, `PROX_IS_NO=1`). `i_estop_in` global é NC por padrão no driver.
   - Saídas físicas: `tmc_step/dir/enn_{x,y,z}`.
   - Saídas de status: `o_moving` (OR dos busy dos eixos), `resp_stream_if.producer tx_stream` (respostas codificadas).
-  - Função: gera ticks de sincronismo (tick/pid_tick/sync_start), interpreta frames de movimento (start/move/home/end/status), aplica safety (E‑STOP e PROX por eixo) e aciona 3 `axis_controller` com setpoints/ganhos fornecidos nos frames. Calcula `enc_vel_x/y/z` como Δpos por `pid_tick`.
+  - Função: gera ticks de sincronismo (tick/pid_tick/sync_start), interpreta frames de movimento (start/move/home/end/status), aplica safety (E‑STOP e PROX por eixo) e aciona 3 `axis_controller_service` com setpoints/ganhos fornecidos nos frames. Calcula `enc_vel_x/y/z` como Δpos por `pid_tick`.
 
-- axis_controller.sv: controlador de eixo
+- axis_controller_service.sv: controlador de eixo
   - Entradas: `clk`, `rst_n`, `i_enable`, `i_dir`, `i_start`, `i_stop`, `i_continuous`, `i_steps`, `i_tick`, `i_pid_tick`, `i_target`, `i_ff_rate`, `i_kp/i_ki/i_kd`, `i_enc_pos`, `i_enc_vel`, `i_prox_in`.
   - Saídas: `o_step`, `o_dir`, `o_enn`, `o_busy`, `o_position`, `o_prox_active`.
-  - Função: aplica `pid_axis` (proporcional) para gerar um incremento de taxa e dirige o `tmc5160_step_dir_driver` em modo síncrono (`i_tick` + `i_rate_inc` + largura do pulso em `i_pulse_ticks`). Exporta a posição de entrada e reporta `o_busy`.
+  - Função: aplica `pid_axis_service` (proporcional) para gerar um incremento de taxa e dirige o `tmc5160_step_dir_driver` em modo síncrono (`i_tick` + `i_rate_inc` + largura do pulso em `i_pulse_ticks`). Exporta a posição de entrada e reporta `o_busy`.
   - Observações: `o_prox_active` é pass‑through do `i_prox_in`; debouncing/política ficam no `motion_service`.
 
-- pid_axis.sv: controlador P (single‑axis)
+- pid_axis_service.sv: controlador P (single‑axis)
   - Entradas: `clk`, `rst_n`, `enable`, `pid_tick`, `target`, `ff_rate`, `kp/ki/kd`, `enc_pos`.
   - Saídas: `rate_out` (taxa corrigida), `pid_err` (placeholder).
   - Função: `rate_out = max(0, ff_rate + (kp*(target-enc_pos) >> KP_SHIFT))` com larguras explícitas para evitar truncamentos. `ki/kd` reservados para futuro.
@@ -217,7 +217,7 @@ Este capítulo documenta cada bloco do projeto — propósito, entradas/saídas 
 - pid_service.sv: controlador P (3 eixos)
   - Entradas: `clk`, `rst_n`, `enable`, `pid_tick`, `target_x/y/z`, `ff_rate_x/y/z`, `kp/ki/kd` por eixo, `enc_pos_x/y/z`.
   - Saídas: `rate_x/y/z`, `pid_err_x/y/z`.
-  - Função: versão multi‑eixo do `pid_axis` (termo P). Mantido para compatibilidade, mas a arquitetura atual usa `axis_controller + pid_axis`.
+  - Função: versão multi‑eixo do `pid_axis_service` (termo P). Mantido para compatibilidade, mas a arquitetura atual usa `axis_controller_service + pid_axis_service`.
 
 ### Drivers (baixo nível)
 
