@@ -105,10 +105,12 @@ module spi_full_flow_motion_home_tb;
     .queue_status_frame('0),
     .enc_pos_x(enc_pos), .enc_pos_y(32'd0), .enc_pos_z(32'd0),
     .i_prox_in_x(prox_in), .i_prox_in_y(1'b0), .i_prox_in_z(1'b0),
+    .i_idx_pulse_x(1'b0), .i_idx_pulse_y(1'b0), .i_idx_pulse_z(1'b0),
     .i_estop_in(estop_in),
     .tmc_step_x(tmc_step_x), .tmc_dir_x(tmc_dir_x), .tmc_enn_x(tmc_enn_x),
     .tmc_step_y(tmc_step_y), .tmc_dir_y(tmc_dir_y), .tmc_enn_y(tmc_enn_y),
     .tmc_step_z(tmc_step_z), .tmc_dir_z(tmc_dir_z), .tmc_enn_z(tmc_enn_z),
+    .o_moving(),
     .tx_stream(motion_stream)
   );
 
@@ -259,7 +261,7 @@ module spi_full_flow_motion_home_tb;
 
     // Espera bytes: 4 (start_move) + 8 (move_home resp) = 12
     cycles = 0;
-    while (resp_byte_count < 12 && cycles < 2000) begin
+    while (resp_byte_count < 12 && cycles < 300000) begin
       @(posedge clk); cycles++;
     end
     `TEST_ASSERT(resp_byte_count >= 12, "timeout_home_resp")

@@ -63,5 +63,10 @@ package protocol_constants_pkg;
   // ---------------------------
   localparam byte_t FPGA_STATUS_TYPE   = 8'h20;
   
+  // ---------------------------
+  // HOME_STATUS (resposta complementar após homing)
+  // ---------------------------
+  localparam byte_t HOME_STATUS_TYPE   = 8'h21;
+  
 endpackage
 `endif
