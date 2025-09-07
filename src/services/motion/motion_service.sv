@@ -150,6 +150,8 @@ module motion_service #(
   logic [7:0]  home_frame_id;        // frameId do request MOVE_HOME
   logic        home_status_sched;    // agendar envio de HOME_STATUS
   logic [7:0]  home_status_frame_id; // frameId do HOME_STATUS
+  logic        move_end_sched;       // agendar envio de MOVE_END
+  logic [7:0]  move_end_frame_id;    // frameId do MOVE_END
 
   // Sinais por eixo da FSM de homing
   logic home_start_x, home_start_y, home_start_z;
@@ -311,6 +313,8 @@ module motion_service #(
       home_frame_id  <= 8'd0;
       home_status_sched <= 1'b0;
       home_status_frame_id <= 8'd0;
+      move_end_sched <= 1'b0;
+      move_end_frame_id <= 8'd0;
       home_valid     <= 3'b000;
       home_offset_x  <= 32'd0;
       home_offset_y  <= 32'd0;
@@ -399,6 +403,18 @@ module motion_service #(
         pend_len  <= home_status_response_pkg::FRAME_BITS/8;
         pending   <= 1'b1;
         home_status_sched <= 1'b0;
+      end
+
+      // Envio de MOVE_END quando agendado e canal livre (após HOME_STATUS)
+      if (!pending && !home_status_sched && move_end_sched) begin
+        move_end_resp_bytes_t r;
+        r = move_end_response_pkg::make_default();
+        r.frameIdEcho = move_end_frame_id;
+        pend_bits <= '0;
+        pend_bits[SHIFT_BITS-1 -: 32] <= move_end_response_pkg::encoder(r);
+        pend_len  <= 4;
+        pending   <= 1'b1;
+        move_end_sched <= 1'b0;
       end
 
       if (frame_valid) begin
@@ -512,7 +528,6 @@ module motion_service #(
             end
           end
           MOVE_END_TYPE: begin
-            move_end_resp_bytes_t r;
             move_enabled  <= 1'b0;
             move_end_pulse <= 1'b1;
             ff_rate_x    <= 32'd0;
@@ -521,12 +536,8 @@ module motion_service #(
             kp_x <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
             kp_y <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
             kp_z <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
-            r = move_end_response_pkg::make_default();
-            r.frameIdEcho = move_end_frame.frameId;
-            pend_bits      <= '0;
-            pend_bits[SHIFT_BITS-1 -: 32] <= move_end_response_pkg::encoder(r);
-            pend_len       <= 4;
-            pending        <= 1'b1;
+            move_end_sched    <= 1'b1;
+            move_end_frame_id <= move_end_frame.frameId;
           end
           default: begin end
         endcase
