@@ -13,8 +13,10 @@
 module motion_service #(
     // Configuração elétrica dos sensores de proximidade por eixo
     // PROX_IS_PNP=1 => PNP; 0 => NPN. PROX_IS_NO=1 => Normalmente Aberto; 0 => Normalmente Fechado
-    parameter bit PROX_IS_PNP = 1'b1,
-    parameter bit PROX_IS_NO  = 1'b1
+    parameter bit PROX_IS_PNP      = 1'b1,
+    parameter bit PROX_IS_NO       = 1'b1,
+    // Quando 1, o homing aguarda pulso de índice (Z) após o sensor de proximidade
+    parameter bit HOMING_USE_INDEX = 1'b0
 ) (
     input  logic clk,
     input  logic rst_n,
@@ -31,6 +33,10 @@ module motion_service #(
     input  logic [31:0]        enc_pos_x,
     input  logic [31:0]        enc_pos_y,
     input  logic [31:0]        enc_pos_z,
+    // Pulsos de índice Z dos encoders
+    input  logic              i_idx_pulse_x,
+    input  logic              i_idx_pulse_y,
+    input  logic              i_idx_pulse_z,
     // Sensores brutos por eixo
     input  logic i_prox_in_x,
     input  logic i_prox_in_y,
@@ -54,6 +60,7 @@ module motion_service #(
   import move_probe_level_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import move_home_response_pkg::*;
+  import home_status_response_pkg::*;
   import move_queue_status_response_pkg::*;
   import start_move_response_pkg::*;
   import move_queue_add_response_pkg::*;
@@ -134,10 +141,28 @@ module motion_service #(
   logic        busy_x, busy_y, busy_z;
   logic [7:0]  pid_err_x, pid_err_y, pid_err_z;
   logic        move_end_pulse;
-  // Controle de homing
-  logic        home_pending;
-  logic [7:0]  home_frame_id;
-  logic [2:0]  home_axis_mask;
+
+  // Controle de homing detalhado
+  logic [2:0]  home_start_pending;   // pulsos de start para FSMs
+  logic [2:0]  home_axis_mask;       // eixos solicitados
+  logic [2:0]  home_done_mask;       // eixos concluídos
+  logic        home_active;          // existe homing em progresso
+  logic [7:0]  home_frame_id;        // frameId do request MOVE_HOME
+  logic        home_status_sched;    // agendar envio de HOME_STATUS
+  logic [7:0]  home_status_frame_id; // frameId do HOME_STATUS
+
+  // Sinais por eixo da FSM de homing
+  logic home_start_x, home_start_y, home_start_z;
+  logic home_done_x,  home_done_y,  home_done_z;
+  logic home_done_x_q, home_done_y_q, home_done_z_q;
+  wire  home_done_pulse_x = home_done_x & ~home_done_x_q;
+  wire  home_done_pulse_y = home_done_y & ~home_done_y_q;
+  wire  home_done_pulse_z = home_done_z & ~home_done_z_q;
+
+  // Offsets e posições relativas
+  logic [31:0]        home_offset_x, home_offset_y, home_offset_z;
+  logic [2:0]         home_valid;
+  logic signed [31:0] pos_rel_x, pos_rel_y, pos_rel_z;
 
 `ifdef __SIM_BUILD__
   localparam bit SAFETY_ENABLE = 1'b0;
@@ -202,6 +227,45 @@ module motion_service #(
     .o_position(), .o_prox_active()
   );
 
+  // FSM de homing por eixo -------------------------------------------------
+  axis_home_service #(.USE_INDEX(HOMING_USE_INDEX)) u_home_x (
+    .clk(clk), .rst_n(rst_n), .start_pulse(home_start_x),
+    .prox_active(prox_active_x), .idx_pulse(i_idx_pulse_x),
+    .running(), .coarse_done(), .done(home_done_x)
+  );
+  axis_home_service #(.USE_INDEX(HOMING_USE_INDEX)) u_home_y (
+    .clk(clk), .rst_n(rst_n), .start_pulse(home_start_y),
+    .prox_active(prox_active_y), .idx_pulse(i_idx_pulse_y),
+    .running(), .coarse_done(), .done(home_done_y)
+  );
+  axis_home_service #(.USE_INDEX(HOMING_USE_INDEX)) u_home_z (
+    .clk(clk), .rst_n(rst_n), .start_pulse(home_start_z),
+    .prox_active(prox_active_z), .idx_pulse(i_idx_pulse_z),
+    .running(), .coarse_done(), .done(home_done_z)
+  );
+
+  // Atualiza posição relativa em cada pid_tick
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      pos_rel_x <= '0; pos_rel_y <= '0; pos_rel_z <= '0;
+    end else if (pid_tick) begin
+      pos_rel_x <= home_valid[0] ? $signed(enc_pos_x) - $signed(home_offset_x) : 32'sd0;
+      pos_rel_y <= home_valid[1] ? $signed(enc_pos_y) - $signed(home_offset_y) : 32'sd0;
+      pos_rel_z <= home_valid[2] ? $signed(enc_pos_z) - $signed(home_offset_z) : 32'sd0;
+    end
+  end
+
+  // Registra conclusão de homing para geração de pulsos
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      home_done_x_q <= 1'b0; home_done_y_q <= 1'b0; home_done_z_q <= 1'b0;
+    end else begin
+      home_done_x_q <= home_done_x;
+      home_done_y_q <= home_done_y;
+      home_done_z_q <= home_done_z;
+    end
+  end
+
   // FSM de controle e stream de respostas -----------------------------------
   logic [2:0] start_pending;
   localparam int SHIFT_BITS = spi_service_pkg::RESP_MAX_BYTES * 8;
@@ -217,6 +281,9 @@ module motion_service #(
       start_x        <= 1'b0;
       start_y        <= 1'b0;
       start_z        <= 1'b0;
+      home_start_x   <= 1'b0;
+      home_start_y   <= 1'b0;
+      home_start_z   <= 1'b0;
       sync_req       <= 1'b0;
       move_end_pulse <= 1'b0;
       pending        <= 1'b0;
@@ -237,13 +304,24 @@ module motion_service #(
       cont_z         <= 1'b0;
       current_move_id<= 8'd0;
       start_pending  <= 3'b000;
-      home_pending   <= 1'b0;
-      home_frame_id  <= 8'd0;
+      home_start_pending <= 3'b000;
       home_axis_mask <= 3'd0;
+      home_done_mask <= 3'd0;
+      home_active    <= 1'b0;
+      home_frame_id  <= 8'd0;
+      home_status_sched <= 1'b0;
+      home_status_frame_id <= 8'd0;
+      home_valid     <= 3'b000;
+      home_offset_x  <= 32'd0;
+      home_offset_y  <= 32'd0;
+      home_offset_z  <= 32'd0;
     end else begin
       start_x        <= 1'b0;
       start_y        <= 1'b0;
       start_z        <= 1'b0;
+      home_start_x   <= 1'b0;
+      home_start_y   <= 1'b0;
+      home_start_z   <= 1'b0;
       sync_req       <= 1'b0;
       move_end_pulse <= 1'b0;
 
@@ -252,20 +330,44 @@ module motion_service #(
         move_enabled <= 1'b0;
 
       // Emite starts alinhados ao próximo tick
-      if (sync_start && (start_pending != 3'b000)) begin
+      if (sync_start && ((start_pending != 3'b000) || (home_start_pending != 3'b000))) begin
         start_x       <= start_pending[0];
         start_y       <= start_pending[1];
         start_z       <= start_pending[2];
         start_pending <= 3'b000;
+        home_start_x  <= home_start_pending[0];
+        home_start_y  <= home_start_pending[1];
+        home_start_z  <= home_start_pending[2];
+        home_start_pending <= 3'b000;
       end
 
-      // Resposta de homing quando sensor(es) do(s) eixo(s) requisitado(s) acionam
-      if (home_pending && (|(prox_mask & home_axis_mask)) && !pending) begin
+      // Captura conclusão de homing
+      if (home_done_pulse_x) begin
+        home_done_mask[0] <= 1'b1;
+        cont_x            <= 1'b0;
+        home_offset_x     <= enc_pos_x;
+        home_valid[0]     <= 1'b1;
+      end
+      if (home_done_pulse_y) begin
+        home_done_mask[1] <= 1'b1;
+        cont_y            <= 1'b0;
+        home_offset_y     <= enc_pos_y;
+        home_valid[1]     <= 1'b1;
+      end
+      if (home_done_pulse_z) begin
+        home_done_mask[2] <= 1'b1;
+        cont_z            <= 1'b0;
+        home_offset_z     <= enc_pos_z;
+        home_valid[2]     <= 1'b1;
+      end
+
+      // Finalização agregada do MOVE_HOME
+      if (home_active && ((home_done_mask & home_axis_mask) == home_axis_mask) && !pending) begin
         move_home_resp_bytes_t r;
         r = move_home_response_pkg::make_default();
         r.frameIdEcho  = home_frame_id;
-        r.status       = 8'd0; // ALL_OK
-        r.axisHomeMask = {5'b0, (prox_mask & home_axis_mask)};
+        r.status       = 8'd0;
+        r.axisHomeMask = {5'b0, home_axis_mask};
         r.errorFlags   = 8'd0;
         r = move_home_response_pkg::set_parity(r);
         pend_bits <= '0;
@@ -273,10 +375,30 @@ module motion_service #(
                   <= move_home_response_pkg::encoder(r);
         pend_len  <= move_home_response_pkg::FRAME_BITS/8;
         pending   <= 1'b1;
-        home_pending <= 1'b0;
-        cont_x <= 1'b0;
-        cont_y <= 1'b0;
-        cont_z <= 1'b0;
+        home_active <= 1'b0;
+        home_status_sched <= 1'b1;
+        home_status_frame_id <= home_frame_id;
+      end
+
+      // Envio de HOME_STATUS quando agendado e canal livre
+      if (!pending && home_status_sched) begin
+        home_status_resp_bytes_t r;
+        r = home_status_response_pkg::make_default();
+        r.frameIdEcho = home_status_frame_id;
+        r.axisMask    = {5'b0, home_valid};
+        r.posRelX_hi  = pos_rel_x[15:8];  r.posRelX_lo  = pos_rel_x[7:0];
+        r.posRelY_hi  = pos_rel_y[15:8];  r.posRelY_lo  = pos_rel_y[7:0];
+        r.posRelZ_hi  = pos_rel_z[15:8];  r.posRelZ_lo  = pos_rel_z[7:0];
+        r.homeOffX_hi = home_offset_x[15:8]; r.homeOffX_lo = home_offset_x[7:0];
+        r.homeOffY_hi = home_offset_y[15:8]; r.homeOffY_lo = home_offset_y[7:0];
+        r.homeOffZ_hi = home_offset_z[15:8]; r.homeOffZ_lo = home_offset_z[7:0];
+        r = home_status_response_pkg::set_parity(r);
+        pend_bits <= '0;
+        pend_bits[SHIFT_BITS-1 -: home_status_response_pkg::FRAME_BITS]
+                  <= home_status_response_pkg::encoder(r);
+        pend_len  <= home_status_response_pkg::FRAME_BITS/8;
+        pending   <= 1'b1;
+        home_status_sched <= 1'b0;
       end
 
       if (frame_valid) begin
@@ -347,11 +469,16 @@ module motion_service #(
               cont_y    <= move_home_frame.axisMask[1];
               cont_z    <= move_home_frame.axisMask[2];
               start_pending    <= move_home_frame.axisMask[2:0];
+              home_start_pending<= move_home_frame.axisMask[2:0];
               if (|move_home_frame.axisMask[2:0]) sync_req <= 1'b1;
               current_move_id  <= move_home_frame.frameId;
-              home_pending     <= |move_home_frame.axisMask[2:0];
-              home_frame_id    <= move_home_frame.frameId;
               home_axis_mask   <= move_home_frame.axisMask[2:0];
+              home_done_mask   <= 3'b000;
+              home_frame_id    <= move_home_frame.frameId;
+              home_active      <= |move_home_frame.axisMask[2:0];
+              if (move_home_frame.axisMask[0]) home_valid[0] <= 1'b0;
+              if (move_home_frame.axisMask[1]) home_valid[1] <= 1'b0;
+              if (move_home_frame.axisMask[2]) home_valid[2] <= 1'b0;
             end else begin
               move_home_resp_bytes_t r;
               r = move_home_response_pkg::make_default();
@@ -369,7 +496,7 @@ module motion_service #(
             move_queue_status_resp_bytes_t r;
             r = move_queue_status_response_pkg::make_default();
             r.frameIdEcho = current_move_id;
-            r.status      = (busy_x | busy_y | busy_z) ? 8'd0 : 8'd1; // Running/Idle
+            r.status      = (busy_x | busy_y | busy_z) ? 8'd0 : 8'd1;
             r.pidErrX     = 8'd0;
             r.pidErrY     = 8'd0;
             r.pidErrZ     = 8'd0;
@@ -379,6 +506,10 @@ module motion_service #(
                       <= move_queue_status_response_pkg::encoder(r);
             pend_len  <= 12;
             pending   <= 1'b1;
+            if (home_valid != 3'b111) begin
+              home_status_sched <= 1'b1;
+              home_status_frame_id <= queue_status_frame.frameId;
+            end
           end
           MOVE_END_TYPE: begin
             move_end_resp_bytes_t r;
