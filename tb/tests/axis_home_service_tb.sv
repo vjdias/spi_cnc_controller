@@ -53,7 +53,7 @@ module axis_home_service_tb;
     repeat (2) @(posedge clk); rst_n = 1;
 
     // inicia homing
-    start0 = 1; @(posedge clk); start0 = 0; @(posedge clk);
+    start0 = 1; @(posedge clk); start0 = 0;
     `TEST_ASSERT(running0, "coarse_running")
 
     // ativa prox -> deve finalizar sem idx
@@ -69,7 +69,7 @@ module axis_home_service_tb;
     repeat (2) @(posedge clk); rst_n = 1;
 
     // inicia homing
-    start1 = 1; @(posedge clk); start1 = 0; @(posedge clk);
+    start1 = 1; @(posedge clk); start1 = 0;
     `TEST_ASSERT(running1 && !coarse_done1 && !done1, "fine_start")
 
     // ativa prox -> entra em FINE aguardando índice
