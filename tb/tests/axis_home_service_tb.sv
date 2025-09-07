@@ -53,12 +53,15 @@ module axis_home_service_tb;
     repeat (2) @(posedge clk); rst_n = 1;
 
     // inicia homing
-    start0 = 1; @(posedge clk); start0 = 0; @(posedge clk);
+    $display("[coarse] start_pulse");
+    start0 = 1; @(posedge clk); start0 = 0; repeat (2) @(posedge clk);
+    $display("[coarse] running esperado=1 obtido=%0b", running0);
     `TEST_ASSERT(running0, "coarse_running")
 
     // ativa prox -> deve finalizar sem idx
     repeat (5) @(posedge clk);
-    prox0 = 1; @(posedge clk);
+    prox0 = 1; @(posedge clk); repeat (2) @(posedge clk);
+    $display("[coarse] coarse_done esperado=1 obtido=%0b, done esperado=1 obtido=%0b", coarse_done0, done0);
     `TEST_ASSERT(coarse_done0 && done0, "coarse_done")
   endtask
 
@@ -69,16 +72,20 @@ module axis_home_service_tb;
     repeat (2) @(posedge clk); rst_n = 1;
 
     // inicia homing
-    start1 = 1; @(posedge clk); start1 = 0; @(posedge clk);
+    $display("[fine] start_pulse");
+    start1 = 1; @(posedge clk); start1 = 0; repeat (2) @(posedge clk);
+    $display("[fine] running esperado=1 obtido=%0b, coarse_done= %0b, done=%0b", running1, coarse_done1, done1);
     `TEST_ASSERT(running1 && !coarse_done1 && !done1, "fine_start")
 
     // ativa prox -> entra em FINE aguardando índice
     repeat (5) @(posedge clk);
-    prox1 = 1; @(posedge clk);
+    prox1 = 1; @(posedge clk); repeat (2) @(posedge clk);
+    $display("[fine] após prox: coarse_done esperado=1 obtido=%0b, done esperado=0 obtido=%0b", coarse_done1, done1);
     `TEST_ASSERT(coarse_done1 && !done1, "fine_waiting")
 
     // gera pulsos AB e índice conforme PPR
     gen_abz(ppr);
+    $display("[fine] após idx: done esperado=1 obtido=%0b", done1);
     `TEST_ASSERT(done1, $sformatf("fine_done_%0d", ppr))
   endtask
 
