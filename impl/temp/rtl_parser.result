@@ -117,7 +117,7 @@
    },
    {
     "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv",
-    "InstLine" : 428,
+    "InstLine" : 429,
     "InstName" : "u_motion",
     "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
     "ModuleLine" : 13,
@@ -125,7 +125,7 @@
     "SubInsts" : [
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 66,
+      "InstLine" : 73,
       "InstName" : "u_prox_x",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
       "ModuleLine" : 16,
@@ -133,7 +133,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 72,
+      "InstLine" : 79,
       "InstName" : "u_prox_y",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
       "ModuleLine" : 16,
@@ -141,7 +141,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 78,
+      "InstLine" : 85,
       "InstName" : "u_prox_z",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv",
       "ModuleLine" : 16,
@@ -149,7 +149,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 89,
+      "InstLine" : 96,
       "InstName" : "u_estop",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv",
       "ModuleLine" : 16,
@@ -157,7 +157,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 111,
+      "InstLine" : 118,
       "InstName" : "u_tick",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv",
       "ModuleLine" : 9,
@@ -165,7 +165,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 175,
+      "InstLine" : 200,
       "InstName" : "u_axis_x",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -191,7 +191,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 185,
+      "InstLine" : 210,
       "InstName" : "u_axis_y",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -217,7 +217,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 195,
+      "InstLine" : 220,
       "InstName" : "u_axis_z",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -240,6 +240,30 @@
         "ModuleName" : "tmc5160_step_dir_driver"
        }
       ]
+     },
+     {
+      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
+      "InstLine" : 231,
+      "InstName" : "u_home_x",
+      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
+      "ModuleLine" : 27,
+      "ModuleName" : "axis_home_service"
+     },
+     {
+      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
+      "InstLine" : 236,
+      "InstName" : "u_home_y",
+      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
+      "ModuleLine" : 27,
+      "ModuleName" : "axis_home_service"
+     },
+     {
+      "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
+      "InstLine" : 241,
+      "InstName" : "u_home_z",
+      "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
+      "ModuleLine" : 27,
+      "ModuleName" : "axis_home_service"
      }
     ]
    }
