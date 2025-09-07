@@ -165,7 +165,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 200,
+      "InstLine" : 202,
       "InstName" : "u_axis_x",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -191,7 +191,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 210,
+      "InstLine" : 212,
       "InstName" : "u_axis_y",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -217,7 +217,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 220,
+      "InstLine" : 222,
       "InstName" : "u_axis_z",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv",
       "ModuleLine" : 4,
@@ -243,7 +243,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 231,
+      "InstLine" : 233,
       "InstName" : "u_home_x",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
       "ModuleLine" : 27,
@@ -251,7 +251,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 236,
+      "InstLine" : 238,
       "InstName" : "u_home_y",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
       "ModuleLine" : 27,
@@ -259,7 +259,7 @@
      },
      {
       "InstFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv",
-      "InstLine" : 241,
+      "InstLine" : 243,
       "InstName" : "u_home_z",
       "ModuleFile" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv",
       "ModuleLine" : 27,
