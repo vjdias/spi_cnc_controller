@@ -512,7 +512,6 @@ module motion_service #(
             end
           end
           MOVE_END_TYPE: begin
-            move_end_resp_bytes_t r;
             move_enabled  <= 1'b0;
             move_end_pulse <= 1'b1;
             ff_rate_x    <= 32'd0;
@@ -521,12 +520,8 @@ module motion_service #(
             kp_x <= 16'd0; ki_x <= 16'd0; kd_x <= 16'd0;
             kp_y <= 16'd0; ki_y <= 16'd0; kd_y <= 16'd0;
             kp_z <= 16'd0; ki_z <= 16'd0; kd_z <= 16'd0;
-            r = move_end_response_pkg::make_default();
-            r.frameIdEcho = move_end_frame.frameId;
-            pend_bits      <= '0;
-            pend_bits[SHIFT_BITS-1 -: 32] <= move_end_response_pkg::encoder(r);
-            pend_len       <= 4;
-            pending        <= 1'b1;
+            move_end_sched    <= 1'b1;
+            move_end_frame_id <= move_end_frame.frameId;
           end
           default: begin end
         endcase

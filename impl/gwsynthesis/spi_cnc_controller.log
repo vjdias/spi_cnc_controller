@@ -20,6 +20,7 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\led_control_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_end_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_home_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\home_status_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_probe_level_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_add_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_status_response_pkg.sv'
@@ -40,6 +41,7 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_home_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv'
@@ -59,13 +61,14 @@ Extracting RAM for identifier 'mem'("C:\Users\Valdir\Documents\Develop\fpga\tang
 Compiling module 'spi_rx_hub_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv":99)
 Compiling module 'led_service(tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv":10)
 Compiling module 'quad_encoder_tmcs28_driver(POS_WIDTH=32'b00000000000000000000000000100000,FILTER_CYCLES=32'b00000000000000000000000000000000,INDEX_OFFSET=32'b00000000000000000000000000000000,MODULO=32'b00000000000000000000000000000000,VEL_WINDOW_CYCLES=32'b00000000000000000000000000000000,COUNT_MODE=32'b00000000000000000000000000000100)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv":18)
-Compiling module 'motion_service(PROX_IS_PNP=1'b0,tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":13)
+Compiling module 'motion_service(PROX_IS_PNP=1'b0,HOMING_USE_INDEX=1'b1,tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":13)
 Compiling module 'lj12a3_proximity_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv":16)
 Compiling module 'emergency_stop_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv":16)
 Compiling module 'tick_gen'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv":9)
 Compiling module 'axis_controller_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller_service.sv":4)
 Compiling module 'pid_axis_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv":4)
 Compiling module 'tmc5160_step_dir_driver(SYNC_MODE=32'b00000000000000000000000000000001)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv":16)
+Compiling module 'axis_home_service(USE_INDEX=1'b1)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_home_service.sv":27)
 NOTE  (EX0101) : Current top module is "top"
 [5%] Running netlist conversion ...
 Running device independent optimization ...

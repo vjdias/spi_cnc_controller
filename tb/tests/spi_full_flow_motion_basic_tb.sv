@@ -232,6 +232,11 @@ module spi_full_flow_motion_basic_tb;
     start_move_resp_bytes_t dec;
     for (int i = 0; i < 4; i++) raw[31 - i*8 -: 8] = resp_bytes[start_idx + i];
     dec = start_move_response_pkg::decoder(raw);
+    $display("[START_MOVE] header=%02X (exp=%02X) tail=%02X (exp=%02X) msgType=%02X (exp=%02X) frameIdEcho=%02X (exp=%02X)",
+             dec.header, protocol_constants_pkg::RESP_HEADER,
+             dec.tail,   protocol_constants_pkg::RESP_TAIL,
+             dec.msgType, protocol_constants_pkg::START_MOVE_TYPE,
+             dec.frameIdEcho, frameId);
     `TEST_ASSERT(dec.header == protocol_constants_pkg::RESP_HEADER, "sm_header")
     `TEST_ASSERT(dec.tail   == protocol_constants_pkg::RESP_TAIL,   "sm_tail")
     `TEST_ASSERT(dec.msgType == protocol_constants_pkg::START_MOVE_TYPE, "sm_type")
@@ -243,6 +248,11 @@ module spi_full_flow_motion_basic_tb;
     move_queue_add_resp_bytes_t dec;
     for (int i = 0; i < 6; i++) raw[47 - i*8 -: 8] = resp_bytes[start_idx + i];
     dec = move_queue_add_response_pkg::decoder(raw);
+    $display("[MOVE_QUEUE_ADD] parity=%0d msgType=%02X (exp=%02X) frameIdEcho=%02X (exp=%02X) status=%02X (exp=%02X)",
+             move_queue_add_response_pkg::check_parity(dec),
+             dec.msgType, protocol_constants_pkg::MOVE_TYPE,
+             dec.frameIdEcho, frameId,
+             dec.status, exp_status);
     `TEST_ASSERT(move_queue_add_response_pkg::check_parity(dec), "mq_parity")
     `TEST_ASSERT(dec.msgType == protocol_constants_pkg::MOVE_TYPE, "mq_type")
     `TEST_ASSERT(dec.frameIdEcho == frameId, "mq_frameid")
@@ -254,6 +264,10 @@ module spi_full_flow_motion_basic_tb;
     move_queue_status_resp_bytes_t dec;
     for (int i = 0; i < 12; i++) raw[95 - i*8 -: 8] = resp_bytes[start_idx + i];
     dec = move_queue_status_response_pkg::decoder(raw);
+    $display("[MOVE_QUEUE_STATUS] parity=%0d msgType=%02X (exp=%02X) status=%02X (exp=%02X)",
+             move_queue_status_response_pkg::check_parity(dec),
+             dec.msgType, protocol_constants_pkg::MOVE_QUEUE_STATUS_TYPE,
+             dec.status, exp_status);
     `TEST_ASSERT(move_queue_status_response_pkg::check_parity(dec), "mqs_parity")
     `TEST_ASSERT(dec.msgType == protocol_constants_pkg::MOVE_QUEUE_STATUS_TYPE, "mqs_type")
     `TEST_ASSERT(dec.status == exp_status, "mqs_status")
@@ -264,6 +278,9 @@ module spi_full_flow_motion_basic_tb;
     move_end_resp_bytes_t dec;
     for (int i = 0; i < 4; i++) raw[31 - i*8 -: 8] = resp_bytes[start_idx + i];
     dec = move_end_response_pkg::decoder(raw);
+    $display("[MOVE_END] msgType=%02X (exp=%02X) frameIdEcho=%02X (exp=%02X)",
+             dec.msgType, protocol_constants_pkg::MOVE_END_TYPE,
+             dec.frameIdEcho, frameId);
     `TEST_ASSERT(dec.msgType == protocol_constants_pkg::MOVE_END_TYPE, "me_type")
     `TEST_ASSERT(dec.frameIdEcho == frameId, "me_frameid")
   endtask
@@ -273,6 +290,11 @@ module spi_full_flow_motion_basic_tb;
     home_status_resp_bytes_t dec;
     for (int i = 0; i < (home_status_response_pkg::FRAME_BITS/8); i++) raw[home_status_response_pkg::FRAME_BITS-1 - i*8 -: 8] = resp_bytes[start_idx + i];
     dec = home_status_response_pkg::decoder(raw);
+    $display("[HOME_STATUS] parity=%0d msgType=%02X (exp=%02X) frameIdEcho=%02X (exp=%02X) axisMask=%03b (exp=%03b)",
+             home_status_response_pkg::check_parity(dec),
+             dec.msgType, protocol_constants_pkg::HOME_STATUS_TYPE,
+             dec.frameIdEcho, frameId,
+             dec.axisMask[2:0], axisMask[2:0]);
     `TEST_ASSERT(home_status_response_pkg::check_parity(dec), "hs_parity")
     `TEST_ASSERT(dec.msgType == protocol_constants_pkg::HOME_STATUS_TYPE, "hs_type")
     `TEST_ASSERT(dec.frameIdEcho == frameId, "hs_echo")
@@ -311,14 +333,17 @@ module spi_full_flow_motion_basic_tb;
     rst_n = 1;
 
     // 1) START_MOVE
+    $display("[SEQ] START_MOVE");
     send_start_move(8'h10);
 
     // 2) MOVE_QUEUE_ADD: mover 10 passos no eixo X, dir=1, vx=1 step/tick
+    $display("[SEQ] MOVE_QUEUE_ADD");
     send_move_queue_add(8'h11, 8'b0000_0001, 32'd10, 32'd0, 32'd0,
                         8'd1, 8'd0, 8'd0,
                         16'd0, 16'd0, 16'd0);
 
     // 3) MOVE_QUEUE_STATUS (deve indicar Running durante os passos)
+    $display("[SEQ] MOVE_QUEUE_STATUS running");
     send_move_queue_status(8'h12);
 
     // 4) Aguarda gerar 10 pulsos STEP_X (timeout razoável)
@@ -326,12 +351,15 @@ module spi_full_flow_motion_basic_tb;
     while (step_count_x < 10 && cycles < 200000) begin
       @(posedge clk); cycles++;
     end
+    $display("[STEP_GEN] passos_x=%0d (esperado>=10) ciclos=%0d", step_count_x, cycles);
     `TEST_ASSERT(step_count_x >= 10, "timeout_steps_x")
 
     // 5) MOVE_QUEUE_STATUS (agora deve indicar Idle)
+    $display("[SEQ] MOVE_QUEUE_STATUS idle");
     send_move_queue_status(8'h13);
 
     // 6) MOVE_END encerra sessão (desabilita ENN)
+    $display("[SEQ] MOVE_END");
     send_move_end(8'h14);
 
     // Aguarda bytes chegarem: 4 + 6 + (12+18) + (12+18) + 4 = 74 bytes
@@ -352,6 +380,7 @@ module spi_full_flow_motion_basic_tb;
     check_move_end_resp_at(idx, 8'h14); idx += 4;
 
     // ENN deve ter sido desativado após MOVE_END (ativo-baixo)
+    $display("[ENN] valor=%0b (esperado=1)", tmc_enn_x);
     `TEST_ASSERT(tmc_enn_x == 1'b1, "enn_x_desativado")
 
     $display("Sucesso: spi_full_flow_motion_basic_tb");
