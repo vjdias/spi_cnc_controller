@@ -26,6 +26,7 @@ tb_files = [
     tb_dir / "spi_tx_buffer_tb.sv",
     tb_dir / "spi_full_flow_led_20_tb.sv",
     tb_dir / "spi_tx_hub_service_tb.sv",
+    tb_dir / "axis_home_service_tb.sv",
     # Motion end-to-end tests (SPI -> tick -> STEP)
     tb_dir / "spi_full_flow_motion_basic_tb.sv",
     tb_dir / "spi_full_flow_motion_home_tb.sv",
