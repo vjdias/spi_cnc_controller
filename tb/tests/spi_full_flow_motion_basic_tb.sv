@@ -15,6 +15,7 @@ module spi_full_flow_motion_basic_tb;
   import move_queue_status_response_pkg::*;
   import move_end_request_pkg::*;
   import move_end_response_pkg::*;
+  import home_status_response_pkg::*;
 
   // Clock/reset
   logic clk = 0;
@@ -102,11 +103,13 @@ module spi_full_flow_motion_basic_tb;
     .probe_frame('0),
     .queue_status_frame(queue_status_frame),
     .enc_pos_x(enc_pos), .enc_pos_y(32'd0), .enc_pos_z(32'd0),
+    .i_idx_pulse_x(1'b0), .i_idx_pulse_y(1'b0), .i_idx_pulse_z(1'b0),
     .i_prox_in_x(prox_in), .i_prox_in_y(1'b0), .i_prox_in_z(1'b0),
     .i_estop_in(estop_in),
     .tmc_step_x(tmc_step_x), .tmc_dir_x(tmc_dir_x), .tmc_enn_x(tmc_enn_x),
     .tmc_step_y(tmc_step_y), .tmc_dir_y(tmc_dir_y), .tmc_enn_y(tmc_enn_y),
     .tmc_step_z(tmc_step_z), .tmc_dir_z(tmc_dir_z), .tmc_enn_z(tmc_enn_z),
+    .o_moving(),
     .tx_stream(motion_stream)
   );
 
@@ -130,7 +133,7 @@ module spi_full_flow_motion_basic_tb;
   );
 
   // Captura de bytes de resposta
-  localparam int RESP_CAP_BYTES = 64;
+  localparam int RESP_CAP_BYTES = 128;
   spi_service_pkg::byte_t resp_bytes[RESP_CAP_BYTES];
   int unsigned resp_byte_count;
 
@@ -265,6 +268,17 @@ module spi_full_flow_motion_basic_tb;
     `TEST_ASSERT(dec.frameIdEcho == frameId, "me_frameid")
   endtask
 
+  task automatic check_home_status_resp_at(input int start_idx, input spi_service_pkg::byte_t frameId, input spi_service_pkg::byte_t axisMask);
+    logic [home_status_response_pkg::FRAME_BITS-1:0] raw;
+    home_status_resp_bytes_t dec;
+    for (int i = 0; i < (home_status_response_pkg::FRAME_BITS/8); i++) raw[home_status_response_pkg::FRAME_BITS-1 - i*8 -: 8] = resp_bytes[start_idx + i];
+    dec = home_status_response_pkg::decoder(raw);
+    `TEST_ASSERT(home_status_response_pkg::check_parity(dec), "hs_parity")
+    `TEST_ASSERT(dec.msgType == protocol_constants_pkg::HOME_STATUS_TYPE, "hs_type")
+    `TEST_ASSERT(dec.frameIdEcho == frameId, "hs_echo")
+    `TEST_ASSERT(dec.axisMask[2:0] == axisMask[2:0], "hs_mask")
+  endtask
+
   // Contadores de passos (bordas de subida de STEP)
   int step_count_x, step_count_y, step_count_z;
   logic prev_step_x, prev_step_y, prev_step_z;
@@ -320,19 +334,21 @@ module spi_full_flow_motion_basic_tb;
     // 6) MOVE_END encerra sessão (desabilita ENN)
     send_move_end(8'h14);
 
-    // Aguarda bytes chegarem: 4 + 6 + 12 + 12 + 4 = 38 bytes
+    // Aguarda bytes chegarem: 4 + 6 + (12+18) + (12+18) + 4 = 74 bytes
     cycles = 0;
-    while (resp_byte_count < 38 && cycles < 2000) begin
+    while (resp_byte_count < 74 && cycles < 2000) begin
       @(posedge clk); cycles++;
     end
-    `TEST_ASSERT(resp_byte_count >= 38, "timeout_respostas")
+    `TEST_ASSERT(resp_byte_count >= 74, "timeout_respostas")
 
     // Decodifica e checa respostas
     idx = 0;
     check_start_move_resp_at(idx, 8'h10); idx += 4;
     check_move_queue_add_resp_at(idx, 8'h11, 8'h00); idx += 6;
     check_move_queue_status_resp_at(idx, 8'h00); idx += 12; // Running
+    check_home_status_resp_at(idx, 8'h12, 8'b0000_0000); idx += 18;
     check_move_queue_status_resp_at(idx, 8'h01); idx += 12; // Idle
+    check_home_status_resp_at(idx, 8'h13, 8'b0000_0000); idx += 18;
     check_move_end_resp_at(idx, 8'h14); idx += 4;
 
     // ENN deve ter sido desativado após MOVE_END (ativo-baixo)
