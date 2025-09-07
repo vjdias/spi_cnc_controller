@@ -93,8 +93,12 @@ for tb in tb_files:
 
     proc = subprocess.run([str(obj_dir / f"V{top}")], cwd=root, capture_output=True, text=True)
     print(proc.stdout)
-    if proc.returncode != 0 or "Sucesso" not in proc.stdout:
+    expected_str = "Sucesso"
+    print(f"Esperado: saída contendo '{expected_str}' para {top}")
+    print(f"Recebido: {proc.stdout.strip()}")
+    if proc.returncode != 0 or expected_str not in proc.stdout:
         print(proc.stderr)
+        print(f"Falha: {top}")
         success = False
         break
 

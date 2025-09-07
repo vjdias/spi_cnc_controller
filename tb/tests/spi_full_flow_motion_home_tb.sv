@@ -11,6 +11,7 @@ module spi_full_flow_motion_home_tb;
   import start_move_response_pkg::*;
   import move_home_request_pkg::*;
   import move_home_response_pkg::*;
+  import home_status_response_pkg::*;
 
   // Dump de ondas para inspeção (Verilator)
 `ifdef VERILATOR
@@ -47,6 +48,7 @@ module spi_full_flow_motion_home_tb;
   logic [31:0] enc_pos;
   logic signed [31:0] enc_vel;
   logic prox_in, estop_in;
+  logic idx_pulse;
   logic tmc_step_x, tmc_dir_x, tmc_enn_x;
   logic tmc_step_y, tmc_dir_y, tmc_enn_y;
   logic tmc_step_z, tmc_dir_z, tmc_enn_z;
@@ -93,7 +95,7 @@ module spi_full_flow_motion_home_tb;
     .led_ctrl_frame()
   );
 
-  motion_service u_motion(
+  motion_service #(.HOMING_USE_INDEX(1)) u_motion(
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid),
     .msgType(out_msgType),
@@ -104,11 +106,13 @@ module spi_full_flow_motion_home_tb;
     .probe_frame('0),
     .queue_status_frame('0),
     .enc_pos_x(enc_pos), .enc_pos_y(32'd0), .enc_pos_z(32'd0),
+    .i_idx_pulse_x(idx_pulse), .i_idx_pulse_y(1'b0), .i_idx_pulse_z(1'b0),
     .i_prox_in_x(prox_in), .i_prox_in_y(1'b0), .i_prox_in_z(1'b0),
     .i_estop_in(estop_in),
     .tmc_step_x(tmc_step_x), .tmc_dir_x(tmc_dir_x), .tmc_enn_x(tmc_enn_x),
     .tmc_step_y(tmc_step_y), .tmc_dir_y(tmc_dir_y), .tmc_enn_y(tmc_enn_y),
     .tmc_step_z(tmc_step_z), .tmc_dir_z(tmc_dir_z), .tmc_enn_z(tmc_enn_z),
+    .o_moving(),
     .tx_stream(motion_stream)
   );
 
@@ -210,6 +214,18 @@ module spi_full_flow_motion_home_tb;
     `TEST_ASSERT(dec.axisHomeMask[2:0] == axisMask[2:0], "mh_axis_mask")
   endtask
 
+  task automatic check_home_status_resp_at(input int start_idx, input spi_service_pkg::byte_t frameId, input spi_service_pkg::byte_t axisMask);
+    logic [home_status_response_pkg::FRAME_BITS-1:0] raw;
+    home_status_resp_bytes_t dec;
+    for (int i = 0; i < 18; i++) raw[home_status_response_pkg::FRAME_BITS-1 - i*8 -:8] = resp_bytes[start_idx + i];
+    dec = home_status_response_pkg::decoder(raw);
+    `TEST_ASSERT(home_status_response_pkg::check_parity(dec), "hs_parity");
+    `TEST_ASSERT(dec.msgType == protocol_constants_pkg::HOME_STATUS_TYPE, "hs_type");
+    `TEST_ASSERT(dec.frameIdEcho == frameId, "hs_echo");
+    `TEST_ASSERT(dec.axisMask[2:0] == axisMask[2:0], "hs_axis");
+    `TEST_ASSERT(dec.posRelX == 16'd0, "hs_posrel0");
+  endtask
+
   // Contagem de passos (X)
   int step_count_x;
   logic prev_step_x;
@@ -234,6 +250,7 @@ module spi_full_flow_motion_home_tb;
     // Portanto, o nível "seguro" (não acionado) é 0, e 1 aciona o sensor.
     prox_in = 1'b0; // PROX seguro (não acionado)
     estop_in = 1'b1; // E-STOP NC seguro
+    idx_pulse = 1'b0;
     // Resets performed in always_ff blocks
 
     repeat (4) @(posedge clk);
@@ -254,20 +271,28 @@ module spi_full_flow_motion_home_tb;
     end
     `TEST_ASSERT(step_count_x >= 5, "timeout_steps_home_start")
 
-    // Dispara sensor de proximidade (ativo-alto) -> deve gerar resposta MOVE_HOME
+    // Dispara sensor de proximidade (ativo-alto)
     prox_in = 1'b1;
 
-    // Espera bytes: 4 (start_move) + 8 (move_home resp) = 12
+    // Aguarda alguns passos adicionais e emite pulso de índice
     cycles = 0;
-    while (resp_byte_count < 12 && cycles < 2000) begin
+    while (step_count_x < 10 && cycles < 500000) begin
       @(posedge clk); cycles++;
     end
-    `TEST_ASSERT(resp_byte_count >= 12, "timeout_home_resp")
+    idx_pulse = 1'b1; @(posedge clk); idx_pulse = 1'b0;
+
+    // Espera bytes: 4 (start_move) + 8 (move_home resp) + 18 (home_status) = 30
+    cycles = 0;
+    while (resp_byte_count < 30 && cycles < 5000) begin
+      @(posedge clk); cycles++;
+    end
+    `TEST_ASSERT(resp_byte_count >= 30, "timeout_home_resp")
 
     // Checa respostas
     idx = 0;
     check_start_move_resp_at(idx, 8'h20); idx += 4;
     check_move_home_resp_at(idx, 8'h21, 8'b0000_0001); idx += 8;
+    check_home_status_resp_at(idx, 8'h21, 8'b0000_0001); idx += 18;
 
     // Após homing completo, movimento contínuo deve parar (contadores estabilizam)
     prev_cnt = step_count_x;

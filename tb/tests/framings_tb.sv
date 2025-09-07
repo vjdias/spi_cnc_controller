@@ -228,6 +228,24 @@ module framings_tb;
     $display("Sucesso: test_move_queue_add_response");
   endtask
 
+  task automatic test_home_status_response();
+    home_status_response_pkg::home_status_resp_bytes_t r;
+    logic [home_status_response_pkg::FRAME_BITS-1:0] raw;
+    home_status_response_pkg::home_status_resp_bytes_t d;
+    r = home_status_response_pkg::make_default();
+    r.frameIdEcho = 8'h70;
+    r.axisMask    = 8'h07;
+    r.posRelX     = 16'h0001; r.homeOffX = 16'h0002;
+    r.posRelY     = 16'h0003; r.homeOffY = 16'h0004;
+    r.posRelZ     = 16'h0005; r.homeOffZ = 16'h0006;
+    r = home_status_response_pkg::set_parity(r);
+    `TEST_ASSERT(home_status_response_pkg::check_parity(r), "test_home_status_response");
+    raw = home_status_response_pkg::encoder(r);
+    d   = home_status_response_pkg::decoder(raw);
+    `TEST_ASSERT(d == r, "test_home_status_response");
+    $display("Sucesso: test_home_status_response");
+  endtask
+
   task automatic test_move_probe_level_response();
     move_probe_level_response_pkg::move_probe_level_resp_bytes_t r;
     logic [159:0] raw;
@@ -279,6 +297,7 @@ module framings_tb;
     test_fpga_status_response();
     test_move_queue_add_response();
     test_move_probe_level_response();
+    test_home_status_response();
     test_led_ctrl_response();
     $display("All framing tests passed");
     $finish;

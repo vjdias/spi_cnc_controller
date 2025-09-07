@@ -14,7 +14,8 @@ module motion_service #(
     // Configuração elétrica dos sensores de proximidade por eixo
     // PROX_IS_PNP=1 => PNP; 0 => NPN. PROX_IS_NO=1 => Normalmente Aberto; 0 => Normalmente Fechado
     parameter bit PROX_IS_PNP = 1'b1,
-    parameter bit PROX_IS_NO  = 1'b1
+    parameter bit PROX_IS_NO  = 1'b1,
+    parameter bit HOMING_USE_INDEX = 1'b1
 ) (
     input  logic clk,
     input  logic rst_n,
@@ -31,6 +32,10 @@ module motion_service #(
     input  logic [31:0]        enc_pos_x,
     input  logic [31:0]        enc_pos_y,
     input  logic [31:0]        enc_pos_z,
+    // Pulsos de índice Z por eixo
+    input  logic i_idx_pulse_x,
+    input  logic i_idx_pulse_y,
+    input  logic i_idx_pulse_z,
     // Sensores brutos por eixo
     input  logic i_prox_in_x,
     input  logic i_prox_in_y,
@@ -54,6 +59,7 @@ module motion_service #(
   import move_probe_level_request_pkg::*;
   import move_queue_status_request_pkg::*;
   import move_home_response_pkg::*;
+  import home_status_response_pkg::*;
   import move_queue_status_response_pkg::*;
   import start_move_response_pkg::*;
   import move_queue_add_response_pkg::*;
@@ -138,6 +144,14 @@ module motion_service #(
   logic        home_pending;
   logic [7:0]  home_frame_id;
   logic [2:0]  home_axis_mask;
+  logic signed [31:0] home_offset_x, home_offset_y, home_offset_z;
+  logic signed [31:0] pos_rel_x, pos_rel_y, pos_rel_z;
+  logic [2:0]  home_valid;
+  logic [2:0]  home_done_mask;
+  logic        home_status_req;
+  logic        home_start_x, home_start_y, home_start_z;
+  logic        home_active_x, home_active_y, home_active_z;
+  logic        home_done_pulse_x, home_done_pulse_y, home_done_pulse_z;
 
 `ifdef __SIM_BUILD__
   localparam bit SAFETY_ENABLE = 1'b0;
@@ -145,9 +159,12 @@ module motion_service #(
   localparam bit SAFETY_ENABLE = 1'b1;
 `endif
   // Stop/enable por eixo (E-STOP global + prox do próprio eixo)
-  assign stop_x = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_x) : 1'b0) | move_end_pulse);
-  assign stop_y = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_y) : 1'b0) | move_end_pulse);
-  assign stop_z = ((SAFETY_ENABLE ? (estop_inhibit | prox_active_z) : 1'b0) | move_end_pulse);
+  assign stop_x = ((SAFETY_ENABLE ? (estop_inhibit | (prox_active_x & ~home_active_x)) : 1'b0)
+                   | move_end_pulse | home_done_pulse_x);
+  assign stop_y = ((SAFETY_ENABLE ? (estop_inhibit | (prox_active_y & ~home_active_y)) : 1'b0)
+                   | move_end_pulse | home_done_pulse_y);
+  assign stop_z = ((SAFETY_ENABLE ? (estop_inhibit | (prox_active_z & ~home_active_z)) : 1'b0)
+                   | move_end_pulse | home_done_pulse_z);
 
   // Cálculo de velocidades por eixo (diferença por pid_tick)
   logic [31:0]        enc_pos_x_q, enc_pos_y_q, enc_pos_z_q;
@@ -168,9 +185,9 @@ module motion_service #(
 
   // Eixos (axis_controller_service agrega PID + driver + prox local — usa prox local)
   logic drv_enable_x, drv_enable_y, drv_enable_z;
-  assign drv_enable_x = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_x) : tick_enable;
-  assign drv_enable_y = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_y) : tick_enable;
-  assign drv_enable_z = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~prox_active_z) : tick_enable;
+  assign drv_enable_x = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~(prox_active_x & ~home_active_x)) : tick_enable;
+  assign drv_enable_y = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~(prox_active_y & ~home_active_y)) : tick_enable;
+  assign drv_enable_z = SAFETY_ENABLE ? (tick_enable & ~estop_inhibit & ~(prox_active_z & ~home_active_z)) : tick_enable;
 
   axis_controller_service u_axis_x (
     .clk(clk), .rst_n(rst_n),
@@ -200,6 +217,20 @@ module motion_service #(
     .i_enc_pos(enc_pos_z), .i_enc_vel(enc_vel_z), .i_prox_in(i_prox_in_z),
     .o_step(tmc_step_z), .o_dir(tmc_dir_z), .o_enn(tmc_enn_z), .o_busy(busy_z),
     .o_position(), .o_prox_active()
+  );
+
+  // FSM de homing por eixo
+  axis_home_service #(.HOMING_USE_INDEX(HOMING_USE_INDEX)) u_home_x (
+    .clk(clk), .rst_n(rst_n), .start(home_start_x), .prox_active(prox_active_x),
+    .idx_pulse(i_idx_pulse_x), .homing(home_active_x), .done_pulse(home_done_pulse_x)
+  );
+  axis_home_service #(.HOMING_USE_INDEX(HOMING_USE_INDEX)) u_home_y (
+    .clk(clk), .rst_n(rst_n), .start(home_start_y), .prox_active(prox_active_y),
+    .idx_pulse(i_idx_pulse_y), .homing(home_active_y), .done_pulse(home_done_pulse_y)
+  );
+  axis_home_service #(.HOMING_USE_INDEX(HOMING_USE_INDEX)) u_home_z (
+    .clk(clk), .rst_n(rst_n), .start(home_start_z), .prox_active(prox_active_z),
+    .idx_pulse(i_idx_pulse_z), .homing(home_active_z), .done_pulse(home_done_pulse_z)
   );
 
   // FSM de controle e stream de respostas -----------------------------------
@@ -240,10 +271,19 @@ module motion_service #(
       home_pending   <= 1'b0;
       home_frame_id  <= 8'd0;
       home_axis_mask <= 3'd0;
+      home_offset_x  <= '0; home_offset_y <= '0; home_offset_z <= '0;
+      pos_rel_x      <= '0; pos_rel_y    <= '0; pos_rel_z    <= '0;
+      home_valid     <= 3'b000;
+      home_done_mask <= 3'b000;
+      home_status_req<= 1'b0;
+      home_start_x   <= 1'b0; home_start_y <= 1'b0; home_start_z <= 1'b0;
     end else begin
       start_x        <= 1'b0;
       start_y        <= 1'b0;
       start_z        <= 1'b0;
+      home_start_x   <= 1'b0;
+      home_start_y   <= 1'b0;
+      home_start_z   <= 1'b0;
       sync_req       <= 1'b0;
       move_end_pulse <= 1'b0;
 
@@ -251,21 +291,61 @@ module motion_service #(
       if (SAFETY_ENABLE && estop_inhibit)
         move_enabled <= 1'b0;
 
+      // Atualiza pos_rel continuamente após homing válido
+      if (home_valid[0])
+        pos_rel_x <= $signed(enc_pos_x) - home_offset_x;
+      else
+        pos_rel_x <= 32'sd0;
+      if (home_valid[1])
+        pos_rel_y <= $signed(enc_pos_y) - home_offset_y;
+      else
+        pos_rel_y <= 32'sd0;
+      if (home_valid[2])
+        pos_rel_z <= $signed(enc_pos_z) - home_offset_z;
+      else
+        pos_rel_z <= 32'sd0;
+
+      // Captura offsets ao concluir homing por eixo
+      if (home_done_pulse_x) begin
+        home_offset_x  <= enc_pos_x;
+        pos_rel_x      <= 32'sd0;
+        home_valid[0]  <= 1'b1;
+        home_done_mask[0] <= 1'b1;
+        cont_x         <= 1'b0;
+      end
+      if (home_done_pulse_y) begin
+        home_offset_y  <= enc_pos_y;
+        pos_rel_y      <= 32'sd0;
+        home_valid[1]  <= 1'b1;
+        home_done_mask[1] <= 1'b1;
+        cont_y         <= 1'b0;
+      end
+      if (home_done_pulse_z) begin
+        home_offset_z  <= enc_pos_z;
+        pos_rel_z      <= 32'sd0;
+        home_valid[2]  <= 1'b1;
+        home_done_mask[2] <= 1'b1;
+        cont_z         <= 1'b0;
+      end
+
       // Emite starts alinhados ao próximo tick
       if (sync_start && (start_pending != 3'b000)) begin
         start_x       <= start_pending[0];
         start_y       <= start_pending[1];
         start_z       <= start_pending[2];
+        home_start_x  <= start_pending[0];
+        home_start_y  <= start_pending[1];
+        home_start_z  <= start_pending[2];
         start_pending <= 3'b000;
       end
 
-      // Resposta de homing quando sensor(es) do(s) eixo(s) requisitado(s) acionam
-      if (home_pending && (|(prox_mask & home_axis_mask)) && !pending) begin
+      // Resposta de homing quando todos os eixos requisitados finalizam
+      if (home_pending && (home_done_mask == home_axis_mask) && !pending) begin
         move_home_resp_bytes_t r;
         r = move_home_response_pkg::make_default();
         r.frameIdEcho  = home_frame_id;
         r.status       = 8'd0; // ALL_OK
-        r.axisHomeMask = {5'b0, (prox_mask & home_axis_mask)};
+        r.axisHomeMask = {5'b0, home_done_mask};
         r.errorFlags   = 8'd0;
         r = move_home_response_pkg::set_parity(r);
         pend_bits <= '0;
@@ -273,10 +353,29 @@ module motion_service #(
                   <= move_home_response_pkg::encoder(r);
         pend_len  <= move_home_response_pkg::FRAME_BITS/8;
         pending   <= 1'b1;
-        home_pending <= 1'b0;
-        cont_x <= 1'b0;
-        cont_y <= 1'b0;
-        cont_z <= 1'b0;
+        home_pending   <= 1'b0;
+        home_status_req<= 1'b1;
+      end
+
+      // Envia HOME_STATUS se requisitado
+      if (home_status_req && !pending) begin
+        home_status_resp_bytes_t hs;
+        hs = home_status_response_pkg::make_default();
+        hs.frameIdEcho = home_frame_id;
+        hs.axisMask    = {5'b0, home_valid};
+        hs.posRelX     = pos_rel_x[15:0];
+        hs.homeOffX    = home_offset_x[15:0];
+        hs.posRelY     = pos_rel_y[15:0];
+        hs.homeOffY    = home_offset_y[15:0];
+        hs.posRelZ     = pos_rel_z[15:0];
+        hs.homeOffZ    = home_offset_z[15:0];
+        hs = home_status_response_pkg::set_parity(hs);
+        pend_bits <= '0;
+        pend_bits[SHIFT_BITS-1 -: home_status_response_pkg::FRAME_BITS]
+                  <= home_status_response_pkg::encoder(hs);
+        pend_len  <= home_status_response_pkg::FRAME_BITS/8;
+        pending   <= 1'b1;
+        home_status_req <= 1'b0;
       end
 
       if (frame_valid) begin
@@ -352,6 +451,7 @@ module motion_service #(
               home_pending     <= |move_home_frame.axisMask[2:0];
               home_frame_id    <= move_home_frame.frameId;
               home_axis_mask   <= move_home_frame.axisMask[2:0];
+              home_done_mask   <= 3'b000;
             end else begin
               move_home_resp_bytes_t r;
               r = move_home_response_pkg::make_default();
@@ -379,6 +479,10 @@ module motion_service #(
                       <= move_queue_status_response_pkg::encoder(r);
             pend_len  <= 12;
             pending   <= 1'b1;
+            if (home_valid != 3'b111) begin
+              home_status_req <= 1'b1;
+              home_frame_id   <= queue_status_frame.frameId;
+            end
           end
           MOVE_END_TYPE: begin
             move_end_resp_bytes_t r;

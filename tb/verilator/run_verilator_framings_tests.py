@@ -63,10 +63,16 @@ expected = [
     "test_fpga_status_response",
     "test_move_queue_add_response",
     "test_move_probe_level_response",
+    "test_home_status_response",
 ]
 
 for name in expected:
-    if f"Sucesso: {name}" not in proc.stdout:
+    expected_str = f"Sucesso: {name}"
+    print(f"Esperado: {expected_str}")
+    if expected_str in proc.stdout:
+        print(f"Recebido: {expected_str}")
+    else:
+        print(f"Recebido: {proc.stdout.strip()}")
         print(f"Falha: {name}")
         sys.exit(1)
 
