@@ -468,7 +468,8 @@ module motion_service #(
           MOVE_QUEUE_STATUS_TYPE: begin
             move_queue_status_resp_bytes_t r;
             r = move_queue_status_response_pkg::make_default();
-            r.frameIdEcho = current_move_id;
+            // ecoa o frameId do pedido de status, não o último MOVE
+            r.frameIdEcho = queue_status_frame.frameId;
             r.status      = (busy_x | busy_y | busy_z) ? 8'd0 : 8'd1; // Running/Idle
             r.pidErrX     = 8'd0;
             r.pidErrY     = 8'd0;

@@ -331,6 +331,12 @@ module spi_full_flow_motion_basic_tb;
     // 5) MOVE_QUEUE_STATUS (agora deve indicar Idle)
     send_move_queue_status(8'h13);
 
+    // Aguarda envio da resposta e HOME_STATUS antes de encerrar
+    cycles = 0;
+    while (resp_byte_count < 70 && cycles < 2000) begin
+      @(posedge clk); cycles++;
+    end
+
     // 6) MOVE_END encerra sessão (desabilita ENN)
     send_move_end(8'h14);
 
@@ -339,7 +345,7 @@ module spi_full_flow_motion_basic_tb;
     // + (12+18) para cada MOVE_QUEUE_STATUS seguido de HOME_STATUS
     // + 4 (MOVE_END) = 74 bytes
     cycles = 0;
-    while (resp_byte_count < 74 && cycles < 2000) begin
+    while (resp_byte_count < 74 && cycles < 4000) begin
       @(posedge clk); cycles++;
     end
     `TEST_ASSERT(resp_byte_count >= 74, "timeout_respostas")

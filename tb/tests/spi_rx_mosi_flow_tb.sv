@@ -31,7 +31,8 @@ module spi_rx_mosi_flow_tb;
     spi_byte_valid = 0;
     spi_byte       = 0;
 
-    #12 rst_n = 1;
+    repeat (2) @(posedge clk);
+    rst_n = 1;
 
     // Envia RX_BLOCK_LEVEL+1 bytes: busy deve ativar após exceder limite
     for (int i = 0; i < RX_BLOCK_LEVEL + 1; i++) begin
@@ -40,12 +41,10 @@ module spi_rx_mosi_flow_tb;
     @(posedge clk);
     @(posedge clk);
     $display("count=%0d busy=%0b", fifo.count, slave_busy);
-    if (!slave_busy) begin
+    if (!slave_busy)
       $display("Falha: busy_apos_limite");
-      $finish;
-    end
-
-    $display("Sucesso: spi_rx_mosi_flow_tb");
+    else
+      $display("Sucesso: spi_rx_mosi_flow_tb");
     $finish;
   end
 
