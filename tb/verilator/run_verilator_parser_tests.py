@@ -3,6 +3,7 @@ import subprocess
 from pathlib import Path
 import sys
 import shutil
+import argparse
 
 root = Path(__file__).resolve().parents[2]
 temp_dir = root / "tb" / "tests" / "temp"
@@ -14,8 +15,22 @@ router_root = root / "src" / "protocol" / "routers"
 
 tb_dir = root / "tb" / "tests"
 
+# permite selecionar subconjuntos de testes pela linha de comando
+argp = argparse.ArgumentParser()
+argp.add_argument("tests", nargs="*", help="executa apenas os testbenches cujos nomes contêm estas strings")
+argp.add_argument("--list", action="store_true", help="lista os testbenches disponíveis e sai")
+args = argp.parse_args()
+
 tb_files = sorted(tb_dir.glob("*_request_parser_tb.sv"))
 tb_files.append(tb_dir / "request_router_tb.sv")
+
+if args.list:
+    for tb in tb_files:
+        print(tb.stem)
+    sys.exit(0)
+
+if args.tests:
+    tb_files = [tb for tb in tb_files if any(t in tb.stem for t in args.tests)]
 
 files = []
 files.extend(sorted((framing_root / "constants").glob("*.sv")))
@@ -35,6 +50,7 @@ for tb in tb_files:
     obj_dir.mkdir(parents=True, exist_ok=True)
 
     top = tb.stem
+    print(f"Compilando e executando {top}...")
     # Garante que o Verilator está disponível
     if shutil.which("verilator") is None:
         print("Verilator não encontrado no PATH. Instale-o ou use ModelSim (vsim).")
@@ -61,8 +77,12 @@ for tb in tb_files:
 
     proc = subprocess.run([str(obj_dir / f"V{top}")], cwd=root, capture_output=True, text=True)
     print(proc.stdout)
-    if proc.returncode != 0 or "Sucesso" not in proc.stdout:
+    expected_str = "Sucesso"
+    print(f"Esperado: saída contendo '{expected_str}'")
+    print(f"Recebido: {proc.stdout.strip()}")
+    if proc.returncode != 0 or expected_str not in proc.stdout:
         print(proc.stderr)
+        print(f"Falha: {top}")
         success = False
         break
 

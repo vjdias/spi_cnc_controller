@@ -3,6 +3,7 @@ import subprocess
 import shutil
 from pathlib import Path
 import sys
+import argparse
 
 root = Path(__file__).resolve().parents[2]
 temp_dir = root / "tb" / "tests" / "temp"
@@ -22,10 +23,13 @@ tb_dir = root / "tb" / "tests"
 tb_files = [
     tb_dir / "spi_rx_mosi_service_tb.sv",
     tb_dir / "spi_rx_mosi_flow_tb.sv",
+    tb_dir / "spi_rx_mosi_busy_limit_tb.sv",
     tb_dir / "spi_rx_hub_service_tb.sv",
     tb_dir / "spi_tx_buffer_tb.sv",
     tb_dir / "spi_full_flow_led_20_tb.sv",
     tb_dir / "spi_tx_hub_service_tb.sv",
+    tb_dir / "spi_tx_hub_rr_tb.sv",
+    tb_dir / "spi_move_queue_status_type_tb.sv",
     # Motion end-to-end tests (SPI -> tick -> STEP)
     tb_dir / "spi_full_flow_motion_basic_tb.sv",
     tb_dir / "spi_full_flow_motion_home_tb.sv",
@@ -33,6 +37,20 @@ tb_files = [
     tb_dir / "spi_full_flow_motion_early_end_tb.sv",
     tb_dir / "spi_full_flow_motion_10_moves_tb.sv",
 ]
+
+parser = argparse.ArgumentParser()
+parser.add_argument("tests", nargs="*", help="lista de testbenches a executar")
+parser.add_argument("--list", action="store_true", dest="list_tests", help="lista testbenches disponíveis")
+args = parser.parse_args()
+
+if args.list_tests:
+    for tb in tb_files:
+        print(tb.stem)
+    sys.exit(0)
+
+if args.tests:
+    stems = set(args.tests)
+    tb_files = [tb for tb in tb_files if tb.stem in stems]
 
 files = []
 files.extend(sorted((framing_root / "constants").glob("*.sv")))
@@ -93,8 +111,12 @@ for tb in tb_files:
 
     proc = subprocess.run([str(obj_dir / f"V{top}")], cwd=root, capture_output=True, text=True)
     print(proc.stdout)
-    if proc.returncode != 0 or "Sucesso" not in proc.stdout:
+    expected_str = "Sucesso"
+    print(f"Esperado: saída contendo '{expected_str}' para {top}")
+    print(f"Recebido: {proc.stdout.strip()}")
+    if proc.returncode != 0 or expected_str not in proc.stdout:
         print(proc.stderr)
+        print(f"Falha: {top}")
         success = False
         break
 

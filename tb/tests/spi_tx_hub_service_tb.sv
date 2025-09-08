@@ -160,6 +160,13 @@ module spi_tx_hub_service_tb;
     rst_n = 1;
 
     test_led_only();
+
+    // Reseta HUB e FIFO antes do teste de round-robin
+    rst_n = 0;
+    tx_fifo.wr_ptr = 0; tx_fifo.rd_ptr = 0; tx_fifo.count = 0;
+    repeat (2) @(posedge clk);
+    rst_n = 1;
+
     test_round_robin_two_streams();
 
     $display("Sucesso: spi_tx_hub_service_tb");

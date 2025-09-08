@@ -424,7 +424,8 @@ module top (
     // -------------------------
     motion_service #(
       .PROX_IS_PNP(1'b0), // NPN
-      .PROX_IS_NO (1'b1)  // Normalmente Aberto (ajuste para 1'b0 se for NC)
+      .PROX_IS_NO (1'b1),  // Normalmente Aberto (ajuste para 1'b0 se for NC)
+      .HOMING_USE_INDEX(1'b1)
     ) u_motion (
       .clk                 (i_clk),
       .rst_n               (i_resetn),
@@ -439,6 +440,9 @@ module top (
       .enc_pos_x           (enc_position),
       .enc_pos_y           (enc_position_y),
       .enc_pos_z           (enc_position_z),
+      .i_idx_pulse_x       (enc_z_pulse),
+      .i_idx_pulse_y       (enc_z_pulse_y),
+      .i_idx_pulse_z       (enc_z_pulse_z),
       .i_prox_in_x         (i_prox_in_x),
       .i_prox_in_y         (i_prox_in_y),
       .i_prox_in_z         (i_prox_in_z),
