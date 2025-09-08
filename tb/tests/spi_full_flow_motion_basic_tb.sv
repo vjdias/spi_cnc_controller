@@ -13,6 +13,7 @@ module spi_full_flow_motion_basic_tb;
   import move_queue_add_response_pkg::*;
   import move_queue_status_request_pkg::*;
   import move_queue_status_response_pkg::*;
+  import home_status_response_pkg::*;
   import move_end_request_pkg::*;
   import move_end_response_pkg::*;
 
@@ -132,7 +133,8 @@ module spi_full_flow_motion_basic_tb;
   );
 
   // Captura de bytes de resposta
-  localparam int RESP_CAP_BYTES = 64;
+  // buffer grande o suficiente para incluir HOME_STATUS extras
+  localparam int RESP_CAP_BYTES = 96;
   spi_service_pkg::byte_t resp_bytes[RESP_CAP_BYTES];
   int unsigned resp_byte_count;
 
@@ -258,6 +260,16 @@ module spi_full_flow_motion_basic_tb;
     `TEST_ASSERT(dec.status == exp_status, "mqs_status")
   endtask
 
+  task automatic check_home_status_resp_at(input int start_idx, input spi_service_pkg::byte_t exp_axis_mask);
+    logic [143:0] raw;
+    home_status_resp_bytes_t dec;
+    for (int i = 0; i < 18; i++) raw[143 - i*8 -: 8] = resp_bytes[start_idx + i];
+    dec = home_status_response_pkg::decoder(raw);
+    `TEST_ASSERT(home_status_response_pkg::check_parity(dec), "hs_parity")
+    `TEST_ASSERT(dec.msgType == protocol_constants_pkg::HOME_STATUS_TYPE, "hs_type")
+    `TEST_ASSERT(dec.axisMask == {5'b0, exp_axis_mask}, "hs_axis_mask")
+  endtask
+
   task automatic check_move_end_resp_at(input int start_idx, input spi_service_pkg::byte_t frameId);
     logic [31:0] raw;
     move_end_resp_bytes_t dec;
@@ -322,19 +334,24 @@ module spi_full_flow_motion_basic_tb;
     // 6) MOVE_END encerra sessão (desabilita ENN)
     send_move_end(8'h14);
 
-    // Aguarda bytes chegarem: 4 + 6 + 12 + 12 + 4 = 38 bytes
+    // Aguarda bytes chegarem:
+    // 4 (START_MOVE) + 6 (MOVE_QUEUE_ADD)
+    // + (12+18) para cada MOVE_QUEUE_STATUS seguido de HOME_STATUS
+    // + 4 (MOVE_END) = 74 bytes
     cycles = 0;
-    while (resp_byte_count < 38 && cycles < 2000) begin
+    while (resp_byte_count < 74 && cycles < 2000) begin
       @(posedge clk); cycles++;
     end
-    `TEST_ASSERT(resp_byte_count >= 38, "timeout_respostas")
+    `TEST_ASSERT(resp_byte_count >= 74, "timeout_respostas")
 
     // Decodifica e checa respostas
     idx = 0;
     check_start_move_resp_at(idx, 8'h10); idx += 4;
     check_move_queue_add_resp_at(idx, 8'h11, 8'h00); idx += 6;
     check_move_queue_status_resp_at(idx, 8'h00); idx += 12; // Running
+    check_home_status_resp_at(idx, 8'h00);      idx += 18;
     check_move_queue_status_resp_at(idx, 8'h01); idx += 12; // Idle
+    check_home_status_resp_at(idx, 8'h00);      idx += 18;
     check_move_end_resp_at(idx, 8'h14); idx += 4;
 
     // ENN deve ter sido desativado após MOVE_END (ativo-baixo)
