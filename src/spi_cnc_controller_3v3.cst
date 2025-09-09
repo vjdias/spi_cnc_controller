@@ -5,7 +5,7 @@
 //Part Number: GW2A-LV18PG256C8/I7
 //Device: GW2A-18
 //Device Version: C
-//Created Time: Mon 09 08 17:48:08 2025
+//Created Time: Tue 09 09 01:22:37 2025
 
 IO_LOC "pi_miso" T6;
 IO_PORT "pi_miso" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
