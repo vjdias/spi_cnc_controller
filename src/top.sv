@@ -79,6 +79,34 @@ module top (
     // Saída MISO do wrapper vai ao pino externo
     assign pi_miso = miso_slave_i;
 
+    // -----------------------------------------------------------------
+    // Tie-offs for ports sem conexão física para evitar sinais flutuantes
+    // -----------------------------------------------------------------
+    // Entradas de sensores (ativos em 0) ficam em nível alto por segurança
+    wire i_prox_in_x_safe = 1'b1;
+    wire i_prox_in_y_safe = 1'b1;
+    wire i_prox_in_z_safe = 1'b1;
+    wire i_estop_in_safe  = 1'b1;
+
+    // Encoders Y/Z não usados – amarrados em 0
+    wire i_enc_a_y_safe = 1'b0;
+    wire i_enc_b_y_safe = 1'b0;
+    wire i_enc_z_y_safe = 1'b0;
+    wire i_enc_a_z_safe = 1'b0;
+    wire i_enc_b_z_safe = 1'b0;
+    wire i_enc_z_z_safe = 1'b0;
+
+    // Saídas para drivers TMC que não possuem pinos físicos
+    wire tmc_step_x_int;
+    wire tmc_dir_x_int;
+    wire tmc_enn_x_int;
+    wire tmc_step_y_int;
+    wire tmc_dir_y_int;
+    wire tmc_enn_y_int;
+    wire tmc_step_z_int;
+    wire tmc_dir_z_int;
+    wire tmc_enn_z_int;
+
 
     // -------------------------
     // Instância do wrapper SPI slave
@@ -373,9 +401,9 @@ module top (
     ) u_quad_enc_y (
       .clk           (i_clk),
       .rst_n         (i_resetn),
-      .i_enc_a       (i_enc_a_y),
-      .i_enc_b       (i_enc_b_y),
-      .i_enc_z       (i_enc_z_y),
+      .i_enc_a       (i_enc_a_y_safe),
+      .i_enc_b       (i_enc_b_y_safe),
+      .i_enc_z       (i_enc_z_y_safe),
       .o_position    (enc_position_y),
       .o_step_pulse  (enc_step_pulse_y),
       .o_dir         (enc_dir_y),
@@ -405,9 +433,9 @@ module top (
     ) u_quad_enc_z (
       .clk           (i_clk),
       .rst_n         (i_resetn),
-      .i_enc_a       (i_enc_a_z),
-      .i_enc_b       (i_enc_b_z),
-      .i_enc_z       (i_enc_z_z),
+      .i_enc_a       (i_enc_a_z_safe),
+      .i_enc_b       (i_enc_b_z_safe),
+      .i_enc_z       (i_enc_z_z_safe),
       .o_position    (enc_position_z),
       .o_step_pulse  (enc_step_pulse_z),
       .o_dir         (enc_dir_z),
@@ -443,22 +471,33 @@ module top (
       .i_idx_pulse_x       (enc_z_pulse),
       .i_idx_pulse_y       (enc_z_pulse_y),
       .i_idx_pulse_z       (enc_z_pulse_z),
-      .i_prox_in_x         (i_prox_in_x),
-      .i_prox_in_y         (i_prox_in_y),
-      .i_prox_in_z         (i_prox_in_z),
-      .i_estop_in          (i_estop_in),
-      .tmc_step_x          (tmc_step_x),
-      .tmc_dir_x           (tmc_dir_x),
-      .tmc_enn_x           (tmc_enn_x),
-      .tmc_step_y          (tmc_step_y),
-      .tmc_dir_y           (tmc_dir_y),
-      .tmc_enn_y           (tmc_enn_y),
-      .tmc_step_z          (tmc_step_z),
-      .tmc_dir_z           (tmc_dir_z),
-      .tmc_enn_z           (tmc_enn_z),
+      .i_prox_in_x         (i_prox_in_x_safe),
+      .i_prox_in_y         (i_prox_in_y_safe),
+      .i_prox_in_z         (i_prox_in_z_safe),
+      .i_estop_in          (i_estop_in_safe),
+      .tmc_step_x          (tmc_step_x_int),
+      .tmc_dir_x           (tmc_dir_x_int),
+      .tmc_enn_x           (tmc_enn_x_int),
+      .tmc_step_y          (tmc_step_y_int),
+      .tmc_dir_y           (tmc_dir_y_int),
+      .tmc_enn_y           (tmc_enn_y_int),
+      .tmc_step_z          (tmc_step_z_int),
+      .tmc_dir_z           (tmc_dir_z_int),
+      .tmc_enn_z           (tmc_enn_z_int),
       .o_moving            (o_moving),
       .tx_stream           (motion_stream)    // tie-off em HW (ready=1)
     );
+
+    // Saídas para drivers não utilizados (amarradas a níveis seguros)
+    assign tmc_step_x = 1'b0;
+    assign tmc_dir_x  = 1'b0;
+    assign tmc_enn_x  = 1'b1;
+    assign tmc_step_y = 1'b0;
+    assign tmc_dir_y  = 1'b0;
+    assign tmc_enn_y  = 1'b1;
+    assign tmc_step_z = 1'b0;
+    assign tmc_dir_z  = 1'b0;
+    assign tmc_enn_z  = 1'b1;
 
 
 endmodule
