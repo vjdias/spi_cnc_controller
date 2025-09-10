@@ -107,6 +107,7 @@ module spi_full_flow_led_basic_tb;
       logic [55:0] raw_resp;
       spi_service_pkg::byte_t rb;
       int got;
+      logic val;
 
       send_led_ctrl_frame(frameIds[i], masks[i], vals[i]);
 
@@ -114,7 +115,7 @@ module spi_full_flow_led_basic_tb;
       cycles = 0; while (!resp_valid && cycles < 100) begin @(posedge clk); cycles++; end
       `TEST_ASSERT(resp_valid, "resp_valid_timeout")
       // Atualiza esperado conforme semântica do serviço
-      logic val = vals[i][0];
+      val = vals[i][0];
       if (ACTIVE_LOW) val = ~val;
       if (val) expected_leds = expected_leds |  masks[i][5:0];
       else     expected_leds = expected_leds & ~masks[i][5:0];

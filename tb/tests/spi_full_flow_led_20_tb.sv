@@ -273,10 +273,11 @@ module spi_full_flow_led_20_tb;
     // Marca início e envia TB_NUM_FRAMES frames respeitando busy
     start_cycle = cycle_ctr;
     for (i = 0; i < TB_NUM_FRAMES; i++) begin
+      logic val;
       send_led_ctrl_frame(frameIds[i], masks[i], vals[i]);
       messages_sent++;
       // Atualiza modelo esperado de LEDs
-      logic val = vals[i][0];
+      val = vals[i][0];
       if (ACTIVE_LOW) val = ~val;
       if (val)
         expected_leds = expected_leds | masks[i][5:0];
