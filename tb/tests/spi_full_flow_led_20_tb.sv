@@ -84,7 +84,9 @@ module spi_full_flow_led_20_tb;
     .led_ctrl_frame(led_ctrl_frame)
   );
 
-  led_service u_led(
+  localparam bit ACTIVE_LOW = 1;
+
+  led_service #(.ACTIVE_LOW(ACTIVE_LOW)) u_led(
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid), .msgType(out_msgType),
     .led_req(led_ctrl_frame),
@@ -249,7 +251,7 @@ module spi_full_flow_led_20_tb;
     inq = {};
     started = 1'b0;
     messages_sent = 0;
-    expected_leds  = 6'b0;
+    expected_leds  = ACTIVE_LOW ? 6'b111111 : 6'b0;
     repeat (2) @(posedge clk);
     rst_n = 1;
 
@@ -274,7 +276,9 @@ module spi_full_flow_led_20_tb;
       send_led_ctrl_frame(frameIds[i], masks[i], vals[i]);
       messages_sent++;
       // Atualiza modelo esperado de LEDs
-      if (vals[i][0])
+      logic val = vals[i][0];
+      if (ACTIVE_LOW) val = ~val;
+      if (val)
         expected_leds = expected_leds | masks[i][5:0];
       else
         expected_leds = expected_leds & ~masks[i][5:0];

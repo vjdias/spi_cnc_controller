@@ -44,7 +44,9 @@ module spi_full_flow_led_basic_tb;
     .move_home_frame(), .start_move_frame(), .move_probe_frame(), .queue_add_frame(), .move_end_frame(),
     .queue_status_frame(), .fpga_status_frame(), .led_ctrl_frame(led_ctrl_frame)
   );
-  led_service u_led(
+  localparam bit ACTIVE_LOW = 1;
+
+  led_service #(.ACTIVE_LOW(ACTIVE_LOW)) u_led(
     .clk(clk), .rst_n(rst_n), .frame_valid(frame_valid), .msgType(out_msgType),
     .led_req(led_ctrl_frame), .leds(leds), .resp_valid(resp_valid), .resp_frame(resp_frame),
     .tx_stream(led_stream)
@@ -84,7 +86,7 @@ module spi_full_flow_led_basic_tb;
     logic [5:0] expected_leds;
 
     // Reset
-    expected_leds = 6'b0;
+    expected_leds = ACTIVE_LOW ? 6'b111111 : 6'b0;
     repeat (2) @(posedge clk); rst_n = 1;
 
     // Programa 10 combinações (liga alguns, desliga outros, e final all-on)
@@ -112,8 +114,10 @@ module spi_full_flow_led_basic_tb;
       cycles = 0; while (!resp_valid && cycles < 100) begin @(posedge clk); cycles++; end
       `TEST_ASSERT(resp_valid, "resp_valid_timeout")
       // Atualiza esperado conforme semântica do serviço
-      if (vals[i][0]) expected_leds = expected_leds |  masks[i][5:0];
-      else            expected_leds = expected_leds & ~masks[i][5:0];
+      logic val = vals[i][0];
+      if (ACTIVE_LOW) val = ~val;
+      if (val) expected_leds = expected_leds |  masks[i][5:0];
+      else     expected_leds = expected_leds & ~masks[i][5:0];
       `TEST_ASSERT(leds == expected_leds, "leds_state_match")
 
       // Captura 7 bytes enviados ao wrapper (via wr_en/wdata)
