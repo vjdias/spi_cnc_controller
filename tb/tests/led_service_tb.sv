@@ -18,7 +18,9 @@ module led_service_tb;
   // Stream genérico (não consumido neste TB)
   resp_stream_if led_stream();
 
-  led_service svc(
+  localparam bit ACTIVE_LOW = 1;
+
+  led_service #(.ACTIVE_LOW(ACTIVE_LOW)) svc(
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid), .msgType(msgType),
     .led_req(led_req), .leds(leds),
@@ -38,19 +40,19 @@ module led_service_tb;
     led_req.frameId = 8'h01; led_req.ledMask = 8'h3F; led_req.ledValue = 8'h01;
     frame_valid = 1; msgType = LED_CTRL_TYPE; @(posedge clk); frame_valid = 0; @(posedge clk);
     wait_response(8'h01, 8'h3F, 8'h00);
-    `TEST_ASSERT(leds == 6'b111111, "all_on");
+    `TEST_ASSERT(leds == (ACTIVE_LOW ? 6'b000000 : 6'b111111), "all_on");
 
     // Desliga todos os LEDs
     led_req.frameId = 8'h02; led_req.ledMask = 8'h3F; led_req.ledValue = 8'h00;
     frame_valid = 1; msgType = LED_CTRL_TYPE; @(posedge clk); frame_valid = 0; @(posedge clk);
     wait_response(8'h02, 8'h3F, 8'h00);
-    `TEST_ASSERT(leds == 6'b000000, "all_off");
+    `TEST_ASSERT(leds == (ACTIVE_LOW ? 6'b111111 : 6'b000000), "all_off");
 
     // Requisição com LED inexistente
     led_req.frameId = 8'h03; led_req.ledMask = 8'h40; led_req.ledValue = 8'h01;
     frame_valid = 1; msgType = LED_CTRL_TYPE; @(posedge clk); frame_valid = 0; @(posedge clk);
     wait_response(8'h03, 8'h40, 8'h01);
-    `TEST_ASSERT(leds == 6'b000000, "invalid_led_no_change");
+    `TEST_ASSERT(leds == (ACTIVE_LOW ? 6'b111111 : 6'b000000), "invalid_led_no_change");
 
     $display("Sucesso: led_service_tb");
     $finish;
