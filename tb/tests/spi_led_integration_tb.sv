@@ -64,7 +64,9 @@ module spi_led_integration_tb;
     .led_ctrl_frame(led_ctrl_frame)
   );
 
-  led_service u_led(
+  localparam bit ACTIVE_LOW = 1;
+
+  led_service #(.ACTIVE_LOW(ACTIVE_LOW)) u_led(
     .clk(clk), .rst_n(rst_n),
     .frame_valid(frame_valid), .msgType(out_msgType),
     .led_req(led_ctrl_frame),
@@ -136,7 +138,7 @@ module spi_led_integration_tb;
       cycles++;
     end
     `TEST_ASSERT(resp_valid, "resp_valid_timeout")
-    `TEST_ASSERT(leds == 6'b000111, "leds_three_on")
+    `TEST_ASSERT(leds == (ACTIVE_LOW ? 6'b111000 : 6'b000111), "leds_three_on")
     `TEST_ASSERT(resp_frame.frameIdEcho == 8'hA1, "resp_frameid_echo")
     `TEST_ASSERT(resp_frame.ledMask == 8'h07, "resp_ledmask_echo")
     `TEST_ASSERT(resp_frame.status == 8'h00, "resp_status_ok")

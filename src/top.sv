@@ -232,7 +232,7 @@ module top (
     resp_stream_if led_stream();
     wire                        led_resp_valid;
     led_control_response_pkg::led_ctrl_resp_bytes_t led_resp_frame;
-    led_service u_led_synth (
+    led_service #(.ACTIVE_LOW(1)) u_led_synth (
       .clk        (i_clk),
       .rst_n      (i_resetn),
       .frame_valid(frame_valid),

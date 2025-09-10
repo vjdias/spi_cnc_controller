@@ -7,7 +7,9 @@
 // -----------------------------------------------------------------------------
 `ifndef LED_SERVICE_SV
 `define LED_SERVICE_SV
-module led_service (
+module led_service #(
+    parameter bit ACTIVE_LOW = 0
+) (
     input  logic clk,
     input  logic rst_n,
     input  logic frame_valid,
@@ -34,7 +36,7 @@ module led_service (
   // Registradores de saída
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      leds_r     <= 6'b0;
+      leds_r     <= ACTIVE_LOW ? 6'b111111 : 6'b0;
       resp_valid <= 1'b0;
       resp_frame <= led_control_response_pkg::make_default();
       pending    <= 1'b0;
@@ -55,7 +57,7 @@ module led_service (
           // bits fora do intervalo 0..5 -> erro
           r.status = 8'h01; // LED inexistente
         end else begin
-          if (led_req.ledValue[0])
+          if (ACTIVE_LOW ? ~led_req.ledValue[0] : led_req.ledValue[0])
             leds_r <= leds_r | led_req.ledMask[5:0];
           else
             leds_r <= leds_r & ~led_req.ledMask[5:0];
