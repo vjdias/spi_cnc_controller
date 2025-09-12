@@ -70,11 +70,11 @@ module top (
     wire mosi_slave_i = pi_mosi;
     wire miso_slave_i;
 
-    // Barramento interno do wrapper (RX do core)
-    wire        rd_en_i;
-    wire [2:0]  raddr_i;
-    wire [7:0]  rdata_o;
-    wire        irq_o;
+    // Interface de bytes do SPI_Slave
+    wire        rx_dv_w;
+    wire [7:0]  rx_byte_w;
+    wire        tx_dv_w;
+    wire [7:0]  tx_byte_w;
 
     // Saída MISO do wrapper vai ao pino externo com tri-state (inferido)
     // CS# alto => Z; CS# baixo => dirige miso_slave_i
@@ -112,36 +112,19 @@ module top (
     // -------------------------
     // Instância do wrapper SPI slave
     // -------------------------
-    // Wires para TX (MISO) agregados em HW
-    wire        tx_wr_en;
-    wire [2:0]  tx_waddr;
-    wire [7:0]  tx_wdata;
-
-    spi_slave #(
-        .USE_OPEN_CORE(1'b1),
-        .CPOL(1'b1),
-        .CPHA(1'b1)
+    SPI_Slave #(
+        .SPI_MODE(3) // CPOL=1, CPHA=1
     ) u_spi_slave (
-        // clock/reset
-        .i_clk      (i_clk),
-        .i_resetn   (i_resetn),
-
-        // escrita (TX)
-        .wr_en      (tx_wr_en),
-        .waddr      (tx_waddr),
-        .wdata      (tx_wdata),
-
-        // leitura (RX)
-        .rd_en      (rd_en_i),
-        .raddr      (raddr_i),
-        .rdata      (rdata_o),
-        .irq        (irq_o),
-
-        // pinos do RPi
-        .sclk_slave (sclk_slave_i),
-        .ss_n_slave (ss_n_slave_i),
-        .mosi_slave (mosi_slave_i),
-        .miso_slave (miso_slave_i)
+        .i_Rst_L    (i_resetn),
+        .i_Clk      (i_clk),
+        .o_RX_DV    (rx_dv_w),
+        .o_RX_Byte  (rx_byte_w),
+        .i_TX_DV    (tx_dv_w),
+        .i_TX_Byte  (tx_byte_w),
+        .i_SPI_Clk  (sclk_slave_i),
+        .o_SPI_MISO (miso_slave_i),
+        .i_SPI_MOSI (mosi_slave_i),
+        .i_SPI_CS_n (ss_n_slave_i)
     );
 
     // -------------------------
@@ -149,16 +132,11 @@ module top (
     // -------------------------
     wire                        rx_byte_valid;
     spi_service_pkg::byte_t     rx_byte;
-    spi_rx_slave_service #(
-      .RX_DATA_ADDR(3'd0),
-      .BACK_TO_BACK_READS(1'b1)
-    ) u_rx_bridge (
+    spi_rx_slave_service u_rx_bridge (
       .clk            (i_clk),
       .rst_n          (i_resetn),
-      .rd_en          (rd_en_i),
-      .raddr          (raddr_i),
-      .rdata          (rdata_o),
-      .irq            (irq_o),
+      .rx_dv          (rx_dv_w),
+      .rx_byte        (rx_byte_w),
       .spi_byte_valid (rx_byte_valid),
       .spi_byte       (rx_byte)
     );
@@ -288,9 +266,6 @@ module top (
     logic                      pick;
     logic                      pick_idx;       // 0 = LED, 1 = Motion
 
-    // Default de outputs
-    assign tx_waddr = 3'd0;
-
     // Combinacional: decidir pick e prontos
     always @* begin
       // defaults
@@ -347,8 +322,9 @@ module top (
     end
 
     // Pulsos de escrita e dados
-    assign tx_wr_en = (tx_state == SEND);
-    assign tx_wdata = tx_shift[SHIFT_BITS-1 - tx_idx*8 -: 8];
+    // Pulsos de transmissão para o SPI_Slave
+    assign tx_dv_w   = (tx_state == SEND);
+    assign tx_byte_w = tx_shift[SHIFT_BITS-1 - tx_idx*8 -: 8];
 
 
     // -------------------------
