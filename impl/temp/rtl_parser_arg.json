@@ -70,6 +70,10 @@
    "Type" : "verilog"
   },
   {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv",
    "Type" : "verilog"
   },
@@ -79,10 +83,6 @@
   },
   {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv",
    "Type" : "verilog"
   },
   {

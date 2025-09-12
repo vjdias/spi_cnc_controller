@@ -22,10 +22,10 @@
         <File path="src/protocol/framings/requests/move_queue_status_request_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/requests/start_move_request_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/fpga_status_response_pkg.sv" type="file.verilog" enable="1"/>
+        <File path="src/protocol/framings/responses/home_status_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/led_control_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/move_end_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/move_home_response_pkg.sv" type="file.verilog" enable="1"/>
-        <File path="src/protocol/framings/responses/home_status_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/move_probe_level_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/move_queue_add_response_pkg.sv" type="file.verilog" enable="1"/>
         <File path="src/protocol/framings/responses/move_queue_status_response_pkg.sv" type="file.verilog" enable="1"/>
@@ -67,6 +67,7 @@
         <File path="constraints/timing_27_spi50.sdc" type="file.sdc" enable="0"/>
         <File path="constraints/timing_50.sdc" type="file.sdc" enable="0"/>
         <File path="constraints/timing_54.sdc" type="file.sdc" enable="0"/>
+        <File path="src/spi_led.rao" type="file.gao" enable="1"/>
         <File path="src/drivers/spi/spi_master/spi_master.ipc" type="file.other" enable="1"/>
     </FileList>
 </Project>

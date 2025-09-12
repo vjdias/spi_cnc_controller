@@ -36,6 +36,8 @@ tb_files = [
     tb_dir / "spi_full_flow_motion_multiaxis_tb.sv",
     tb_dir / "spi_full_flow_motion_early_end_tb.sv",
     tb_dir / "spi_full_flow_motion_10_moves_tb.sv",
+    # Open SPI slave core, Mode 3 test
+    tb_dir / "spi_slave_open_mode3_tb.sv",
 ]
 
 parser = argparse.ArgumentParser()
@@ -60,6 +62,7 @@ files.extend(sorted(parser_root.glob("*.sv")))
 files.extend(sorted(router_root.glob("*.sv")))
 files.extend(sorted(package_root.glob("*.sv")))
 files.extend(sorted(interface_root.glob("*.sv")))
+files.extend(sorted((integrations_root / "rtl").glob("*.sv")))
 files.extend(sorted(service_root.glob("*.sv")))
 # também pega subpastas relevantes em services
 for sub in ["spi", "led", "motion", "pid"]:
@@ -73,6 +76,11 @@ files.extend(sorted((driver_root / "tmc5160").glob("*.sv")))
 files.extend(sorted((driver_root / "proximity_sensor").glob("*.sv")))
 files.extend(sorted((driver_root / "emergency_stop").glob("*.sv")))
 files.extend(sorted((driver_root / "motion").glob("*.sv")))
+
+# Include the open SPI slave core (drivers/spi/spi_slave_open.sv) explicitly
+open_spi = driver_root / "spi" / "spi_slave_open.sv"
+if open_spi.exists():
+    files.append(open_spi)
 
 success = True
 for tb in tb_files:

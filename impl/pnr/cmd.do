@@ -4,6 +4,7 @@
 -cst C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\spi_cnc_controller_3v3.cst
 -cfg C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\device.cfg
 -sdc C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\constraints\timing.sdc
+-gao_crc 1100011110100100
 -bit
 -tr
 -ph
@@ -16,3 +17,4 @@
 -correct_hold 1
 -route_maxfan 23
 -global_freq 100.000
+-rtl_gao

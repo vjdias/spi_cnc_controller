@@ -1,217 +1,280 @@
-`ifndef __SPI_SLAVE_SV__
-`define __SPI_SLAVE_SV__
-// spi_slave.sv
-// Wrapper minimalista para o núcleo SPI no papel de SLAVE (RPi = master)
-// - Expõe interface de registradores (wr_en/rd_en, addr, data, irq)
-// - Liga diretamente os pinos SPI do RPi
-// - Tri-state de MISO quando SS_N_SLAVE = 1 (via TBUF da Gowin)
-//
-// Autor: você + ChatGPT (Embarcados/FPGA)
-// SPDX-License-Identifier: MIT
+`ifndef SPI_SLAVE_SV
+`define SPI_SLAVE_SV
 
-module spi_slave (
-    // -------------------------
-    // Clock/Reset de sistema
-    // -------------------------
-    input  wire        i_clk,      // clock de sistema (I_CLK)
-    input  wire        i_resetn,   // reset ativo-baixo (I_RESETN)
+// SPI Slave (Mode 3 only: CPOL=1, CPHA=1), MSB-first, 8-bit frames.
+// - Clean, auditable implementation
+// - Simple register interface (addr ignored except 0):
+//     TX write  (i_clk): wr_en & waddr==0, wdata enfileira byte para MISO
+//     RX read   (i_clk): rd_en & raddr==0, rdata lê próximo byte recebido
+//     irq       (i_clk): alto enquanto houver bytes no RX FIFO
+// - Pinos: sclk (idle=1), ss_n (ativo=0), mosi (entrada), miso (saída)
+//   Tri-state do pad MISO deve ser feito no top (Z quando ss_n=1).
 
-    // -------------------------
-    // Interface de escrita (TX)
-    // -------------------------
-    input  wire        wr_en,      // I_TX_EN
-    input  wire [2:0]  waddr,      // I_WADDR[2:0]
-    input  wire [7:0]  wdata,      // I_WDATA[7:0]
+module spi_slave #(
+  parameter int RX_DEPTH = 32,
+  parameter int TX_DEPTH = 32
+)(
+  // Sistema
+  input  logic       i_clk,
+  input  logic       i_resetn,
 
-    // -------------------------
-    // Interface de leitura (RX)
-    // -------------------------
-    input  wire        rd_en,      // I_RX_EN
-    input  wire [2:0]  raddr,      // I_RADDR[2:0]
-    output wire [7:0]  rdata,      // O_RDATA[7:0]
-    output wire        irq,        // O_SPI_INT
+  // Interface de escrita (TX -> MISO)
+  input  logic       wr_en,
+  input  logic [2:0] waddr,
+  input  logic [7:0] wdata,
 
-    // -------------------------
-    // Pinos SPI para Raspberry
-    // -------------------------
-    input  wire        sclk_slave, // SCLK do RPi (SCLK_SLAVE)
-    input  wire        ss_n_slave, // CS# do RPi   (SS_N_SLAVE, ativo em 0)
-    input  wire        mosi_slave, // MOSI do RPi  (MOSI_SLAVE)
-    output wire        miso_slave  // MISO para RPi (tri-state quando ss_n_slave=1)
+  // Interface de leitura (RX <- MOSI)
+  input  logic       rd_en,
+  input  logic [2:0] raddr,
+  output logic [7:0] rdata,
+  output logic       irq,
+
+  // Pinos SPI (Modo 3)
+  input  logic       sclk_slave,
+  input  logic       ss_n_slave,
+  input  logic       mosi_slave,
+  output logic       miso_slave
 );
 
-    // ----------------------------------------
-    // Fio interno com os dados do núcleo p/ MISO
-    // ----------------------------------------
-    wire miso_from_core;
+  // ----------------------------------------
+  // FIFOs assíncronos (SCLK <-> i_clk)
+  // ----------------------------------------
+  // RX: SCLK -> i_clk
+  logic        rx_wr_en_sclk;
+  logic [7:0]  rx_wr_data_sclk;
+  logic        rx_wr_full_sclk;
+  logic        rx_rd_en_sys;
+  logic [7:0]  rx_rd_data_sys;
+  logic        rx_rd_valid_sys;
+  logic        rx_rd_empty_sys;
 
-    // ----------------------------------------
-    // Núcleo SPI: escolha entre IP real ou STUB de simulação
-    // ----------------------------------------
-`ifndef SIM_STUB_SPI_CORE
-    // Instância do núcleo gerado (slave)
-    // (nome de módulo "escapado" conforme o gerador da Gowin)
-    \~spi_master.SPI_MASTER_Top u_spi_slave_core (
-        .I_CLK     (i_clk),
-        .I_RESETN  (i_resetn),
+  async_fifo_gray_rtl #(
+    .WIDTH(8), .DEPTH(RX_DEPTH)
+  ) u_rx_fifo (
+    .wr_clk     (sclk_slave),
+    .wr_rst_n   (i_resetn),
+    .wr_en      (rx_wr_en_sclk),
+    .wr_data    (rx_wr_data_sclk),
+    .wr_full    (rx_wr_full_sclk),
+    .rd_clk     (i_clk),
+    .rd_rst_n   (i_resetn),
+    .rd_en      (rx_rd_en_sys),
+    .rd_data    (rx_rd_data_sys),
+    .rd_valid   (rx_rd_valid_sys),
+    .rd_empty   (rx_rd_empty_sys),
+    .rd_peek_data(),
+    .rd_peek_valid()
+  );
 
-        .I_TX_EN   (wr_en),
-        .I_WADDR   (waddr[2:0]),
-        .I_WDATA   (wdata[7:0]),
+  // TX: i_clk -> SCLK
+  logic        tx_wr_en_sys;
+  logic [7:0]  tx_wr_data_sys;
+  logic        tx_wr_full_sys;
+  logic        tx_rd_en_sclk;
+  logic [7:0]  tx_rd_data_sclk;
+  logic        tx_rd_valid_sclk;
+  logic        tx_rd_empty_sclk;
+  logic [7:0]  tx_peek_data_sclk;
+  logic        tx_peek_valid_sclk;
 
-        .I_RX_EN   (rd_en),
-        .I_RADDR   (raddr[2:0]),
-        .O_RDATA   (rdata[7:0]),
-        .O_SPI_INT (irq),
+  async_fifo_gray_rtl #(
+    .WIDTH(8), .DEPTH(TX_DEPTH)
+  ) u_tx_fifo (
+    .wr_clk     (i_clk),
+    .wr_rst_n   (i_resetn),
+    .wr_en      (tx_wr_en_sys),
+    .wr_data    (tx_wr_data_sys),
+    .wr_full    (tx_wr_full_sys),
+    .rd_clk     (sclk_slave),
+    .rd_rst_n   (i_resetn),
+    .rd_en      (tx_rd_en_sclk),
+    .rd_data    (tx_rd_data_sclk),
+    .rd_valid   (tx_rd_valid_sclk),
+    .rd_empty   (tx_rd_empty_sclk),
+    .rd_peek_data(tx_peek_data_sclk),
+    .rd_peek_valid(tx_peek_valid_sclk)
+  );
 
-        // Pinos SLAVE
-        .SCLK_SLAVE(sclk_slave),
-        .SS_N_SLAVE(ss_n_slave),
-        .MOSI_SLAVE(mosi_slave),
-        .MISO_SLAVE(miso_from_core)
+  // ----------------------------------------
+  // Interface de registradores (i_clk)
+  // ----------------------------------------
+  // TX write
+  assign tx_wr_en_sys   = (wr_en && (waddr == 3'd0) && !tx_wr_full_sys);
+  assign tx_wr_data_sys = wdata;
 
-        // Se a sua variante do core tiver também portas *_MASTER,
-        // elas podem ficar desconectadas ou em tri-state fora daqui.
-    );
-`else
-    // STUB comportamental para simulação sem o IP cifrado
-    // - TX: byte escrito via wr_en/waddr é deslocado em MISO durante SS# baixo
-    // - RX: a cada 8 amostras de MOSI (SCLK ↑), um byte é armazenado e IRQ sobe
-    //        até ser limpo por leitura (rd_en/raddr)
-    localparam [2:0] TX_DATA_ADDR = 3'd0;
-    localparam [2:0] RX_DATA_ADDR = 3'd0;
+  // RX read (1 ciclo de latência)
+  assign rx_rd_en_sys = (rd_en && (raddr == 3'd0) && !rx_rd_empty_sys);
+  always_ff @(posedge i_clk or negedge i_resetn) begin
+    if (!i_resetn) rdata <= 8'h00;
+    else if (rx_rd_valid_sys) rdata <= rx_rd_data_sys;
+  end
 
-    // Regs internos
-    reg [7:0] tx_reg, tx_shift;
-    reg [7:0] rx_reg, rx_shift;
-    reg [2:0] bit_cnt;
-    reg       irq_r;
-    reg [7:0] rdata_r;
+  // IRQ nível: FIFO RX não vazia
+  assign irq = ~rx_rd_empty_sys;
 
-    // Buffer simples para múltiplos bytes de TX (pré-carregados antes da transação)
-    reg [7:0] tx_buf[0:15];
-    reg [3:0] tx_count;  // quantidade de bytes válidos em tx_buf
-    reg [3:0] tx_idx;    // índice do próximo byte a transmitir
+  // ----------------------------------------
+  // Stage simples do primeiro byte (i_clk) para o próximo frame
+  // ----------------------------------------
+  // Sincroniza SS_N para permitir staging apenas quando não selecionado
+  logic ss_sync_d1, ss_sync_d2;
+  always_ff @(posedge i_clk or negedge i_resetn) begin
+    if (!i_resetn) begin ss_sync_d1 <= 1'b1; ss_sync_d2 <= 1'b1; end
+    else begin ss_sync_d1 <= ss_n_slave; ss_sync_d2 <= ss_sync_d1; end
+  end
 
-    assign irq   = irq_r;
-    assign rdata = rdata_r;
-
-    // Escrita de TX e leitura de RX no domínio de i_clk
-    always @(posedge i_clk or negedge i_resetn) begin
-      if (!i_resetn) begin
-        tx_reg  <= 8'h00;
-        rdata_r <= 8'h00;
-        irq_r   <= 1'b0;
-        tx_count <= 4'd0;
-      end else begin
-        if (wr_en && (waddr == TX_DATA_ADDR)) begin
-          tx_reg <= wdata;
-          // Se não estamos em transação (SS_n alto), acumula no buffer de pré-carga
-          if (ss_n_slave && tx_count < 4'd15) begin
-            tx_buf[tx_count] <= wdata;
-            tx_count <= tx_count + 4'd1;
-          end
-        end
-        if (rd_en && (raddr == RX_DATA_ADDR)) begin
-          rdata_r <= rx_reg;
-          irq_r   <= 1'b0; // clear-on-read
-        end
+  logic [7:0] first_byte_hold_sys;
+  logic       first_valid_sys;
+  always_ff @(posedge i_clk or negedge i_resetn) begin
+    if (!i_resetn) begin
+      first_byte_hold_sys <= 8'h00;
+      first_valid_sys     <= 1'b0;
+    end else begin
+      // enquanto SS alto, qualquer write atualiza o primeiro byte a ser usado
+      if (wr_en && (waddr == 3'd0) && ss_sync_d2) begin
+        first_byte_hold_sys <= wdata;
+        first_valid_sys     <= 1'b1;
       end
     end
+  end
 
-    // Início de transação: carrega o primeiro byte de TX
-    always @(negedge ss_n_slave or negedge i_resetn) begin
-      if (!i_resetn) begin
-        tx_shift <= 8'h00;
-        tx_idx   <= 4'd0;
-      end else begin
-        tx_idx   <= 4'd0;
-        // Se houver bytes pré-carregados, usa o primeiro do buffer; caso contrário, usa tx_reg
-        if (tx_count != 0) begin
-          tx_shift <= tx_buf[0];
-        end else begin
-          tx_shift <= tx_reg;
-        end
-      end
+  // ----------------------------------------
+  // Lógica no domínio de SCLK (Modo 3)
+  // - Rising: amostra MOSI
+  // - Falling: atualiza MISO e desloca
+  // ----------------------------------------
+  logic [7:0] rx_shift;
+  logic [7:0] tx_shift;
+  logic [2:0] bit_cnt;           // 0..7
+  logic       miso_q;
+  logic       tx_reload_next;    // recarregar no próximo falling
+  logic [7:0] tx_buf;            // pré-busca de um byte
+  logic       tx_buf_valid;
+  logic       drop_first_pop;    // descarta cabeça do FIFO na primeira borda após seed
+  // Espelho do flag de staging no domínio SCLK
+  logic first_valid_ff1, first_valid_ff2;
+  always_ff @(posedge sclk_slave or negedge i_resetn) begin
+    if (!i_resetn) begin first_valid_ff1 <= 1'b0; first_valid_ff2 <= 1'b0; end
+    else begin first_valid_ff1 <= first_valid_sys; first_valid_ff2 <= first_valid_ff1; end
+  end
+
+  // Idle/reset quando SS# sobe
+  always_ff @(posedge ss_n_slave or negedge i_resetn) begin
+    if (!i_resetn) begin
+      bit_cnt        <= 3'd0;
+      tx_reload_next <= 1'b0;
+      tx_shift       <= 8'h00;
+      rx_shift       <= 8'h00;
+      miso_q         <= 1'b0;
+      tx_buf_valid   <= 1'b0;
+      drop_first_pop <= 1'b0;
+    end else begin
+      bit_cnt        <= 3'd0;
+      tx_reload_next <= 1'b0;
+      drop_first_pop <= 1'b0;
     end
+  end
 
-    // Fim de transação: descarta o que foi consumido
-    always @(posedge ss_n_slave or negedge i_resetn) begin
-      if (!i_resetn) begin
-        tx_count <= 4'd0;
+  // Início da transação: coloca MSB do primeiro byte no MISO (falling edge)
+  always_ff @(negedge ss_n_slave or negedge i_resetn) begin
+    if (!i_resetn) begin
+      // nada
+    end else begin
+      // Prioriza tx_buf; se vazio, usa peek; senão staged; senão 0x00
+      if (tx_buf_valid) begin
+        tx_shift      <= tx_buf;
+        miso_q        <= tx_buf[7];
+        tx_buf_valid  <= 1'b0;   // consome pré-busca
+        drop_first_pop<= 1'b0;
+      end else if (tx_peek_valid_sclk) begin
+        tx_shift      <= tx_peek_data_sclk;
+        miso_q        <= tx_peek_data_sclk[7];
+        drop_first_pop<= 1'b1;   // vamos dar pop no próximo posedge
+      end else if (first_valid_ff2) begin
+        tx_shift      <= first_byte_hold_sys; // estável enquanto flag alto
+        miso_q        <= first_byte_hold_sys[7];
+        // não limpamos o flag aqui; uma nova escrita o atualizará
       end else begin
-        // Consome tx_idx bytes do início do buffer
-        if (tx_idx != 0) begin
-          integer k;
-          for (k = 0; k < 15; k = k + 1) begin
-            if (k + tx_idx < 16)
-              tx_buf[k] <= tx_buf[k + tx_idx];
-          end
-          if (tx_count > tx_idx)
-            tx_count <= tx_count - tx_idx;
-          else
-            tx_count <= 4'd0;
-        end
+        tx_shift      <= 8'h00;
+        miso_q        <= 1'b0;
+        drop_first_pop<= 1'b0;
       end
+      bit_cnt        <= 3'd0;
+      tx_reload_next <= 1'b0;
     end
+  end
 
-    // Amostragem de MOSI (modo 0) e contagem de bits
-    always @(posedge sclk_slave or posedge ss_n_slave or negedge i_resetn) begin
-      if (!i_resetn) begin
-        rx_shift <= 8'h00;
-        bit_cnt  <= 3'd0;
-      end else if (ss_n_slave) begin
-        bit_cnt  <= 3'd0;
-      end else begin
+  // Posedge: amostra MOSI, escreve RX e agenda reload
+  always_ff @(posedge sclk_slave or negedge i_resetn) begin
+    if (!i_resetn) begin
+      rx_wr_en_sclk <= 1'b0;
+      tx_rd_en_sclk <= 1'b0;
+    end else begin
+      rx_wr_en_sclk <= 1'b0;
+      tx_rd_en_sclk <= 1'b0;
+
+      // Pop inicial do FIFO TX caso tenhamos usado peek para o primeiro byte
+      if (!ss_n_slave && drop_first_pop) begin
+        tx_rd_en_sclk <= 1'b1;           // descarta cabeça
+        if (tx_rd_valid_sclk) drop_first_pop <= 1'b0;
+      end
+
+      // Pré-busca contínua quando buffer vazio
+      if (!tx_buf_valid && !tx_rd_empty_sclk) begin
+        tx_rd_en_sclk <= 1'b1;           // busca um byte
+      end
+      if (tx_rd_valid_sclk) begin
+        tx_buf       <= tx_rd_data_sclk;
+        tx_buf_valid <= 1'b1;
+      end
+
+      if (!ss_n_slave) begin
+        // sample MOSI no rising
         rx_shift <= {rx_shift[6:0], mosi_slave};
-        bit_cnt  <= bit_cnt + 3'd1;
         if (bit_cnt == 3'd7) begin
-          rx_reg <= {rx_shift[6:0], mosi_slave};
-          irq_r  <= 1'b1;
-        end
-      end
-    end
-
-    // Deslocamento de TX e drive de MISO em borda de descida
-    // A cada 8 bits transmitidos (bit_cnt == 0 após a borda de subida),
-    // recarrega o próximo byte a partir de tx_reg para suportar bursts
-    // multi-byte com SS_n mantido baixo.
-    always @(negedge sclk_slave or posedge ss_n_slave or negedge i_resetn) begin
-      if (!i_resetn) begin
-        tx_shift <= 8'h00;
-      end else if (ss_n_slave) begin
-        tx_shift <= tx_shift; // mantém
-      end else begin
-        if (bit_cnt == 3'd0) begin
-          // carrega próximo byte do buffer se disponível; senão, reusa tx_reg
-          if (tx_idx + 1 < tx_count) begin
-            tx_shift <= tx_buf[tx_idx + 1];
-            tx_idx   <= tx_idx + 1;
-          end else begin
-            tx_shift <= tx_reg;
-            tx_idx   <= tx_idx + 1;
-          end
+          // fecha byte de RX
+          rx_wr_data_sclk <= {rx_shift[6:0], mosi_slave};
+          if (!rx_wr_full_sclk) rx_wr_en_sclk <= 1'b1;
+          bit_cnt        <= 3'd0;
+          tx_reload_next <= 1'b1;        // pronto para carregar próximo TX
         end else begin
-          tx_shift <= {tx_shift[6:0], 1'b0};   // shift para o próximo bit
+          bit_cnt <= bit_cnt + 3'd1;
         end
       end
     end
+  end
 
-    assign miso_from_core = tx_shift[7];
-`endif
+  // Negedge: dirige MISO e desloca (Modo 3)
+  always_ff @(negedge sclk_slave or negedge i_resetn) begin
+    if (!i_resetn) begin
+      // nada extra
+    end else begin
+      if (!ss_n_slave) begin
+        if (tx_reload_next) begin
+          // carrega próximo byte e apresenta MSB já neste falling
+          if (tx_buf_valid) begin
+            tx_shift      <= tx_buf;
+            miso_q        <= tx_buf[7];
+            tx_buf_valid  <= 1'b0;
+          end else if (tx_peek_valid_sclk) begin
+            tx_shift      <= tx_peek_data_sclk;
+            miso_q        <= tx_peek_data_sclk[7];
+            tx_rd_en_sclk <= 1'b1; // descarta cabeça no próximo posedge
+            drop_first_pop<= 1'b1;
+          end else begin
+            tx_shift      <= 8'h00;
+            miso_q        <= 1'b0;
+          end
+          tx_reload_next <= 1'b0;
+        end else begin
+          // desloca um bit para o próximo ciclo
+          miso_q   <= tx_shift[7];
+          tx_shift <= {tx_shift[6:0], 1'b0};
+        end
+      end
+    end
+  end
 
-    // ----------------------------------------
-    // TRI-STATE de MISO quando o device NÃO está selecionado
-    // Usa o TBUF da Gowin (igual o netlist do IP faz).
-    // OEN = 1 ==> saída em Z; OEN = 0 ==> saída ativa
-    // Logo, OEN recebe SS_N (alto = não selecionado = Z).
-    // ----------------------------------------
-    TBUF u_miso_buf (
-        .O  (miso_slave),
-        .I  (miso_from_core),
-        .OEN(ss_n_slave)   // tri-state quando SS_n = 1
-    );
+  assign miso_slave = miso_q;
 
 endmodule
-`default_nettype wire
-`endif // __SPI_SLAVE_SV__
+`endif

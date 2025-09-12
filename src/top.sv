@@ -19,7 +19,7 @@ module top (
     input  wire        pi_sclk,    // SCLK
     input  wire        pi_csn,     // CE0/CE1 (CS#), ativo em 0
     input  wire        pi_mosi,    // MOSI
-    output wire        pi_miso,    // MISO (vai em Z quando CS#=1)
+    inout  wire        pi_miso,    // MISO (vai em Z quando CS#=1)
 
     // -------------------------
     // Sinais de LED (usados por testes de integração)
@@ -76,8 +76,9 @@ module top (
     wire [7:0]  rdata_o;
     wire        irq_o;
 
-    // Saída MISO do wrapper vai ao pino externo
-    assign pi_miso = miso_slave_i;
+    // Saída MISO do wrapper vai ao pino externo com tri-state (inferido)
+    // CS# alto => Z; CS# baixo => dirige miso_slave_i
+    assign pi_miso = ss_n_slave_i ? 1'bz : miso_slave_i;
 
     // -----------------------------------------------------------------
     // Tie-offs for ports sem conexão física para evitar sinais flutuantes
@@ -116,7 +117,11 @@ module top (
     wire [2:0]  tx_waddr;
     wire [7:0]  tx_wdata;
 
-    spi_slave u_spi_slave (
+    spi_slave #(
+        .USE_OPEN_CORE(1'b1),
+        .CPOL(1'b1),
+        .CPHA(1'b1)
+    ) u_spi_slave (
         // clock/reset
         .i_clk      (i_clk),
         .i_resetn   (i_resetn),

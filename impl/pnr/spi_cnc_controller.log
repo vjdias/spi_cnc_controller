@@ -7,6 +7,7 @@ Running placement......
 [10%] Placement Phase 0 completed
 [20%] Placement Phase 1 completed
 [30%] Placement Phase 2 completed
+WARN  (TA1132) :  'tck_pad_i' was determined to be a clock but was not created.
 [50%] Placement Phase 3 completed
 Running routing......
 [60%] Routing Phase 0 completed
@@ -26,5 +27,5 @@ Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_contr
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.html" completed
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.rpt.txt" completed
 Generate file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\pnr\spi_cnc_controller.tr.html" completed
-Tue Sep  9 01:23:19 2025
+Wed Sep 10 23:16:03 2025
 

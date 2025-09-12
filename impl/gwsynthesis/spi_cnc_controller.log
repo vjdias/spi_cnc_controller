@@ -1,9 +1,9 @@
 GowinSynthesis start
 Running parser ...
+ERROR (EX5998) : Cannot open Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_master\spi_master.v'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_master\spi_master.v'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv'
@@ -17,10 +17,10 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\move_queue_status_request_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\requests\start_move_request_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\fpga_status_response_pkg.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\home_status_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\led_control_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_end_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_home_response_pkg.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\home_status_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_probe_level_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_add_response_pkg.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\responses\move_queue_status_response_pkg.sv'
@@ -51,41 +51,33 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_hub_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_miso_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv'
-Compiling module 'top'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":9)
-Compiling module 'spi_slave'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":12)
-Compiling module '**'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_master\spi_master.v":399)
-Compiling module 'spi_rx_slave_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv":16)
-Compiling module 'spi_rx_mosi_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv":52)
-Compiling module 'byte_fifo_sync(DEPTH=210)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":9)
-Extracting RAM for identifier 'mem'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":27)
-Compiling module 'spi_rx_hub_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv":99)
-Compiling module 'led_service(tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv":10)
-Compiling module 'quad_encoder_tmcs28_driver(POS_WIDTH=32'b00000000000000000000000000100000,FILTER_CYCLES=32'b00000000000000000000000000000000,INDEX_OFFSET=32'b00000000000000000000000000000000,MODULO=32'b00000000000000000000000000000000,VEL_WINDOW_CYCLES=32'b00000000000000000000000000000000,COUNT_MODE=32'b00000000000000000000000000000100)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv":18)
-Compiling module 'motion_service(PROX_IS_PNP=1'b0,tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":13)
-Compiling module 'lj12a3_proximity_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv":16)
-Compiling module 'emergency_stop_driver'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv":16)
-Compiling module 'tick_gen'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv":9)
-Compiling module 'axis_controller_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_controller_service.sv":4)
-Compiling module 'pid_axis_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv":4)
-Compiling module 'tmc5160_step_dir_driver(SYNC_MODE=32'b00000000000000000000000000000001)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv":16)
-Compiling module 'axis_home_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_home_service.sv":10)
-NOTE  (EX0101) : Current top module is "top"
-[5%] Running netlist conversion ...
-Running device independent optimization ...
-[10%] Optimizing Phase 0 completed
-[15%] Optimizing Phase 1 completed
-[25%] Optimizing Phase 2 completed
-Running inference ...
-[30%] Inferring Phase 0 completed
-[40%] Inferring Phase 1 completed
-[50%] Inferring Phase 2 completed
-[55%] Inferring Phase 3 completed
-Running technical mapping ...
-[60%] Tech-Mapping Phase 0 completed
-[65%] Tech-Mapping Phase 1 completed
-[75%] Tech-Mapping Phase 2 completed
-[80%] Tech-Mapping Phase 3 completed
-[90%] Tech-Mapping Phase 4 completed
-[95%] Generate netlist file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg" completed
-[100%] Generate report file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller_syn.rpt.html" completed
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v'
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_expression.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_parameter.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_parameter.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\gw_jtag.v'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\gw_gao_top.v'
 GowinSynthesis finish
