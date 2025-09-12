@@ -181,9 +181,9 @@ module spi_master_slave_integration_tb;
     end
     spi_end();
 
-    // Aguarda a geração da resposta (TX FIFO cheia o suficiente)
+    // Aguarda o início da transmissão da resposta
     wait_cycles = 0;
-    while (tx_fifo.count < 7 && wait_cycles < 500) begin
+    while (!tx_busy && wait_cycles < 500) begin
       @(posedge clk); wait_cycles++;
     end
 

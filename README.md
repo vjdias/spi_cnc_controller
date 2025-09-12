@@ -69,6 +69,13 @@ serviços (frames prontos) ──> resp_stream_if (valid/ready)
   - RX FIFO: sem descarte por padrão (evita corromper frames). `slave_busy` sobe quando `count > RX_BLOCK_LEVEL` para o master respeitar.
   - TX FIFO: suporta modo opcional “drop‑old” (descartar o mais antigo ao escrever cheio), configurável por parâmetro da interface. O hub de TX só escreve quando `!full` (sem perdas) a menos que seja ajustado.
 
+### Operação da comunicação SPI slave
+
+1. O master (Raspberry Pi) envia bytes de requisição no MOSI com `ss_n=0`. O pipeline de RX (`spi_rx_slave_service` → `spi_rx_mosi_service` → `spi_rx_hub_service`) decodifica cada frame e aciona o serviço correspondente.
+2. Cada serviço, ao produzir uma resposta, publica-a via `resp_stream_if`. Em simulação, `spi_tx_hub_service` e `spi_tx_miso_service` convertem esse stream em bytes e escrevem no registrador de TX do `spi_slave`.
+3. Para coletar os bytes de resposta, o master deve continuar gerando clocks após o envio da requisição. O primeiro byte fica disponível no MISO quando o wrapper inicia a transmissão (`tx_busy=1`).
+4. Não confie apenas na contagem da FIFO de TX para saber quando há dados: `spi_tx_miso_service` drena a FIFO assim que os bytes chegam. Esse detalhe levou o teste `spi_master_slave_integration_tb` a falhar (`resp_bytes_captured`) até que a captura de MISO fosse sincronizada com `tx_busy`.
+
 ## Executando testes
 Há scripts para Windows e Linux, ambos exigindo um parâmetro que define o simulador a ser utilizado:
 
