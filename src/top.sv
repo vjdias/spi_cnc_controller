@@ -132,7 +132,7 @@ module top (
     // -------------------------
     wire                        rx_byte_valid;
     spi_service_pkg::byte_t     rx_byte;
-    spi_rx_slave_service u_rx_bridge (
+    spi_rx_slave_stream_bridge u_rx_bridge (
       .clk            (i_clk),
       .rst_n          (i_resetn),
       .rx_dv          (rx_dv_w),

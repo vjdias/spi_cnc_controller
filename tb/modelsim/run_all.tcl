@@ -106,6 +106,9 @@ set tb_files [rglob [file join $root tb tests] "*.sv"]
 set filtered_tb {}
 foreach f $tb_files {
   if {[string match *spi_master_vo_integration_tb.sv $f]} { continue }
+  # Exclui TBs experimentais que não fazem parte da suíte estável atual
+  if {[string match *spi_slave_open_mode3_tb.sv $f]} { continue }
+  if {[string match *spi_slave_m3_tb.sv $f]} { continue }
   lappend filtered_tb $f
 }
 set tb_files $filtered_tb

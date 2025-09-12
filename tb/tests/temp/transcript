@@ -13,7 +13,7 @@
 # Modifying tb/modelsim/modelsim.ini
 # C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw1n/prim_sim.v
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 02:44:20 on Sep 12,2025
+# Start time: 17:13:26 on Sep 12,2025
 # vlog -work simlib C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simlib/gw2a/prim_sim.v 
 # -- Compiling UDP mux2
 # -- Compiling module MUX2
@@ -258,14 +258,14 @@
 # 	DLLDLY
 # 	DCS
 # 	DQCE
-# End time: 02:44:20 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:26 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv
-# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv
+# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/SPI_Slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave_wrap.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_stream_bridge.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv
+# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/SPI_Slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave_wrap.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_stream_bridge.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 # ** Warning: (vlog-13288) Multiple macros defined in +define+ command line switch.
-# Start time: 02:44:20 on Sep 12,2025
-# vlog -sv -mfcu "+define+SIM_STUB_SPI_CORE+ROUTER_IGNORE_NOISE" "+incdir+C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests" C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv 
+# Start time: 17:13:26 on Sep 12,2025
+# vlog -sv -mfcu "+define+SIM_STUB_SPI_CORE+ROUTER_IGNORE_NOISE" "+incdir+C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests" C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/constants/protocol_constants_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/fpga_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/led_control_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_end_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_home_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_probe_level_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_add_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/move_queue_status_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/requests/start_move_request_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/fpga_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/home_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/led_control_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_end_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_home_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_probe_level_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_add_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/move_queue_status_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/responses/start_move_response_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/framings/utils/bytes_util_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/fpga_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/led_control_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_end_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_home_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_probe_level_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_add_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/move_queue_status_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/parsers/requests/start_move_req_parser_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/protocol/routers/request_router_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/packages/spi_service_pkg.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/resp_stream_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/interfaces/spi_fifo_if.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/emergency_stop/emergency_stop_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/encoder/quad_encoder_tmcs28_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/proximity_sensor/lj12a3_proximity_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/SPI_Slave.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave_wrap.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tick_gen.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/tmc5160/tmc5160_step_dir_driver.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/async_fifo_gray_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/integrations/rtl/byte_fifo_sync_rtl.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/led/led_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_controller_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/axis_home_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/motion_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_axis_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/motion/pid_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_mosi_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_stream_bridge.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_hub_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_tx_miso_service.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/top.sv 
 # -- Compiling package protocol_constants_pkg
 # -- Compiling package fpga_status_request_pkg
 # -- Importing package protocol_constants_pkg
@@ -319,6 +319,7 @@
 # -- Compiling module emergency_stop_driver
 # -- Compiling module quad_encoder_tmcs28_driver
 # -- Compiling module lj12a3_proximity_driver
+# -- Compiling module SPI_Slave
 # -- Compiling module spi_slave
 # -- Compiling module tick_gen
 # -- Compiling module tmc5160_step_dir_driver
@@ -341,31 +342,35 @@
 # -- Importing package request_router_pkg
 # -- Compiling module spi_rx_mosi_service
 # -- Compiling module spi_rx_slave_service
+# -- Compiling module spi_rx_slave_stream_bridge
 # -- Compiling module spi_tx_hub_service
 # -- Compiling module spi_tx_miso_service
 # -- Compiling module top
 # 
 # Top level modules:
+# 	spi_slave
+# 	async_fifo_gray_rtl
 # 	pid_service
+# 	spi_rx_slave_service
 # 	spi_tx_hub_service
 # 	spi_tx_miso_service
 # 	top
-# End time: 02:44:21 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:27 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 02:44:21 on Sep 12,2025
+# Start time: 17:13:27 on Sep 12,2025
 # vlog C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lib/simulate_vo/gw_spi_master.vo 
 # -- Compiling module gw_spi_master
 # 
 # Top level modules:
 # 	gw_spi_master
-# End time: 02:44:21 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:27 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_vo_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_open_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv
-# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_open_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv
+# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_vo_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode0_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode1_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode2_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_open_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv
+# C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode0_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode1_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode2_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 02:44:21 on Sep 12,2025
-# vlog -sv -mfcu "+define+ROUTER_IGNORE_NOISE" "+incdir+C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests" C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_open_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv 
+# Start time: 17:13:27 on Sep 12,2025
+# vlog -sv -mfcu "+define+ROUTER_IGNORE_NOISE" "+incdir+C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests" C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode0_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode1_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode2_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode3_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv 
 # -- Compiling module fpga_status_request_parser_tb
 # -- Importing package protocol_constants_pkg
 # -- Importing package fpga_status_request_pkg
@@ -422,8 +427,22 @@
 # -- Compiling module spi_rx_mosi_busy_limit_tb
 # -- Compiling module spi_rx_mosi_flow_tb
 # -- Compiling module spi_rx_mosi_service_tb
-# -- Compiling module spi_slave_m3_tb
-# -- Compiling module spi_slave_open_mode3_tb
+# -- Compiling module spi_slave_tb
+# -- Compiling module spi_slave_mode0_tb
+# ** Warning: ** while parsing file included at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode1_tb.sv(2)
+# ** at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(3): (vlog-2275) Existing module 'spi_slave_tb' will be overwritten.
+# -- Compiling module spi_slave_tb
+# -- Compiling module spi_slave_mode1_tb
+# ** Warning: ** while parsing file included at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode2_tb.sv(2)
+# ** at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(3): (vlog-2275) Existing module 'spi_slave_tb' will be overwritten.
+# -- Compiling module spi_slave_tb
+# -- Compiling module spi_slave_mode2_tb
+# ** Warning: ** while parsing file included at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_mode3_tb.sv(2)
+# ** at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(3): (vlog-2275) Existing module 'spi_slave_tb' will be overwritten.
+# -- Compiling module spi_slave_tb
+# -- Compiling module spi_slave_mode3_tb
+# ** Warning: C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(3): (vlog-2275) Existing module 'spi_slave_tb' will be overwritten.
+# -- Compiling module spi_slave_tb
 # -- Compiling module spi_tx_buffer_tb
 # -- Compiling module spi_tx_hub_rr_tb
 # -- Compiling module spi_tx_hub_service_tb
@@ -457,45 +476,96 @@
 # 	spi_rx_mosi_busy_limit_tb
 # 	spi_rx_mosi_flow_tb
 # 	spi_rx_mosi_service_tb
-# 	spi_slave_m3_tb
-# 	spi_slave_open_mode3_tb
+# 	spi_slave_mode0_tb
+# 	spi_slave_mode1_tb
+# 	spi_slave_mode2_tb
+# 	spi_slave_mode3_tb
 # 	spi_tx_buffer_tb
 # 	spi_tx_hub_rr_tb
 # 	spi_tx_hub_service_tb
 # 	start_move_request_parser_tb
-# End time: 02:44:21 on Sep 12,2025, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# End time: 17:13:27 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 4
 # vsim -quiet -L simlib -onfinish stop fpga_status_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:21 on Sep 12,2025
+# Start time: 17:13:27 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] header_error_flag
+# [PASS] header_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_fpga_status_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv(58)
 #    Time: 0 ps  Iteration: 0  Instance: /fpga_status_request_parser_tb
 # Break in Module fpga_status_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv line 58
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/fpga_status_request_parser_tb.sv line 58
 #  quit -sim
-# End time: 02:44:21 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:27 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop framings_tb -do "run -all; quit -sim" 
-# Start time: 02:44:22 on Sep 12,2025
+# Start time: 17:13:28 on Sep 12,2025
 # run -all
+# [PASS] test_bytes_util
+# [PASS] test_bytes_util
+# [PASS] test_bytes_util
+# [PASS] test_bytes_util
+# [PASS] test_bytes_util
+# [PASS] test_bytes_util
 # Sucesso: test_bytes_util
+# [PASS] test_start_move_request
 # Sucesso: test_start_move_request
+# [PASS] test_move_home_request
+# [PASS] test_move_home_request
 # Sucesso: test_move_home_request
+# [PASS] test_move_probe_level_request
+# [PASS] test_move_probe_level_request
 # Sucesso: test_move_probe_level_request
+# [PASS] test_fpga_status_request
 # Sucesso: test_fpga_status_request
+# [PASS] test_move_queue_status_request
 # Sucesso: test_move_queue_status_request
+# [PASS] test_move_end_request
 # Sucesso: test_move_end_request
+# [PASS] test_move_queue_add_request
+# [PASS] test_move_queue_add_request
 # Sucesso: test_move_queue_add_request
+# [PASS] test_led_ctrl_request
+# [PASS] test_led_ctrl_request
 # Sucesso: test_led_ctrl_request
+# [PASS] test_start_move_response
 # Sucesso: test_start_move_response
+# [PASS] test_move_end_response
 # Sucesso: test_move_end_response
+# [PASS] test_move_home_response
+# [PASS] test_move_home_response
 # Sucesso: test_move_home_response
+# [PASS] test_move_queue_status_response
+# [PASS] test_move_queue_status_response
 # Sucesso: test_move_queue_status_response
+# [PASS] test_fpga_status_response
+# [PASS] test_fpga_status_response
 # Sucesso: test_fpga_status_response
+# [PASS] test_move_queue_add_response
+# [PASS] test_move_queue_add_response
+# [PASS] test_move_queue_add_response
+# [PASS] test_move_queue_add_response
 # Sucesso: test_move_queue_add_response
+# [PASS] test_move_probe_level_response
+# [PASS] test_move_probe_level_response
 # Sucesso: test_move_probe_level_response
+# [PASS] test_home_status_response
+# [PASS] test_home_status_response
 # Sucesso: test_home_status_response
+# [PASS] test_led_ctrl_response
+# [PASS] test_led_ctrl_response
 # Sucesso: test_led_ctrl_response
 # All framing tests passed
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv(303)
@@ -503,121 +573,670 @@
 # Break in Module framings_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv line 303
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/framings_tb.sv line 303
 #  quit -sim
-# End time: 02:44:22 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:28 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop led_control_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:22 on Sep 12,2025
+# Start time: 17:13:28 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_err_0
+# [PASS] no_valid_1
+# [PASS] no_err_1
+# [PASS] no_valid_2
+# [PASS] no_err_2
+# [PASS] no_valid_3
+# [PASS] no_err_3
+# [PASS] no_valid_4
+# [PASS] no_err_4
+# [PASS] no_valid_5
+# [PASS] no_err_5
+# [PASS] frame_valid
+# [PASS] no_err_final
+# [PASS] frame_match
+# [PASS] parity_error
+# [PASS] parity_no_valid
+# [PASS] tail_error
+# [PASS] tail_no_valid
 # Sucesso: led_control_request_parser_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv(72)
 #    Time: 0 ps  Iteration: 0  Instance: /led_control_request_parser_tb
 # Break in Module led_control_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv line 72
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_control_request_parser_tb.sv line 72
 #  quit -sim
-# End time: 02:44:22 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:28 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop led_service_tb -do "run -all; quit -sim" 
-# Start time: 02:44:22 on Sep 12,2025
+# Start time: 17:13:28 on Sep 12,2025
 # run -all
+# [PASS] resp_valid_timeout
+# [PASS] resp_frameid
+# [PASS] resp_mask
+# [PASS] resp_status
+# [PASS] all_on
+# [PASS] resp_valid_timeout
+# [PASS] resp_frameid
+# [PASS] resp_mask
+# [PASS] resp_status
+# [PASS] all_off
+# [PASS] resp_valid_timeout
+# [PASS] resp_frameid
+# [PASS] resp_mask
+# [PASS] resp_status
+# [PASS] invalid_led_no_change
 # Sucesso: led_service_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv(58)
 #    Time: 75 ns  Iteration: 1  Instance: /led_service_tb
 # Break in Module led_service_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv line 58
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/led_service_tb.sv line 58
 #  quit -sim
-# End time: 02:44:23 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:29 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop lj12a3_proximity_driver_tb -do "run -all; quit -sim" 
-# Start time: 02:44:23 on Sep 12,2025
+# Start time: 17:13:29 on Sep 12,2025
 # run -all
+# [PASS] wait_active_target
+# [PASS] pnp_no_pulses_clear
+# [PASS] wait_active_target
+# [PASS] pnp_no_pulses_clear2
+# [PASS] wait_active_target
+# [PASS] npn_no_pulses_clear
+# [PASS] wait_active_target
+# [PASS] npn_no_pulses_clear2
+# [PASS] wait_active_target
+# [PASS] npn_nc_pulses_clear
+# [PASS] wait_active_target
+# [PASS] npn_nc_pulses_clear2
+# [PASS] wait_active_target
+# [PASS] pnp_nc_pulses_clear
+# [PASS] wait_active_target
+# [PASS] pnp_nc_pulses_clear2
+# [PASS] debounce_glitch_ignored
+# [PASS] wait_active_target
+# [PASS] debounce_pulses_clear
+# [PASS] wait_active_target
+# [PASS] debounce_pulses_clear2
 # Sucesso: lj12a3_proximity_driver_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv(143)
 #    Time: 675 ns  Iteration: 2  Instance: /lj12a3_proximity_driver_tb
 # Break in Module lj12a3_proximity_driver_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv line 143
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/lj12a3_proximity_driver_tb.sv line 143
 #  quit -sim
-# End time: 02:44:23 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:29 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop move_end_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:23 on Sep 12,2025
+# Start time: 17:13:29 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] header_error_flag
+# [PASS] header_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_move_end_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv(58)
 #    Time: 0 ps  Iteration: 0  Instance: /move_end_request_parser_tb
 # Break in Module move_end_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv line 58
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_end_request_parser_tb.sv line 58
 #  quit -sim
-# End time: 02:44:24 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:29 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop move_home_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:24 on Sep 12,2025
+# Start time: 17:13:29 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] no_valid_3
+# [PASS] no_error_3
+# [PASS] no_valid_4
+# [PASS] no_error_4
+# [PASS] no_valid_5
+# [PASS] no_error_5
+# [PASS] no_valid_6
+# [PASS] no_error_6
+# [PASS] no_valid_7
+# [PASS] no_error_7
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] parity_error_flag
+# [PASS] parity_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_move_home_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv(74)
 #    Time: 0 ps  Iteration: 0  Instance: /move_home_request_parser_tb
 # Break in Module move_home_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv line 74
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_home_request_parser_tb.sv line 74
 #  quit -sim
-# End time: 02:44:24 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:30 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop move_probe_level_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:24 on Sep 12,2025
+# Start time: 17:13:30 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] no_valid_3
+# [PASS] no_error_3
+# [PASS] no_valid_4
+# [PASS] no_error_4
+# [PASS] no_valid_5
+# [PASS] no_error_5
+# [PASS] no_valid_6
+# [PASS] no_error_6
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] parity_error_flag
+# [PASS] parity_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_move_probe_level_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv(71)
 #    Time: 0 ps  Iteration: 0  Instance: /move_probe_level_request_parser_tb
 # Break in Module move_probe_level_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv line 71
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_probe_level_request_parser_tb.sv line 71
 #  quit -sim
-# End time: 02:44:24 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:30 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop move_queue_add_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:24 on Sep 12,2025
+# Start time: 17:13:30 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] no_valid_3
+# [PASS] no_error_3
+# [PASS] no_valid_4
+# [PASS] no_error_4
+# [PASS] no_valid_5
+# [PASS] no_error_5
+# [PASS] no_valid_6
+# [PASS] no_error_6
+# [PASS] no_valid_7
+# [PASS] no_error_7
+# [PASS] no_valid_8
+# [PASS] no_error_8
+# [PASS] no_valid_9
+# [PASS] no_error_9
+# [PASS] no_valid_10
+# [PASS] no_error_10
+# [PASS] no_valid_11
+# [PASS] no_error_11
+# [PASS] no_valid_12
+# [PASS] no_error_12
+# [PASS] no_valid_13
+# [PASS] no_error_13
+# [PASS] no_valid_14
+# [PASS] no_error_14
+# [PASS] no_valid_15
+# [PASS] no_error_15
+# [PASS] no_valid_16
+# [PASS] no_error_16
+# [PASS] no_valid_17
+# [PASS] no_error_17
+# [PASS] no_valid_18
+# [PASS] no_error_18
+# [PASS] no_valid_19
+# [PASS] no_error_19
+# [PASS] no_valid_20
+# [PASS] no_error_20
+# [PASS] no_valid_21
+# [PASS] no_error_21
+# [PASS] no_valid_22
+# [PASS] no_error_22
+# [PASS] no_valid_23
+# [PASS] no_error_23
+# [PASS] no_valid_24
+# [PASS] no_error_24
+# [PASS] no_valid_25
+# [PASS] no_error_25
+# [PASS] no_valid_26
+# [PASS] no_error_26
+# [PASS] no_valid_27
+# [PASS] no_error_27
+# [PASS] no_valid_28
+# [PASS] no_error_28
+# [PASS] no_valid_29
+# [PASS] no_error_29
+# [PASS] no_valid_30
+# [PASS] no_error_30
+# [PASS] no_valid_31
+# [PASS] no_error_31
+# [PASS] no_valid_32
+# [PASS] no_error_32
+# [PASS] no_valid_33
+# [PASS] no_error_33
+# [PASS] no_valid_34
+# [PASS] no_error_34
+# [PASS] no_valid_35
+# [PASS] no_error_35
+# [PASS] no_valid_36
+# [PASS] no_error_36
+# [PASS] no_valid_37
+# [PASS] no_error_37
+# [PASS] no_valid_38
+# [PASS] no_error_38
+# [PASS] no_valid_39
+# [PASS] no_error_39
+# [PASS] no_valid_40
+# [PASS] no_error_40
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] parity_error_flag
+# [PASS] parity_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_move_queue_add_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv(69)
 #    Time: 0 ps  Iteration: 0  Instance: /move_queue_add_request_parser_tb
 # Break in Module move_queue_add_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv line 69
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_add_request_parser_tb.sv line 69
 #  quit -sim
-# End time: 02:44:25 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:31 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop move_queue_status_request_parser_tb -do "run -all; quit -sim" 
-# Start time: 02:44:25 on Sep 12,2025
+# Start time: 17:13:31 on Sep 12,2025
 # run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] header_error_flag
+# [PASS] header_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
 # Sucesso: test_move_queue_status_request_parser
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv(58)
 #    Time: 0 ps  Iteration: 0  Instance: /move_queue_status_request_parser_tb
 # Break in Module move_queue_status_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv line 58
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/move_queue_status_request_parser_tb.sv line 58
 #  quit -sim
-# End time: 02:44:25 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:31 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop pid_service_tb -do "run -all; quit -sim" 
-# Start time: 02:44:25 on Sep 12,2025
+# Start time: 17:13:31 on Sep 12,2025
 # run -all
+# [PASS] disable_zero_rates
+# [PASS] kp0_equals_ff
+# [PASS] pos_err_kp1
+# [PASS] neg_err_kp1
+# [PASS] saturates_zero
+# [PASS] multi_x
+# [PASS] multi_y
+# [PASS] multi_z
+# [PASS] disable_again
 # Sucesso: pid_service_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv(101)
 #    Time: 85 ns  Iteration: 1  Instance: /pid_service_tb
 # Break in Module pid_service_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv line 101
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/pid_service_tb.sv line 101
 #  quit -sim
-# End time: 02:44:25 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:31 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop request_router_tb -do "run -all; quit -sim" 
-# Start time: 02:44:25 on Sep 12,2025
+# Start time: 17:13:31 on Sep 12,2025
 # run -all
+# [PASS] sm_no_valid_0
+# [PASS] sm_no_error_0
+# [PASS] sm_no_valid_1
+# [PASS] sm_no_error_1
+# [PASS] sm_no_valid_2
+# [PASS] sm_no_error_2
+# [PASS] sm_valid
+# [PASS] sm_no_error
+# [PASS] sm_type
+# [PASS] sm_payload
+# [PASS] mh_no_valid_0
+# [PASS] mh_no_error_0
+# [PASS] mh_no_valid_1
+# [PASS] mh_no_error_1
+# [PASS] mh_no_valid_2
+# [PASS] mh_no_error_2
+# [PASS] mh_no_valid_3
+# [PASS] mh_no_error_3
+# [PASS] mh_no_valid_4
+# [PASS] mh_no_error_4
+# [PASS] mh_no_valid_5
+# [PASS] mh_no_error_5
+# [PASS] mh_no_valid_6
+# [PASS] mh_no_error_6
+# [PASS] mh_no_valid_7
+# [PASS] mh_no_error_7
+# [PASS] mh_valid
+# [PASS] mh_no_error
+# [PASS] mh_type
+# [PASS] mh_payload
+# [PASS] mp_no_valid_0
+# [PASS] mp_no_error_0
+# [PASS] mp_no_valid_1
+# [PASS] mp_no_error_1
+# [PASS] mp_no_valid_2
+# [PASS] mp_no_error_2
+# [PASS] mp_no_valid_3
+# [PASS] mp_no_error_3
+# [PASS] mp_no_valid_4
+# [PASS] mp_no_error_4
+# [PASS] mp_no_valid_5
+# [PASS] mp_no_error_5
+# [PASS] mp_no_valid_6
+# [PASS] mp_no_error_6
+# [PASS] mp_valid
+# [PASS] mp_no_error
+# [PASS] mp_type
+# [PASS] mp_payload
+# [PASS] qa_no_valid_0
+# [PASS] qa_no_error_0
+# [PASS] qa_no_valid_1
+# [PASS] qa_no_error_1
+# [PASS] qa_no_valid_2
+# [PASS] qa_no_error_2
+# [PASS] qa_no_valid_3
+# [PASS] qa_no_error_3
+# [PASS] qa_no_valid_4
+# [PASS] qa_no_error_4
+# [PASS] qa_no_valid_5
+# [PASS] qa_no_error_5
+# [PASS] qa_no_valid_6
+# [PASS] qa_no_error_6
+# [PASS] qa_no_valid_7
+# [PASS] qa_no_error_7
+# [PASS] qa_no_valid_8
+# [PASS] qa_no_error_8
+# [PASS] qa_no_valid_9
+# [PASS] qa_no_error_9
+# [PASS] qa_no_valid_10
+# [PASS] qa_no_error_10
+# [PASS] qa_no_valid_11
+# [PASS] qa_no_error_11
+# [PASS] qa_no_valid_12
+# [PASS] qa_no_error_12
+# [PASS] qa_no_valid_13
+# [PASS] qa_no_error_13
+# [PASS] qa_no_valid_14
+# [PASS] qa_no_error_14
+# [PASS] qa_no_valid_15
+# [PASS] qa_no_error_15
+# [PASS] qa_no_valid_16
+# [PASS] qa_no_error_16
+# [PASS] qa_no_valid_17
+# [PASS] qa_no_error_17
+# [PASS] qa_no_valid_18
+# [PASS] qa_no_error_18
+# [PASS] qa_no_valid_19
+# [PASS] qa_no_error_19
+# [PASS] qa_no_valid_20
+# [PASS] qa_no_error_20
+# [PASS] qa_no_valid_21
+# [PASS] qa_no_error_21
+# [PASS] qa_no_valid_22
+# [PASS] qa_no_error_22
+# [PASS] qa_no_valid_23
+# [PASS] qa_no_error_23
+# [PASS] qa_no_valid_24
+# [PASS] qa_no_error_24
+# [PASS] qa_no_valid_25
+# [PASS] qa_no_error_25
+# [PASS] qa_no_valid_26
+# [PASS] qa_no_error_26
+# [PASS] qa_no_valid_27
+# [PASS] qa_no_error_27
+# [PASS] qa_no_valid_28
+# [PASS] qa_no_error_28
+# [PASS] qa_no_valid_29
+# [PASS] qa_no_error_29
+# [PASS] qa_no_valid_30
+# [PASS] qa_no_error_30
+# [PASS] qa_no_valid_31
+# [PASS] qa_no_error_31
+# [PASS] qa_no_valid_32
+# [PASS] qa_no_error_32
+# [PASS] qa_no_valid_33
+# [PASS] qa_no_error_33
+# [PASS] qa_no_valid_34
+# [PASS] qa_no_error_34
+# [PASS] qa_no_valid_35
+# [PASS] qa_no_error_35
+# [PASS] qa_no_valid_36
+# [PASS] qa_no_error_36
+# [PASS] qa_no_valid_37
+# [PASS] qa_no_error_37
+# [PASS] qa_no_valid_38
+# [PASS] qa_no_error_38
+# [PASS] qa_no_valid_39
+# [PASS] qa_no_error_39
+# [PASS] qa_no_valid_40
+# [PASS] qa_no_error_40
+# [PASS] qa_valid
+# [PASS] qa_no_error
+# [PASS] qa_type
+# [PASS] qa_payload
+# [PASS] me_no_valid_0
+# [PASS] me_no_error_0
+# [PASS] me_no_valid_1
+# [PASS] me_no_error_1
+# [PASS] me_no_valid_2
+# [PASS] me_no_error_2
+# [PASS] me_valid
+# [PASS] me_no_error
+# [PASS] me_type
+# [PASS] me_payload
+# [PASS] qs_no_valid_0
+# [PASS] qs_no_error_0
+# [PASS] qs_no_valid_1
+# [PASS] qs_no_error_1
+# [PASS] qs_no_valid_2
+# [PASS] qs_no_error_2
+# [PASS] qs_valid
+# [PASS] qs_no_error
+# [PASS] qs_type
+# [PASS] qs_payload
+# [PASS] fs_no_valid_0
+# [PASS] fs_no_error_0
+# [PASS] fs_no_valid_1
+# [PASS] fs_no_error_1
+# [PASS] fs_no_valid_2
+# [PASS] fs_no_error_2
+# [PASS] fs_valid
+# [PASS] fs_no_error
+# [PASS] fs_type
+# [PASS] fs_payload
+# [PASS] led_no_valid_0
+# [PASS] led_no_error_0
+# [PASS] led_no_valid_1
+# [PASS] led_no_error_1
+# [PASS] led_no_valid_2
+# [PASS] led_no_error_2
+# [PASS] led_no_valid_3
+# [PASS] led_no_error_3
+# [PASS] led_no_valid_4
+# [PASS] led_no_error_4
+# [PASS] led_no_valid_5
+# [PASS] led_no_error_5
+# [PASS] led_valid
+# [PASS] led_no_error
+# [PASS] led_type
+# [PASS] led_payload
+# [PASS] unknown_type_error
+# [PASS] unknown_type_no_valid
+# [PASS] parity_error_flag
+# [PASS] parity_error_no_valid
 # Sucesso: request_router_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv(266)
 #    Time: 0 ps  Iteration: 0  Instance: /request_router_tb
 # Break in Module request_router_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv line 266
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/request_router_tb.sv line 266
 #  quit -sim
-# End time: 02:44:26 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:32 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_led_20_tb -do "run -all; quit -sim" 
-# Start time: 02:44:26 on Sep 12,2025
+# Start time: 17:13:32 on Sep 12,2025
 # run -all
+# [PASS] timeout_respostas
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] resp_header
+# [PASS] resp_tail
+# [PASS] resp_type
+# [PASS] resp_parity
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status
+# [PASS] estado_leds_final
 # === SPI Flow Metrics ===
 # busy_rise_count        = 0
 # busy_cycle_count       = 0
@@ -634,22 +1253,105 @@
 # Break in Module spi_full_flow_led_20_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv line 318
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_20_tb.sv line 318
 #  quit -sim
-# End time: 02:44:26 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:32 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_led_basic_tb -do "run -all; quit -sim" 
-# Start time: 02:44:26 on Sep 12,2025
+# Start time: 17:13:32 on Sep 12,2025
 # run -all
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] resp_valid_timeout
+# [PASS] leds_state_match
+# [PASS] tx_fifo_timeout
+# [PASS] resp_type
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
 # Sucesso: spi_full_flow_led_basic_tb (10 mudanças)
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv(143)
 #    Time: 4215 ns  Iteration: 1  Instance: /spi_full_flow_led_basic_tb
 # Break in Module spi_full_flow_led_basic_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv line 143
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_led_basic_tb.sv line 143
 #  quit -sim
-# End time: 02:44:27 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:33 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_motion_10_moves_tb -do "run -all; quit -sim" 
-# Start time: 02:44:27 on Sep 12,2025
+# Start time: 17:13:33 on Sep 12,2025
 # run -all
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_steps_delta
+# [PASS] timeout_respostas
+# [PASS] total_steps_x
+# [PASS] enn_x_desativado
 # === Motion 10-Moves Flow Metrics ===
 # busy_rise_count        = 0
 # busy_cycle_count       = 0
@@ -666,87 +1368,162 @@
 # Break in Module spi_full_flow_motion_10_moves_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv line 363
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_10_moves_tb.sv line 363
 #  quit -sim
-# End time: 02:44:27 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:33 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_motion_basic_tb -do "run -all; quit -sim" 
-# Start time: 02:44:27 on Sep 12,2025
+# Start time: 17:13:33 on Sep 12,2025
 # run -all
+# [PASS] timeout_steps_x
+# [PASS] timeout_respostas
+# [PASS] sm_header
+# [PASS] sm_tail
+# [PASS] sm_type
+# [PASS] sm_frameid_echo
+# [PASS] mq_parity
+# [PASS] mq_type
+# [PASS] mq_frameid
+# [PASS] mq_status
+# [PASS] mqs_parity
+# [PASS] mqs_type
+# [PASS] mqs_status
+# [PASS] hs_parity
+# [PASS] hs_type
+# [PASS] hs_axis_mask
+# [PASS] mqs_parity
+# [PASS] mqs_type
+# [PASS] mqs_status
+# [PASS] hs_parity
+# [PASS] hs_type
+# [PASS] hs_axis_mask
+# [PASS] me_type
+# [PASS] me_frameid
+# [PASS] enn_x_desativado
 # Sucesso: spi_full_flow_motion_basic_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv(367)
 #    Time: 3295 ns  Iteration: 1  Instance: /spi_full_flow_motion_basic_tb
 # Break in Module spi_full_flow_motion_basic_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv line 367
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_basic_tb.sv line 367
 #  quit -sim
-# End time: 02:44:28 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:33 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_motion_early_end_tb -do "run -all; quit -sim" 
-# Start time: 02:44:28 on Sep 12,2025
+# Start time: 17:13:33 on Sep 12,2025
 # run -all
+# [PASS] min_steps
+# [PASS] enn_disabled_after_end
+# [PASS] stopped_after_end
 # Sucesso: spi_full_flow_motion_early_end_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv(152)
 #    Time: 26175 ns  Iteration: 1  Instance: /spi_full_flow_motion_early_end_tb
 # Break in Module spi_full_flow_motion_early_end_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv line 152
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_early_end_tb.sv line 152
 #  quit -sim
-# End time: 02:44:28 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:34 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_motion_home_tb -do "run -all; quit -sim" 
-# Start time: 02:44:28 on Sep 12,2025
+# Start time: 17:13:34 on Sep 12,2025
 # run -all
+# [PASS] timeout_steps_home_start
+# [PASS] timeout_home_resp
+# [PASS] sm_type
+# [PASS] sm_echo
+# [PASS] mh_parity
+# [PASS] mh_type
+# [PASS] mh_echo
+# [PASS] mh_status_ok
+# [PASS] mh_axis_mask
+# [PASS] hs_parity
+# [PASS] hs_type
+# [PASS] hs_echo
+# [PASS] hs_axis
+# [PASS] hs_posrel0
+# [PASS] home_stopped_steps
 # Sucesso: spi_full_flow_motion_home_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv(306)
 #    Time: 51695 ns  Iteration: 1  Instance: /spi_full_flow_motion_home_tb
 # Break in Module spi_full_flow_motion_home_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv line 306
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_home_tb.sv line 306
 #  quit -sim
-# End time: 02:44:28 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:34 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_motion_multiaxis_tb -do "run -all; quit -sim" 
-# Start time: 02:44:28 on Sep 12,2025
+# Start time: 17:13:34 on Sep 12,2025
 # run -all
+# [PASS] steps_done_all
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
+# [PASS] sync_xy
+# [PASS] sync_xz
 # Sucesso: spi_full_flow_motion_multiaxis_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv(154)
 #    Time: 1425 ns  Iteration: 1  Instance: /spi_full_flow_motion_multiaxis_tb
 # Break in Module spi_full_flow_motion_multiaxis_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv line 154
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_motion_multiaxis_tb.sv line 154
 #  quit -sim
-# End time: 02:44:29 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:35 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_full_flow_tick_count_tb -do "run -all; quit -sim" 
-# Start time: 02:44:29 on Sep 12,2025
+# Start time: 17:13:35 on Sep 12,2025
 # run -all
+# [PASS] driver_busy_start
+# [PASS] steps_exact
+# [PASS] driver_idle_end
+# [PASS] tick_count_matches
+# [PASS] no_steps_after_idle
+# [PASS] no_busy_ticks_after_idle
 # Sucesso: spi_full_flow_tick_count_tb (ticks=60 exp=60 steps=12)
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv(164)
 #    Time: 101655 ns  Iteration: 1  Instance: /spi_full_flow_tick_count_tb
 # Break in Module spi_full_flow_tick_count_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv line 164
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_full_flow_tick_count_tb.sv line 164
 #  quit -sim
-# End time: 02:44:29 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:35 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_led_integration_tb -do "run -all; quit -sim" 
-# Start time: 02:44:29 on Sep 12,2025
+# Start time: 17:13:35 on Sep 12,2025
 # run -all
+# [PASS] resp_valid_timeout
+# [PASS] leds_three_on
+# [PASS] resp_frameid_echo
+# [PASS] resp_ledmask_echo
+# [PASS] resp_status_ok
+# [PASS] tx_fifo_timeout
+# [PASS] dec_frameid_echo
+# [PASS] dec_ledmask
+# [PASS] dec_status_ok
 # Sucesso: spi_led_integration_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv(162)
 #    Time: 255 ns  Iteration: 1  Instance: /spi_led_integration_tb
 # Break in Module spi_led_integration_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv line 162
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_led_integration_tb.sv line 162
 #  quit -sim
-# End time: 02:44:30 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:36 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_master_slave_integration_tb -do "run -all; quit -sim" 
-# Start time: 02:44:30 on Sep 12,2025
+# Start time: 17:13:36 on Sep 12,2025
 # run -all
-# Falha: resp_type
-# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv(204)
-#    Time: 5459 ns  Iteration: 0  Instance: /spi_master_slave_integration_tb
-# Break in Module spi_master_slave_integration_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv line 204
-# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv line 204
+# [FAIL] resp_bytes_captured
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv(201)
+#    Time: 25235 ns  Iteration: 1  Instance: /spi_master_slave_integration_tb
+# Break in Task spi_led_roundtrip at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv line 201
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_master_slave_integration_tb.sv line 201
 #  quit -sim
-# End time: 02:44:30 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:36 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_move_queue_status_type_tb -do "run -all; quit -sim" 
-# Start time: 02:44:30 on Sep 12,2025
+# Start time: 17:13:36 on Sep 12,2025
 # run -all
 # Sucesso: spi_move_queue_status_type_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv(15)
@@ -754,21 +1531,25 @@
 # Break in Module spi_move_queue_status_type_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv line 15
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_move_queue_status_type_tb.sv line 15
 #  quit -sim
-# End time: 02:44:31 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:36 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_rx_hub_service_tb -do "run -all; quit -sim" 
-# Start time: 02:44:31 on Sep 12,2025
+# Start time: 17:13:36 on Sep 12,2025
 # run -all
+# [PASS] frame_valid_sucesso
+# [PASS] msgtype_sucesso
+# [PASS] frame_match_sucesso
+# [PASS] parity_error
 # Sucesso: spi_rx_hub_service_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv(106)
 #    Time: 215 ns  Iteration: 1  Instance: /spi_rx_hub_service_tb
 # Break in Module spi_rx_hub_service_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv line 106
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_hub_service_tb.sv line 106
 #  quit -sim
-# End time: 02:44:31 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:37 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_rx_mosi_busy_limit_tb -do "run -all; quit -sim" 
-# Start time: 02:44:31 on Sep 12,2025
+# Start time: 17:13:37 on Sep 12,2025
 # run -all
 # Contagem=169 busy=1
 # Sucesso: spi_rx_mosi_busy_limit_tb
@@ -777,10 +1558,10 @@
 # Break in Module spi_rx_mosi_busy_limit_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv line 42
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_busy_limit_tb.sv line 42
 #  quit -sim
-# End time: 02:44:31 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:37 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_rx_mosi_flow_tb -do "run -all; quit -sim" 
-# Start time: 02:44:31 on Sep 12,2025
+# Start time: 17:13:37 on Sep 12,2025
 # run -all
 # count=169 busy=1
 # Sucesso: spi_rx_mosi_flow_tb
@@ -789,38 +1570,171 @@
 # Break in Module spi_rx_mosi_flow_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv line 48
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_flow_tb.sv line 48
 #  quit -sim
-# End time: 02:44:32 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:38 on Sep 12,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vsim -quiet -L simlib -onfinish stop spi_rx_mosi_service_tb -do "run -all; quit -sim" 
-# Start time: 02:44:32 on Sep 12,2025
+# Start time: 17:13:38 on Sep 12,2025
 # run -all
+# [PASS] fifo_not_empty
+# [PASS] overflow_flag
 # Sucesso: spi_rx_mosi_service_tb
 # ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv(56)
 #    Time: 115 ns  Iteration: 1  Instance: /spi_rx_mosi_service_tb
 # Break in Module spi_rx_mosi_service_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv line 56
 # Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_rx_mosi_service_tb.sv line 56
 #  quit -sim
-# End time: 02:44:32 on Sep 12,2025, Elapsed time: 0:00:00
+# End time: 17:13:38 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -quiet -L simlib -onfinish stop spi_slave_m3_tb -do "run -all; quit -sim" 
-# Start time: 02:44:32 on Sep 12,2025
+# vsim -quiet -L simlib -onfinish stop spi_slave_mode0_tb -do "run -all; quit -sim" 
+# Start time: 17:13:38 on Sep 12,2025
 # run -all
-# [FAIL] miso_first_byte: got=00 exp=A5
-# Falha: miso_first_byte
-# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv(87)
-#    Time: 107 ns  Iteration: 0  Instance: /spi_slave_m3_tb
-# Break in Module spi_slave_m3_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv line 87
-# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_m3_tb.sv line 87
+# MOSI=00 MISO=c1
+# MOSI=01 MISO=00
+# MOSI=80 MISO=01
+# MOSI=ff MISO=80
+# MOSI=55 MISO=ff
+# MOSI=aa MISO=55
+# Sucesso: spi_slave_tb mode 0
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(105)
+#    Time: 4230 ns  Iteration: 1  Instance: /spi_slave_mode0_tb/tb
+# Break in Module spi_slave_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
 #  quit -sim
-# End time: 02:44:33 on Sep 12,2025, Elapsed time: 0:00:01
+# End time: 17:13:38 on Sep 12,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -quiet -L simlib -onfinish stop spi_slave_open_mode3_tb -do "run -all; quit -sim" 
-# Start time: 02:44:33 on Sep 12,2025
-# ** Error: (vsim-3033) Instantiation of 'spi_slave_open' failed. The design unit was not found.
-#    Time: 0 ps  Iteration: 0  Instance: /spi_slave_open_mode3_tb File: C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_open_mode3_tb.sv Line: 26
-#         Searched libraries:
-#             C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/temp/simlib
-#             C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/temp/work
-# Error loading design
-# End time: 02:44:33 on Sep 12,2025, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_slave_mode1_tb -do "run -all; quit -sim" 
+# Start time: 17:13:38 on Sep 12,2025
+# run -all
+# MOSI=00 MISO=c1
+# MOSI=01 MISO=00
+# MOSI=80 MISO=01
+# MOSI=ff MISO=80
+# MOSI=55 MISO=ff
+# MOSI=aa MISO=55
+# Sucesso: spi_slave_tb mode 1
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(105)
+#    Time: 4230 ns  Iteration: 1  Instance: /spi_slave_mode1_tb/tb
+# Break in Module spi_slave_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+#  quit -sim
+# End time: 17:13:39 on Sep 12,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_slave_mode2_tb -do "run -all; quit -sim" 
+# Start time: 17:13:39 on Sep 12,2025
+# run -all
+# MOSI=00 MISO=e0
+# MOSI=01 MISO=80
+# MOSI=80 MISO=00
+# MOSI=ff MISO=c0
+# MOSI=55 MISO=7f
+# MOSI=aa MISO=aa
+# Sucesso: spi_slave_tb mode 2
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(105)
+#    Time: 4230 ns  Iteration: 1  Instance: /spi_slave_mode2_tb/tb
+# Break in Module spi_slave_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+#  quit -sim
+# End time: 17:13:39 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_slave_mode3_tb -do "run -all; quit -sim" 
+# Start time: 17:13:39 on Sep 12,2025
+# run -all
+# MOSI=00 MISO=60
+# MOSI=01 MISO=80
+# MOSI=80 MISO=00
+# MOSI=ff MISO=c0
+# MOSI=55 MISO=7f
+# MOSI=aa MISO=aa
+# Sucesso: spi_slave_tb mode 3
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(105)
+#    Time: 4230 ns  Iteration: 1  Instance: /spi_slave_mode3_tb/tb
+# Break in Module spi_slave_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+#  quit -sim
+# End time: 17:13:39 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_slave_tb -do "run -all; quit -sim" 
+# Start time: 17:13:40 on Sep 12,2025
+# run -all
+# MOSI=00 MISO=c1
+# MOSI=01 MISO=00
+# MOSI=80 MISO=01
+# MOSI=ff MISO=80
+# MOSI=55 MISO=ff
+# MOSI=aa MISO=55
+# Sucesso: spi_slave_tb mode 0
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv(105)
+#    Time: 4230 ns  Iteration: 1  Instance: /spi_slave_tb
+# Break in Module spi_slave_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_slave_tb.sv line 105
+#  quit -sim
+# End time: 17:13:40 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_tx_buffer_tb -do "run -all; quit -sim" 
+# Start time: 17:13:40 on Sep 12,2025
+# run -all
+# Sucesso: spi_tx_buffer_tb
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv(28)
+#    Time: 0 ps  Iteration: 0  Instance: /spi_tx_buffer_tb
+# Break in Module spi_tx_buffer_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv line 28
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_buffer_tb.sv line 28
+#  quit -sim
+# End time: 17:13:40 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_tx_hub_rr_tb -do "run -all; quit -sim" 
+# Start time: 17:13:40 on Sep 12,2025
+# run -all
+# [PASS] tx_fifo_timeout
+# [PASS] rr_first_any
+# [PASS] rr_second_any
+# Sucesso: spi_tx_hub_rr_tb
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv(94)
+#    Time: 125 ns  Iteration: 1  Instance: /spi_tx_hub_rr_tb
+# Break in Module spi_tx_hub_rr_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv line 94
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_rr_tb.sv line 94
+#  quit -sim
+# End time: 17:13:41 on Sep 12,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop spi_tx_hub_service_tb -do "run -all; quit -sim" 
+# Start time: 17:13:41 on Sep 12,2025
+# run -all
+# [PASS] tx_fifo_timeout
+# [PASS] led_msg_type
+# [PASS] led_frameid_echo
+# [PASS] led_mask
+# [PASS] led_parity
+# [PASS] tx_fifo_timeout
+# [PASS] rr_first_any
+# [PASS] rr_second_any
+# Sucesso: spi_tx_hub_service_tb
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv(173)
+#    Time: 235 ns  Iteration: 1  Instance: /spi_tx_hub_service_tb
+# Break in Module spi_tx_hub_service_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv line 173
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/spi_tx_hub_service_tb.sv line 173
+#  quit -sim
+# End time: 17:13:41 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -quiet -L simlib -onfinish stop start_move_request_parser_tb -do "run -all; quit -sim" 
+# Start time: 17:13:41 on Sep 12,2025
+# run -all
+# [PASS] no_valid_0
+# [PASS] no_error_0
+# [PASS] no_valid_1
+# [PASS] no_error_1
+# [PASS] no_valid_2
+# [PASS] no_error_2
+# [PASS] frame_valid
+# [PASS] no_error_final
+# [PASS] frame_match
+# [PASS] header_error_flag
+# [PASS] header_no_valid
+# [PASS] tail_error_flag
+# [PASS] tail_no_valid
+# Sucesso: test_start_move_request_parser
+# ** Note: $finish    : C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv(60)
+#    Time: 0 ps  Iteration: 0  Instance: /start_move_request_parser_tb
+# Break in Module start_move_request_parser_tb at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv line 60
+# Stopped at C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/tb/tests/start_move_request_parser_tb.sv line 60
+#  quit -sim
+# End time: 17:13:41 on Sep 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

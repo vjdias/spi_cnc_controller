@@ -151,7 +151,7 @@ module spi_master_slave_integration_tb;
     end
   endtask
 
-  // envia um frame LED_CTRL via MOSI e monta a resposta via wr_en/wdata
+  // envia um frame LED_CTRL via MOSI e coleta 7 bytes de resposta via MISO
   task automatic spi_led_roundtrip(
       input spi_service_pkg::byte_t frameId,
       input spi_service_pkg::byte_t mask,
@@ -163,10 +163,6 @@ module spi_master_slave_integration_tb;
     logic [55:0] raw_resp;
     spi_service_pkg::byte_t rb;
     int wait_cycles;
-    // Decls must precede statements in this block
-    spi_service_pkg::byte_t resp_bytes[0:6];
-    int rc;
-    int cap_cycles;
     req          = led_control_request_pkg::make_default();
     req.frameId  = frameId;
     req.ledMask  = mask;
@@ -174,41 +170,32 @@ module spi_master_slave_integration_tb;
     req          = led_control_request_pkg::set_parity(req);
     raw_req      = led_control_request_pkg::encoder(req);
 
-    // envia 7 bytes do request
+    // (debug removido)
     spi_begin();
+    // envia 7 bytes do request
     for (int i = 0; i < 7; i++) begin
       spi_transfer_byte(raw_req[55 - i*8 -: 8], rb);
     end
+    // coleta 7 bytes de resposta (em outra transação)
     spi_end();
-
-    // Aguarda a geração da resposta (TX FIFO cheia o suficiente)
+    // Aguarda até que a pilha de TX publique a resposta na FIFO
     wait_cycles = 0;
     while (tx_fifo.count < 7 && wait_cycles < 500) begin
       @(posedge clk); wait_cycles++;
     end
-
-    // Captura bytes da resposta diretamente nas escritas do wrapper
-    rc = 0;
-    cap_cycles = 0;
-    while (rc < 7 && cap_cycles < 2000) begin
-      @(posedge clk);
-      cap_cycles++;
-      if (wr_en && waddr == 3'd0) begin
-        resp_bytes[rc] = wdata;
-        rc++;
-      end
+    spi_begin();
+    for (int i = 0; i < 7; i++) begin
+      spi_transfer_byte(8'h00, rb);
+      raw_resp[55 - i*8 -: 8] = rb;
+      captured[i] = rb;
     end
-    `TEST_EXPECT_TRUE(rc == 7, "resp_bytes_captured")
-
-    for (int i2 = 0; i2 < 7; i2++) begin
-      raw_resp[55 - i2*8 -: 8] = resp_bytes[i2];
-      $display("resp_bytes[%0d]=%02h", i2, resp_bytes[i2]);
-    end
+    spi_end();
 
     resp = led_control_response_pkg::decoder(raw_resp);
   endtask
 
   initial begin
+    byte captured[0:6];
     led_ctrl_resp_bytes_t dec;
     // defaults
     sclk = 1'b0; ss_n = 1'b1; mosi = 1'b0;

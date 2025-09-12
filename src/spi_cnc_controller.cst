@@ -3,25 +3,25 @@
 // Referencia: UG289E (Gowin EDA Constraint User Guide)
 // -----------------------------------------------------------------------------
 
-// Clock e reset
+// Clock e reset (1V8 profile)
 IO_LOC  "i_clk"      C8;
-IO_PORT "i_clk"      IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "i_clk"      IO_TYPE=LVCMOS18 PULL_MODE=NONE;
 
 IO_LOC  "i_resetn"   F13;
 IO_PORT "i_resetn"   IO_TYPE=LVCMOS18 PULL_MODE=UP;
 
-// SPI do Raspberry Pi
+// SPI do Raspberry Pi (caso use level-shifter 1V8)
 IO_LOC  "pi_sclk"    A9;
-IO_PORT "pi_sclk"    IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "pi_sclk"    IO_TYPE=LVCMOS18 PULL_MODE=NONE;
 
 IO_LOC  "pi_csn"     G12;
 IO_PORT "pi_csn"     IO_TYPE=LVCMOS18 PULL_MODE=UP;
 
 IO_LOC  "pi_mosi"    F14;
-IO_PORT "pi_mosi"    IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "pi_mosi"    IO_TYPE=LVCMOS18 PULL_MODE=NONE;
 
 IO_LOC  "pi_miso"    F16;
-IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8; // edge rate per default; adjust if needed
+IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 PULL_MODE=NONE DRIVE=8 SLEW=SLOW;
 
 // LEDs (exemplo)
 // IO_LOC  "leds[0]"  B12;
@@ -59,15 +59,15 @@ IO_PORT "pi_miso"    IO_TYPE=LVCMOS18 DRIVE=8; // edge rate per default; adjust 
 // IO_LOC  "i_estop_btn"   ???;
 // IO_PORT "i_estop_btn"   IO_TYPE=LVCMOS18 PULL_MODE=UP;
 
-// Encoder incremental (ABZ) - pinos GCLK recomendados para A/B
-IO_LOC  "i_enc_a"    J1;
-IO_PORT "i_enc_a"    IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKT_5
+// Encoder incremental (ABZ) — eixo X (nomes alinhados ao top.sv)
+IO_LOC  "i_enc_a_x"  J1;
+IO_PORT "i_enc_a_x"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKT_5
 
-IO_LOC  "i_enc_b"    J3;
-IO_PORT "i_enc_b"    IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKC_5
+IO_LOC  "i_enc_b_x"  J3;
+IO_PORT "i_enc_b_x"  IO_TYPE=LVCMOS18 PULL_MODE=UP;   // GCLKC_5
 
-IO_LOC  "i_enc_z"    H3;
-IO_PORT "i_enc_z"    IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_LOC  "i_enc_z_x"  H3;
+IO_PORT "i_enc_z_x"  IO_TYPE=LVCMOS18 PULL_MODE=UP;
 
 // Encoders adicionais (Y/Z) — ajuste pinos conforme seu esquemático
 // Eixo Y
