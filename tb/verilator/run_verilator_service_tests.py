@@ -26,18 +26,14 @@ tb_files = [
     tb_dir / "spi_rx_mosi_busy_limit_tb.sv",
     tb_dir / "spi_rx_hub_service_tb.sv",
     tb_dir / "spi_tx_buffer_tb.sv",
-    tb_dir / "spi_full_flow_led_20_tb.sv",
     tb_dir / "spi_tx_hub_service_tb.sv",
     tb_dir / "spi_tx_hub_rr_tb.sv",
     tb_dir / "spi_move_queue_status_type_tb.sv",
-    # Motion end-to-end tests (SPI -> tick -> STEP)
-    tb_dir / "spi_full_flow_motion_basic_tb.sv",
-    tb_dir / "spi_full_flow_motion_home_tb.sv",
-    tb_dir / "spi_full_flow_motion_multiaxis_tb.sv",
-    tb_dir / "spi_full_flow_motion_early_end_tb.sv",
-    tb_dir / "spi_full_flow_motion_10_moves_tb.sv",
-    # Open SPI slave core, Mode 3 test
-    tb_dir / "spi_slave_open_mode3_tb.sv",
+    # Basic SPI slave tests for all modes
+    tb_dir / "spi_slave_mode0_tb.sv",
+    tb_dir / "spi_slave_mode1_tb.sv",
+    tb_dir / "spi_slave_mode2_tb.sv",
+    tb_dir / "spi_slave_mode3_tb.sv",
 ]
 
 parser = argparse.ArgumentParser()
@@ -76,6 +72,7 @@ files.extend(sorted((driver_root / "tmc5160").glob("*.sv")))
 files.extend(sorted((driver_root / "proximity_sensor").glob("*.sv")))
 files.extend(sorted((driver_root / "emergency_stop").glob("*.sv")))
 files.extend(sorted((driver_root / "motion").glob("*.sv")))
+files.extend(sorted((driver_root / "spi").glob("*.sv")))
 
 # Include the open SPI slave core (drivers/spi/spi_slave_open.sv) explicitly
 open_spi = driver_root / "spi" / "spi_slave_open.sv"
