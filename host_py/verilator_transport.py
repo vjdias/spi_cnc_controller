@@ -188,7 +188,10 @@ class VerilatorSpiTransport:
                 self._tick()
             resp.append(rbyte & 0xFF)
         self.sim.io.pi_csn = 1
-        # Allow core logic time to process and queue responses while CS is high
-        for _ in range(32):
+        # Allow core logic ample time to route the request and populate the
+        # transmit queue before the next transaction begins.  Some services
+        # take dozens of cycles to traverse the RX FIFO, hub and response
+        # aggregator, so provide a generous margin here.
+        for _ in range(256):
             self._tick()
         return resp
