@@ -234,6 +234,12 @@ module top (
 
     // Interface de stream para o motion_service
     resp_stream_if motion_stream();
+    // Serviço de motion não está presente nesta build de simulação,
+    // então publicamos constantes para evitar 'X' propagando pelo
+    // agregador de respostas.
+    assign motion_stream.valid = 1'b0;
+    assign motion_stream.bits  = '0;
+    assign motion_stream.len   = '0;
 
     // -------------------------
     // Agregador de TX sintetizável (2 streams: LED e Motion)
@@ -270,6 +276,9 @@ module top (
     // seleção combinacional do stream
     logic                      pick;
     logic                      pick_idx;       // 0 = LED, 1 = Motion
+    // registradores para escrita no spi_slave
+    logic                      tx_wr_en_r;
+    logic [7:0]                tx_wr_data_r;
 
     // Combinacional: decidir pick e prontos
     always @* begin
@@ -294,12 +303,15 @@ module top (
     // FSM do agregador
     always_ff @(posedge i_clk or negedge i_resetn) begin
       if (!i_resetn) begin
-        tx_state <= IDLE;
-        rr_sel   <= 1'b0;
-        tx_shift <= '0;
-        tx_len   <= '0;
-        tx_idx   <= '0;
+        tx_state     <= IDLE;
+        rr_sel       <= 1'b0;
+        tx_shift     <= '0;
+        tx_len       <= '0;
+        tx_idx       <= '0;
+        tx_wr_en_r   <= 1'b0;
+        tx_wr_data_r <= 8'h00;
       end else begin
+        tx_wr_en_r   <= 1'b0; // desativa por padrão
         unique case (tx_state)
           IDLE: begin
             tx_idx <= '0; // pronto para aceitar novo frame
@@ -312,24 +324,27 @@ module top (
             end
           end
           SEND: begin
-            // Envia 1 byte por ciclo para o spi_slave (endereço 0)
+            // Publica o próximo byte
+            tx_wr_en_r   <= 1'b1;
+            tx_wr_data_r <= tx_shift[SHIFT_BITS-1 -: 8];
             if (tx_idx + 1 >= tx_len) begin
               // último byte neste ciclo → volta ao IDLE no próximo
-              tx_idx  <= '0;
-              tx_state<= IDLE;
+              tx_idx   <= '0;
+              tx_state <= IDLE;
             end else begin
               tx_idx <= tx_idx + 1'b1;
             end
+            // Prepara byte seguinte
+            tx_shift <= {tx_shift[SHIFT_BITS-9:0], 8'd0};
           end
           default: tx_state <= IDLE;
         endcase
       end
     end
 
-    // Pulsos de escrita e dados
     // Pulsos de transmissão para o SPI_Slave
-    assign tx_wr_en   = (tx_state == SEND);
-    assign tx_wr_data = tx_shift[SHIFT_BITS-1 - tx_idx*8 -: 8];
+    assign tx_wr_en   = tx_wr_en_r;
+    assign tx_wr_data = tx_wr_data_r;
 
 
     // -------------------------

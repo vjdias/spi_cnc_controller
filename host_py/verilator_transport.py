@@ -14,9 +14,11 @@ class VerilatorSpiTransport:
     expected by :class:`FpgaSpiClient`.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, debug: bool = False) -> None:
         self.sim = None
         self._tempdir = None
+        self._vcd_path = None
+        self.debug = debug
 
     # ------------------------------------------------------------------
     def open(self) -> None:  # pragma: no cover - heavy to simulate in tests
@@ -137,6 +139,11 @@ class VerilatorSpiTransport:
             pv_mod.verilator_name_to_standard_modular_name = orig_name_fn
             template_cpp.template_cpp = orig_template_cpp
 
+        # Inicia captura de ondas para depuração
+        trace_path = root / "blink_leds_sim.vcd"
+        self.sim.start_vcd_trace(str(trace_path))
+        self._vcd_path = trace_path
+
         # Reset
         self.sim.io.i_resetn = 0
         self.sim.io.i_clk = 0
@@ -151,6 +158,12 @@ class VerilatorSpiTransport:
         self.sim.io.pi_mosi = 0
 
     def close(self) -> None:  # pragma: no cover - heavy
+        if self.sim is not None:
+            try:
+                self.sim.flush_vcd_trace()
+                self.sim.stop_vcd_trace()
+            except Exception:
+                pass
         self.sim = None
         if self._tempdir is not None:
             self._tempdir.cleanup()
@@ -194,4 +207,8 @@ class VerilatorSpiTransport:
         # aggregator, so provide a generous margin here.
         for _ in range(256):
             self._tick()
+        if self.debug:
+            tx = [f"0x{b:02X}" for b in data]
+            rx = [f"0x{b:02X}" for b in resp]
+            print(f"SPI xfer tx={tx} rx={rx}")
         return resp
