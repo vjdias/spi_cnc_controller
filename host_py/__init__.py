@@ -9,6 +9,7 @@ from .fpga_spi_client import (
     UnexpectedMsgType,
     StatusError,
 )
+from .verilator_transport import VerilatorSpiTransport
 
 __all__ = [
     "FpgaSpiClient",
@@ -20,5 +21,6 @@ __all__ = [
     "ParityError",
     "UnexpectedMsgType",
     "StatusError",
+    "VerilatorSpiTransport",
 ]
 

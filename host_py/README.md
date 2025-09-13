@@ -9,6 +9,20 @@ Requirements
 - Python 3.8+
 - spidev: `sudo apt-get install python3-spidev`
 
+Verilator simulation
+- Optionally build and exercise the full FPGA RTL in software using
+  [PyVerilator](https://github.com/verilator/pyverilator).  This is useful
+  for running the Python client without hardware.
+  - Install dependencies: `python -m pip install pyverilator`
+  - Run the demo that blinks the LEDs inside the simulation:
+    `python3 host_py/examples/blink_leds_sim.py`
+  - The script compiles `src/top.sv` with Verilator, toggles the SPI pins
+    and exchanges frames with the FPGA logic using the same client API.
+  - Por padrão são usados os serviços sintetizáveis sem interfaces, garantindo
+    compatibilidade com Verilator. Para habilitar as versões com interfaces
+    (utilizadas nos testbenches ModelSim), compile definindo
+    `-DSPI_USE_INTERFACES` — recurso ainda não suportado no Verilator 5.x.
+
 Usage
 - Status:
   `python3 -m host_py.fpga_spi_client status --bus 0 --dev 0 --speed 1000000`

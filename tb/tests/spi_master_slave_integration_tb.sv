@@ -208,12 +208,28 @@ module spi_master_slave_integration_tb;
     resp = led_control_response_pkg::decoder(raw_resp);
   endtask
 
+  // Reads 7 dummy bytes expecting no response
+  task automatic spi_idle_read(output spi_service_pkg::byte_t first);
+    spi_service_pkg::byte_t tmp;
+    spi_begin();
+    for (int i = 0; i < 7; i++) begin
+      spi_transfer_byte(8'h00, tmp);
+      if (i == 0) first = tmp;
+    end
+    spi_end();
+  endtask
+
   initial begin
     led_ctrl_resp_bytes_t dec;
     // defaults
     sclk = 1'b0; ss_n = 1'b1; mosi = 1'b0;
     repeat (2) @(posedge clk);
     rst_n = 1;
+    // leitura antes de qualquer request não deve ter header de resposta
+    spi_service_pkg::byte_t first;
+    spi_idle_read(first);
+    `TEST_EXPECT_TRUE(first != protocol_constants_pkg::RESP_HEADER, "no_response_before_req")
+
     // Liga LEDs 0..2
     spi_led_roundtrip(8'hA1, 8'h07, 8'h01, dec);
     `TEST_EXPECT_EQ_HEX(dec.msgType, protocol_constants_pkg::LED_CTRL_TYPE, "resp_type")

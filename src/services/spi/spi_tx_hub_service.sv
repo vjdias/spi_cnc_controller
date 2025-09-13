@@ -7,11 +7,9 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_TX_HUB_SERVICE_SV
 `define SPI_TX_HUB_SERVICE_SV
-// Disponível somente em simulação (ModelSim/Verilator)
-`ifdef MODEL_TECH
-`define __SIM_BUILD__
-`endif
-`ifdef VERILATOR
+// Módulo disponível apenas quando SPI_USE_INTERFACES está definido (ex.: testbenches ModelSim).
+// Para o Verilator e para síntese, a alternativa integrada no top usa sinais simples.
+`ifdef SPI_USE_INTERFACES
 `define __SIM_BUILD__
 `endif
 `ifdef __SIM_BUILD__
