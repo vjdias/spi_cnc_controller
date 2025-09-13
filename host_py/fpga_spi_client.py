@@ -165,12 +165,14 @@ class FpgaSpiClient:
         max_speed_hz: int = 1_000_000,
         mode: int = 0,
         transport: Optional[object] = None,
+        debug: bool = False,
     ) -> None:
         """
         If `transport` is provided, it must expose `open()`, `close()` and `xfer(seq)->list`.
         Otherwise a spidev transport is created with the given parameters.
         """
         self._t = transport or _SpiDevWrapper(bus, device, max_speed_hz, mode)
+        self._debug = debug
 
     # Lifecycle ---------------------------------------------------------------
     def open(self) -> None:
@@ -181,10 +183,15 @@ class FpgaSpiClient:
 
     # Primitives --------------------------------------------------------------
     def _write(self, data: Sequence[int]) -> None:
+        if self._debug:
+            print("SPI write:", [f"0x{b:02X}" for b in data])
         self._t.xfer(list(data))  # write-only (MISO ignored)
 
     def _read(self, nbytes: int, fill: int = 0x00) -> List[int]:
-        return self._t.xfer([fill] * nbytes)
+        resp = self._t.xfer([fill] * nbytes)
+        if self._debug:
+            print("SPI read:", [f"0x{b:02X}" for b in resp])
+        return resp
 
     # Maintenance / diagnostics ----------------------------------------------
     def drain(self, nbytes: int = 64, fill: int = 0x00) -> List[int]:
@@ -205,17 +212,22 @@ class FpgaSpiClient:
 
     # Request/Response helpers -----------------------------------------------
     def _send_request(self, req: Sequence[int]) -> None:
+        if self._debug:
+            print("Sending request:", [f"0x{b:02X}" for b in req])
         self._write(req)
 
     def _read_response_stream(
         self,
         expect_type: Optional[int],
         timeout_s: float,
-        chunk: int = 32,
+        chunk: int = 8,
         max_bytes: int = 1024,
     ) -> List[int]:
         """
         Repeatedly clocks zeros and accumulates bytes until a full frame is found.
+        `chunk` controls the number of bytes clocked per SPI transaction and is
+        kept small so the FPGA's 16-byte transmit FIFO can't wrap within a single
+        transfer.
         If `expect_type` is set, validates the msgType before returning.
         Raises SpiTimeoutError on timeout, ProtocolError on framing issues.
         """
@@ -224,10 +236,15 @@ class FpgaSpiClient:
         while True:
             # Timeout check
             if time.monotonic() - t0 > timeout_s:
+                if self._debug:
+                    print("Timeout, buffer:", [f"0x{b:02X}" for b in buf])
                 raise SpiTimeoutError("Timeout waiting for response header")
 
             # Read a chunk
-            buf.extend(self._read(chunk))
+            chunk_bytes = self._read(chunk)
+            buf.extend(chunk_bytes)
+            if self._debug:
+                print("Accumulated buffer:", [f"0x{b:02X}" for b in buf])
             if len(buf) > max_bytes:
                 raise ProtocolError("Response stream exceeded maximum length")
 

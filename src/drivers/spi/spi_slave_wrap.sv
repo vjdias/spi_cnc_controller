@@ -59,7 +59,7 @@ module spi_slave #(
     end else begin
       if (wr_en && (waddr == 3'd0)) begin
         tx_reg <= wdata;
-        if (ss_n_slave && tx_count < 4'd16) begin
+        if (tx_count < 4'd15) begin
           tx_buf[tx_count] <= wdata;
           tx_count <= tx_count + 4'd1;
         end
