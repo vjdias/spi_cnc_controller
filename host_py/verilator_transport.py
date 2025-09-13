@@ -145,9 +145,9 @@ class VerilatorSpiTransport:
         self.sim.io.i_resetn = 1
         for _ in range(8):
             self._tick()
-        # Idle values
+        # Idle values (hardware uses SPI mode 0: SCLK idles low)
         self.sim.io.pi_csn = 1
-        self.sim.io.pi_sclk = 1
+        self.sim.io.pi_sclk = 0
         self.sim.io.pi_mosi = 0
 
     def close(self) -> None:  # pragma: no cover - heavy
@@ -168,23 +168,27 @@ class VerilatorSpiTransport:
     def xfer(self, data: Sequence[int]) -> List[int]:  # pragma: no cover - heavy
         assert self.sim is not None
         resp: List[int] = []
+        # Begin transaction (active-low CS and mode 0 clocking)
         self.sim.io.pi_csn = 0
+        self.sim.io.pi_sclk = 0
+        self._tick()
         for byte in data:
             rbyte = 0
             for bit in range(7, -1, -1):
                 b = (byte >> bit) & 1
+                # Drive MOSI while clock low
                 self.sim.io.pi_mosi = b
-                # falling edge -> data valid
+                # Rising edge: slave samples MOSI; master samples MISO
                 self.sim.io.pi_sclk = 1
                 self._tick()
-                self.sim.io.pi_sclk = 0
-                self._tick()
-                # rising edge -> sample MISO
                 miso = int(self.sim.io.pi_miso)
                 rbyte = (rbyte << 1) | miso
-                self.sim.io.pi_sclk = 1
+                # Falling edge: prepare for next bit
+                self.sim.io.pi_sclk = 0
                 self._tick()
             resp.append(rbyte & 0xFF)
         self.sim.io.pi_csn = 1
-        self._tick()
+        # Allow core logic time to process and queue responses while CS is high
+        for _ in range(32):
+            self._tick()
         return resp

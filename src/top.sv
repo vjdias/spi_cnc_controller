@@ -113,7 +113,7 @@ module top (
     // Instância do wrapper SPI slave
     // -------------------------
     SPI_Slave #(
-        .SPI_MODE(3) // CPOL=1, CPHA=1
+        .SPI_MODE(0) // CPOL=0, CPHA=0
     ) u_spi_slave (
         .i_Rst_L    (i_resetn),
         .i_Clk      (i_clk),
