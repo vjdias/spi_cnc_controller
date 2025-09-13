@@ -7,8 +7,8 @@ from host_py.verilator_transport import VerilatorSpiTransport
 
 
 def main() -> int:
-    transport = VerilatorSpiTransport()
-    cli = FpgaSpiClient(transport=transport)
+    transport = VerilatorSpiTransport(debug=True)
+    cli = FpgaSpiClient(transport=transport, debug=True)
     cli.open()
     try:
         try:

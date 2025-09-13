@@ -14,10 +14,11 @@ class VerilatorSpiTransport:
     expected by :class:`FpgaSpiClient`.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, debug: bool = False) -> None:
         self.sim = None
         self._tempdir = None
         self._vcd_path = None
+        self.debug = debug
 
     # ------------------------------------------------------------------
     def open(self) -> None:  # pragma: no cover - heavy to simulate in tests
@@ -206,4 +207,8 @@ class VerilatorSpiTransport:
         # aggregator, so provide a generous margin here.
         for _ in range(256):
             self._tick()
+        if self.debug:
+            tx = [f"0x{b:02X}" for b in data]
+            rx = [f"0x{b:02X}" for b in resp]
+            print(f"SPI xfer tx={tx} rx={rx}")
         return resp
