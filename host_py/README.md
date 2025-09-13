@@ -22,6 +22,11 @@ Verilator simulation
     compatibilidade com Verilator. Para habilitar as versões com interfaces
     (utilizadas nos testbenches ModelSim), compile definindo
     `-DSPI_USE_INTERFACES` — recurso ainda não suportado no Verilator 5.x.
+  - Em caso de *Timeout waiting for response header* ou para depurar o fluxo
+    SPI, o `blink_leds_sim.py` roda com `debug=True` e o transporte Verilator
+    gera o arquivo `blink_leds_sim.vcd` com as ondas dos sinais SPI. Abra esse
+    VCD no [GTKWave](http://gtkwave.sourceforge.net/) para inspecionar as
+    transações e localizar falhas de comunicação.
 
 Usage
 - Status:
