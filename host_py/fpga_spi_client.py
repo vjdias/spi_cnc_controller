@@ -220,11 +220,14 @@ class FpgaSpiClient:
         self,
         expect_type: Optional[int],
         timeout_s: float,
-        chunk: int = 32,
+        chunk: int = 8,
         max_bytes: int = 1024,
     ) -> List[int]:
         """
         Repeatedly clocks zeros and accumulates bytes until a full frame is found.
+        `chunk` controls the number of bytes clocked per SPI transaction and is
+        kept small so the FPGA's 16-byte transmit FIFO can't wrap within a single
+        transfer.
         If `expect_type` is set, validates the msgType before returning.
         Raises SpiTimeoutError on timeout, ProtocolError on framing issues.
         """
