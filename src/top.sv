@@ -6,6 +6,10 @@
 //
 // SPDX-License-Identifier: MIT
 
+`ifndef VERILATOR
+`include "drivers/spi/spi_slave_wrap.sv"
+`endif
+
 module top (
     // -------------------------
     // Clock/Reset de sistema
@@ -234,6 +238,9 @@ module top (
 
     // Interface de stream para o motion_service
     resp_stream_if motion_stream();
+    // Interface do serviço de motion (ativos quando o serviço publicar
+    // respostas). Não amarramos sinais aqui para permitir que o módulo
+    // de movimento dirija `motion_stream` diretamente.
 
     // -------------------------
     // Agregador de TX sintetizável (2 streams: LED e Motion)
