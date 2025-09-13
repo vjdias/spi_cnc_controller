@@ -14,11 +14,11 @@
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_master/spi_master.v",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/SPI_Slave.sv",
    "Type" : "verilog"
   },
   {
-   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave.sv",
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/drivers/spi/spi_slave_wrap.sv",
    "Type" : "verilog"
   },
   {
@@ -191,6 +191,10 @@
   },
   {
    "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_service.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Valdir/Documents/Develop/fpga/tangPrime20k/spi_cnc_controller/src/services/spi/spi_rx_slave_stream_bridge.sv",
    "Type" : "verilog"
   },
   {

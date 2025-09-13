@@ -81,8 +81,8 @@ foreach f $sv_v_filtered {
 
 set ordered [concat $pkgs $ifaces $rest]
 if {[llength $ordered] > 0} {
-  puts "Compilando fontes com STUB do wrapper (SIM_STUB_SPI_CORE) e ROUTER_IGNORE_NOISE"
-  eval vlog -sv -mfcu +define+SIM_STUB_SPI_CORE+ROUTER_IGNORE_NOISE +incdir+$root/tb/tests $ordered
+  puts "Compilando fontes com STUB do wrapper (SIM_STUB_SPI_CORE), SPI_USE_INTERFACES e ROUTER_IGNORE_NOISE"
+  eval vlog -sv -mfcu +define+SIM_STUB_SPI_CORE+SPI_USE_INTERFACES+ROUTER_IGNORE_NOISE +incdir+$root/tb/tests $ordered
 } else {
   puts "Nenhum arquivo de origem encontrado em $root/src"
 }
@@ -103,7 +103,7 @@ if {![file exists $tb_file]} {
   puts "Erro: testbench não encontrado em $tb_file"
   quit -f
 }
-vlog -sv -mfcu +define+INCLUDE_MASTER_VO_TB +incdir+$root/tb/tests $tb_file
+vlog -sv -mfcu +define+SPI_USE_INTERFACES+INCLUDE_MASTER_VO_TB +incdir+$root/tb/tests $tb_file
 
 puts "Executando spi_master_vo_integration_tb com libs simlib"
 vsim -quiet -L simlib -onfinish stop spi_master_vo_integration_tb -do {run -all; quit -sim}

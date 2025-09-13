@@ -6,7 +6,10 @@
 //
 // SPDX-License-Identifier: MIT
 
-`ifndef VERILATOR
+// For simulation with Verilator we include the SPI wrapper here.
+// For synthesis (e.g., Gowin), the file is added via the project file (.gprj),
+// so we avoid including it to prevent duplicate module compilation.
+`ifdef VERILATOR
 `include "drivers/spi/spi_slave_wrap.sv"
 `endif
 

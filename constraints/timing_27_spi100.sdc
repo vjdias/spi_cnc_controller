@@ -14,3 +14,6 @@ set_input_delay  -clock pi_sclk -min 0.500 [get_ports {pi_mosi pi_csn}]
 # MISO from FPGA to master (setup/hold @ master)
 set_output_delay -clock pi_sclk -max 3.000 [get_ports {pi_miso}]
 set_output_delay -clock pi_sclk -min -0.500 [get_ports {pi_miso}]
+
+# CS# (pi_csn) is not a clock; ignore paths sourced from it to avoid TA1132
+set_false_path -from [get_ports {pi_csn}]

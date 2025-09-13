@@ -18,3 +18,6 @@ set_input_delay  -clock pi_sclk -max 3.000 [get_ports {pi_mosi pi_csn}]
 set_input_delay  -clock pi_sclk -min 0.500 [get_ports {pi_mosi pi_csn}]
 set_output_delay -clock pi_sclk -max 3.000 [get_ports {pi_miso}]
 set_output_delay -clock pi_sclk -min -0.500 [get_ports {pi_miso}]
+
+# CS# (pi_csn) não é clock; ignore paths a partir dele
+set_false_path -from [get_ports {pi_csn}]

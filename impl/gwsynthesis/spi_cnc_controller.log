@@ -3,7 +3,8 @@ Running parser ...
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\emergency_stop\emergency_stop_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\proximity_sensor\lj12a3_proximity_driver.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\SPI_Slave.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tick_gen.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\protocol\framings\constants\protocol_constants_pkg.sv'
@@ -46,49 +47,19 @@ Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_stream_bridge.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv'
+Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_stream_bridge.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_hub_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_tx_miso_service.sv'
 Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv'
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v'
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'
-Analyzing included file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'
-Analyzing included file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_expression.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_parameter.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_top_define.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
-Analyzing included file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_parameter.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
-Back to file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
-Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\gw_jtag.v'
-Analyzing Verilog file 'C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\gw_gao_top.v'
-Compiling module 'top'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":9)
-Compiling module 'SPI_Slave(SPI_MODE=3)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":24)
-WARN  (EX3791) : Expression size 4 truncated to fit in target size 3("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":84)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 3("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":163)
-Compiling module 'spi_rx_slave_stream_bridge'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_stream_bridge.sv":9)
-Compiling module 'spi_rx_mosi_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv":52)
+Compiling module 'top'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":16)
+Compiling module 'spi_slave'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":11)
+Extracting RAM for identifier 'tx_buf'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":38)
+Compiling module 'spi_rx_slave_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_slave_service.sv":16)
+Compiling module 'spi_rx_mosi_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_mosi_service.sv":51)
 Compiling module 'byte_fifo_sync(DEPTH=210)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":9)
 Extracting RAM for identifier 'mem'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\integrations\rtl\byte_fifo_sync_rtl.sv":27)
-Compiling module 'spi_rx_hub_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv":99)
+Compiling module 'spi_rx_hub_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\spi\spi_rx_hub_service.sv":98)
 Compiling module 'led_service(ACTIVE_LOW=1'b1,tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\led\led_service.sv":10)
 Compiling module 'quad_encoder_tmcs28_driver(POS_WIDTH=32'b00000000000000000000000000100000,FILTER_CYCLES=32'b00000000000000000000000000000000,INDEX_OFFSET=32'b00000000000000000000000000000000,MODULO=32'b00000000000000000000000000000000,VEL_WINDOW_CYCLES=32'b00000000000000000000000000000000,COUNT_MODE=32'b00000000000000000000000000000100)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\encoder\quad_encoder_tmcs28_driver.sv":18)
 Compiling module 'motion_service(PROX_IS_PNP=1'b0,tx_stream=resp_stream_if_producer)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":13)
@@ -99,28 +70,18 @@ Compiling module 'axis_controller_service'("C:\Users\Valdir\Documents\Develop\fp
 Compiling module 'pid_axis_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\pid_axis_service.sv":4)
 Compiling module 'tmc5160_step_dir_driver(SYNC_MODE=32'b00000000000000000000000000000001)'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\tmc5160\tmc5160_step_dir_driver.sv":16)
 Compiling module 'axis_home_service'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\axis_home_service.sv":10)
-Compiling module 'gw_gao'("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\RTL_GAO\gw_gao_top.v":1)
-Compiling module 'GW_JTAG'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\gw_jtag.v":1)
-Compiling module '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
-Compiling module '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Compiling module '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
-Extracting RAM for identifier '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
-Compiling module '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v":74)
-Compiling module '**'("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
-WARN  (EX1998) : Net '**' does not have a driver("C:\Gowin\Gowin_V1.9.11.01_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
-Trying to combine GAO to RTL design
 NOTE  (EX0101) : Current top module is "top"
 [5%] Running netlist conversion ...
-WARN  (CV0016) : Input i_enc_a_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":36)
-WARN  (CV0016) : Input i_enc_b_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":37)
-WARN  (CV0016) : Input i_enc_z_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":38)
-WARN  (CV0016) : Input i_enc_a_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":40)
-WARN  (CV0016) : Input i_enc_b_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":41)
-WARN  (CV0016) : Input i_enc_z_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":42)
-WARN  (CV0016) : Input i_prox_in_x is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":47)
-WARN  (CV0016) : Input i_prox_in_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":48)
-WARN  (CV0016) : Input i_prox_in_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":49)
-WARN  (CV0016) : Input i_estop_in is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":50)
+WARN  (CV0016) : Input i_enc_a_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":43)
+WARN  (CV0016) : Input i_enc_b_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":44)
+WARN  (CV0016) : Input i_enc_z_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":45)
+WARN  (CV0016) : Input i_enc_a_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":47)
+WARN  (CV0016) : Input i_enc_b_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":48)
+WARN  (CV0016) : Input i_enc_z_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":49)
+WARN  (CV0016) : Input i_prox_in_x is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":54)
+WARN  (CV0016) : Input i_prox_in_y is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":55)
+WARN  (CV0016) : Input i_prox_in_z is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":56)
+WARN  (CV0016) : Input i_estop_in is unused("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":57)
 Running device independent optimization ...
 [10%] Optimizing Phase 0 completed
 [15%] Optimizing Phase 1 completed
@@ -134,16 +95,48 @@ Running technical mapping ...
 [60%] Tech-Mapping Phase 0 completed
 [65%] Tech-Mapping Phase 1 completed
 [75%] Tech-Mapping Phase 2 completed
-WARN  (AG0100) : Find logical loop signal : "r_SPI_MISO_Bit"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":169)
-WARN  (AG0100) : Find logical loop signal : "r_SPI_MISO_Bit"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":169)
-WARN  (AG0100) : Find logical loop signal : "r_SPI_MISO_Bit"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave.sv":169)
+WARN  (AG0100) : Find logical loop signal : "n421"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "n335"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "n421"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "n423"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "n335"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "n423"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[3]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[3]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[3]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[2]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[2]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[2]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[1]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[1]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[1]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[0]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[0]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "consumed_spi[0]"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0101) : The netlist is not one directed acyclic graph
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
+WARN  (AG0100) : Find logical loop signal : "tx_done_tgl_spi"("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\drivers\spi\spi_slave_wrap.sv":200)
 WARN  (AG0101) : The netlist is not one directed acyclic graph
 [80%] Tech-Mapping Phase 3 completed
 [90%] Tech-Mapping Phase 4 completed
 WARN  (NL0002) : The module "lj12a3_proximity_driver" instantiated to "u_prox_y" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":81)
 WARN  (NL0002) : The module "lj12a3_proximity_driver" instantiated to "u_prox_z" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\services\motion\motion_service.sv":87)
-WARN  (NL0002) : The module "quad_encoder_tmcs28_driver" instantiated to "u_quad_enc_y" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":395)
-WARN  (NL0002) : The module "quad_encoder_tmcs28_driver" instantiated to "u_quad_enc_z" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":427)
+WARN  (NL0002) : The module "quad_encoder_tmcs28_driver" instantiated to "u_quad_enc_y" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":419)
+WARN  (NL0002) : The module "quad_encoder_tmcs28_driver" instantiated to "u_quad_enc_z" is swept in optimizing("C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\src\top.sv":451)
 [95%] Generate netlist file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller.vg" completed
 [100%] Generate report file "C:\Users\Valdir\Documents\Develop\fpga\tangPrime20k\spi_cnc_controller\impl\gwsynthesis\spi_cnc_controller_syn.rpt.html" completed
 GowinSynthesis finish
