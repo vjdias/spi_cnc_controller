@@ -221,12 +221,12 @@ module spi_master_slave_integration_tb;
 
   initial begin
     led_ctrl_resp_bytes_t dec;
+    spi_service_pkg::byte_t first;
     // defaults
     sclk = 1'b0; ss_n = 1'b1; mosi = 1'b0;
     repeat (2) @(posedge clk);
     rst_n = 1;
     // leitura antes de qualquer request não deve ter header de resposta
-    spi_service_pkg::byte_t first;
     spi_idle_read(first);
     `TEST_EXPECT_TRUE(first != protocol_constants_pkg::RESP_HEADER, "no_response_before_req")
 
