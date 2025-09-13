@@ -9,11 +9,10 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_RX_HUB_SERVICE_SV
 `define SPI_RX_HUB_SERVICE_SV
-// Disponível somente em simulação (ModelSim/Verilator)
-`ifdef MODEL_TECH
-`define __SIM_BUILD__
-`endif
-`ifdef VERILATOR
+// Versão com interface direta disponível somente quando SPI_USE_INTERFACES estiver definido
+// (como em testbenches ModelSim). Por padrão, inclui a versão sintetizável baseada em sinais
+// simples para suportar Verilator.
+`ifdef SPI_USE_INTERFACES
 `define __SIM_BUILD__
 `endif
 
@@ -140,14 +139,14 @@ module spi_rx_hub_service (
       frame_valid   <= 1'b0;
       frame_error   <= 1'b0;
       out_msgType   <= '0;
-      move_home_frame    <= move_home_request_pkg::make_default();
-      start_move_frame   <= start_move_request_pkg::make_default();
-      move_probe_frame   <= move_probe_level_request_pkg::make_default();
-      queue_add_frame    <= move_queue_add_request_pkg::make_default();
-      move_end_frame     <= move_end_request_pkg::make_default();
-      queue_status_frame <= move_queue_status_request_pkg::make_default();
-      fpga_status_frame  <= fpga_status_request_pkg::make_default();
-      led_ctrl_frame     <= led_control_request_pkg::make_default();
+      move_home_frame    = move_home_request_pkg::make_default();
+      start_move_frame   = start_move_request_pkg::make_default();
+      move_probe_frame   = move_probe_level_request_pkg::make_default();
+      queue_add_frame    = move_queue_add_request_pkg::make_default();
+      move_end_frame     = move_end_request_pkg::make_default();
+      queue_status_frame = move_queue_status_request_pkg::make_default();
+      fpga_status_frame  = fpga_status_request_pkg::make_default();
+      led_ctrl_frame     = led_control_request_pkg::make_default();
       fifo_rd_en         <= 1'b0;
       stage0_valid       <= 1'b0;
       stage1_valid       <= 1'b0;

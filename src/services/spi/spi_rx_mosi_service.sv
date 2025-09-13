@@ -7,11 +7,10 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_RX_MOSI_SERVICE_SV
 `define SPI_RX_MOSI_SERVICE_SV
-// Disponível somente em simulação (ModelSim/Verilator)
-`ifdef MODEL_TECH
-`define __SIM_BUILD__
-`endif
-`ifdef VERILATOR
+// Versão com interface está disponível apenas quando SPI_USE_INTERFACES estiver definido
+// (ex.: testbenches ModelSim). Em outros ambientes, inclui a versão sintetizável baseada
+// em sinais simples para compatibilidade com Verilator e síntese.
+`ifdef SPI_USE_INTERFACES
 `define __SIM_BUILD__
 `endif
 `ifdef __SIM_BUILD__

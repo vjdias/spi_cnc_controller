@@ -7,6 +7,7 @@
 // -----------------------------------------------------------------------------
 `ifndef SPI_TX_MISO_SERVICE_SV
 `define SPI_TX_MISO_SERVICE_SV
+`ifdef SPI_USE_INTERFACES
 module spi_tx_miso_service #(
     parameter int WAIT_CYCLES = 2
   )(
@@ -41,4 +42,5 @@ module spi_tx_miso_service #(
     end
   end
 endmodule
+`endif // SPI_USE_INTERFACES
 `endif // SPI_TX_MISO_SERVICE_SV
