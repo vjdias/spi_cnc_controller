@@ -234,12 +234,6 @@ module top (
 
     // Interface de stream para o motion_service
     resp_stream_if motion_stream();
-    // Serviço de motion não está presente nesta build de simulação,
-    // então publicamos constantes para evitar 'X' propagando pelo
-    // agregador de respostas.
-    assign motion_stream.valid = 1'b0;
-    assign motion_stream.bits  = '0;
-    assign motion_stream.len   = '0;
 
     // -------------------------
     // Agregador de TX sintetizável (2 streams: LED e Motion)
@@ -287,7 +281,7 @@ module top (
       stream_ready[1] = 1'b0;
       pick            = 1'b0;
       pick_idx        = rr_sel;
-      if ((tx_state == IDLE) && ss_n_slave_i) begin
+      if (tx_state == IDLE) begin
         if (stream_valid[rr_sel]) begin
           pick     = 1'b1;
           pick_idx = rr_sel;
